@@ -3,7 +3,10 @@
 \usepackage{amsmath}
 \usepackage{natbib}
 \usepackage{parskip}
+\usepackage{tikz}
 \bibliographystyle{jasa}
+\usetikzlibrary{positioning,calc,backgrounds}
+
 
 \title{Notater til masteren}
 \author{johaskog }
@@ -19,12 +22,15 @@
 \begin{document}
 
 \maketitle
+%need this to plot the tikz trees. 
+\input{tikz-trees/basics_tikz}
+
 
 \input{1-introduction}
 \input{2-theory}
 \input{probabilities}
 
-
+%\input{tikz-trees/unif_unlim_a0.01}
 
 
 \newpage

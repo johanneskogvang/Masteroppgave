@@ -1,0 +1,34 @@
+%This is needed for the tikzpicture:
+\newcommand{\DoNode}[8][]{% (keys), name, loss1, loss2, loss3, CircleColour1, CircleColour2, radius
+    %\pgfmathtruncatemacro{\tmpa}{round(360*#3/(#3+#4+#5))}
+    %\pgfmathtruncatemacro{\tmpb}{round(360*(#3+#4)/(#3+#4+#5))}
+    %\pgfmathtruncatemacro{\tmpa}{round(360*(#3/(#3+#4+#5)))}
+    %\pgfmathtruncatemacro{\tmpb}{round(360*((#3+#4)/(#3+#4+#5)))}
+    \pgfmathtruncatemacro{\tmpa}{round(360*(#3/(#3+#4+#5)))+90}
+    \pgfmathtruncatemacro{\tmpb}{round(360*((#3+#4)/(#3+#4+#5)))+90}
+    
+    %\node[treenodeT, #1] (#2) {Loss0: #3 \\ Loss1: #4 \\ Loss2: #5};
+    \node[treenodeT, #1, minimum size=2*#8cm] (#2) {};
+    % and after that...
+    \begin{scope}[on background layer]
+        %\fill [blue!40] let \p1 = ($(#2.0)-(#2.center)$) in
+        %    (#2.center) -- (#2.0) arc(0:\tmpa:{veclen(\x1,\y1)}) -- cycle;
+        %\fill [red!40] let \p1 = ($(#2.0)-(#2.center)$) in
+        %    (#2.center) -- (#2.\tmpa) arc(\tmpa:\tmpb:{veclen(\x1,\y1)}) -- cycle;
+        %\fill [green!30] let \p1 = ($(#2.0)-(#2.center)$) in
+        %    (#2.center) -- (#2.\tmpb) arc(\tmpb:360:{veclen(\x1,\y1)}) -- cycle;
+        \fill [blue!30] let \p1 = ($(#2.0)-(#2.center)$) in
+            (#2.center) -- (#2.0) arc(0:\tmpa:{veclen(\x1,\y1)}) -- cycle;
+        \fill [red!30] let \p1 = ($(#2.0)-(#2.center)$) in
+            (#2.center) -- (#2.\tmpa) arc(\tmpa:\tmpb:{veclen(\x1,\y1)}) -- cycle;
+        \fill [green!30] let \p1 = ($(#2.0)-(#2.center)$) in
+            (#2.center) -- (#2.\tmpb) arc(\tmpb:450:{veclen(\x1,\y1)}) -- cycle;
+%        \draw [#6!20] let \p1 = ($(#2.0)-(#2.center)$) in
+%            (#2.center) -- (#2.\tmpb) arc(\tmpb:360:{veclen(\x1,\y1)}) -- cycle;
+%        \draw[color = #6] (#2.center) circle (1.5cm);
+        \draw[color= #6, very thick] (#2.center)+(0,#8cm) arc (90:270:#8cm);
+        \draw[color = #7, very thick] (#2.center)+(0,-#8cm) arc (270:360:#8cm);
+        \draw[color = #7, very thick] (#2.center)+(#8cm,0) arc (0:90:#8cm);
+    
+    \end{scope}
+}
