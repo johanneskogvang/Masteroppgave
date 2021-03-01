@@ -11,6 +11,17 @@ import numpy as np
 from scipy.stats import hypergeom
 from itertools import chain
 
+
+
+"""
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The following code is for finding the probabilities needed when assuming uniform
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+"""
+
 #find all the probabilities and losses fro the uniform solution
 def zeta(u_i,i,n):
     #zeta(i,u_i,n)=P(U_i=u_i)
@@ -20,7 +31,7 @@ def zeta(u_i,i,n):
         prob+=hypergeom.pmf(u_i,n,j,i)
     return prob/n
     
-def rho(i,u_i,n):
+def unif_rho(i,u_i,n):
     #=number of boxes
     #Rho(i,x,n) = P(u_n >= (n/2)+1 | U_i=u_i) = P(red majority given U_i=u_i)
     #If n=12: Rho(i,x,12)=P(u_12 >=7 | U_i=u_i)
@@ -46,7 +57,7 @@ def gamma(k,u_i,i,n):
         return (k-u_i)/(n-i)
 
 
-def epsilon(u_i,i,n):
+def unif_epsilon(u_i,i,n):
     #epsilon(u_i,i,n)=P(X_i+1 = 1 | U_i=u_i)
     prob=0
     b = zeta(u_i,i,n)
@@ -57,15 +68,50 @@ def epsilon(u_i,i,n):
     return prob
 
 
+
+
+"""
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The following code is for finding the probabilities needed when assuming binomial
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+"""
+
+def binom_rho(i,u_i,gamma,kappa):
+    return 1
+
+def binom_epsilon(u_i,i,n,gamma,kappa):
+    return 1
+
+
+
+
+
+
+""""
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The following code is for finding the losses and visualising them. This code works for both the uniform and binomial cases
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+"""
+
 #finding the propabilities that red and blue are majority colours in addition to loss0 and loss1. 
-def unif_prob_loss_0_1(n,alpha):
+def prob_loss_0_1(n,alpha,gamma,kappa,binom):
     if n%2 != 0 or n==0:
             raise ValueError('Number of boxes must be an even number above zero.')
     
     m = np.zeros((n,n),dtype=dict)
     for i in range(0,n):
             for u_i in range(0,i+1):
-                r=rho(i,u_i,n) #Rho(i,x,n) = P(u_n >= (n/2)+1 | U_i=u_i)
+                if binom==False:
+                    r=unif_rho(i,u_i,n) #Rho(i,x,n) = P(u_n >= (n/2)+1 | U_i=u_i)
+                else: #binom==True:
+                    r=binom_rho(i,u_i,gamma,kappa) #Rho(i,x,n) = P(u_n >= (n/2)+1 | U_i=u_i)
+                #r=rho(i,u_i,n) #Rho(i,x,n) = P(u_n >= (n/2)+1 | U_i=u_i)
                 L0=r #Expected loss when choosing blue
                 L1=1-r #Expected loss when chosing red 
                 
@@ -78,7 +124,7 @@ def unif_prob_loss_0_1(n,alpha):
                     m[i,u_i]={"prob":r,"Loss0":L0,"Loss1":L1,"Loss2":1000}
     return m
 
-def unif_loss2_unlim(matrix,n,alpha): 
+def loss2_unlim(matrix,n,alpha,gamma,kappa,binom): 
     for i in range(n-2,-1,-1): 
         #looping from the second to last row of the matrix to the first one
         for u_i in range(0,i+1):
@@ -86,11 +132,15 @@ def unif_loss2_unlim(matrix,n,alpha):
             EL_0 = min(matrix[i+1,u_i]["Loss0"],matrix[i+1,u_i]["Loss1"],matrix[i+1,u_i]["Loss2"])
             #expected loss if the next one is red. 
             EL_1 = min(matrix[i+1,u_i+1]["Loss0"],matrix[i+1,u_i+1]["Loss1"],matrix[i+1,u_i+1]["Loss2"])
-            eps=epsilon(u_i,i,n)
+            if binom == False:
+                eps = unif_epsilon(u_i,i,n)
+            else: #binom==True
+                eps = binom_epsilon(u_i,i,n,gamma,kappa)
+                
             matrix[i,u_i]["Loss2"]=alpha + (1-eps)*EL_0 + eps*EL_1    
     return matrix
 
-def unif_loss2_lim(matrix,n,alpha,beta):
+def loss2_lim(matrix,n,alpha,beta,gamma,kappa,binom):
 #def find_loss2(matrix,n,alpha): 
     for i in range(n-2,-1,-1): 
         #looping from the second to last row of the matrix to the first one
@@ -104,19 +154,22 @@ def unif_loss2_lim(matrix,n,alpha,beta):
             EL_0 = min(matrix[i+1,u_i]["Loss0"],matrix[i+1,u_i]["Loss1"],matrix[i+1,u_i]["Loss2"])
             #expected loss if the next one is red. 
             EL_1 = min(matrix[i+1,u_i+1]["Loss0"],matrix[i+1,u_i+1]["Loss1"],matrix[i+1,u_i+1]["Loss2"])
-            eps=epsilon(u_i,i,n)
+            if binom == False:
+                eps = unif_epsilon(u_i,i,n)
+            else: #binom==True
+                eps = binom_epsilon(u_i,i,n,gamma,kappa)
             matrix[i,u_i]["Loss2"]=alpha + (1-PT)*((1-eps)*EL_0 + eps*EL_1) + PT*beta    
     return matrix
  
 
-def unif_make_matrix_unlim(n,alpha):
-    matrix=unif_prob_loss_0_1(n,alpha)
-    matrix=unif_loss2_unlim(matrix,n,alpha)
+def make_matrix_unlim(n,alpha,gamma,kappa,binom):
+    matrix=prob_loss_0_1(n,alpha,gamma,kappa,binom)
+    matrix=loss2_unlim(matrix,n,alpha,gamma,kappa,binom)
     return matrix
 
-def unif_make_matrix_lim(n,alpha,beta):
-    matrix=unif_prob_loss_0_1(n,alpha)
-    matrix=unif_loss2_lim(matrix,n,alpha,beta)
+def make_matrix_lim(n,alpha,beta,gamma,kappa,binom):
+    matrix=prob_loss_0_1(n,alpha,gamma,kappa,binom)
+    matrix=loss2_lim(matrix,n,alpha,beta,gamma,kappa,binom)
     return matrix
 
 
@@ -243,7 +296,7 @@ def visualise_optimal(mat,file_location_and_name, radius):
 
 
 
-def main(alpha,beta,unlim=True,binom=True):
+def main(alpha,beta,unlim=True,binom=True,gamma=1,kappa=1):
     n=12
     node_radius=0.4
     file_loc= "C:\\Users\\Johan\\OneDrive\\Documents\\Masteroppgave\\Masteroppgave\\tikz-trees"
@@ -251,7 +304,7 @@ def main(alpha,beta,unlim=True,binom=True):
     #uniform unlimited
     if unlim==True and binom==False:
         file = file_loc + "\\unif_unlim_a"+str(alpha)+".tex"
-        mat_losses = unif_make_matrix_unlim(n,alpha)
+        mat_losses = make_matrix_unlim(n,alpha,gamma,kappa,binom=False)
         nodes = make_node_matrix(mat_losses)
         visualise_optimal(nodes,file,node_radius)
         print("Uniform unlimited")
@@ -259,7 +312,7 @@ def main(alpha,beta,unlim=True,binom=True):
     #limted uniform
     if unlim==False and binom==False:
         file = file_loc + "\\unif_lim_a"+str(alpha)+"_b"+str(beta)+".tex"
-        mat_losses = unif_make_matrix_lim(n,alpha,beta)
+        mat_losses = make_matrix_lim(n,alpha,beta,gamma,kappa,binom=False)
         nodes = make_node_matrix(mat_losses)
         visualise_optimal(nodes,file,node_radius)
         print("Uniform limited")
@@ -275,9 +328,9 @@ def main(alpha,beta,unlim=True,binom=True):
     
     
 #uniform unlimited
-main(0.01,1,True,False)
+#main(0.01,1,True,False)
 #uniform limited
-#main(1,1,False,False)
+main(0.01,0.4,False,False)
 
 
 #print(main(1,1,True,True))
