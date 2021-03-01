@@ -8,6 +8,7 @@ Created on Tue Feb 23 15:30:45 2021
 
 
 import numpy as np
+import scipy.special as sc
 from scipy.stats import hypergeom
 from itertools import chain
 
@@ -79,11 +80,83 @@ The following code is for finding the probabilities needed when assuming binomia
 
 """
 
-def binom_rho(i,u_i,gamma,kappa):
-    return 1
+#def binom_rho(i,u_i,n,gamma,kappa):
+#    return 1
 
-def binom_epsilon(u_i,i,n,gamma,kappa):
-    return 1
+#def binom_epsilon(u_i,i,n,gamma,kappa):
+#    return 1
+def u12equalj(j,i,ui,gamma,kappa):
+#P(U_i+V_i = j | U_i=u_i)
+    #ui <= j <= 12
+    #ui <= i <= 12   
+    #j <= 12- (i-ui) 
+    if j > ui + 12-i: #cant have more red boxes than ui + the numer of boxes that are left to open
+        return 0
+    if ui>j:
+        return 0
+    if j>12:
+        raise ValueError('j has to be smaller than or equal to 12')
+    if i>12:
+        raise ValueError('i has to be smaller than or equal to 12')
+    if ui>i:
+        raise ValueError('i has to be bigger than or equal to ui')
+    if i>12:
+        raise ValueError('i has to be smaller than or equal to 12')
+    if ui>12:
+        raise ValueError('ui has to be smaller than or equal to 12')
+    
+    
+    nume = sc.beta(j+gamma,12-j+kappa) #runtime warning her
+    nume = nume*sc.binom(12-i,j-ui)
+    denume = sc.beta(ui+gamma,i-ui+kappa)
+    return nume/denume
+
+    
+def binom_rho(i,ui,n,gamma,kappa):
+#def redmajority(i,ui,gamma,kappa):
+    #P(U_i+V_i >= 7 | U_i=u_i, U_i+V_i neq 6)
+    #ui <= i <= 12 
+    if ui>6:
+        return 1
+    elif ui+12-i<6:
+        return 0
+       
+    nume = 0
+    for j in [7,8,9,10,11,12]:
+        nume += u12equalj(j,i,ui,gamma,kappa)
+    
+    denume= 1 - u12equalj(6,i,ui,gamma,kappa)
+    
+    return nume/denume
+
+
+    
+
+
+
+
+def nextisred(i,ui,gamma,kappa):
+    #P(X_i+1 = 1 | U_i=u_i) = P(X_i+1 = 1)
+    return (gamma+ui)/(gamma+kappa+i)
+
+def majority_givennextisred(i,ui,gamma,kappa):
+    #P(U_i+V_i neq 6 | U_i=u_i, X_i+1 = 1)
+    if ui>i:
+        raise ValueError('i has to be bigger than or equal to ui')
+    a = sc.binom(11-i,5-ui)
+    b = sc.beta(6+gamma,6+kappa)/sc.beta(gamma+ui+1,kappa+i-ui)
+    return 1 - (a*b)
+   
+    
+def majority_given_ui(i,ui,gamma,kappa):
+    a = sc.binom(12-i,6-ui)
+    b = sc.beta(6+gamma,6+kappa)/sc.beta(ui+gamma,i-ui+kappa)
+    return 1 - (a*b)
+
+def binom_epsilon(ui,i,n,gamma,kappa):
+#def nextisred_givenmajority(i,ui,gamma,kappa):
+    #P(X_i+1 = 1 | U_i=u_i, U_i+V_i neq 6)
+    return nextisred(i,ui,gamma,kappa)*majority_givennextisred(i,ui,gamma,kappa)/majority_given_ui(i,ui,gamma,kappa)
 
 
 
@@ -110,7 +183,7 @@ def prob_loss_0_1(n,alpha,gamma,kappa,binom):
                 if binom==False:
                     r=unif_rho(i,u_i,n) #Rho(i,x,n) = P(u_n >= (n/2)+1 | U_i=u_i)
                 else: #binom==True:
-                    r=binom_rho(i,u_i,gamma,kappa) #Rho(i,x,n) = P(u_n >= (n/2)+1 | U_i=u_i)
+                    r=binom_rho(i,u_i,n,gamma,kappa) #Rho(i,x,n) = P(u_n >= (n/2)+1 | U_i=u_i)
                 #r=rho(i,u_i,n) #Rho(i,x,n) = P(u_n >= (n/2)+1 | U_i=u_i)
                 L0=r #Expected loss when choosing blue
                 L1=1-r #Expected loss when chosing red 
@@ -220,7 +293,7 @@ def make_node_matrix(matrix):
 
 #making tikz code to visualise the IO solution
 def visualise_optimal(mat,file_location_and_name, radius):
-    file = open(file_location_and_name,"a")
+    file = open(file_location_and_name,"w")
 
     start_of_doc=r"""
 \begin{tikzpicture}[
@@ -319,19 +392,32 @@ def main(alpha,beta,unlim=True,binom=True,gamma=1,kappa=1):
     
     #unlimited binomial
     if unlim==True and binom==True:
-        return "unlim binomial"
+        file = file_loc + "\\binom_unlim_a"+str(alpha)+"_g"+str(gamma)+ "_k"+str(kappa)+".tex"
+        mat_losses = make_matrix_unlim(n,alpha,gamma,kappa,binom=True)
+        nodes = make_node_matrix(mat_losses)
+        visualise_optimal(nodes,file,node_radius)
+        print("Binomial unlimited")
     
     #limited binomial
     if unlim==False and binom==True:
-        return "limted binomial"
+        file = file_loc + "\\binom_lim_a"+str(alpha)+"_b"+str(beta)+"_g"+str(gamma)+ "_k"+str(kappa)+".tex"
+        mat_losses = make_matrix_lim(n,alpha,beta,gamma,kappa,binom=True)
+        nodes = make_node_matrix(mat_losses)
+        visualise_optimal(nodes,file,node_radius)
+        print("Binomial limited")
     
     
     
 #uniform unlimited
 #main(0.01,1,True,False)
+
 #uniform limited
-main(0.01,0.4,False,False)
+#main(0.01,0.4,False,False)
 
 
-#print(main(1,1,True,True))
-#print(main(1,1,False,True))
+#unlimited binomial:
+main(0.01,0.6,True,True,2,0.5)
+
+
+#limited binomial:
+#main(0.01,0.6,False,True,1,1)
