@@ -1,0 +1,565 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+
+\title{Notater til masteren}
+\author{johaskog }
+\date{January 2021}
+
+\begin{document}
+
+\maketitle
+
+\section{Box task, ideal observer solution assuming binomial}
+\subsection{Posterior for $u_{12}$}
+We have that 
+\begin{equation*}
+    U_{12}|p \sim \text{Binomial}(n,p)
+\end{equation*}
+and we choose a prior for $p$:
+\begin{equation*}
+    p \sim \text{Beta}(\gamma,\kappa).
+\end{equation*}
+But, we want to have $U_{12}\neq 6$, meaning that we have to condition on that
+\begin{equation*}
+    f(u_{12}|p,u_{12}\neq6) = P(U_{12}=u_{12}|p,U_{12}\neq6) = \frac{P(U_{12}=u_{12},U_{12}\neq6|p)}{P(U_{12}\neq6|p)}.
+\end{equation*}
+Numerator:
+\begin{equation*}
+    \begin{aligned}
+        P(U_{12}=u_{12},U_{12}\neq6|p) 
+        = &P(U_{12}\neq6|p,U_{12}=u_{12})P(U_{12}=u_{12}|p)\\
+        = &I(u_{12}\neq6)P(U_{12}=u_{12}|p)
+    \end{aligned}
+\end{equation*}
+Denominator:
+\begin{equation*}
+    \begin{aligned}
+        P(U_{12}\neq6|p)
+        = &1-P(U_{12}=6|p)\\
+        = &1-\binom{12}{12}p^6(1-p)^6\\
+        = & 1-p^6(1-p)^6
+    \end{aligned}
+\end{equation*}
+Hence:
+\begin{equation*}
+    \begin{aligned}
+        f(u_{12}|p,u_{12}\neq6)
+        = &P(U_{12}=u_{12}|p,U_{12}\neq6)\\
+        = &\frac{I(u_{12}\neq6)}{1-p^6(1-p)^6}P(U_{12}=u_12|p) \\
+        = &\frac{I(u_{12}\neq6)}{1-p^6(1-p)^6}\binom{12}{12}p^{u_{12}}(1-p)^{12-u_{12}}\\
+        = &\frac{I(u_{12}\neq6)}{1-p^6(1-p)^6}p^{u_{12}}(1-p)^{12-u_{12}}
+    \end{aligned}
+\end{equation*}
+Prior:
+\begin{equation*}
+    p \sim \text{Beta}(\gamma,\kappa).
+\end{equation*}
+\begin{equation*}
+    \pi(p) = \frac{1}{\text{B}(\gamma,\kappa)}p^{\gamma-1}(1-p)^{\kappa-1}
+\end{equation*}
+Posterior:
+\begin{equation*}
+    \begin{aligned}
+        \pi(p|U_{12}) = \frac{\pi(p)f(u_{12}|p,u_{12}\neq6)}{\int_{0}^{1} \pi(p)f(u_{12}|p,u_{12}\neq6) dp},
+    \end{aligned}
+\end{equation*}
+where
+\begin{equation*}
+    \begin{aligned}
+        \pi(p)f(u_{12}|p, u_{12}\neq6) 
+        = & \frac{1}{\text{B}(\gamma,\kappa)}p^{\gamma-1}(1-p)^{\kappa-1} \frac{I(u_{12}\neq6)}{1-p^6(1-p)^6}p^{u_{12}}(1-p)^{12-u_{12}}\\[6pt]
+        = &\frac{I(u_{12}\neq6)}{\text{B}(\gamma,\kappa)}\frac{p^{u_{12}+\gamma-1}(1-p)^{12-u_{12}+\kappa-1}}{1-p^6(1-p)^6}.
+    \end{aligned}
+\end{equation*}
+Hence,
+\begin{equation*}
+    \begin{aligned}
+        \pi(p|U_{12}) 
+        =&\frac{\frac{I(u_{12}\neq6)}{\text{B}(\gamma,\kappa)}\frac{p^{u_{12}+\gamma-1}(1-p)^{12-u_{12}+\kappa-1}}{1-p^6(1-p)^6}}{\int_0^1 \frac{I(u_{12}\neq6)}{\text{B}(\gamma,\kappa)}\frac{p^{u_{12}+\gamma-1}(1-p)^{12-u_{12}+\kappa-1}}{1-p^6(1-p)^6} dp} \\[6pt]
+        =&\frac{\frac{I(u_{12}\neq6)}{\text{B}(\gamma,\kappa)}\frac{p^{u_{12}+\gamma-1}(1-p)^{12-u_{12}+\kappa-1}}{1-p^6(1-p)^6}}
+        {\frac{I(u_{12}\neq6)}{\text{B}(\gamma,\kappa)}\int_0^1 \frac{p^{u_{12}+\gamma-1}(1-p)^{12-u_{12}+\kappa-1}}{1-p^6(1-p)^6} dp}\\[6pt]
+        =&\frac{\frac{p^{u_{12}+\gamma-1}(1-p)^{12-u_{12}+\kappa-1}}{1-p^6(1-p)^6}}
+        {\int_0^1 \frac{p^{u_{12}+\gamma-1}(1-p)^{12-u_{12}+\kappa-1}}{1-p^6(1-p)^6} dp}
+    \end{aligned}
+\end{equation*}
+As $\gamma$ and $\kappa$ possibly are decimal numbers, the integral in the denominator should be solved numerically. (I think that it's not possible to solve the integral analytically if these variables are decimal numbers.) Do that in python. 
+
+
+
+
+\newpage
+\section{Probabilities}
+We need the probabilities $P(U_{12} \geq 7|U_i=u_i)$ and $P(X_{i+1}=1|X_{1:i}=x_{1:i})$.
+
+We assume that
+\begin{equation*}
+    u_i|p \sim \text{Binomial}(i,p),
+\end{equation*}
+but that $u_{12} \neq 12$. Hence,
+\begin{equation*}
+    \begin{aligned}
+    P(U_i=u_i|P=p, U_{12}\neq6) 
+    = &\frac{P(U_i=u_i,U_{12}\neq6|P=p)}{P(U_{12}\neq6|P=p)}\\[6pt]
+    = &\frac{P(U_{12}\neq6|P=p,U_i=u_i)P(U_i=u_i|P=p)}{P(U_{12}\neq6|P=p)}
+    \end{aligned}
+\end{equation*}
+Need to find those probabilities:
+If the colour of a box that is opened is independent of the colour of the other boxes, then the following holds. 
+\begin{equation*}
+    P(U_{12}\neq6|P=p,U_i=u_i) = P(U_{12-i}\neq(6-u_i)|P=p).
+\end{equation*}
+Hence,
+\begin{equation*}
+    \begin{aligned}
+        P(U_{12}\neq6|P=p,U_i=u_i) 
+        =& 1 - P(U_{12-i}=6-u_i|P=p) \\[6pt]
+        =& 1 - \binom{12-i}{6-u_i}p^{6-u_i}(1-p)^{12-i-(6-u_i)}
+    \end{aligned}
+\end{equation*}
+We also have that
+\begin{equation*}
+    P(U_i=u_i|P=p)=\binom{i}{u_i}p^{u_i}(1-p)^{i-u_i},
+\end{equation*}
+and 
+\begin{equation*}
+    \begin{aligned}
+        P(U_{12}\neq6|P=p)
+        =& 1-P(U_{12}=6|P=p)\\[6pt]
+        =& 1-\binom{12}{12}p^6(1-p)^6\\[6pt]
+        =& 1-p^6(1-p)^6.
+    \end{aligned}
+\end{equation*}
+We can then find $P(U_i=u_i|P=p, U_{12}\neq6)$.
+\begin{equation*}
+    \begin{aligned}
+        P(U_i=u_i|P=p, U_{12}\neq6) 
+        = &\frac{P(U_{12}\neq6|P=p,U_i=u_i)P(U_i=u_i|P=p)}{P(U_{12}\neq6|P=p)}\\[6pt]
+        = & \frac{\Big(1 - \binom{12-i}{6-u_i}p^{6-u_i}(1-p)^{12-i-(6-u_i)}\Big)\binom{i}{u_i}p^{u_i}(1-p)^{i-u_i}}{1-p^6(1-p)^6}
+    \end{aligned}
+\end{equation*}
+
+\subsection{Posterior, $p|u_{i}$}
+We assume a beta prior for $p$,
+\begin{equation*}
+    \pi(p)=\frac{1}{\text{B}(\gamma,\kappa)}p^{\gamma-1}(1-p)^{\kappa-1}.
+\end{equation*}
+We can then find the posterior 
+\begin{equation*}
+    \pi(p|U_i=u_i,U_{12}\neq6) = \frac{\pi(p)f(U_i=u_i|U_{12}\neq6,P=p)}{\int^1_0 \pi(p)f(U_i=u_i|U_{12}\neq6,P=p) dp},
+\end{equation*}
+where 
+\begin{equation*}
+    \begin{aligned}
+        &\pi(p)f(U_i=u_i|U_{12}\neq6,P=p)\\[6pt]
+        &= \frac{1}{\text{B}(\gamma,\kappa)}
+        \frac{\Big(1 - \binom{12-i}{6-u_i}p^{6-u_i}(1-p)^{12-i-(6-u_i)}\Big)\binom{i}{u_i}p^{u_i+\gamma-1}(1-p)^{i-u_i+\kappa-1}}
+        {1-p^6(1-p)^6}.
+    \end{aligned}
+\end{equation*}
+The posterior is then
+\begin{equation*}
+    \begin{aligned}
+        \pi(p|U_i=u_i,U_{12}\neq6) 
+        =&       \frac{\frac{1}{\text{B}(\gamma,\kappa)}
+        \frac{\Big(1 - \binom{12-i}{6-u_i}p^{6-u_i}(1-p)^{12-i-(6-u_i)}\Big)\binom{i}{u_i}p^{u_i+\gamma-1}(1-p)^{i-u_i+\kappa-1}}
+        {1-p^6(1-p)^6}}{\int^1_0 \frac{1}{\text{B}(\gamma,\kappa)}
+        \frac{\Big(1 - \binom{12-i}{6-u_i}p^{6-u_i}(1-p)^{12-i-(6-u_i)}\Big)\binom{i}{u_i}p^{u_i+\gamma-1}(1-p)^{i-u_i+\kappa-1}}
+        {1-p^6(1-p)^6} dp}\\[10pt]
+        =& \frac{
+        \frac{\Big(1 - \binom{12-i}{6-u_i}p^{6-u_i}(1-p)^{12-i-(6-u_i)}\Big)p^{u_i+\gamma-1}(1-p)^{i-u_i+\kappa-1}}
+        {1-p^6(1-p)^6}}{\int^1_0\frac{\Big(1 - \binom{12-i}{6-u_i}p^{6-u_i}(1-p)^{12-i-(6-u_i)}\Big)p^{u_i+\gamma-1}(1-p)^{i-u_i+\kappa-1}}
+        {1-p^6(1-p)^6} dp}
+    \end{aligned}
+\end{equation*}
+
+\subsection{$P(U_{12}\geq 7|U_i=u_i,U_{12}\neq6)$}
+\begin{equation*}
+    \begin{aligned}
+        &P(U_{12}\geq 7|U_i=u_i,U_{12}\neq6)\\[6pt]
+        &= \int^1_0 P(U_{12}|U_i=u_i,U_{12}\neq6,P=p)P(P=p|U_i=u_i,U_{12}\neq6) dp,
+    \end{aligned}
+\end{equation*}
+where
+\begin{equation*}
+    P(P=p|U_i=u_i,U_{12}\neq6) = \pi(P=p|U_i=u_i,U_{12}\neq6)
+\end{equation*}
+is the posterior found above. 
+
+We also need to find $P(U_{12}|U_i=u_i,U_{12}\neq6,P=p)$.
+\begin{equation*}
+    \begin{aligned}
+        P(U_{12}\geq7|U_i=u_i,U_{12}\neq6,P=p) 
+        =&  \sum_{j=7}^{12} P(U_{12}=j|U_i=u_i,U_{12}\neq6,P=p)\\[6pt]
+        =& \sum_{j=7}^{12} P(U_{12}=j|U_i=u_i,P=p)\\[6pt]
+        =& \sum_{j=7}^{12} P(U_{12-i}=j-u_i|P=p)\\[6pt]
+        =& \sum_{j=7}^{12} \binom{12-i}{j-4}p^{j-4}(1-p)^{12-i-(j-4)}.
+    \end{aligned}
+\end{equation*}
+We can use this to integrate out $p$:
+\begin{equation*}
+    \begin{aligned}
+        &P(U_{12}\geq7|U_i=u_i,U_{12}\neq6)\\[6pt]
+        &=\int^1_0 \sum_{j=7}^{12} \binom{12-i}{j-4}p^{j-4}(1-p)^{12-i-(j-4)} \pi(P=p|U_i=u_i,U_{12}\neq6) dp   
+    \end{aligned}
+\end{equation*}
+
+
+\subsection{$P(X_{i+1}=1|X_{1:i}=x_{1:i})$}
+$P(X_{i+1}=1)$ is actually independent of the earlier draws, but we have to condition on $U_{12}\neq6$.
+\begin{equation*}
+    P(X_{i+1}=1|X_{1:i}=x_{1:i},U_{12}\neq6) = P(X_{i+1}=1|U_{i}=u_{i},U_{12}\neq6)
+\end{equation*}
+Could we then say that for all $i\neq11$:
+\begin{equation*}
+    P(X_{i+1}=1|U_i=u_i)=p, \: \forall \:i\neq11.
+\end{equation*}
+And then for $i=11$:
+\begin{equation*}
+    P(X_{12}=1|U_{11}=u_{11}) = 
+    \begin{cases}
+        1 &\text{if } U_{11}=5 \\
+        0 &\mbox{if } U_{11}=6\\
+        p &\text{else}
+    \end{cases}
+\end{equation*}
+
+\newpage
+\section{New way to solve this}
+We need the probabilities $P(U_{12} \geq 7|U_i=u_i)$ and $P(X_{i+1}=1|X_{1:i}=x_{1:i})$.
+
+We assume that 
+\begin{equation*}
+    X_k|p \sim Bernoulli(p).
+\end{equation*}
+and that
+\begin{equation*}
+    U_i|p = \sum_{k=1}^i X_k|p, \: \: \: i \in \{0, 1, 2,3,4,5,6,7,8,9,10,11,12\}
+\end{equation*}
+such that 
+\begin{equation*}
+    U_i|p \sim Binomial(i,p).
+\end{equation*}
+Additionally, 
+\begin{equation*}
+    V_i|p = \sum_{k=i+1}^{12} X_k|p,\: \: \: i \in \{0, 1, 2,3,4,5,6,7,8,9,10,11,12\}
+\end{equation*}
+such that
+\begin{equation*}
+    V_i \sim Binomial(12-i,p).
+\end{equation*}
+Because each box that is opened is independent of the other boxes that are opened, if $p$ is given, $U_i|p$ and $V_i|p$ are independent of each other.
+
+\subsection{$P(U_{12}\geq 7|U_i=u_i,U_{12}\neq6)$}
+We can now find the probability that red is the majority colour given the colour of the boxes that already are opened. Firstly, we find the probability that there are $j$ red boxes when all twelve boxes are opened given $i$ opened boxes, hence we find $P(U_i+V_i = j | U_i=u_i)$.
+%But, we start by finding this given $P$. 
+%\begin{equation*}
+%    \begin{aligned}
+%        P(U_i+V_i = j | U_i=u_i, P=p) 
+%        &= P(V_i = j-u_i|P=p) \\[6pt]
+%        &= \binom{12-i}{j-u_i} p^{j-u_i}(1-p)^{12-i-(j-u_i)}.
+%    \end{aligned}
+%\end{equation*}
+%We want integrate out $P$. 
+We can use the law of total probability to integrate out $P$.
+\begin{equation} 
+\label{prob_red_major}
+    \begin{aligned}
+        P(U_i&+V_i = j | U_i=u_i) \\[6pt]
+        =& \int_0^1 P(U_i+V_i = j | U_i=u_i, P=p) P(P=p| U_i=u_i) dP \\[6pt]
+        =& \int_0^1 P(V_i = j-u_i | P=p) P(P=p| U_i=u_i) dP 
+        %\\[6pt]
+        %=& \int_0^1 \binom{12-i}{j-u_i} p^{j-u_i}(1-p)^{12-i-(j-u_i)} 
+        % \frac{1}{\text{B}(\gamma,\kappa)}p^{\gamma-1}(1-p)^{\kappa-1} dP \\[6pt]
+        %=& \frac{1}{\text{B}(\gamma,\kappa)} \binom{12-i}{j-u_i} \int_0^1 p^{j-u_i+\gamma-1} (1-p)^{12-i-(j-u_i)+\kappa-1} dP.
+    \end{aligned}
+\end{equation}
+We need to find expressions for these two probabilities. 
+
+As $V_i|P=p \sim \text{Binomial}(12-i,p)$, we get that 
+\begin{equation*}
+    P(V_i=j-u_i|P=p)=\binom{12-i}{j-u_i}p^{j-u_i}(1-p)^{12-i-(j-u_i)}
+\end{equation*}
+
+We assume a beta prior for $p$,
+\begin{equation*}
+    P \sim \text{Beta}(\gamma,\kappa).
+\end{equation*}
+Hence,
+\begin{equation*}
+    P(P=p) = \frac{1}{\text{B}(\gamma,\kappa)}p^{\gamma-1}(1-p)^{\kappa-1}.
+\end{equation*}
+We can find $P(P=p| U_i=u_i)$ using Bayes rule. Hence,
+\begin{equation*}
+    P(P=p| U_i=u_i) = \frac{P(U_i=u_i|P=p)P(P=p)}{P(U_i=u_i)},
+\end{equation*}
+which is proportional to the numerator of the right hand side. Using that $U_i|P$ has a binomial distribution and that $p$ has a Beta prior, we get that
+\begin{equation*}
+    \begin{aligned}
+        P(P=p|U_i=u_i) 
+        &\propto P(U_i=u_i|P=p)P(P=p)\\[6pt] 
+        &\propto p^{u_i}(1-p)^{i-u_i}p^{\gamma-1}(1-p)^{\kappa-1}\\[6pt]
+        &= p^{u_i+\gamma-1}(1-p)^{i-u_i+\kappa-1}.
+    \end{aligned}
+\end{equation*}
+This resembles a beta-distribution, hence we can conclude that
+\begin{equation*}
+    p|u_i \sim \text{Beta}(u_i+\gamma,i-u_i+\kappa),
+\end{equation*}
+and therefore that 
+\begin{equation*}
+    P(P=p|U_i=u_i) = \frac{1}{\text{B}(u_i+\gamma,i-u_i+\kappa)}p^{u_i+\gamma-1}(1-p)^{i-u_i+\kappa-1}.
+\end{equation*}
+As we now have the probabilities $P(V_i=j-u_i|P=p)$ and $P(P=p|U_i=u_i)$, we can put this into \eqref{prob_red_major}.
+\begin{equation}
+\label{red_12_equal_j}
+    \begin{aligned}
+         P(&U_i+V_i = j | U_i=u_i) \\[6pt]
+        =& \int_0^1 P(V_i = j-u_i | P=p) P(P=p| U_i=u_i) dp \\[6pt]
+        =& \int_0^1 \binom{12-i}{j-u_i}p^{j-u_i}(1-p)^{12-i-(j-u_i)} \frac{p^{u_i+\gamma-1}(1-p)^{i-u_i+\kappa-1}}{\text{B}(u_i+\gamma,i-u_i+\kappa)} dp\\[6pt]
+        =& \frac{\binom{12-i}{j-u_i}}{\text{B}(u_i+\gamma,i-u_i+\kappa)} \int_0^1 
+        p^{j-u_i+u_i+\gamma-1}(1-p)^{12-i-(j-u_i)+i-u_i+\kappa-1} dp\\[6pt]
+        =& \frac{\binom{12-i}{j-u_i}}{\text{B}(u_i+\gamma,i-u_i+\kappa)} \int_0^1 
+        p^{j+\gamma-1}(1-p)^{12-j+\kappa-1} dp.
+    \end{aligned}
+\end{equation}
+The part inside the integral is proportional to a beta distribution with parameters $j+\gamma$ and $12-j+\kappa$. The integral of a distribution over the parameter space is one, hence
+\begin{equation*}
+    \int_0^1 \frac{1}{\text{B}(j+\gamma,12-j+\kappa)}p^{j+\gamma-1}(1-p)^{12-j+\kappa}dp = 1.
+\end{equation*}
+Therefore,
+\begin{equation*}
+    \int_0^1 p^{j+\gamma-1}(1-p)^{12-j+\kappa}dp = \text{B}(j+\gamma,12-j+\kappa).
+\end{equation*}
+Putting this into \eqref{red_12_equal_j}, we get
+\begin{equation}
+\label{red_12_equal_j_final}
+    \begin{aligned}
+        P(U_i+&V_i = j | U_i=u_i) = \binom{12-i}{j-u_i} \frac{\text{B}(j+\gamma,12-j+\kappa)}{\text{B}(u_i+\gamma,i-u_i+\kappa)}.
+    \end{aligned}
+\end{equation}
+We want to find the probability that there is a red majority when all twelve boxes are opened. This is equal to the probability that there are seven or more red boxes. 
+\begin{equation}
+\label{redmajor1}
+    \begin{aligned}
+        P(U_i+V_i \geq 7 | U_i=u_i) 
+        &= \sum_{j=7}^{12} P(U_i+V_i = j | U_i=u_i)\\[6pt]
+        &= \sum_{j=7}^{12} \binom{12-i}{j-u_i} \frac{\text{B}(j+\gamma,12-j+\kappa)}{\text{B}(u_i+\gamma,i-u_i+\kappa)}.
+    \end{aligned}
+\end{equation}
+As one of the colour always is in majority, there cannot be six red and six blue boxes when all twelve boxes are opened, hence we need to condition on that as well. Hence, we want to find $P(U_i+_i \geq 7 | U_i=u_i,U_i+V_i \neq 6)$. Using Bayes rule we get that
+\begin{equation}
+\label{redmajor2}
+    \begin{aligned}
+        P(&U_i+V_i \geq 7 | U_i=u_i,U_i+V_i \neq 6) \\[6pt]
+        &= \frac{P(U_i+V_i\neq6|U_i=u_i,U_i+V_i\geq7)P(U_i+V_i\geq7|U_i=u_i)}{P(U_i+V_i\neq6|U_i=u_i)}.
+    \end{aligned}
+\end{equation}
+We have that
+\begin{equation*}
+    P(U_i+V_i\neq6|U_i=u_i,U_i+V_i\geq7)=1
+\end{equation*}
+and, using \eqref{red_12_equal_j_final},
+\begin{equation*}
+    \begin{aligned}
+        P(U_i+V_i\neq6|U_i=u_i) 
+        &= 1-P(U_i+V_i=6|U_i=u_i)\\[6pt]
+        &= 1-\binom{12-i}{6-u_i} \frac{\text{B}(6+\gamma,12-6+\kappa)}{\text{B}(u_i+\gamma,i-u_i+\kappa)}\\[6pt]
+        &= 1-\binom{12-i}{6-u_i} \frac{\text{B}(6+\gamma,6+\kappa)}{\text{B}(u_i+\gamma,i-u_i+\kappa)}.
+    \end{aligned}
+\end{equation*}
+Putting this and \eqref{redmajor1} into \eqref{redmajor2}, we get
+\begin{equation*}
+\label{redmajor_final}
+    \begin{aligned}
+        P(U_i+V_i \geq 7 | U_i=u_i,U_i+V_i \neq 6) 
+        &= \frac{\sum_{j=7}^{12} \binom{12-i}{j-u_i} \frac{\text{B}(j+\gamma,12-j+\kappa)}{\text{B}(u_i+\gamma,i-u_i+\kappa)}}{1-\binom{12-i}{6-u_i} \frac{\text{B}(6+\gamma,6+\kappa)}{\text{B}(u_i+\gamma,i-u_i+\kappa)}}.
+    \end{aligned}
+\end{equation*}
+This is the probability that there is a red majority in total, given the colour of the first $i$ boxes that are opened, and given that one of the colours is in majority. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+The part we want to integrate resembles a beta distribution with parameters $j-u_i+\gamma$ and $12-i-(j-u_i)+\kappa$. When we integrate a beta distribution from 0 to 1, we get 1. Hence,
+\begin{equation*}
+    \begin{aligned}
+        \int_0^1 \frac{1}{\text{B}(j-u_i+\gamma,12-i-(j-u_i)+\kappa)}
+        p^{j-u_i+\gamma-1} (1-p)^{12-i-(j-u_i)+\kappa-1} dP = 1.
+    \end{aligned}
+\end{equation*}
+Therefore we get that the integral is 
+\begin{equation*}
+    \begin{aligned}
+        \int_0^1 
+        p^{j-u_i+\gamma-1} (1-p)^{12-i-(j-u_i)+\kappa-1} dP = \text{B}(j-u_i+\gamma,12-i-(j-u_i)+\kappa).
+    \end{aligned}
+\end{equation*}
+Putting this into \eqref{prob_red_major}, we get
+\begin{equation}
+%\label{red_12_equal_j}
+    \begin{aligned}
+         P(U_i&+V_i = j | U_i=u_i)
+         = \frac{\binom{12-i}{j-u_i}}{\text{B}(\gamma,\kappa)}  \text{B}(j-u_i+\gamma,12-i-(j-u_i)+\kappa) .
+    \end{aligned}
+\end{equation}
+We can now find the probability that red is the majority colour, using that
+\begin{equation*}
+    P(U_i+V_i \geq 7 | U_i=u_i) = \sum_{j=7}^{12} P(U_i+V_i=j|U_i=u_i).
+\end{equation*}
+But we also wish to condition on there being a majority colour, meaning that when 12 boxes are opened, there can not be 6 of each colour. Therefore, we condition on $U_i+V_i \neq 6$. Using Bayes rule, we get that
+\begin{equation*}
+    \begin{aligned}
+         P(U_i&+V_i \geq 7 | U_i=u_i, U_i+V_i \neq 6) \\[6pt]
+         = &\frac{P(U_i+V_i \neq 6|U_i=u_i,U_i+V_i \geq 7)P(U_i+V_i \geq 7|U_i=u_i)}{P(U_i+V_i \neq 6|U_i=u_i)},
+    \end{aligned}
+\end{equation*}
+where 
+\begin{equation*}
+    P(U_i+V_i \neq 6|U_i=u_i,U_i+V_i \geq 7) = 1,
+\end{equation*}
+\begin{equation*}
+    P(U_i+V_i \geq 7|U_i=u_i) = \sum_{j=7}^{12} P(U_i+V_i=j|U_i=u_i)
+\end{equation*}
+and
+\begin{equation*}
+    P(U_i+V_i \neq 6|U_i=u_i) = \sum_{j=0,j\neq6}^{12} P(U_i+V_i=j|U_i=u_i).
+\end{equation*}
+Using this together with \eqref{red_12_equal_j}, we get that
+\begin{equation*}
+    \begin{aligned}
+        P(U_i+V_i \geq 7 | U_i=u_i, U_i+V_i \neq 6)
+        =&\frac{\sum_{j=7}^{12} P(U_i+V_i=j|U_i=u_i)}{\sum_{j=0,j\neq6}^{12} P(U_i+V_i=j|U_i=u_i)} \\[6pt]
+        =&\frac{\sum_{j=7}^{12}  \frac{\binom{12-i}{j-u_i}}{\text{B}(\gamma,\kappa)} \text{B}(j-u_i+\gamma,12-i-(j-u_i)+\kappa) }{\sum_{j=0,j\neq6}^{12} \frac{\binom{12-i}{j-u_i}}{\text{B}(\gamma,\kappa)}\text{B}(j-u_i+\gamma,12-i-(j-u_i)+\kappa)}\\[6pt]
+        =&\frac{\sum_{j=7}^{12}\binom{12-i}{j-u_i} \text{B}(j-u_i+\gamma,12-i-(j-u_i)+\kappa) }{\sum_{j=0,j\neq6}^{12} \binom{12-i}{j-u_i}\text{B}(j-u_i+\gamma,12-i-(j-u_i)+\kappa)}.
+    \end{aligned}
+\end{equation*}
+
+
+\subsection{$P(X_{i+1}=1|X_{1:i}=x_{1:i})$}
+Or actually $P(X_{i+1}=1|U_i=u_i,U_i+V_i \neq 6)$.
+
+We have that 
+\begin{equation*}
+    X_{i+1} \sim \text{Bernoulli}(p)
+\end{equation*}
+and
+\begin{equation*}
+    X_{k} \sim \text{Bernoulli}(p).
+\end{equation*}
+As before, we also have that
+\begin{equation*}
+    U_i = \sum_{k=1}^i X_k, \: \: \: i \in \{0, 1, 2,3,4,5,6,7,8,9,10,11,12\}
+\end{equation*}
+such that 
+\begin{equation*}
+    U_i \sim \text{Binomial}(i,p),
+\end{equation*}
+and
+\begin{equation*}
+    V_i = \sum_{k=i+1}^{12} X_k,\: \: \: i \in \{0, 1, 2,3,4,5,6,7,8,9,10,11,12\}
+\end{equation*}
+such that
+\begin{equation*}
+    V_i \sim \text{Binomial}(12-i,p).
+\end{equation*}
+As the colour of the $i+1$-th box is independent of the colour of the other opened boxes, we have that
+\begin{equation*}
+    P(X_{i+1}=1|U_i=u_i)=P(X_{i+1}=1).
+\end{equation*}
+When we integrate out $P$, we get
+\begin{equation}
+\label{nextisone}
+    \begin{aligned}
+        P(X_{i+1}=1) 
+        =& \int_0^1 P(X_{i+1}=1|P=p)P(P=p)dP\\[6pt]
+        =& \int_0^1 p \frac{1}{\text{B}(\gamma,\kappa)}
+        p^{\gamma-1}(1-p)^{\kappa-1} dP \\[6pt]
+        =& \frac{1}{\text{B}(\gamma,\kappa)} \int_0^1  
+        p^{\gamma}(1-p)^{\kappa-1} dP.
+    \end{aligned}
+\end{equation}
+This integral resembles a beta distribution with parameters $\gamma+1$ and $\kappa$. We have that
+\begin{equation*}
+    \int_0^1  \frac{1}{\text{B}(\gamma+1,\kappa)}
+        p^{\gamma}(1-p)^{\kappa-1} dP = 1.
+\end{equation*}
+Hence,
+\begin{equation*}
+    \int_0^1  
+        p^{\gamma}(1-p)^{\kappa-1} dP = \text{B}(\gamma+1,\kappa).
+\end{equation*}
+Putting this into \eqref{nextisone}, we get
+\begin{equation*}
+    \begin{aligned}
+        P(X_{i+1}=1) = \frac{\text{B}(\gamma+1,\kappa)}{\text{B}(\gamma,\kappa)}.
+    \end{aligned}
+\end{equation*}
+Using the property of the beta function, that 
+\begin{equation*}
+    \text{B}(a,b) = \frac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)},
+\end{equation*}
+we get
+\begin{equation*}
+    \begin{aligned}
+        P(X_{i+1}=1) 
+        =& \frac{\Gamma(\gamma+1)\Gamma(\kappa)}{\Gamma(\gamma+\kappa+1)}
+        \frac{1}
+        {\frac{\Gamma(\gamma)\Gamma(\kappa)}{\Gamma(\gamma+\kappa)}}\\[6pt]
+        =& \frac{\Gamma(\gamma+1)\Gamma(\kappa)}{\Gamma(\gamma+\kappa+1)}
+        \frac{\Gamma(\gamma+\kappa)}{\Gamma(\gamma)\Gamma(\kappa)}.
+    \end{aligned}
+\end{equation*}
+When using the property of the gamma function that
+\begin{equation*}
+    \Gamma(n+1) = n\Gamma(n),
+\end{equation*}
+we get
+\begin{equation*}
+    \begin{aligned}
+        P(X_{i+1}=1) 
+        =& \frac{\gamma \Gamma(\gamma) \Gamma(\kappa)}
+        {(\gamma+\kappa)\Gamma(\gamma+\kappa)}
+        \frac{\Gamma(\gamma+\kappa)}{\Gamma(\gamma)\Gamma(\kappa)}\\[6pt]
+        =& \frac{\gamma}{\gamma+\kappa}.
+    \end{aligned}
+\end{equation*}
+The part inside the integral resembles a beta distribution with parameters $\gamma+1$ and $\kappa$.
+
+
+
+
+
+
+
+\end{document}

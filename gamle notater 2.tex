@@ -1,0 +1,392 @@
+\section{Finding the probabilities}
+We need the probabilities $P(U_{12} \geq 7|U_i=u_i)$ and $P(X_{i+1}=1|X_{1:i}=x_{1:i})$.
+
+We let $\theta$ be the probability that a box is red, and assume that 
+\begin{equation*}
+    X_k|\Theta=\theta \sim \text{Bernoulli}(\theta).
+\end{equation*}
+and that
+\begin{equation*}
+    U_i = \sum_{k=1}^i X_k, \: \: \: i \in \{0, 1, 2,3,4,5,6,7,8,9,10,11,12\}
+\end{equation*}
+such that 
+\begin{equation*}
+    U_i|\Theta=\theta \sim \text{Binomial}(i,\theta).
+\end{equation*}
+Additionally, 
+\begin{equation*}
+    V_i = \sum_{k=i+1}^{12} X_k,\: \: \: i \in \{0,1, 2,3,4,5,6,7,8,9,10,11,12\}
+\end{equation*}
+such that
+\begin{equation*}
+    V_i|\Theta=\theta \sim \text{Binomial}(12-i,\theta).
+\end{equation*}
+$U_i$ and $V_i$ are conditionally independent given $\theta$ because each box that is opened is independent of the other boxes that are opened, given $\theta$.
+
+
+\subsection{$P(U_{12}\geq 7|U_i=u_i,U_{12}\neq6)$}
+We can now find the probability that red is the majority colour given the colour of the boxes that already are opened. Firstly, we find the probability that there are $j$ red boxes when all twelve boxes are opened given $i$ opened boxes, hence we find $P(U_i+V_i = j | U_i=u_i)$.
+%But, we start by finding this given $P$. 
+%\begin{equation*}
+%    \begin{aligned}
+%        P(U_i+V_i = j | U_i=u_i, P=p) 
+%        &= P(V_i = j-u_i|P=p) \\[6pt]
+%        &= \binom{12-i}{j-u_i} p^{j-u_i}(1-p)^{12-i-(j-u_i)}.
+%    \end{aligned}
+%\end{equation*}
+%We want integrate out $P$. 
+We use the law of total probability and condition on $\theta$. We then get
+\begin{equation} 
+\label{prob_red_major}
+    \begin{aligned}
+        P(U_i&+V_i = j | U_i=u_i) \\[6pt]
+        =& \int_0^1 P(U_i+V_i = j | U_i=u_i, \Theta=\theta) P(\Theta=\theta| U_i=u_i) \dd \theta \\[6pt]
+        =& \int_0^1 P(V_i = j-u_i | \Theta=\theta) P(\Theta=\theta| U_i=u_i) \dd \theta
+        %\\[6pt]
+        %=& \int_0^1 \binom{12-i}{j-u_i} p^{j-u_i}(1-p)^{12-i-(j-u_i)} 
+        % \frac{1}{\text{B}(\gamma,\kappa)}p^{\gamma-1}(1-p)^{\kappa-1} dP \\[6pt]
+        %=& \frac{1}{\text{B}(\gamma,\kappa)} \binom{12-i}{j-u_i} \int_0^1 p^{j-u_i+\gamma-1} (1-p)^{12-i-(j-u_i)+\kappa-1} dP.
+    \end{aligned}
+\end{equation}
+We need to find expressions for these two probabilities. 
+
+As $V_i|\Theta=\theta \sim \text{Binomial}(12-i,\theta)$, we get that 
+\begin{equation*}
+    P(V_i=j-u_i|\Theta=\theta)=\binom{12-i}{j-u_i}\theta^{j-u_i}(1-\theta)^{12-i-(j-u_i)}
+\end{equation*}
+
+We assume a beta prior for $\Theta$,
+\begin{equation*}
+    \Theta \sim \text{Beta}(\gamma,\kappa).
+\end{equation*}
+Hence,
+\begin{equation*}
+    P(\Theta=\theta) = \frac{1}{\text{B}(\gamma,\kappa)}\theta^{\gamma-1}(1-\theta)^{\kappa-1}.
+\end{equation*}
+We can find $P(\Theta=\theta| U_i=u_i)$ using Bayes rule. Hence,
+\begin{equation*}
+    P(\Theta=\theta| U_i=u_i) = \frac{P(U_i=u_i|\Theta=\theta)P(\Theta=\theta)}{P(U_i=u_i)},
+\end{equation*}
+which is proportional to the numerator of the right hand side. Using that $U_i|\Theta$ has a binomial distribution and that $\theta$ has a Beta prior, we get that
+\begin{equation*}
+    \begin{aligned}
+        P(\Theta=\theta|U_i=u_i) 
+        &\propto P(U_i=u_i|\Theta=\theta)P(\Theta=\theta)\\[6pt] 
+        &\propto \theta^{u_i}(1-\theta)^{i-u_i}\theta^{\gamma-1}(1-\theta)^{\kappa-1}\\[6pt]
+        &= \theta^{u_i+\gamma-1}(1-\theta)^{i-u_i+\kappa-1}.
+    \end{aligned}
+\end{equation*}
+This is proportional to a beta-distribution with parameters $u_i+\gamma$ and $i-u_i+\kappa$, hence we can conclude that
+\begin{equation*}
+    \Theta|U_i \sim \text{Beta}(u_i+\gamma,i-u_i+\kappa),
+\end{equation*}
+and therefore that 
+\begin{equation}
+\label{p_given_ui}
+    P(\Theta=\theta|U_i=u_i) = \frac{1}{\text{B}(u_i+\gamma,i-u_i+\kappa)}\theta^{u_i+\gamma-1}(1-\theta)^{i-u_i+\kappa-1}.
+\end{equation}
+As we now have the probabilities $P(V_i=j-u_i|\Theta=\theta)$ and $P(\Theta=\theta|U_i=u_i)$, we can put this into \eqref{prob_red_major}.
+\begin{equation}
+\label{red_12_equal_j}
+    \begin{aligned}
+         P(&U_i+V_i = j | U_i=u_i) \\[6pt]
+        =& \int_0^1 P(V_i = j-u_i | \Theta=\theta) P(\Theta=\theta| U_i=u_i) \dd \theta \\[6pt]
+        =& \int_0^1 \binom{12-i}{j-u_i}\theta^{j-u_i}(1-\theta)^{12-i-(j-u_i)} \frac{\theta^{u_i+\gamma-1}(1-\theta)^{i-u_i+\kappa-1}}{\text{B}(u_i+\gamma,i-u_i+\kappa)} \dd \theta\\[6pt]
+        =& \frac{\binom{12-i}{j-u_i}}{\text{B}(u_i+\gamma,i-u_i+\kappa)} \int_0^1 
+        \theta^{j-u_i+u_i+\gamma-1}(1-\theta)^{12-i-(j-u_i)+i-u_i+\kappa-1} \dd \theta\\[6pt]
+        =& \frac{\binom{12-i}{j-u_i}}{\text{B}(u_i+\gamma,i-u_i+\kappa)} \int_0^1 
+        \theta^{j+\gamma-1}(1-\theta)^{12-j+\kappa-1} \dd \theta.
+    \end{aligned}
+\end{equation}
+The part inside the integral is proportional to a beta distribution with parameters $j+\gamma$ and $12-j+\kappa$. The integral of a distribution over the parameter space is one, hence
+\begin{equation*}
+    \int_0^1 \frac{1}{\text{B}(j+\gamma,12-j+\kappa)}\theta^{j+\gamma-1}(1-\theta)^{12-j+\kappa} \dd \theta = 1.
+\end{equation*}
+Therefore,
+\begin{equation*}
+    \int_0^1 \theta^{j+\gamma-1}(1-\theta)^{12-j+\kappa} \dd \theta = \text{B}(j+\gamma,12-j+\kappa).
+\end{equation*}
+Putting this into \eqref{red_12_equal_j}, we get
+\begin{equation}
+\label{red_12_equal_j_final}
+    \begin{aligned}
+        P(U_i+&V_i = j | U_i=u_i) = \binom{12-i}{j-u_i} \frac{\text{B}(j+\gamma,12-j+\kappa)}{\text{B}(u_i+\gamma,i-u_i+\kappa)}.
+    \end{aligned}
+\end{equation}
+We want to find the probability that there is a red majority when all twelve boxes are opened. This is equal to the probability that there are seven or more red boxes. 
+\begin{equation}
+\label{redmajor1}
+    \begin{aligned}
+        P(U_i+V_i \geq 7 | U_i=u_i) 
+        &= \sum_{j=7}^{12} P(U_i+V_i = j | U_i=u_i)\\[6pt]
+        &= \sum_{j=7}^{12} \binom{12-i}{j-u_i} \frac{\text{B}(j+\gamma,12-j+\kappa)}{\text{B}(u_i+\gamma,i-u_i+\kappa)}.
+    \end{aligned}
+\end{equation}
+As one of the colour always is in majority, there cannot be six red and six blue boxes when all twelve boxes are opened, hence we need to condition on that as well. Hence, we want to find $P(U_i+_i \geq 7 | U_i=u_i,U_i+V_i \neq 6)$. Using Bayes rule we get that
+\begin{equation}
+\label{redmajor2}
+    \begin{aligned}
+        P(&U_i+V_i \geq 7 | U_i=u_i,U_i+V_i \neq 6) \\[6pt]
+        &= \frac{P(U_i+V_i\neq6|U_i=u_i,U_i+V_i\geq7)P(U_i+V_i\geq7|U_i=u_i)}{P(U_i+V_i\neq6|U_i=u_i)}.
+    \end{aligned}
+\end{equation}
+We have that
+\begin{equation*}
+    P(U_i+V_i\neq6|U_i=u_i,U_i+V_i\geq7)=1
+\end{equation*}
+and, using \eqref{red_12_equal_j_final}, we get 
+\begin{equation}
+\label{u12neq6}
+    \begin{aligned}
+        P(U_i+V_i\neq6|U_i=u_i) 
+        &= 1-P(U_i+V_i=6|U_i=u_i)\\[6pt]
+        &= 1-\binom{12-i}{6-u_i} \frac{\text{B}(6+\gamma,12-6+\kappa)}{\text{B}(u_i+\gamma,i-u_i+\kappa)}\\[6pt]
+        &= 1-\binom{12-i}{6-u_i} \frac{\text{B}(6+\gamma,6+\kappa)}{\text{B}(u_i+\gamma,i-u_i+\kappa)}.
+    \end{aligned}
+\end{equation}
+Putting this and \eqref{redmajor1} into \eqref{redmajor2}, we get
+\begin{equation*}
+\label{redmajor_final}
+    \begin{aligned}
+        P(U_i+V_i \geq 7 | U_i=u_i,U_i+V_i \neq 6) 
+        &= \frac{\sum_{j=7}^{12} \binom{12-i}{j-u_i} \frac{\text{B}(j+\gamma,12-j+\kappa)}{\text{B}(u_i+\gamma,i-u_i+\kappa)}}{1-\binom{12-i}{6-u_i} \frac{\text{B}(6+\gamma,6+\kappa)}{\text{B}(u_i+\gamma,i-u_i+\kappa)}}.
+    \end{aligned}
+\end{equation*}
+This is the probability that there is a red majority in total, given the colour of the first $i$ boxes that are opened, and given that one of the colours is in majority. 
+
+
+
+\subsection{$P(X_{i+1}=1|U_i=u_i,U_i+V_i\neq6)$}
+
+To be able to find $P(X_{i+1}=1|U_i=u_i,U_i+V_i\neq6)$, we are again using the law of total probability. As we are going to use this later, we start with the situation where we are not conditioning on $U_i+V_i\neq6$, hence, we start by finding $P(X_{i+1}=1|U_i=u_i)$. Using the law of total probability, we get
+\begin{equation}
+\label{xiplus1_given_ui1}
+    \begin{aligned}
+        P(X_{i+1}=1|U_i=u_i)
+        = \int_0^1 P(X_{i+1}=1|U_i=u_i,\Theta=\theta)P(\Theta=\theta|U_i=u_i) \dd \theta.
+    \end{aligned}
+\end{equation}
+The expression for $P(\Theta=\theta|U_i=u_i)$ is as given in \eqref{p_given_ui}. All of the $x$'s are Bernoulli distributed with probability $\theta$. They are conditionally independent of each other, given $\theta$. Therefore, the probability that $X_{i+1}$ is one, or red, is independent of the colour of the of the boxes that already are opened. The probability that a box that is opened is 1 is also equal to $\theta$. Hence,
+\begin{equation*}
+    \begin{aligned}
+        P(X_{i+1}=1|U_i=u_i,\Theta=\theta) = P(X_{i+1}=1|\Theta=\theta) = \theta.
+    \end{aligned}
+\end{equation*}
+Putting this and \eqref{p_given_ui} into \eqref{xiplus1_given_ui1} gives
+\begin{equation}
+\label{xiplus1_given_ui2}
+    \begin{aligned}
+        P(X_{i+1}=1|U_i=u_i)
+        &= \int_0^1 \theta \frac{1}{\text{B}(u_i+\gamma,i-u_i+\kappa)}\theta^{u_i+\gamma-1}(1-\theta)^{i-u_i+\kappa-1}  \dd \theta\\[6pt]
+        &=\frac{1}{\text{B}(u_i+\gamma,i-u_i+\kappa)} \int_0^1 \theta^{u_i+\gamma+1-1}(1-\theta)^{i-u_i+\kappa-1} \dd \theta.
+    \end{aligned}
+\end{equation}
+Again, the part inside the integral is proportional to a beta distribution, here with parameters $u_i+\gamma+1$ and $i-u_i+\kappa$. Integrating a distribution over the parameter space gives one, which in this case gives
+\begin{equation*}
+    \begin{aligned}
+        \int_0^1 \frac{1}{\text{B}(u_i+\gamma+1,i-u_i+\kappa)} \theta^{u_i+\gamma+1-1}(1-\theta)^{i-u_i+\kappa-1}  \dd \theta = 1.
+    \end{aligned}
+\end{equation*}
+Hence,
+\begin{equation*}
+    \begin{aligned}
+        \int_0^1 \theta^{u_i+\gamma+1-1}(1-\theta)^{i-u_i+\kappa-1} \dd \theta = \text{B}(u_i+\gamma+1,i-u_i+\kappa).
+    \end{aligned}
+\end{equation*}
+Inserting this into \eqref{xiplus1_given_ui2} gives
+\begin{equation*}
+    \begin{aligned}
+        P(X_{i+1}=1|U_i=u_i) 
+        = \frac{\text{B}(u_i+\gamma+1,i-u_i+\kappa)}
+        {\text{B}(u_i+\gamma,i-u_i+\kappa)}.
+    \end{aligned}
+\end{equation*}
+Using the property of the beta function that
+\begin{equation*}
+    \text{B}(a,b) = \frac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)},
+\end{equation*}
+where $\Gamma(\cdot)$ is the gamma function, we get
+\begin{equation*}
+    \begin{aligned}
+        P(X_{i+1}=1|U_i=u_i) 
+        &= \frac{\frac{\Gamma(u_i+\gamma+1)\Gamma(i-u_i+\kappa)}{\Gamma(u_i+\gamma+1+i-u_i+\kappa)}}
+        {\frac{\Gamma(u_i+\gamma)\Gamma(i-u_i+\kappa)}{\Gamma(u_i+\gamma+i-u_i+\kappa)}} \\[6pt]
+        &= \frac{\frac{\Gamma(u_i+\gamma+1)}{\Gamma(\gamma+1+i+\kappa)}}
+        {\frac{\Gamma(u_i+\gamma)}{\Gamma(\gamma+i+\kappa)}}.
+    \end{aligned}
+\end{equation*}
+Using the property of the gamma function that
+\begin{equation*}
+    \Gamma(n+1) = n\Gamma(n),
+\end{equation*}
+we get that 
+\begin{equation}
+\label{xiplus1_given_ui3}
+    \begin{aligned}
+        P(X_{i+1}=1|U_i=u_i) 
+        &= \frac{\frac{(\gamma+u_i)\Gamma(u_i+\gamma)}{(\gamma+\kappa+i)\Gamma(\gamma+i+\kappa)}}
+        {\frac{\Gamma(u_i+\gamma)}{\Gamma(\gamma+i+\kappa)}}\\[6pt]
+        &=\frac{\gamma+u_i}
+        {\gamma+\kappa+i}.
+    \end{aligned}
+\end{equation}
+We now have the probability that the next box we open is red, but we have not yet conditioned on there being a majority of either red or blue. Hence, we have to condition on $U_i+V_i\neq6$. Using Bayes' rule we get
+\begin{equation}
+\label{nextisred_given_majority}
+    \begin{aligned}
+        P(&X_{i+1}=1|U_i=u_i,U_i+V_i\neq6) \\[6pt]
+        &= \frac{P(U_i+V_i\neq6|U_i=u_i,X_{i+1}=1)P(X_{i+1}=1|U_i=u_i)}
+        {P(U_i+V_i\neq6|U_i=u_i)}.
+    \end{aligned}
+\end{equation}
+We have $P(X_{i+1}=1|U_i=u_i)$ from \eqref{xiplus1_given_ui3} and $P(U_i+V_i\neq6|U_i=u_i)$ is given in \eqref{u12neq6}. It remains to find $P(U_i+V_i\neq6|U_i=u_i,X_{i+1}=1)$.
+Firstly, 
+\begin{equation*}
+    \begin{aligned}
+        P(U_i+V_i\neq6|U_i=u_i,X_{i+1}=1) = 1 - P(U_i+V_i=6|U_i=u_i,X_{i+1}=1).
+    \end{aligned}
+\end{equation*}
+Again, using the law of total probability, we get
+\begin{equation}
+\label{u12eq6_given_nextisone}
+    \begin{aligned}
+        P(U_i+&V_i=6|U_i=u_i,X_{i+1}=1) \\[6pt]
+        = \int_0^1 &P(U_i+V_i=6|U_i=u_i,X_{i+1}=1,P=p)\\[6pt]
+        &\times P(P=p|U_i=u_i,X_{i+1}=1) \dd p
+    \end{aligned}
+\end{equation}
+Thus, we need to find those two probabilities. 
+\begin{equation*}
+    \begin{aligned}
+        P(U_i+V_i=6|U_i=u_i,X_{i+1}=1,P=p) 
+        = P(U_{i+1}+V_{i+1}=6|U_{i+1}=u_i+1,P=p).
+    \end{aligned}
+\end{equation*}
+As we condition on $U_{i+1}=u_i+1$, we get that
+\begin{equation*}
+    \begin{aligned}
+        P(U_i+V_i=6|U_i=u_i,X_{i+1}=1,P=p) 
+        &= P(V_{i+1}=6-(u_i+1)|P=p)\\[6pt]
+        &= P(V_{i+1}=5-u_i|P=p).
+    \end{aligned}
+\end{equation*}
+
+We have that 
+\begin{equation*}
+    V_{i+1}|P = \sum_{j=i+2}^{12} X_j,
+\end{equation*}
+and
+\begin{equation*}
+   X_j \sim \text{Bernoulli}(p). 
+\end{equation*}
+Then
+\begin{equation*}
+    V_{i+1}|P \sim \text{Binomial}(12-(i+1),p) = \text{Binomial}(11-i),p).
+\end{equation*}
+Thus, 
+\begin{equation}
+\label{majority_given_nextisred}
+    \begin{aligned}
+        P(U_i+V_i=6|U_i=u_i,X_{i+1}=1,P=p)
+        &= P(V_{i+1}=5-u_i|P=p)\\[6pt]
+        &= \binom{11-i}{5-u_i} p^{5-u_i}(1-p)^{11-i-(5-u_i)}\\[6pt]
+        &= \binom{11-i}{5-u_i} p^{5-u_i}(1-p)^{6-i+u_i}.
+    \end{aligned}
+\end{equation}
+
+We also need to find the distribution of
+\begin{equation*}
+    P(P=p|U_i=u_i,X_{i+1}=1) = P(P=p|U_i=u_i+1).
+\end{equation*}
+Using Bayes' theorem we find that this is
+\begin{equation*}
+    P(P=p|U_i=u_i+1) = \frac{P(U_{i+1}=u_i+1|P=p)P(P=p)}{P(U_{i+1}=u_i+1)} .
+\end{equation*}
+which is proportional to $P(U_{i+1}=u_i+1|P=p)P(P=p)$. We also have that 
+\begin{equation*}
+    U_{i+1}|P = \sum_{j=0}^{i+1} X_j \sim \text{Binomial}(i+1,p).
+\end{equation*}
+We also have that $P(P=p)$ is the posterior distribution of $p$, which we set to be the beta distribution with parameters $\gamma$ and $\kappa$. 
+Hence, 
+\begin{equation*}
+    \begin{aligned}
+        P(P=p|U_i=u_i, X_{i+1}=1) 
+        &\propto P(U_{i+1}=u_i+1|P=p)P(P=p)\\[6pt]
+        &\propto p^{u_i+1}(1-p)^{i+1-(u_i+1)}p^{\gamma-1}(1-p)^{\kappa-1}\\[6pt]
+        &= p^{\gamma+u_i}(1-p)^{\kappa+i-u_i-1},
+    \end{aligned}
+\end{equation*}
+where the constants in the binomial and the beta distribution are disregarded. This probability has the same form as a beta distribution with parameters $\gamma+u_i+1$ and $\kappa+1-u_i$. We can therefore conclude that $P(P=p|U_i=u_i, X_{i+1}=1)$ has a Beta distribution with those parameters. Thus,
+\begin{equation}
+\label{p_given_nextisred}
+    \begin{aligned}
+        P(P=p|U_i=u_i, X_{i+1}=1) 
+        = \frac{1}{\text{B}(\gamma+u_i+1,\kappa+i-u_i)} 
+        p^{\gamma+u_i}(1-p)^{\kappa+i-u_i-1}. 
+    \end{aligned}
+\end{equation}
+As we have the probabilities $P(U_i+V_i=6|U_i=u_i,X_{i+1}=1,P=p)$ and $P(P=p|U_i=u_i,X_{i+1}=1)$ in \eqref{majority_given_nextisred} and \eqref{p_given_nextisred}, respectively, we can now find $P(U_i+V_i=6|U_i=u_i,X_{i+1}=1)$. Putting these into \eqref{u12eq6_given_nextisone}, we get that
+\begin{equation*}
+    \begin{aligned}
+        P&(U_i+V_i=6|U_i=u_i,X_{i+1}=1) \\[6pt]
+        &= \int_0^1 P(U_i+V_i=6|U_i=u_i,X_{i+1}=1,P=p)
+        P(P=p|U_i=u_i,X_{i+1}=1 \dd p\\[6pt]
+        &= \int_0^1 \binom{11-i}{5-u_i} p^{5-u_i}(1-p)^{6-i+u_i}
+        \frac{p^{\gamma+u_i}(1-p)^{\kappa+i-u_i-1}}{\text{B}(\gamma+u_i+1,\kappa+i-u_i)} \dd p.
+    \end{aligned}
+\end{equation*}
+If we move the parts that does not depend on $p$ outside the integral, we get
+\begin{equation}
+\label{notmajority_givennextisred}
+    \begin{aligned}
+        P&(U_i+V_i=6|U_i=u_i,X_{i+1}=1) \\[6pt]
+        &= \frac{\binom{11-i}{5-u_i}}{\text{B}(\gamma+u_i+1,\kappa+i-u_i)}
+        \int_0^1 p^{5-u_i+\gamma+u_i}(1-p)^{6-i+u_i+\kappa+i-u_i-1} \dd p\\[6pt]
+        &= \frac{\binom{11-i}{5-u_i}}{\text{B}(\gamma+u_i+1,\kappa+i-u_i)}
+        \int_0^1 p^{5+\gamma}(1-p)^{5+\kappa} \dd p.
+    \end{aligned}
+\end{equation}
+The part inside the integral is proportional to a beta distribution with parameters $6+\gamma$ and $6+\kappa$. Since,
+\begin{equation*}
+    \begin{aligned}
+        \int_0^1 \frac{1}{\text{B}(6+\gamma,6+\kappa)}
+        p^{5+\gamma}(1-p)^{5+\kappa} \dd p 
+        = 1,
+    \end{aligned}
+\end{equation*}
+we get that
+\begin{equation*}
+    \begin{aligned}
+        \int_0^1 p^{5+\gamma}(1-p)^{5+\kappa} \dd p 
+        =\text{B}(6+\gamma,6+\kappa).
+    \end{aligned}
+\end{equation*}
+Inserting this into \eqref{notmajority_givennextisred}, we get
+\begin{equation*}
+    \begin{aligned}
+        P(U_i+V_i=6|U_i=u_i,X_{i+1}=1)
+        = \binom{11-i}{5-u_i}\frac{\text{B}(6+\gamma,6+\kappa)}{\text{B}(\gamma+u_i+1,\kappa+i-u_i)}.
+    \end{aligned}
+\end{equation*}
+Then, 
+\begin{equation}
+\label{notmajority_givennextisred_final}
+    \begin{aligned}
+        P(U_i+V_i\neq6|U_i=u_i,X_{i+1}=1)
+        &=1-P(U_i+V_i=6|U_i=u_i,X_{i+1}=1)\\[6pt]
+        &=1 - \binom{11-i}{5-u_i}\frac{\text{B}(6+\gamma,6+\kappa)}{\text{B}(\gamma+u_i+1,\kappa+i-u_i)}.
+    \end{aligned}
+\end{equation}
+As we have $P(U_i+V_i\neq6|U_i=u_i,X_{i+1}=1)$ from \eqref{notmajority_givennextisred_final}, $P(X_{i+1}=1|U_i=u_i)$ from \eqref{xiplus1_given_ui3} and $P(U_i+V_i\neq6|U_i=u_i)$ from \eqref{u12neq6}, we can put this into \eqref{nextisred_given_majority}. Thus,
+\begin{equation}
+%\label{nextisred_given_majority}
+    \begin{aligned}
+        P(&X_{i+1}=1|U_i=u_i,U_i+V_i\neq6) \\[6pt]
+        &= \frac{P(U_i+V_i\neq6|U_i=u_i,X_{i+1}=1)P(X_{i+1}=1|U_i=u_i)}
+        {P(U_i+V_i\neq6|U_i=u_i)}\\[6pt]
+        &= \frac{\bigg[ 1 - \binom{11-i}{5-u_i}\frac{\text{B}(6+\gamma,6+\kappa)}{\text{B}(\gamma+u_i+1,\kappa+i-u_i)} \bigg]
+        \frac{\gamma+u_i}
+        {\gamma+\kappa+i}}
+        {1-\binom{12-i}{6-u_i} \frac{\text{B}(6+\gamma,6+\kappa)}{\text{B}(u_i+\gamma,i-u_i+\kappa)}}.
+    \end{aligned}
+\end{equation}

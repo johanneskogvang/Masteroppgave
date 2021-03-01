@@ -1,0 +1,18 @@
+\newpage
+\section{Theory}
+\subsection{Bayesian inference}
+Consider a stochastic variable, $X$, that has a probability density function $f(x|\theta)$, where $\theta$ is a parameter upon which $X$ depend. In classical statistics, $\theta$ is said to be a fixed but unknown parameter. On the other hand, in Bayesian statistics, we have a density function for $\theta$, $f(\theta)$, that is called the prior distribution. This includes all the prior knowledge we have about $\theta$ before observing any data. That could be our own subjective believes about the parameter, or other previously collected data or studies. One could also choose a prior distribution that does not say anything about the parameter at all. Then it does not influence the final results or inference. 
+%Source: computational statistics book. 
+If we have collected data, $\textbf{x} = (x_1,x_2,...,x_n)$, we can update the prior with the information from that data. The resulting distribution is called the posterior distribution of $\theta$. This can be found using Bayes' rule. For two events, $A$ and $B$, that is
+\begin{equation*}
+    P(A|B)=\frac{P(B|A)P(A)}{P(B)}.
+\end{equation*}%Source, statinfboka p 23. 
+In our case, we let $P(\theta|\textbf{x})$ be the posterior distribution, $P(\theta)$ be the prior distribution and $f(\textbf{x}|\theta)$ be the distribution of the sample, $\textbf{x}$. The posterior could then be expressed as
+\begin{equation*}
+    P(\theta|\textbf{x}) = \frac{f(\textbf{x}|\theta)P(\theta)}{m(\textbf{x})},
+\end{equation*}
+%Source: statinf boka s 324. 
+where $m(\textbf{x})$ is the marginal distribution of $\textbf{X}$, hence, it is
+\begin{equation*}
+    m(\textbf{x}) = \int f(\textbf{x}|\theta) P(\theta) \dd \theta.
+\end{equation*}
