@@ -1,14 +1,15 @@
+\newpage
 \section{Trees}
 %the following trees look like the ones from the specialisation thesis
 %\input{tikz-trees/unif_unlim_a0.01v2}
 %\input{tikz-trees/unif_lim_a0.01_b0.6}
 %\input{tikz-trees/unif_lim_a0.01_b0.4}
-\input{tikz-trees/binom_unlim_a0.01} %g=k=1 tror jeg
-\input{tikz-trees/binom_lim_a0.01_b0.6}%g=k=1 tror jeg
-\input{tikz-trees/binom_unlim_a0.01_g2_k0.5}
-\input{tikz-trees/binom_unlim_a0.01_g2_k2}
+%\input{tikz-trees/binom_unlim_a0.01} %g=k=1 tror jeg
+%\input{tikz-trees/binom_lim_a0.01_b0.6}%g=k=1 tror jeg
+%\input{tikz-trees/binom_unlim_a0.01_g2_k0.5}
+%\input{tikz-trees/binom_unlim_a0.01_g2_k2}
 
-
+%\subsection{Unlimited}
 \begin{figure}
     \centering
     \scalebox{0.5}{\input{tikz-trees/unif_unlim_a0.01v2}}
@@ -46,8 +47,36 @@
     \centering
     \begin{minipage}[t]{0.45\textwidth} 
         \centering
-        \scalebox{0.6}{\input{tikz-trees/binom_unlim_a0.01}}
-        \caption{Binomial, unlimited, $\alpha = 0.01$, $\gamma=1$ and $\kappa=1$.}
+        \scalebox{0.6}{\input{tikz-trees/binom_unlim_a0.01_g5_k5}}
+        \caption{Binomial, unlimited, $\alpha = 0.01$, $\gamma=5$ and $\kappa=5$.}
+        \label{binom_unlim_a0.01_g5_k5}
+    \end{minipage}
+\end{figure}
+
+
+%\subsection{Limited}
+
+\begin{figure}
+    \centering
+    \scalebox{0.5}{\input{tikz-trees/unif_lim_a0.01_b0.6}}
+    \caption{Uniform limited, $\alpha = 0.01$, $\beta=0.6$.}
+    \label{unif_lim_a0.01_b0.6}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{minipage}[t]{0.45\textwidth} 
+        \centering
+        \scalebox{0.6}{\input{tikz-trees/binom_lim_a0.01_g0.5_k0.5}}
+        \caption{Binomial, unlimited, $\alpha = 0.01$, $\gamma=0.5$ and $\kappa=0.5$.}
+        \label{binom_unlim_a0.01_g0.5_k0.5}
+    \end{minipage}
+    \hfill
+    \centering
+    \begin{minipage}[t]{0.45\textwidth} 
+        \centering
+        \scalebox{0.6}{\input{tikz-trees/binom_lim_a0.01_b0.6_g1_k1}}
+        \caption{Binomial, unlimited, $\alpha = 0.01$, $\beta=0.6$ $\gamma=1$ and $\kappa=1$.}
         \label{binom_unlim_a0.01_g1_k1}
     \end{minipage}
 \end{figure}
