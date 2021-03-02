@@ -1,5 +1,23 @@
 \newpage
 \section{Theory}
+Write something general here. Something like:
+
+In this section we will go through some of the statistical theory used in this thesis. That includes Bayes' Rule, .... 
+
+\subsection{Bayes' Rule}
+Consider two events, $A$ and $B$. We can find the probability of $A$ given event $B$ by the use of the probability of event $B$ given $A$ and the probabilities of the events $A$ and $B$ separately \citep{statinf}. Hence,
+\begin{equation}
+\label{bayesrule}
+    P(A|B)=\frac{P(B|A)P(A)}{P(B)}.
+\end{equation}
+This is called Bayes' Rule. 
+
+Should I include an example here?
+
+
+\subsection{The law of total probability}
+
+
 \subsection{Bayesian inference}
 Consider a stochastic variable, $X$, that has a probability density function $f(x|\theta)$, where $\theta$ is a parameter upon which $X$ depend. In classical statistics, $\theta$ is said to be a fixed but unknown parameter. On the other hand, in Bayesian statistics, we have a density function for $\theta$, $f(\theta)$, that is called the prior distribution. This includes all the prior knowledge we have about $\theta$ before observing any data. That could be our own subjective believes about the parameter, or other previously collected data or studies. One could also choose a prior distribution that does not say anything about the parameter at all. Then it does not influence the final results or inference. 
 %Source: computational statistics book. 
