@@ -11,7 +11,7 @@
 
 \begin{figure}
     \centering
-    \scalebox{0.8}{\input{tikz-trees/unif_unlim_a0.01v2}}
+    \scalebox{0.5}{\input{tikz-trees/unif_unlim_a0.01v2}}
     \caption{Uniform unlimited, $\alpha = 0.01$}
     \label{unif_unlim_a0.01}
 \end{figure}
@@ -20,16 +20,34 @@
     \centering
     \begin{minipage}[t]{0.45\textwidth} 
         \centering
-        \scalebox{0.8}{\input{tikz-trees/binom_unlim_a0.01}}
-        \caption{Binomial, unlimited, $\alpha = 0.01$, $\gamma=1$ and $\kappa=1$.}
-        \label{binom_unlim_a0.01_g1_k1}
+        \scalebox{0.6}{\input{tikz-trees/binom_unlim_a0.01_g0.5_k0.5}}
+        \caption{Binomial, unlimited, $\alpha = 0.01$, $\gamma=0.5$ and $\kappa=0.5$.}
+        \label{binom_unlim_a0.01_g0.5_k0.5}
     \end{minipage}
     \hfill
     \centering
     \begin{minipage}[t]{0.45\textwidth} 
         \centering
-        \scalebox{0.8}{\input{lim_unif_a0.01_b0.6}}
-        \caption{A decision tree for a limited trial, with $\alpha = 0.01$ and $\beta=0.6$, that can be understood in the same way as Figure \ref{unlim_a0.0001}.}
-        \label{lim_a0.01_b0.6}
+        \scalebox{0.6}{\input{tikz-trees/binom_unlim_a0.01}}
+        \caption{Binomial, unlimited, $\alpha = 0.01$, $\gamma=1$ and $\kappa=1$.}
+        \label{binom_unlim_a0.01_g1_k1}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{minipage}[t]{0.45\textwidth} 
+        \centering
+        \scalebox{0.6}{\input{tikz-trees/binom_unlim_a0.01_g2_k2}}
+        \caption{Binomial, unlimited, $\alpha = 0.01$, $\gamma=2$ and $\kappa=2$.}
+        \label{binom_unlim_a0.01_g2_k2}
+    \end{minipage}
+    \hfill
+    \centering
+    \begin{minipage}[t]{0.45\textwidth} 
+        \centering
+        \scalebox{0.6}{\input{tikz-trees/binom_unlim_a0.01}}
+        \caption{Binomial, unlimited, $\alpha = 0.01$, $\gamma=1$ and $\kappa=1$.}
+        \label{binom_unlim_a0.01_g1_k1}
     \end{minipage}
 \end{figure}
