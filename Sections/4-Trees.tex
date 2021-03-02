@@ -1,0 +1,35 @@
+\section{Trees}
+%the following trees look like the ones from the specialisation thesis
+%\input{tikz-trees/unif_unlim_a0.01v2}
+%\input{tikz-trees/unif_lim_a0.01_b0.6}
+%\input{tikz-trees/unif_lim_a0.01_b0.4}
+\input{tikz-trees/binom_unlim_a0.01} %g=k=1 tror jeg
+\input{tikz-trees/binom_lim_a0.01_b0.6}%g=k=1 tror jeg
+\input{tikz-trees/binom_unlim_a0.01_g2_k0.5}
+\input{tikz-trees/binom_unlim_a0.01_g2_k2}
+
+
+\begin{figure}
+    \centering
+    \scalebox{0.8}{\input{tikz-trees/unif_unlim_a0.01v2}}
+    \caption{Uniform unlimited, $\alpha = 0.01$}
+    \label{unif_unlim_a0.01}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{minipage}[t]{0.45\textwidth} 
+        \centering
+        \scalebox{0.8}{\input{tikz-trees/binom_unlim_a0.01}}
+        \caption{Binomial, unlimited, $\alpha = 0.01$, $\gamma=1$ and $\kappa=1$.}
+        \label{binom_unlim_a0.01_g1_k1}
+    \end{minipage}
+    \hfill
+    \centering
+    \begin{minipage}[t]{0.45\textwidth} 
+        \centering
+        \scalebox{0.8}{\input{lim_unif_a0.01_b0.6}}
+        \caption{A decision tree for a limited trial, with $\alpha = 0.01$ and $\beta=0.6$, that can be understood in the same way as Figure \ref{unlim_a0.0001}.}
+        \label{lim_a0.01_b0.6}
+    \end{minipage}
+\end{figure}
