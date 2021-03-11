@@ -1,10 +1,49 @@
 \newpage
 \section{Theory}
-Write something general here. Something like:
+In this section we will go through some of the statistical theory used in this thesis. That includes the theorem of total probability, Bayes' theorem, the beta and gamma functions and Bayesian modelling. 
 
-In this section we will go through some of the statistical theory used in this thesis. That includes Bayes' Rule, .... 
+\subsection{The Theorem of Total Probability}
+The theorem of total probability can be used when we have dependent variables and we wish to find the probability of one variable alone(?).
+\begin{theorem}[Theorem of Total Probability, Continuous Variables]
+If we have continuous variables $U$ and $\Theta$, and both $P(U=u|\Theta=\theta)$ and  $P(\Theta=\theta)$ exist for all $\theta$, then we can find $P(U=u)$ using these \citep{schay2016introduction}. 
+\begin{equation}
+    \label{lawoftotprob}
+    P(U=u) = \int_{-\infty}^{\infty} P(U=u|\Theta=\theta)P(\Theta=\theta) \dd \theta.
+\end{equation}
+\end{theorem}
 
-\subsection{Bayes' Rule}
+\begin{comment}
+In \citet{schay2016introduction}, the theorem of total probability for continuous variables is stated as 
+\begin{theorem}[Theorem of Total Probability, Continuous Versions]
+ For a continuous random variable Y and any event A, if $f_{Y|A}$ and $f_Y$ exists for all y, then
+\begin{equation}
+   % \label{lawoftotprob}
+    P(A) = \int_{-\infty}^{\infty}
+    P(A|Y=y)f_Y(y) dy.
+\end{equation}
+\end{theorem}
+\end{comment}
+
+
+
+
+Consider, for example, two continuous random variables $U$ and $V$ that are conditionally independent given the stochastic variable $\theta$. To find the probability that $U+V$ is equal to some integer $j$, we can use the theorem of total probability to condition on theta. Thus,
+\begin{equation*}
+    P(U+V=j) = \int_{-\infty}^\infty P(U+V=j|\Theta=\theta)P(\Theta=\theta) d\theta
+\end{equation*}
+Later, we can exploit that $U|\theta$ and $V|\theta$ are independent. If $\theta$ is a probability that is defined on the interval (0,1), this will be integrated on that interval, such that 
+\begin{equation*}
+    P(U+V=j) = \int_{0}^1 P(U+V=j|\Theta=\theta)P(\Theta=\theta) d\theta.
+\end{equation*}
+Mer utfyllende her?
+
+
+
+
+\subsection{Bayes' Theorem}
+Why do we need bayes theorem?
+
+\begin{comment}
 Consider two events, $A$ and $B$. We can find the probability of $A$ given event $B$ by the use of the probability of event $B$ given $A$ and the probabilities of the events $A$ and $B$ separately \citep{statinf}. Hence,
 \begin{equation}
 \label{bayesrule}
@@ -12,16 +51,242 @@ Consider two events, $A$ and $B$. We can find the probability of $A$ given event
 \end{equation}
 This is called Bayes' Rule. 
 
-Should I include an example here?
+Or should I write about the continous version? Could I for example write: 
+\end{comment}
+
+\begin{comment}
+From \citet{schay2016introduction}, we have a version of Bayes' theorem for continuous variables which is stated as 
+\begin{theorem}[Bayes' Theorem]
+\label{bayestheorem}
+For a continuous random variable Y and any event A with nonzero probability, if $P(A|Y=y)$ and $f_Y$ exist for all $y$, then
+\begin{equation}
+    \label{bayestheorem_eq}
+    f_{Y|A}(y) = \frac{P(A|Y=y)f_Y(y)}{\int_{-\infty}^{\infty}P(A|Y=y) f_Y(y) dy}.
+\end{equation}
+Here $f_Y$is called the prior density of $Y$, and $f_{Y|A}$ its posterior density, referring to the fact that these are the densities of $Y$ before and after the observation of $A$. 
+\end{theorem}
+
+From \eqref{lawoftotprob} we see that the denominator is the probability of event $A$, \begin{equation*}
+    \int_{-\infty}^{\infty}P(A|Y=y) f_Y(y) = P(A),
+\end{equation*}
+such that Bayes' theorem can be stated as
+\begin{equation}
+    \label{bayestheorem_eq2}
+    f_{Y|A}(y) = \frac{P(A|Y=y)f_Y(y)}{P(A)}.
+\end{equation}
 
 
-\subsection{The law of total probability}
+Or:
+\end{comment}
 
 
-\subsection{Bayesian inference}
-Consider a stochastic variable, $X$, that has a probability density function $f(x|\theta)$, where $\theta$ is a parameter upon which $X$ depend. In classical statistics, $\theta$ is said to be a fixed but unknown parameter. On the other hand, in Bayesian statistics, we have a density function for $\theta$, $f(\theta)$, that is called the prior distribution. This includes all the prior knowledge we have about $\theta$ before observing any data. That could be our own subjective believes about the parameter, or other previously collected data or studies. One could also choose a prior distribution that does not say anything about the parameter at all. Then it does not influence the final results or inference. 
-%Source: computational statistics book. 
-If we have collected data, $\textbf{x} = (x_1,x_2,...,x_n)$, we can update the prior with the information from that data. The resulting distribution is called the posterior distribution of $\theta$. This can be found using Bayes' rule. For two events, $A$ and $B$, that is
+\begin{theorem}[Bayes' Theorem]
+\label{bayestheorem}
+Consider two continuous random variables, $U$ and $\Theta$, that both have a nonzero probability. If both $P(U=u|\Theta=\theta)$ and $P(\Theta=\theta)$ exist for all $\theta$, then \citep{schay2016introduction}
+\begin{equation}
+    \label{bayesrule}
+    P(\Theta=\theta|U=u) = \frac{P(U=u|\Theta=\theta)P(\Theta=\theta)}{\int_{-\infty}^{\infty} P(U=u|\Theta=\theta)P(\Theta=\theta) \dd \theta}.
+\end{equation}
+$P(\Theta=\theta)$ is the prior probability/density of $\Theta$, and it represents the prior knowledge we have about that parameter. $P(\Theta=\theta|U=u)$ is called the posterior of $\Theta$, which is the probability density after we have observed that $U=u$. 
+\end{theorem}
+
+
+From \eqref{lawoftotprob} we see that the denominator is the probability that $U=u$,
+\begin{equation*}
+    \int_{-\infty}^{\infty} P(U=u|\Theta=\theta)P(\Theta=\theta) \dd \theta = P(U=u).
+\end{equation*}
+Thus, Bayes' theorem can be reformulated as
+\begin{equation}
+    \label{Bayesrule2}
+     P(\Theta=\theta|U=u) = \frac{P(U=u|\Theta=\theta)P(\Theta=\theta)}{P(U=u)}.
+\end{equation}
+
+
+
+As an example, consider a random variable $U$ that is binomial distributed with parameters $n$ and $\theta$. Thus,
+\begin{equation*}
+    U|\theta \sim \mathrm{Binomial}(n,\theta).
+\end{equation*}
+Using Theorem \ref{bayestheorem} and \eqref{Bayesrule2}, we get that the posterior probability of $\Theta|U$ is
+\begin{equation*}
+    P(\Theta=\theta|U=u) = \frac{P(U=u|\Theta=\theta)P(\Theta=\theta)}{P(U=u)}.
+\end{equation*}
+
+
+\subsection{The Beta and Gamma Functions}
+%The beta distribution is continuous on the interval between 0 and 1, and have two parameters \citep{statinf}. Consider a parameter $\theta$ is beta distributed with parameters $\gamma$ and $\kappa$, hence,
+%\begin{equation*}
+%    \theta \sim beta(\gamma,\kappa).
+%\end{equation*}
+%The probability density function of $\theta$ is then
+% \begin{equation}
+    % \label{betadistribution}
+    % f(\theta|\gamma,\kappa) = \frac{1}{\mathrm{B}(\gamma,\kappa)} \theta^{\gamma-1}(1-\theta)^{\kappa-1},\:\: 0<\theta<1, \gamma>0, \kappa>0,
+% \end{equation}
+% where $\mathrm{B}(\gamma,\kappa)$ is the beta function, meaning that
+
+
+Later, we will use the beta and gamma functions and some properties of these, thus, these are stated here. This theory is found in \citet{statinf}. The gamma function for a parameter $\kappa$ is 
+\begin{equation*}
+    \label{gamma_func}
+    \Gamma(\kappa) = \int_0^\infty t^{\kappa-1}e^{-t} \dd t.
+\end{equation*}
+A useful property of the gamma function is that it is recursive. Hence,
+\begin{equation*}
+    \Gamma(\kappa+1) = \kappa \Gamma(\kappa), \quad \kappa>0 .
+\end{equation*}
+
+Additionally, the beta function with parameters $\gamma$ and $\kappa$ is defined as
+\begin{equation*}
+    \mathrm{B}(\gamma,\kappa) = \int_0^1 \theta^{\gamma-1}(1-\theta)^{\kappa-1} \: \dd \theta.
+\end{equation*}
+We can express the beta function as a product of gamma functions. That yields
+\begin{equation}
+    \label{beta_as_gamma}
+    \mathrm{B}(\gamma,\kappa) = \frac{\Gamma(\gamma)\Gamma(\kappa)}{\Gamma(\gamma+\kappa)}.
+\end{equation}
+
+
+% Using this and the fact that $\Gamma(1)=1$, we get the useful property that (not sure if I need this?)
+% \begin{equation*}
+    % \Gamma(n) = (n-1)!,
+% \end{equation*}
+% for all integers $n>0$.
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{comment}
+\subsection{The binomial distribution}
+Alternative title: The Bernoulli and binomial distributions
+
+Assume we have a random variable, $X_j$, that is 1 with probability $\theta$ and 0 with probability $1-\theta$. $X_j$ is the Bernoulli distributed with parameter $\theta$, thus
+\begin{equation*}
+    X_j \sim \mathrm{Bernoulli}(\theta).
+\end{equation*}
+Consider a sample of $n$ draws from that Bernoulli distribution, $(x_1,x_2,...,x_n)$. If we define a stochastic variable, $Y$, as
+\begin{equation*}
+    Y = \sum_{j=1}^n X_j,
+\end{equation*}
+then $Y$ has a binomial distribution with parameters $n$ and $\theta$. Thus,
+\begin{equation*}
+    Y \sim \mathrm{Binomial}(n,\theta).
+\end{equation*}
+$Y$ is then the number of times we get 1 when drawing from the Bernoulli distribution $n$ times. The probability density function of $Y$ is
+\begin{equation*}
+    P(Y=y|n,\theta) = \binom{n}{\theta} \theta^y (1-\theta)^{n-y}, \quad y=0,1,2,...n.
+\end{equation*}
+
+example: the box task, probability that a box is red is $\theta$. $X_i=1$ when the box is red. then the probability that there are $y$ red boxes when all 12 boxes are opened is $\binom{12}{\theta} \theta^y (1-\theta)^{12-y}$.
+
+\subsection{The beta distribution}
+The beta distribution is continuous on the interval between 0 and 1, and have two parameters \citep{statinf}. Consider a parameter $\theta$ is beta distributed with parameters $\gamma$ and $\kappa$, hence,
+\begin{equation*}
+    \theta \sim beta(\gamma,\kappa).
+\end{equation*}
+The probability density function of $\theta$ is then
+\begin{equation}
+    %\label{betadistribution}
+    f(\theta|\gamma,\kappa) = \frac{1}{\mathrm{B}(\gamma,\kappa)} \theta^{\gamma-1}(1-\theta)^{\kappa-1},\:\: 0<\theta<1, \gamma>0, \kappa>0,
+\end{equation}
+where $\mathrm{B}(\gamma,\kappa)$ is the beta function, meaning that
+\begin{equation*}
+    \mathrm{B}(\gamma,\kappa) = \int_0^1 \theta^{\gamma-1}(1-\theta)^{\kappa-1} \dd \theta.
+\end{equation*}
+We can express the beta function as a product of gamma functions, $\Gamma(\cdot)$. The gamma function for a variable $\gamma$ is
+\begin{equation*}
+    \label{gamma_func}
+    \Gamma(\gamma) = \int_0^\infty t^{\gamma-1}e^{-t} \dd t.
+\end{equation*}
+A useful property of the gamma function is that it is recursive. Hence,
+\begin{equation*}
+    \Gamma(\gamma+1) = \gamma \Gamma(\gamma), \quad \gamma>0 .
+\end{equation*}
+Using this and the fact that $\Gamma(1)=1$, we get the useful property that (not sure if I need this?)
+\begin{equation*}
+    \Gamma(n) = (n-1)!,
+\end{equation*}
+for all integers $n>0$.
+
+
+Expressing the beta function in terms of gamma functions yields
+\begin{equation}
+    \label{beta_as_gamma}
+    \mathrm{B}(\gamma,\kappa) = \frac{\Gamma(\gamma)\Gamma(\kappa)}{\Gamma(\gamma+\kappa)}.
+\end{equation}
+
+Example of how the beta distribution is used. 
+
+\end{comment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\subsection{Bayesian Modelling}
+Consider a stochastic variable, $X$, that has a probability density function $f(x|\theta)$, where $\theta$ is a parameter upon which $X$ depend. In classical statistics, $\theta$ is said to be a fixed but unknown parameter. On the other hand, in Bayesian statistics, we have a density function for $\theta$, $f(\theta)$, that is called the prior distribution. This includes all the prior knowledge we have about $\theta$ before observing any data. That could be our own subjective believes about the parameter, or other previously collected data or studies. One could also choose a prior distribution that does not say anything about the parameter at all. Then it does not influence the final results or inference \citep{givens2012computational}. 
+If we have collected data, we can update our prior beliefs with the information we get from that data. The resulting distribution is called the posterior distribution of $\theta$. This can be found using Bayes' theorem, and it includes both the prior information we have and the new information we get from the data. 
+
+Consider data, $\textbf{x} = (x_1,x_2,...,x_n)$, which we can denote as $u = \sum_{j=1}^n x_j$. Let $f(\theta)$ be the prior distribution of $\theta$, hence our prior beliefs of the parameter. Additionally, let $P(u|\theta)$ be the sampling probability of $u$ and $P(u)$ be the marginal probability of $u$. Using Bayes' theorem as is is stated in \eqref{Bayesrule2}, we get that the posterior distribution of $\theta$ given $u$, $f(\theta|u)$, can be expressed as (hva er kilden på dette? statinfboka eller givens2012?)
+\begin{equation*}
+    f(\theta|u) = \frac{P(u|\theta)f(\theta)}{P(u)}.
+\end{equation*}
+Sometimes we can exploit the fact that the posterior distribution is proportional to the numerator in the above expression. This is because the denominator is a normalising constant. Then,
+\begin{equation}
+    \label{posterior_proportional}
+    f(\theta|u) \propto P(u|\theta)f(\theta).
+\end{equation}
+If this have the form of a known distribution, that is the posterior distribution. 
+
+As an example, consider a random variable, $X$, that is Bernoulli distributed with parameter $\theta$. Thus,
+\begin{equation*}
+    X \sim \mathrm{Bernoulli}(\theta).
+\end{equation*}
+Another random variable, $U$, can be defined as above, 
+\begin{equation*}
+    U = \sum_{j=1}^{12} X_j.
+\end{equation*}
+Then $U|\Theta$ has a binomial distribution with parameters 12 and $\theta$.
+\begin{equation*}
+    U|\Theta=\theta \sim \mathrm{Binomial}(12,\theta).
+\end{equation*}
+Thus, the probability that we have $u$ successes out of twelve, given $\theta$, is
+\begin{equation*}
+    P(U=u|\Theta=\theta) = \binom{12}{u} \theta^{u} (1-\theta)^{12-u}.
+\end{equation*}
+We choose a beta prior for $\theta$ with parameters $\gamma$ and $\kappa$ (burde jeg si noe om hvorfor vi velger en beta prior her, eller heller gjøre det lenger ned?). Hence,
+\begin{equation*}
+    \Theta \sim \mathrm{Beta}(\gamma,\kappa). 
+\end{equation*}
+The prior density of $\Theta$ is then
+\begin{equation}
+    \label{betadistribution}
+    f(\theta) = \frac{1}{\mathrm{B}(\gamma,\kappa)}\theta^{\gamma-1}(1-\theta)^{\kappa-1}.
+\end{equation}
+We can find the posterior distribution using \eqref{posterior_proportional}. Thus,
+\begin{equation*}
+    \begin{aligned}
+        f(\theta|u) 
+        &\propto P(u|\theta)f(\theta)\\[6pt]
+        &\propto \binom{12}{u} \theta^{u} (1-\theta)^{12-u} \frac{1}{\mathrm{B}(\gamma,\kappa)}\theta^{\gamma-1}(1-\theta)^{\kappa-1}\\[6pt]
+        &\propto C \: \theta^{u+\gamma-1}(1-\theta)^{12-u+\kappa-1},
+    \end{aligned}
+\end{equation*}
+where $C$ is a constant. We can see that this is proportional to a beta distribution like the one in \eqref{betadistribution}, but in this case with parameters $u+\gamma$ and $12-u+\kappa$. Hence, the posterior distribution is a beta distribution with these parameters, 
+\begin{equation*}
+    \Theta|U=u \sim \mathrm{Beta}(u+\gamma,12-u+\kappa).
+\end{equation*}
+
+
+
+
+
+\begin{comment}
+For two events, $A$ and $B$, that is
 \begin{equation*}
     P(A|B)=\frac{P(B|A)P(A)}{P(B)}.
 \end{equation*}%Source, statinfboka p 23. 
@@ -34,3 +299,4 @@ where $m(\textbf{x})$ is the marginal distribution of $\textbf{X}$, hence, it is
 \begin{equation*}
     m(\textbf{x}) = \int f(\textbf{x}|\theta) P(\theta) \dd \theta.
 \end{equation*}
+\end{comment}

@@ -6,6 +6,12 @@
 \usepackage{tikz}
 \bibliographystyle{jasa}
 \usetikzlibrary{positioning,calc,backgrounds}
+\usepackage{thmtools}
+\usepackage{lipsum}
+%\usepackage{blindtext}
+\usepackage{xcolor}
+\usepackage{comment}
+
 
 
 \title{Notater til masteren}
@@ -14,6 +20,15 @@
 
 \parskip 0.2in %making spacing between paragraphs
 \newcommand{\dd}{\mathrm{d}}
+%\newtheorem{theorem}{Theorem}
+\colorlet{myblue}{blue!5!white}
+%\definecolor{myblue}{rgb}{188,217,255}
+%\definecolor{myblue}{rgb}{1,1,1}
+
+\declaretheorem[
+  shaded={rulecolor=black, rulewidth=1pt, bgcolor=myblue},
+  name=Theorem,
+]{theorem}
 
 
 
@@ -28,8 +43,9 @@
 
 \input{Sections/1-introduction}
 \input{Sections/2-theory}
-\input{Sections/3-probabilities}
-\input{Sections/4-Trees}
+\input{Sections/3-Problem setup}
+\input{Sections/6-probabilities}
+%\input{Sections/7-Trees}
 
 
 \newpage
