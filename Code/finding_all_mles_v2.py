@@ -22,7 +22,7 @@ import matplotlib.pyplot as plt
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 """
 
-def neg_log_likel_unlim(x):
+def neg_log_likel_unlim(x, df, person):
     eta = x[0]
     alpha = x[1]
     gamma = 1
@@ -42,9 +42,10 @@ def neg_log_likel_unlim(x):
     
     #need to find the expected losses for the case we have here:
     #first initializing
-    expL_2 = np.zeros(12,dtype=dict) #these are the exp loss for trial 2. 
-    expL_3 = np.zeros(12,dtype=dict) #these are the exp loss for trial 3. 
-    expL_4 = np.zeros(12,dtype=dict) #these are the exp loss for trial 4. 
+    expL_2 = np.zeros(13,dtype=dict) #these are the exp loss for trial 2.
+    print('expL_2',expL_2)
+    expL_3 = np.zeros(13,dtype=dict) #these are the exp loss for trial 3. 
+    expL_4 = np.zeros(13,dtype=dict) #these are the exp loss for trial 4. 
 
     #The second entry for the matrix for trial 2:
     j2=0    
@@ -68,6 +69,20 @@ def neg_log_likel_unlim(x):
             j4+=1
      #dette ser riktig ut når jeg sjekker om riktig element er kommet med. 
     #all_expL = [expL_2]
+            
+    #the last elemnt of each of the exp losses is not included in the matrix. 
+    #here, we already know what the majority colour is, and then waht the probability and losses are. Loss2 is not existing as it is not possible to open another box.
+    #But is it the possbile to use this in the next steps? dont you need a loss 2?         
+    
+    #dette er egenltig riktig, men da blir det feil når jeg skal stappe det inn i softmax/likelihood funksjonen
+    #expL_2[-1] = {'prob':0,'Loss0':1,'Loss1':0,'Loss2':'NaN'}
+    #expL_3[-1] = {'prob':1,'Loss0':0,'Loss1':1,'Loss2':'NaN'}
+    #expL_4[-1] = {'prob':1,'Loss0':0,'Loss1':1,'Loss2':'NaN'}
+    #derfor prøver jeg hvordan det blir når jeg setter Loss2=0
+    expL_2[-1] = {'prob':0,'Loss0':1,'Loss1':0,'Loss2':0}
+    expL_3[-1] = {'prob':1,'Loss0':0,'Loss1':1,'Loss2':0}
+    expL_4[-1] = {'prob':1,'Loss0':0,'Loss1':1,'Loss2':0}
+    
     all_expL = [expL_2,expL_3,expL_4]
     
     
@@ -75,42 +90,45 @@ def neg_log_likel_unlim(x):
     """
     finding the choices that the participant make. firslty only for the second participant in the first unlimited trial (=trial2)
     """
-    #start by loading the data:
-    df = pd.read_csv(r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\data1.csv',sep=',')
-    df = df.rename(columns={'Unnamed: 0':'ID'}) #putting ID as the name of the first column. 
     
-    person=0
+    #person=0
     #only finding the data for the first participant now., that is row 0.
     dtd2 = df['BoxNormExtDtD2'][person] #dette er riktig
     choice2 = df['BoxNormExtChoice2'][person] #dette er riktig
-    all_choices2 = 2*np.ones(dtd2+1,dtype=int) #making an array of the decisions that the participant make (2 untli last choice)
+    all_choices2 = 2*np.ones(dtd2,dtype=int) #making an array of the decisions that the participant make (2 untli last choice)
     if choice2=='Blue': #we denothe the choice of blue as majority colour as '0'
-        all_choices2[-1]=0
-    else: #choosing res as majority colour is denoted '1'
-        all_choices2[-1]=1
+        all_choices2 = np.append(all_choices2,0)
+    if choice2=='Red': #choosing red as majority colour is denoted '1'
+        all_choices2 = np.append(all_choices2,1)
+    #if choice2 == -1:
+    #    all_choices2 = np.append(all_choices2,-1)
     #dette ser også riktig ut for trial2 for første participant. 
         
         
      #finding the decisions for the third trial:
-    dtd3 = df['BoxNormExtDtD3'][0]
-    all_choices3 = 2*np.ones(dtd3+1,dtype=int)
-    if df['BoxNormExtChoice3'][0] == "Yellow":
-        all_choices3[-1]=0
-    else:
-        all_choices3[-1]=1
+    dtd3 = df['BoxNormExtDtD3'][person]
+    all_choices3 = 2*np.ones(dtd3,dtype=int)
+    if df['BoxNormExtChoice3'][person] == "Yellow":
+        all_choices3 = np.append(all_choices3,0)
+    if df['BoxNormExtChoice3'][person]=='Green':
+        all_choices3 = np.append(all_choices3,1)
+   # if df['BoxNormExtChoice3'][person]==-1_:
+   #     all_choices3 = np.append(all_choices3,-1)
     
     #decisions for the  fourth trial
-    dtd4 = df['BoxNormExtDtD4'][0]
-    all_choices4 = 2*np.ones(dtd4+1,dtype=int)
-    if df['BoxNormExtChoice4'][0] == 'Purple':
-        all_choices4[-1]=0
-    else:
-        all_choices4[-1]=1
+    dtd4 = df['BoxNormExtDtD4'][person]
+    all_choices4 = 2*np.ones(dtd4,dtype=int)
+    if df['BoxNormExtChoice4'][person] == 'Purple':
+        all_choices4 = np.append(all_choices4,0)
+    if df['BoxNormExtChoice4'][person]=='White':
+        all_choices4 = np.append(all_choices4,1)
+    #if df['BoxNormExtChoice4'][person]==-1:
+    #    all_choices4 = np.append(all_choices4,-1)
         
         
     #all_choices = [all_choices2]
     all_choices = [all_choices2,all_choices3,all_choices4]
-    
+    print('all_choices: ',all_choices)
     
     """
     now that we have the exp losses and the choices that the participant make, we can start finding the negative log likelihood
@@ -119,6 +137,7 @@ def neg_log_likel_unlim(x):
     for trial in range(3):
         choices = all_choices[trial]
         expL = all_expL[trial]
+        print('expL ',expL)
         i=0
         for choice in choices:
             loss = 'Loss'+str(choice)
@@ -158,35 +177,115 @@ def neg_log_likel_unlim(x):
     
     return neg_l
 
-#print(neg_log_likel_unlim([10,100]))
-print(neg_log_likel_unlim([-6.9738e-04,2040.51566]))
+#start by loading the data:
+data = pd.read_csv(r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\data1.csv',sep=',')
+data = data.rename(columns={'Unnamed: 0':'ID'}) #putting ID as the name of the first column. 
+person = 34
+data.loc[34]
+
+print(neg_log_likel_unlim([1,0.1],data,person))
 
 
 
 #finding the mle estimators of eta and alpha.
 #that is, we are minimizing the negative log likelihood function
 bnds = ((-inf,inf),(0,inf))
-x0_unlim = [1,0.0001]
-#mles = minimize(neg_log_likel_unlim,x0_unlim,bounds=bnds)
-#mles = minimize(neg_log_likel_unlim,x0_unlim,bounds=bnds,method='L-BFGS-B')
-opt = {'ftol':1e-20,'gtol':1e-20}
-mles = minimize(neg_log_likel_unlim,x0_unlim,bounds=bnds,method='L-BFGS-B',options=opt)
-#mles = minimize(neg_log_likel_unlim,x0_unlim,bounds=bnds,method='Nelder-Mead')
+x0_unlim = [0,0.01]
+#mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person),bounds=bnds)
+#mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person),bounds=bnds,method='L-BFGS-B')
+#opt = {'ftol':1e-100,'gtol':1e-100,'maxiter':1500000,'maxfun':15000000}
+opt = {'ftol':1e-100,'gtol':1e-100,'maxiter':150000,'maxfun':150000}
+mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person),bounds=bnds,method='L-BFGS-B',options=opt)
+#mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person),bounds=bnds,method='BFGS',options={'g-tol':1e-40})
+#mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person),bounds=bnds,method='Nelder-Mead')
 print(mles)
 
 
+
+
+
+'''
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                        finding mles for all participants
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+'''
+
+df_mles = pd.DataFrame(columns = ['ID','eta','alpha'], index = np.arange(0,76))
+#df_mles
+
+bnds = ((-inf,inf),(0,inf))
+x0_unlim = [0,0.01]
+opt = {'ftol':1e-100,'gtol':1e-100,'maxiter':150000,'maxfun':150000}
+
+for person in range(len(data)):
+    ID = data['ID'][person]
+    print(ID)    
+    mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person),bounds=bnds,method='L-BFGS-B',options=opt)
+    eta = mles.x[0]
+    alpha = mles.x[1]
+    print(eta,alpha)
+    df_mles.loc[person] = [ID,eta,alpha]
+    #df_mles.append({'ID':ID,'eta':eta, 'alpha':alpha},ignore_index=True)
+
+
+
+df_mles.head()
+
+#try saving this datafram in excel file:
+excel_file_name_and_loc = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\mles_unlimited_2.xlsx'
+df_mles.to_excel(excel_file_name_and_loc)
+
+
+
+
+'''
 #skriv en kode som skriver e tallene du vil ha til en tekstfil.
-filename = 'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Masteroppgave\Code\optimizing_results.txt'
+filename = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Masteroppgave\Code\optimizing_results.txt'
+file = open(filename,'a')
+string = 'Person: 1, x0='+str(x0_unlim) + ', method: BFGS, eta: '+str(mles.x[0])+', alpha: '+str(mles.x[1])+',  function value: '+str(mles.fun)+'\n'
+#print(string)
+file.writelines(string)
+file.close()
+
+
+
+
+#plot neg log likelihood for person 0 med alpha=0 og forskjellige verdier av eta.
+eta_vals = np.arange(32.56563,32.5657,0.000001)
+neg_log_l = np.ones_like(eta_vals)
+for i in range(len(eta_vals)):
+    neg_log_l[i] = neg_log_likel_unlim([eta_vals[i],0])
+plt.plot(eta_vals,neg_log_l)
+plt.show()
+
+min(neg_log_l)
 
 
 
 
 
 
-"""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 for å sjekke hvordan du kan gjøre den beste optimeringen/minimeringen, sjekk ut denne siden:
     https://scipy-lectures.org/advanced/mathematical_optimization/
-"""
+
 
 #for å sjekke hvordan funcsjonen ser ut, bruk scipy.optimize.brute()
 #brute(neg_log_likel_unlim,ranges=((-10,10),(0,100)))
@@ -194,7 +293,7 @@ for å sjekke hvordan du kan gjøre den beste optimeringen/minimeringen, sjekk u
 
 
 
-'''
+
 #plotting the negative log likelihood for different values of eta and alpha
 #e = np.arange(-10,10,1)
 #a = np.arange(0,2500,250)
@@ -210,16 +309,13 @@ for i in range(len(e)):
 plt.imshow(l,extent=[32.56,32.57,-0.005,0.005])
 plt.colorbar()
 plt.show()
-'''
 
-'''    
+
+ 
 plt.pcolormesh(l)
 plt.colorbar()
 plt.show()
-'''
-
-
-
+''' 
 
 
 
