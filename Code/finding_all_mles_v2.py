@@ -12,9 +12,23 @@ import scipy as sp
 import pandas as pd
 from math import inf
 from scipy.optimize import minimize, brute
-from ryddet_prosjektoppgave import make_matrix_unlim
+from ryddet_prosjektoppgave import make_matrix_unlim, make_matrix_lim
 from pylab import meshgrid,cm,imshow,contour,clabel,colorbar,axis,title,show
 import matplotlib.pyplot as plt
+
+
+'''
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                putting data from participants into a dataframe
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+'''
+#start by loading the data:
+data = pd.read_csv(r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\data1.csv',sep=',')
+data = data.rename(columns={'Unnamed: 0':'ID'}) #putting ID as the name of the first column. 
+
+
+
+
 
 """
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -43,7 +57,7 @@ def neg_log_likel_unlim(x, df, person):
     #need to find the expected losses for the case we have here:
     #first initializing
     expL_2 = np.zeros(13,dtype=dict) #these are the exp loss for trial 2.
-    print('expL_2',expL_2)
+    #print('expL_2',expL_2)
     expL_3 = np.zeros(13,dtype=dict) #these are the exp loss for trial 3. 
     expL_4 = np.zeros(13,dtype=dict) #these are the exp loss for trial 4. 
 
@@ -72,19 +86,13 @@ def neg_log_likel_unlim(x, df, person):
             
     #the last elemnt of each of the exp losses is not included in the matrix. 
     #here, we already know what the majority colour is, and then waht the probability and losses are. Loss2 is not existing as it is not possible to open another box.
-    #But is it the possbile to use this in the next steps? dont you need a loss 2?         
-    
-    #dette er egenltig riktig, men da blir det feil når jeg skal stappe det inn i softmax/likelihood funksjonen
-    #expL_2[-1] = {'prob':0,'Loss0':1,'Loss1':0,'Loss2':'NaN'}
-    #expL_3[-1] = {'prob':1,'Loss0':0,'Loss1':1,'Loss2':'NaN'}
-    #expL_4[-1] = {'prob':1,'Loss0':0,'Loss1':1,'Loss2':'NaN'}
-    #derfor prøver jeg hvordan det blir når jeg setter Loss2=0
-    expL_2[-1] = {'prob':0,'Loss0':1,'Loss1':0,'Loss2':0}
-    expL_3[-1] = {'prob':1,'Loss0':0,'Loss1':1,'Loss2':0}
-    expL_4[-1] = {'prob':1,'Loss0':0,'Loss1':1,'Loss2':0}
+    #Thus, we are putting Loss2 as 1 if the participant did not choose majority colour, as this counts as a failed trial
+    expL_2[-1] = {'prob':1,'Loss0':1,'Loss1':0,'Loss2':1}
+    expL_3[-1] = {'prob':0,'Loss0':0,'Loss1':1,'Loss2':1}
+    expL_4[-1] = {'prob':0,'Loss0':0,'Loss1':1,'Loss2':1}
     
     all_expL = [expL_2,expL_3,expL_4]
-    
+    #print('expL_2',expL_2)
     
     
     """
@@ -100,8 +108,8 @@ def neg_log_likel_unlim(x, df, person):
         all_choices2 = np.append(all_choices2,0)
     if choice2=='Red': #choosing red as majority colour is denoted '1'
         all_choices2 = np.append(all_choices2,1)
-    #if choice2 == -1:
-    #    all_choices2 = np.append(all_choices2,-1)
+    if choice2 == -1:
+        all_choices2 = np.append(all_choices2,-1)
     #dette ser også riktig ut for trial2 for første participant. 
         
         
@@ -112,8 +120,8 @@ def neg_log_likel_unlim(x, df, person):
         all_choices3 = np.append(all_choices3,0)
     if df['BoxNormExtChoice3'][person]=='Green':
         all_choices3 = np.append(all_choices3,1)
-   # if df['BoxNormExtChoice3'][person]==-1_:
-   #     all_choices3 = np.append(all_choices3,-1)
+    if df['BoxNormExtChoice3'][person]==-1:
+        all_choices3 = np.append(all_choices3,-1)
     
     #decisions for the  fourth trial
     dtd4 = df['BoxNormExtDtD4'][person]
@@ -122,13 +130,13 @@ def neg_log_likel_unlim(x, df, person):
         all_choices4 = np.append(all_choices4,0)
     if df['BoxNormExtChoice4'][person]=='White':
         all_choices4 = np.append(all_choices4,1)
-    #if df['BoxNormExtChoice4'][person]==-1:
-    #    all_choices4 = np.append(all_choices4,-1)
+    if df['BoxNormExtChoice4'][person]==-1:
+        all_choices4 = np.append(all_choices4,-1)
         
         
     #all_choices = [all_choices2]
     all_choices = [all_choices2,all_choices3,all_choices4]
-    print('all_choices: ',all_choices)
+    #print('all_choices: ',all_choices)
     
     """
     now that we have the exp losses and the choices that the participant make, we can start finding the negative log likelihood
@@ -137,11 +145,16 @@ def neg_log_likel_unlim(x, df, person):
     for trial in range(3):
         choices = all_choices[trial]
         expL = all_expL[trial]
-        print('expL ',expL)
+        #print('expL ',expL)
         i=0
         for choice in choices:
-            loss = 'Loss'+str(choice)
-            e_delta = expL[i][loss]
+            #her må du får med at choice noen ganger er -1, og da er loss lik 1, altså e_delta er 1 
+            #nå sier jeg at det regnes som et faield trial hvos man ikke velger farge. altså loss er 1 for å ikke velge farge. 
+            if choice == -1:
+                e_delta = 1
+            else:
+                loss = 'Loss'+str(choice)
+                e_delta = expL[i][loss]
             e0=expL[i]['Loss0']
             e1=expL[i]['Loss1']
             e2=expL[i]['Loss2']
@@ -174,28 +187,127 @@ def neg_log_likel_unlim(x, df, person):
         i+=1
     """
 
-    
     return neg_l
-
-#start by loading the data:
-data = pd.read_csv(r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\data1.csv',sep=',')
-data = data.rename(columns={'Unnamed: 0':'ID'}) #putting ID as the name of the first column. 
-person = 34
-data.loc[34]
-
-print(neg_log_likel_unlim([1,0.1],data,person))
+    #return neg_l, all_expL
 
 
+
+
+
+'''
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                plotting the log likelihood for different people
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+'''
+
+#line 11, id=DS4JE30, dtd = 3,5,4, so alpha should not be zero
+person = 11
+eta = 8.10955857591525
+alpha_11 = np.arange(0,0.000000000001,0.00000000000001)
+alpha_11 = np.arange(0,0.0000000000001,0.000000000000001)
+alpha_11 = np.arange(0,0.0000000000000000001,0.000000000000000000001)
+neg_log_l_11 = np.zeros_like(alpha_11)
+for i in range(len(alpha_11)):
+    neg_log_l_11[i] = neg_log_likel_unlim([eta,alpha_11[i]], data, person)
+
+plt.plot(alpha_11,neg_log_l_11)
+plt.title('Person 11')
+plt.show()
+
+
+
+
+person= 10
+eta = 6.03855720281903
+#plottet ble bare en rett linje
+alpha = np.arange(0,0.0000000000001,0.000000000000001)
+alpha = np.arange(0,0.00000000000001,0.0000000000000001)
+neg_log_l = np.zeros_like(alpha)
+for i in range(len(alpha)):
+    neg_log_l[i] = neg_log_likel_unlim([eta,alpha[i]], data, person)
+
+plt.plot(alpha,neg_log_l)
+plt.title('Person 10')
+plt.show()
+
+
+person= 13
+eta = 2.51175344860878
+likel, expL = neg_log_likel_unlim([eta,0.01],data,person)
+print(expL)
+#plottet ble bare en rett linje
+alpha = np.arange(0,0.00000001,0.000000000001)
+
+#alpha = np.arange(0,0.00000000000001,0.0000000000000001)
+neg_log_l = np.zeros_like(alpha)
+for i in range(len(alpha)):
+    neg_log_l[i] = neg_log_likel_unlim([eta,alpha[i]], data, person)
+
+plt.plot(alpha,neg_log_l)
+plt.title('Person 13')
+plt.show()
+
+
+
+person= 5
+eta = 14.257237716594
+#plottet ble bare en rett linje
+alpha = np.arange(0,1,0.001)
+alpha = np.arange(0,0.00001,0.0000001)
+neg_log_l = np.zeros_like(alpha)
+for i in range(len(alpha)):
+    neg_log_l[i] = neg_log_likel_unlim([eta,alpha[i]], data, person)
+
+plt.plot(alpha,neg_log_l)
+plt.title('Person 5')
+plt.show()
+
+
+
+person = 14
+eta = 6.52001129020757
+alpha = np.arange(0,1,0.001)
+alpha = np.arange(0,0.0000001,0.000000001)
+neg_log_l = np.zeros_like(alpha)
+for i in range(len(alpha)):
+    neg_log_l[i] = neg_log_likel_unlim([eta,alpha[i]], data, person)
+
+plt.plot(alpha,neg_log_l)
+plt.title('Person 14')
+plt.show()
+
+
+person = 44
+eta = 143.842177675026
+alpha = np.arange(0.14,0.18,0.001)
+alpha = np.arange(0,0.0000001,0.000000001)
+neg_log_l = np.zeros_like(alpha)
+for i in range(len(alpha)):
+    neg_log_l[i] = neg_log_likel_unlim([eta,alpha[i]], data, person)
+
+plt.plot(alpha,neg_log_l)
+plt.title('Person 44')
+plt.show()
+
+
+
+
+'''
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                mle for only one participant
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+'''
 
 #finding the mle estimators of eta and alpha.
 #that is, we are minimizing the negative log likelihood function
-bnds = ((-inf,inf),(0,inf))
+#this is only for one person
+bnds = ((-inf,inf),(-inf,inf))
 x0_unlim = [0,0.01]
 #mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person),bounds=bnds)
 #mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person),bounds=bnds,method='L-BFGS-B')
 #opt = {'ftol':1e-100,'gtol':1e-100,'maxiter':1500000,'maxfun':15000000}
 opt = {'ftol':1e-100,'gtol':1e-100,'maxiter':150000,'maxfun':150000}
-mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person),bounds=bnds,method='L-BFGS-B',options=opt)
+mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,13),bounds=bnds,method='L-BFGS-B',options=opt)
 #mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person),bounds=bnds,method='BFGS',options={'g-tol':1e-40})
 #mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person),bounds=bnds,method='Nelder-Mead')
 print(mles)
@@ -210,11 +322,12 @@ print(mles)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 '''
 
+#saving the mles in a dataframe
 df_mles = pd.DataFrame(columns = ['ID','eta','alpha'], index = np.arange(0,76))
 #df_mles
 
-bnds = ((-inf,inf),(0,inf))
-x0_unlim = [0,0.01]
+bnds = ((-inf,inf),(0,inf)) #bounds for eta and alpha when minimizing
+x0_unlim = [0,0.01] #start values of eta and alpha
 opt = {'ftol':1e-100,'gtol':1e-100,'maxiter':150000,'maxfun':150000}
 
 for person in range(len(data)):
@@ -232,8 +345,209 @@ for person in range(len(data)):
 df_mles.head()
 
 #try saving this datafram in excel file:
-excel_file_name_and_loc = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\mles_unlimited_2.xlsx'
+excel_file_name_and_loc = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\mles_unlimited_Loss2=1.xlsx'
 df_mles.to_excel(excel_file_name_and_loc)
+
+
+
+'''
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                        alpha-eta plot
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+'''
+
+
+alpha = df_mles['alpha']
+eta = df_mles['eta']
+plt.scatter(alpha,eta,s=10)
+plt.yscale('log') #for log scale of eta.
+plt.title("Mle's of alpha and eta, unlimited")
+plt.xlabel('alpha')
+plt.ylabel('eta')
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                LIMITED TRIALS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+'''
+
+
+def neg_log_likel_lim(x,df,person):
+    eta = x[0]
+    alpha = x[1]
+    beta = x[2]
+    gamma = 1
+    kappa = 1
+    
+    exp_loss_mat = make_matrix_lim(12,alpha,beta,gamma,kappa,True)
+    
+    trial5 = [0,0,0,1,0,0,0,0,1] #Light blue = 0, Red = 1
+    trial6 = [1,0,0,1,0,0] #Yellow, Light Green
+    trial7 = [1,0,0,0,1,0,1,0,0] #Light purple, Yellowish white
+    trial8 = [0,1,0,1,0,1,0,1,0] #Red, Green
+    trial9 = [0,0,1,0,1,0] #Pink, Green
+    trial10 = [0,0,0,1,0,0] #Blue, Light Yellow
+    all_trials = [trial5,trial6,trial7,trial8,trial9,trial10]
+    
+    
+    
+    #need to find the expected losses for the person here. (maybe do all together in one for loop?)
+    #do this for trial 5 first
+    
+    #exp_losses = [[]] #this is only when there is one trial included
+    #for when all trials are included:
+    exp_losses = [[],[],[],[],[],[]]
+    neg_l = 0
+    for a in range(6):
+        trial = all_trials[a]
+        dtd_string = 'BoxNormExtDtD'+str(a+5)
+        choice_string = 'BoxNormExtChoice' + str(a+5)
+        dtd = df[dtd_string][person]
+        #print(dtd)
+        choice = df[choice_string][person]
+        #print(choice)
+        #find choice as 0,1 or -1, depending on trial
+        choice01 = 1
+        if (a==0 and choice=='Light blue') or (a==1 and choice=='Yellow') or (a==2 and choice=='Light purple') or (a==3 and choice=='Red') or (a==4 and choice=='Pink') or (a==5 and choice=='Blue'):
+            choice01=0
+        elif choice == -1:
+            choice01=-1
+        
+        i = 0 #first index in the matrix with losses.
+        j = 0 #second index in the matrix with losses.
+        
+        for l in range(dtd):
+            losses = exp_loss_mat[i][j]
+            exp_losses[a].append(losses)
+            #adding to the neg_l what needs to be added: for when the choice is to open another box.
+            e0 = losses['Loss0']
+            e1 = losses['Loss1']
+            e2 = losses['Loss2']
+            const = max(-eta*e0,-eta*e1,-eta*e2)
+            neg_l += eta*e2 + const + np.log(np.exp(-eta*e0-const)+np.exp(-eta*e1-const)+np.exp(-eta*e2-const))
+            i += 1 #going one step down in the matrix
+            if trial[l]==1: #if red box we go one elemtn to the right in the matrix
+                j+=1
+  
+        #now we are at the last choice: 
+        losses = exp_loss_mat[i][j]
+        exp_losses[a].append(losses)
+        e0 = losses['Loss0']
+        e1 = losses['Loss1']
+        e2 = losses['Loss2']
+        const = max(-eta*e0,-eta*e1,-eta*e2)
+        if choice01==0: #If the first colour is chosen as majority colour
+            neg_l += eta*e0 + const + np.log(np.exp(-eta*e0-const)+np.exp(-eta*e1-const)+np.exp(-eta*e2-const))
+            #neg_l += eta*losses['Loss0'] + np.log(np.exp(-eta*losses['Loss0'])+np.exp(-eta*losses['Loss1'])+np.exp(-eta*losses['Loss2']))
+        elif choice01==1:
+            neg_l += eta*e1 + const + np.log(np.exp(-eta*e0-const)+np.exp(-eta*e1-const)+np.exp(-eta*e2-const))
+            #neg_l += eta*losses['Loss1'] + np.log(np.exp(-eta*losses['Loss0'])+np.exp(-eta*losses['Loss1'])+np.exp(-eta*losses['Loss2']))
+        #if choice and choice01 is -1, we dont add something to the neg_l, as the particioant was not able to choose then, the test just terminated. 
+
+    return neg_l
+            
+print(make_matrix_lim(12,0.01,0.1,1,1,True))
+       
+    
+#print(neg_log_likel_lim([1,0.01,0.1],data,0))
+neg_log_likel_lim([1,0.01,0.1],data,44)
+
+
+
+
+#finding mles:
+bnds = ((-inf,inf),(0,inf),(0,inf)) #eta, alpha, beta
+x0_lim = [1,0.1,1]
+person = 75
+#opt = {'ftol':1e-100,'gtol':1e-100,'maxiter':150000,'maxfun':150000}
+mles_lim = minimize(neg_log_likel_lim, args=(data,person),x0=x0_lim,bounds=bnds)
+print(mles_lim)
+
+
+#sjekk negative likelihood funk for gitte verdier at eta eller beta, da finner du kanskje ut om alpha er null eller ikke
+#eta = 1643.980
+beta = 1.84007
+person = 75
+alpha = np.arange(0.07,0.075,0.0005)
+eta = np.arange(70,80,0.5)
+l = np.zeros((len(alpha),len(eta)))
+for i in range(len(alpha)):
+    for j in range(len(eta)):
+        l[i][j] = neg_log_likel_lim([eta[j],alpha[i],beta],data,person)
+    
+    #l[i] = neg_log_likel_lim([eta,a,beta],data,person)
+
+
+plt.imshow(l,extent=(70,80,0.07,0.075),aspect='auto') #alpha on y-axis.
+plt.show()
+
+
+#plotting only one value, only eta
+eta = np.arange(50,2000,10)
+likel = np.zeros_like(eta)
+person=75
+alpha=0.0719685
+beta=1.84007
+for i in range(len(eta)):
+    likel[i] = neg_log_likel_lim([eta[i],alpha,beta],data,person)
+
+
+plt.plot(eta,likel)
+plt.show()
+
+
+
+
+
+#finding mles for all participants:
+df_mles_lim = pd.DataFrame(columns = ['ID','eta','alpha','beta'], index = np.arange(0,76))
+
+
+bnds = ((-inf,inf),(0,inf),(0,inf)) #bounds for eta, alpha and beta when minimizing
+x0_lim = [0,0.01,0.5] #start values of eta, alpha and beta
+#opt = {'ftol':1e-100,'gtol':1e-100,'maxiter':150000,'maxfun':150000}
+
+for person in range(len(data)):
+    ID = data['ID'][person]
+    print(ID)    
+    mles = minimize(neg_log_likel_lim,x0=x0_lim,args=(data,person),bounds=bnds,method='L-BFGS-B')
+    mles = minimize(neg_log_likel_lim,x0=x0_lim,args=(data,person),bounds=bnds)
+    eta = mles.x[0]
+    alpha = mles.x[1]
+    beta = mles.x[2]
+    print(eta,alpha,beta)
+    df_mles_lim.loc[person] = [ID,eta,alpha,beta]
+    #df_mles.append({'ID':ID,'eta':eta, 'alpha':alpha},ignore_index=True)
+
+
+
+df_mles_lim.head()
+df_mles_lim.tail()
+df_mles_lim[0:20]
+df_mles_lim[20:40]
+df_mles_lim[40:60]
+df_mles_lim[60:77]
+
+
+
+
+
+
+
+
 
 
 
