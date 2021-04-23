@@ -15,6 +15,8 @@ from scipy.optimize import minimize, brute
 from ryddet_prosjektoppgave import make_matrix_unlim, make_matrix_lim
 from pylab import meshgrid,cm,imshow,contour,clabel,colorbar,axis,title,show
 import matplotlib.pyplot as plt
+import random
+import time
 
 
 '''
@@ -36,11 +38,11 @@ data = data.rename(columns={'Unnamed: 0':'ID'}) #putting ID as the name of the f
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 """
 
-def neg_log_likel_unlim(x, df, person):
+def neg_log_likel_unlim(x, df, person,gamma,kappa):
     eta = x[0]
     alpha = x[1]
-    gamma = 1
-    kappa = 1
+#    gamma = 1
+#    kappa = 1
     
     """
     Starting to find the expected losses for trial 2 which is the first unlimited trial.
@@ -194,12 +196,127 @@ def neg_log_likel_unlim(x, df, person):
 
 
 
+
+
+
+'''
+%%%%%%%%%%%% mle for only one participant with different values for x0 %%%%%%%%%%%%%%%%%%%%
+'''
+
+#finding the mle estimators of eta and alpha.
+#that is, we are minimizing the negative log likelihood function
+#this is only for one person
+#trying to do this for many different values of x0, and then choosing hte values that give the lowest function value.
+tic = time.perf_counter()
+result_unlim = {'eta':0,'alpha':0,'f':inf}    
+bnds = ((-inf,inf),(0,inf))
+for k in range(1000):
+    #alpha0 should be a random number between 0 and 0.1:
+    alpha_0 = 0.1*random.random()
+    #eta_0 schould be a random number between 3 and 20:
+    eta_0 = 3 + 17*random.random()
+    x0_unlim = [eta_0,alpha_0]
+    mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,13,1,1),bounds=bnds,method='L-BFGS-B')
+    if mles.fun < result_unlim['f']:
+        print('old:',result_unlim['f'])
+        print('new:',mles.fun)
+        result_unlim['eta'] = mles.x[0]
+        result_unlim['alpha'] = mles.x[1]
+        result_unlim['f'] = mles.fun
+
+print(result_unlim)
+toc = time.perf_counter()
+print(f'Code ran in {toc - tic:0.4f} seconds')
+#mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person),bounds=bnds)
+#mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person),bounds=bnds,method='L-BFGS-B')
+#opt = {'ftol':1e-100,'gtol':1e-100,'maxiter':1500000,'maxfun':15000000}
+#opt = {'ftol':1e-100,'gtol':1e-100,'maxiter':150000,'maxfun':150000}
+#mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,13,1,1),bounds=bnds,method='L-BFGS-B',options=opt)
+#mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person),bounds=bnds,method='BFGS',options={'g-tol':1e-40})
+#mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person),bounds=bnds,method='Nelder-Mead')
+#print(mles)
+
+
+'''
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                        finding mles for all participants
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+'''
+
+#saving the mles in a dataframe
+df_mles = pd.DataFrame(columns = ['ID','eta','alpha','fun'], index = np.arange(0,76))
+df_mles['fun'] = inf
+#df_mles.head()
+
+bnds = ((-inf,inf),(0,inf)) #bounds for eta and alpha when minimizing
+#x0_unlim = [0,0.01] #start values of eta and alpha
+#opt = {'ftol':1e-100,'gtol':1e-100,'maxiter':150000,'maxfun':150000}
+
+#for person in range(len(data)):
+for person in range(4,len(data)):
+    ID = data['ID'][person]
+    print(person, ID)    
+    df_mles['ID'][person] = ID
+    for k in range(1000):
+    #alpha0 should be a random number between 0 and 0.1:
+        alpha_0 = 0.1*random.random()
+        #eta_0 schould be a random number between 3 and 20:
+        eta_0 = 3 + 17*random.random()
+        x0_unlim = [eta_0,alpha_0]
+        mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person,1,1),bounds=bnds,method='L-BFGS-B')
+        if mles.fun < df_mles['fun'][person]:
+            print('old:',df_mles['fun'][person])
+            print('new:',mles.fun)
+            df_mles['eta'][person] = mles.x[0]
+            df_mles['alpha'][person] = mles.x[1]
+            df_mles['fun'][person] = mles.fun
+            print('new',df_mles['fun'][person])
+
+    
+    #mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person,0.5,0.5),bounds=bnds,options=opt) #these two are the same, so its prob l-bfgs-b that is used. 
+    #mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person,0.5,0.5),bounds=bnds,method='L-BFGS-B')
+    #eta = mles.x[0]
+    #alpha = mles.x[1]
+    #print(eta,alpha)
+    #df_mles.loc[person] = [ID,eta,alpha]
+    #df_mles.append({'ID':ID,'eta':eta, 'alpha':alpha},ignore_index=True)
+
+
+
+df_mles.head()
+#df_mles['fun'][0]
+
+#try saving this datafram in excel file:
+excel_file_name_and_loc = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\mles_unlimited_x0_1000_times.xlsx'
+df_mles.to_excel(excel_file_name_and_loc)
+
+
+
+
+
+'''
+alpha-eta plot
+
+'''
+
+
+alpha = df_mles['alpha']
+eta = df_mles['eta']
+plt.scatter(alpha,eta,s=10)
+plt.yscale('log') #for log scale of eta.
+plt.title("Mle's of alpha and eta, unlimited")
+plt.xlabel('alpha')
+plt.ylabel('eta')
+plt.show()
+
+
+
 '''
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                 plotting the log likelihood for different people
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 '''
-
+'''
 #line 11, id=DS4JE30, dtd = 3,5,4, so alpha should not be zero
 person = 11
 eta = 8.10955857591525
@@ -208,7 +325,7 @@ alpha_11 = np.arange(0,0.0000000000001,0.000000000000001)
 alpha_11 = np.arange(0,0.0000000000000000001,0.000000000000000000001)
 neg_log_l_11 = np.zeros_like(alpha_11)
 for i in range(len(alpha_11)):
-    neg_log_l_11[i] = neg_log_likel_unlim([eta,alpha_11[i]], data, person)
+    neg_log_l_11[i] = neg_log_likel_unlim([eta,alpha_11[i]], data, person,1,1)
 
 plt.plot(alpha_11,neg_log_l_11)
 plt.title('Person 11')
@@ -224,7 +341,7 @@ alpha = np.arange(0,0.0000000000001,0.000000000000001)
 alpha = np.arange(0,0.00000000000001,0.0000000000000001)
 neg_log_l = np.zeros_like(alpha)
 for i in range(len(alpha)):
-    neg_log_l[i] = neg_log_likel_unlim([eta,alpha[i]], data, person)
+    neg_log_l[i] = neg_log_likel_unlim([eta,alpha[i]], data, person,1,1)
 
 plt.plot(alpha,neg_log_l)
 plt.title('Person 10')
@@ -241,7 +358,7 @@ alpha = np.arange(0,0.00000001,0.000000000001)
 #alpha = np.arange(0,0.00000000000001,0.0000000000000001)
 neg_log_l = np.zeros_like(alpha)
 for i in range(len(alpha)):
-    neg_log_l[i] = neg_log_likel_unlim([eta,alpha[i]], data, person)
+    neg_log_l[i] = neg_log_likel_unlim([eta,alpha[i]], data, person,1,1)
 
 plt.plot(alpha,neg_log_l)
 plt.title('Person 13')
@@ -256,7 +373,7 @@ alpha = np.arange(0,1,0.001)
 alpha = np.arange(0,0.00001,0.0000001)
 neg_log_l = np.zeros_like(alpha)
 for i in range(len(alpha)):
-    neg_log_l[i] = neg_log_likel_unlim([eta,alpha[i]], data, person)
+    neg_log_l[i] = neg_log_likel_unlim([eta,alpha[i]], data, person,1,1)
 
 plt.plot(alpha,neg_log_l)
 plt.title('Person 5')
@@ -270,7 +387,7 @@ alpha = np.arange(0,1,0.001)
 alpha = np.arange(0,0.0000001,0.000000001)
 neg_log_l = np.zeros_like(alpha)
 for i in range(len(alpha)):
-    neg_log_l[i] = neg_log_likel_unlim([eta,alpha[i]], data, person)
+    neg_log_l[i] = neg_log_likel_unlim([eta,alpha[i]], data, person,1,1)
 
 plt.plot(alpha,neg_log_l)
 plt.title('Person 14')
@@ -283,90 +400,12 @@ alpha = np.arange(0.14,0.18,0.001)
 alpha = np.arange(0,0.0000001,0.000000001)
 neg_log_l = np.zeros_like(alpha)
 for i in range(len(alpha)):
-    neg_log_l[i] = neg_log_likel_unlim([eta,alpha[i]], data, person)
+    neg_log_l[i] = neg_log_likel_unlim([eta,alpha[i]], data, person,1,1)
 
 plt.plot(alpha,neg_log_l)
 plt.title('Person 44')
 plt.show()
-
-
-
-
 '''
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                mle for only one participant
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-'''
-
-#finding the mle estimators of eta and alpha.
-#that is, we are minimizing the negative log likelihood function
-#this is only for one person
-bnds = ((-inf,inf),(-inf,inf))
-x0_unlim = [0,0.01]
-#mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person),bounds=bnds)
-#mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person),bounds=bnds,method='L-BFGS-B')
-#opt = {'ftol':1e-100,'gtol':1e-100,'maxiter':1500000,'maxfun':15000000}
-opt = {'ftol':1e-100,'gtol':1e-100,'maxiter':150000,'maxfun':150000}
-mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,13),bounds=bnds,method='L-BFGS-B',options=opt)
-#mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person),bounds=bnds,method='BFGS',options={'g-tol':1e-40})
-#mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person),bounds=bnds,method='Nelder-Mead')
-print(mles)
-
-
-
-
-
-'''
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                        finding mles for all participants
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-'''
-
-#saving the mles in a dataframe
-df_mles = pd.DataFrame(columns = ['ID','eta','alpha'], index = np.arange(0,76))
-#df_mles
-
-bnds = ((-inf,inf),(0,inf)) #bounds for eta and alpha when minimizing
-x0_unlim = [0,0.01] #start values of eta and alpha
-opt = {'ftol':1e-100,'gtol':1e-100,'maxiter':150000,'maxfun':150000}
-
-for person in range(len(data)):
-    ID = data['ID'][person]
-    print(ID)    
-    mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person),bounds=bnds,method='L-BFGS-B',options=opt)
-    eta = mles.x[0]
-    alpha = mles.x[1]
-    print(eta,alpha)
-    df_mles.loc[person] = [ID,eta,alpha]
-    #df_mles.append({'ID':ID,'eta':eta, 'alpha':alpha},ignore_index=True)
-
-
-
-df_mles.head()
-
-#try saving this datafram in excel file:
-excel_file_name_and_loc = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\mles_unlimited_Loss2=1.xlsx'
-df_mles.to_excel(excel_file_name_and_loc)
-
-
-
-'''
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                        alpha-eta plot
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-'''
-
-
-alpha = df_mles['alpha']
-eta = df_mles['eta']
-plt.scatter(alpha,eta,s=10)
-plt.yscale('log') #for log scale of eta.
-plt.title("Mle's of alpha and eta, unlimited")
-plt.xlabel('alpha')
-plt.ylabel('eta')
-plt.show()
-
-
 
 
 
@@ -379,18 +418,20 @@ plt.show()
 
 
 '''
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                 LIMITED TRIALS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 '''
 
 
-def neg_log_likel_lim(x,df,person):
+def neg_log_likel_lim(x,df,person,gamma,kappa):
     eta = x[0]
     alpha = x[1]
     beta = x[2]
-    gamma = 1
-    kappa = 1
+    #gamma = 1
+    #kappa = 1
     
     exp_loss_mat = make_matrix_lim(12,alpha,beta,gamma,kappa,True)
     
@@ -458,29 +499,33 @@ def neg_log_likel_lim(x,df,person):
         #if choice and choice01 is -1, we dont add something to the neg_l, as the particioant was not able to choose then, the test just terminated. 
 
     return neg_l
+    #return neg_l*100
             
-print(make_matrix_lim(12,0.01,0.1,1,1,True))
+#print(make_matrix_lim(12,0.01,0.1,1,1,True))
        
     
 #print(neg_log_likel_lim([1,0.01,0.1],data,0))
-neg_log_likel_lim([1,0.01,0.1],data,44)
+neg_log_likel_lim([1,0.01,0.1],data,44,1,1)
 
 
 
 
 #finding mles:
 bnds = ((-inf,inf),(0,inf),(0,inf)) #eta, alpha, beta
-x0_lim = [1,0.1,1]
-person = 75
+#x0_lim = [1,0.1,1]
+x0_lim = [1,0.5,1]
+x0_lim = [mles_lim.x[0],mles_lim.x[1],mles_lim.x[2]]
+x0_lim = [5,0,0]
+person = 17
 #opt = {'ftol':1e-100,'gtol':1e-100,'maxiter':150000,'maxfun':150000}
-mles_lim = minimize(neg_log_likel_lim, args=(data,person),x0=x0_lim,bounds=bnds)
+mles_lim = minimize(neg_log_likel_lim, args=(data,person,0.5,0.5),x0=x0_lim,bounds=bnds)
 print(mles_lim)
 
 
 #sjekk negative likelihood funk for gitte verdier at eta eller beta, da finner du kanskje ut om alpha er null eller ikke
 #eta = 1643.980
 beta = 1.84007
-person = 75
+person = 17
 alpha = np.arange(0.07,0.075,0.0005)
 eta = np.arange(70,80,0.5)
 l = np.zeros((len(alpha),len(eta)))
@@ -511,26 +556,58 @@ plt.show()
 
 
 
-
+'''
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+MLE's for all participants:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+'''
 #finding mles for all participants:
-df_mles_lim = pd.DataFrame(columns = ['ID','eta','alpha','beta'], index = np.arange(0,76))
-
-
+df_mles_lim = pd.DataFrame(columns = ['ID','eta','alpha','beta','fun'], index = np.arange(0,76))
+df_mles_lim['fun']=inf
 bnds = ((-inf,inf),(0,inf),(0,inf)) #bounds for eta, alpha and beta when minimizing
-x0_lim = [0,0.01,0.5] #start values of eta, alpha and beta
+#x0_lim = [5,0.1,0.5] #start values of eta, alpha and beta
+#x0_lim = [0,0.01,0.5] #start values of eta, alpha and beta
+#x0_lim = [10,0.01,0.5]
+#x0_lim = [0,0,0]
 #opt = {'ftol':1e-100,'gtol':1e-100,'maxiter':150000,'maxfun':150000}
 
-for person in range(len(data)):
+for person in range(3,len(data)):
+#for person in range(len(data)):
     ID = data['ID'][person]
-    print(ID)    
-    mles = minimize(neg_log_likel_lim,x0=x0_lim,args=(data,person),bounds=bnds,method='L-BFGS-B')
-    mles = minimize(neg_log_likel_lim,x0=x0_lim,args=(data,person),bounds=bnds)
+    print(person, ID)  
+    df_mles_lim['ID'][person] = ID
+    for k in range(1000):
+        eta_0 = 3 + 17*random.random() #random number between 3 and 20
+        alpha_0 = 0.1*random.random() #random number between 0 and 0.1
+        beta_0 = random.random() #radnom number between 0 and 1
+        x0_lim = [eta_0,alpha_0,beta_0]
+        mles = minimize(neg_log_likel_lim,x0=x0_lim,args=(data,person,1,1),bounds=bnds,method='L-BFGS-B')
+        #mles = minimize(neg_log_likel_lim,x0=x0_lim,args=(data,person,1,1),bounds=bnds)
+        if mles.fun < df_mles_lim['fun'][person]:
+             print('old:',df_mles_lim['fun'][person])
+             print('new:',mles.fun)
+             df_mles_lim['eta'][person] = mles.x[0]
+             df_mles_lim['alpha'][person] = mles.x[1]
+             df_mles_lim['beta'][person] = mles.x[2]
+             df_mles_lim['fun'][person] = mles.fun
+             print('new',df_mles_lim['fun'][person])
+            
+
+
+path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\mles_limited_x0_1000_times.csv"
+df_mles_lim.to_csv(path)
+
+        
+'''
+old version, only on x0_lim        
     eta = mles.x[0]
     alpha = mles.x[1]
     beta = mles.x[2]
     print(eta,alpha,beta)
     df_mles_lim.loc[person] = [ID,eta,alpha,beta]
     #df_mles.append({'ID':ID,'eta':eta, 'alpha':alpha},ignore_index=True)
+'''
+
 
 
 
@@ -544,6 +621,52 @@ df_mles_lim[60:77]
 
 
 
+#plotting the paramters 
+
+row = df_mles_lim.loc[df_mles_lim['eta']<0]
+row.index
+#df_lim_copy=df_mles_lim.drop(df_lim_copy['eta']<0) #dropping the values where
+df_lim_copy=df_mles_lim.drop(row.index) #dropping the values where eta is less than zero to be able to take the log 
+#but, this is the only one that has alpha different from zero.
+
+
+
+
+
+alpha = df_lim_copy['alpha']
+beta = df_lim_copy['beta']
+eta = df_lim_copy['eta']
+#one of the elements in eta is negative,hence you cannot take the log of it. 
+eta[0:30]
+
+
+
+#alpga and eta
+plt.scatter(alpha,eta,s=10)
+#plt.hist(alpha,np.log(eta))
+plt.yscale('log') #for log scale of eta.
+plt.title("Mle's of alpha and eta, limited")
+plt.xlabel('alpha')
+plt.ylabel('eta')
+plt.show()
+
+
+#alpha and beta
+plt.scatter(alpha[0:-1],beta[0:-1],s=10) #last participant has beta equal 80, easier to drop this and then compare the other participants
+#plt.yscale('log') #for log scale of beta. det går jo ikke siden mange av de er null
+plt.title("Mle's of alpha and beta, limited")
+plt.xlabel('alpha')
+plt.ylabel('Beta')
+plt.show()
+
+
+#eta and beta
+plt.scatter(beta[0:-1],eta[0:-1],s=10) #th elast participant has a very high beta, easier to compare the other vlaues if we drop that one
+plt.yscale('log') #for log scale of eta.
+plt.title("Mle's of beta and eta, limited")
+plt.xlabel('beta')
+plt.ylabel('eta')
+plt.show()
 
 
 
