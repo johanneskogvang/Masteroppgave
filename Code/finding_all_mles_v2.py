@@ -216,7 +216,7 @@ for k in range(1000):
     #eta_0 schould be a random number between 3 and 20:
     eta_0 = 3 + 17*random.random()
     x0_unlim = [eta_0,alpha_0]
-    mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,13,1,1),bounds=bnds,method='L-BFGS-B')
+    mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,13,0.5,0.5),bounds=bnds,method='L-BFGS-B')
     if mles.fun < result_unlim['f']:
         print('old:',result_unlim['f'])
         print('new:',mles.fun)
@@ -252,8 +252,8 @@ bnds = ((-inf,inf),(0,inf)) #bounds for eta and alpha when minimizing
 #x0_unlim = [0,0.01] #start values of eta and alpha
 #opt = {'ftol':1e-100,'gtol':1e-100,'maxiter':150000,'maxfun':150000}
 
-#for person in range(len(data)):
-for person in range(4,len(data)):
+for person in range(len(data)):
+#for person in range(4,len(data)):
     ID = data['ID'][person]
     print(person, ID)    
     df_mles['ID'][person] = ID
@@ -263,7 +263,7 @@ for person in range(4,len(data)):
         #eta_0 schould be a random number between 3 and 20:
         eta_0 = 3 + 17*random.random()
         x0_unlim = [eta_0,alpha_0]
-        mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person,1,1),bounds=bnds,method='L-BFGS-B')
+        mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person,0.1,0.1),bounds=bnds,method='L-BFGS-B')
         if mles.fun < df_mles['fun'][person]:
             print('old:',df_mles['fun'][person])
             print('new:',mles.fun)
@@ -287,7 +287,7 @@ df_mles.head()
 #df_mles['fun'][0]
 
 #try saving this datafram in excel file:
-excel_file_name_and_loc = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\mles_unlimited_x0_1000_times.xlsx'
+excel_file_name_and_loc = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=0.1\mles_unlimited_x0_1000_times.xlsx'
 df_mles.to_excel(excel_file_name_and_loc)
 
 
@@ -581,7 +581,7 @@ for person in range(3,len(data)):
         alpha_0 = 0.1*random.random() #random number between 0 and 0.1
         beta_0 = random.random() #radnom number between 0 and 1
         x0_lim = [eta_0,alpha_0,beta_0]
-        mles = minimize(neg_log_likel_lim,x0=x0_lim,args=(data,person,1,1),bounds=bnds,method='L-BFGS-B')
+        mles = minimize(neg_log_likel_lim,x0=x0_lim,args=(data,person,0.1,0.1),bounds=bnds,method='L-BFGS-B')
         #mles = minimize(neg_log_likel_lim,x0=x0_lim,args=(data,person,1,1),bounds=bnds)
         if mles.fun < df_mles_lim['fun'][person]:
              print('old:',df_mles_lim['fun'][person])
@@ -594,7 +594,7 @@ for person in range(3,len(data)):
             
 
 
-path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\mles_limited_x0_1000_times.csv"
+path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=0.1\mles_limited_x0_1000_times.csv"
 df_mles_lim.to_csv(path)
 
         
