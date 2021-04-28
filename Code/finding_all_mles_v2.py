@@ -168,26 +168,6 @@ def neg_log_likel_unlim(x, df, person,gamma,kappa):
             
             i+=1
             
-        
-    """    
-    trial = 0 #dettte må bli en for-løkke når alle tre trials er med
-    choices = all_choices[trial]
-    expL = all_expL[trial]
-    i=0
-    for choice in choices:
-        loss = 'Loss'+str(choice)
-        e_delta = expL[i][loss]
-        e0=expL[i]['Loss0']
-        e1=expL[i]['Loss1']
-        e2=expL[i]['Loss2']
-        const = max(-eta*e0,-eta*e1,-eta*e2) #blir dette riktig????
-        neg_l += eta*e_delta + const + np.log(np.exp(-eta*e0-const)
-                                           +np.exp(-eta*e1-const)
-                                          +np.exp(-eta*e2-const))
-        
-        
-        i+=1
-    """
 
     return neg_l
     #return neg_l, all_expL
@@ -237,14 +217,25 @@ print(f'Code ran in {toc - tic:0.4f} seconds')
 #print(mles)
 
 
+
+
+
 '''
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                        finding mles for all participants
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%% Bootstrapping %%%%%%%%%%%%%%%
+'''
+#first finding the probabilities for one person in the first step, then simulating what 
+
+
+
+
+
+
+'''
+%%%%%%%%%%%%%%%%% finding mles for all participants %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 '''
 
 #saving the mles in a dataframe
-df_mles = pd.DataFrame(columns = ['ID','eta','alpha','fun'], index = np.arange(0,76))
+df_mles = pd.DataFrame(columns = ['ID','eta','alpha','fun','eta_0','alpha_0'], index = np.arange(0,76))
 df_mles['fun'] = inf
 #df_mles.head()
 
@@ -263,13 +254,15 @@ for person in range(len(data)):
         #eta_0 schould be a random number between 3 and 20:
         eta_0 = 3 + 17*random.random()
         x0_unlim = [eta_0,alpha_0]
-        mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person,0.1,0.1),bounds=bnds,method='L-BFGS-B')
+        mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person,1,1),bounds=bnds,method='L-BFGS-B')
         if mles.fun < df_mles['fun'][person]:
             print('old:',df_mles['fun'][person])
             print('new:',mles.fun)
             df_mles['eta'][person] = mles.x[0]
             df_mles['alpha'][person] = mles.x[1]
             df_mles['fun'][person] = mles.fun
+            df_mles['eta_0'][person] = eta_0
+            df_mles['alpha_0'][person] = alpha_0
             print('new',df_mles['fun'][person])
 
     
@@ -287,8 +280,12 @@ df_mles.head()
 #df_mles['fun'][0]
 
 #try saving this datafram in excel file:
-excel_file_name_and_loc = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=0.1\mles_unlimited_x0_1000_times.xlsx'
+excel_file_name_and_loc = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\mles_unlimited_x0_1000_times_v2.xlsx'
 df_mles.to_excel(excel_file_name_and_loc)
+
+
+
+
 
 
 
@@ -330,82 +327,9 @@ for i in range(len(alpha_11)):
 plt.plot(alpha_11,neg_log_l_11)
 plt.title('Person 11')
 plt.show()
-
-
-
-
-person= 10
-eta = 6.03855720281903
-#plottet ble bare en rett linje
-alpha = np.arange(0,0.0000000000001,0.000000000000001)
-alpha = np.arange(0,0.00000000000001,0.0000000000000001)
-neg_log_l = np.zeros_like(alpha)
-for i in range(len(alpha)):
-    neg_log_l[i] = neg_log_likel_unlim([eta,alpha[i]], data, person,1,1)
-
-plt.plot(alpha,neg_log_l)
-plt.title('Person 10')
-plt.show()
-
-
-person= 13
-eta = 2.51175344860878
-likel, expL = neg_log_likel_unlim([eta,0.01],data,person)
-print(expL)
-#plottet ble bare en rett linje
-alpha = np.arange(0,0.00000001,0.000000000001)
-
-#alpha = np.arange(0,0.00000000000001,0.0000000000000001)
-neg_log_l = np.zeros_like(alpha)
-for i in range(len(alpha)):
-    neg_log_l[i] = neg_log_likel_unlim([eta,alpha[i]], data, person,1,1)
-
-plt.plot(alpha,neg_log_l)
-plt.title('Person 13')
-plt.show()
-
-
-
-person= 5
-eta = 14.257237716594
-#plottet ble bare en rett linje
-alpha = np.arange(0,1,0.001)
-alpha = np.arange(0,0.00001,0.0000001)
-neg_log_l = np.zeros_like(alpha)
-for i in range(len(alpha)):
-    neg_log_l[i] = neg_log_likel_unlim([eta,alpha[i]], data, person,1,1)
-
-plt.plot(alpha,neg_log_l)
-plt.title('Person 5')
-plt.show()
-
-
-
-person = 14
-eta = 6.52001129020757
-alpha = np.arange(0,1,0.001)
-alpha = np.arange(0,0.0000001,0.000000001)
-neg_log_l = np.zeros_like(alpha)
-for i in range(len(alpha)):
-    neg_log_l[i] = neg_log_likel_unlim([eta,alpha[i]], data, person,1,1)
-
-plt.plot(alpha,neg_log_l)
-plt.title('Person 14')
-plt.show()
-
-
-person = 44
-eta = 143.842177675026
-alpha = np.arange(0.14,0.18,0.001)
-alpha = np.arange(0,0.0000001,0.000000001)
-neg_log_l = np.zeros_like(alpha)
-for i in range(len(alpha)):
-    neg_log_l[i] = neg_log_likel_unlim([eta,alpha[i]], data, person,1,1)
-
-plt.plot(alpha,neg_log_l)
-plt.title('Person 44')
-plt.show()
 '''
+
+
 
 
 
