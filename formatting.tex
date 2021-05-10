@@ -1,0 +1,69 @@
+%\documentclass{article}
+\documentclass[twoside]{report}
+%\documentclass{book}
+%\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{natbib}
+\usepackage{parskip}
+\usepackage{tikz}
+\bibliographystyle{jasa}
+\usetikzlibrary{positioning,calc,backgrounds}
+\usepackage{thmtools}
+\usepackage{lipsum}
+%\usepackage{blindtext}
+\usepackage{xcolor}
+\usepackage{comment}
+\usepackage{mathrsfs}
+\usepackage[main=english,norsk]{babel}
+\usepackage{arabtex}
+\usepackage{afterpage}
+\usepackage[font=footnotesize,labelfont=bf]{caption}
+\usepackage{fancyhdr}
+\usepackage{pgfplots}
+\usepackage[colorlinks]{hyperref}
+
+
+%colour on links
+\hypersetup{
+linkcolor = cyan!50!black,
+citecolor = cyan!50!black
+%linktocpage=true
+}
+
+\parskip 0.2in %making spacing between paragraphs
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\EE}{\mathcal{E}}
+\declaretheorem[
+ name=Theorem,
+]{theorem}
+
+%\newtheorem{theorem}{Theorem}
+\colorlet{myblue}{blue!20!white}
+%\definecolor{myblue}{rgb}{188,217,255}
+%\definecolor{myblue}{rgb}{1,1,1}
+
+%\declaretheorem[
+%  shaded={rulecolor=black, rulewidth=1pt, bgcolor=myblue},
+%  name=Theorem,
+%]{theorem}
+
+\pagenumbering{gobble}
+
+%----front matter ----
+\newcommand{\frontmatter}{
+    \pagenumbering{roman}   % Setting page numbering to lower-case roman
+}
+
+%----- main matter -----
+\newcommand{\mainmatter}{
+    \newpage
+    \pagenumbering{arabic}  % Setting page numbering to normal integers
+    \pagestyle{fancy}
+    \fancyhf{}
+    \fancyhead[LE,RO]{\thepage}
+    \fancyhead[RE]{\leftmark}
+    \fancyhead[LO]{\rightmark}
+    \renewcommand{\headrulewidth}{0pt}
+    %\pagestyle{headings}
+}

@@ -1,51 +1,51 @@
-\documentclass{article}
-\usepackage[utf8]{inputenc}
-\usepackage{amsmath}
-\usepackage{natbib}
-\usepackage{parskip}
-\usepackage{tikz}
-\bibliographystyle{jasa}
-\usetikzlibrary{positioning,calc,backgrounds}
-\usepackage{thmtools}
-\usepackage{lipsum}
-%\usepackage{blindtext}
-\usepackage{xcolor}
-\usepackage{comment}
+\input{formatting}
+%\input{formatting_document}
+\usepackage[b5paper,margin=1.2in]{geometry}
 
 
 
-\title{Notater til masteren}
+
+\title{Master thesis}
 \author{johaskog }
 \date{January 2021}
-
-\parskip 0.2in %making spacing between paragraphs
-\newcommand{\dd}{\mathrm{d}}
-%\newtheorem{theorem}{Theorem}
-\colorlet{myblue}{blue!5!white}
-%\definecolor{myblue}{rgb}{188,217,255}
-%\definecolor{myblue}{rgb}{1,1,1}
-
-\declaretheorem[
-  shaded={rulecolor=black, rulewidth=1pt, bgcolor=myblue},
-  name=Theorem,
-]{theorem}
-
-
-
 
 
 \begin{document}
 
 \maketitle
+
+
 %need this to plot the tikz trees. 
 \input{tikz-trees/basics_tikz}
 
 
+% \frontmatter
+%{\pagenumbering{roman}
+%\input{Sections/0-preface_and_abstract}
+%}
+%\thispagestyle{empty}
+%\tableofcontents
+%\thispagestyle{empty}
+
+\pagenumbering{roman}
+\input{Sections/0-preface_and_abstract}
+
+%\thispagestyle{empty}
+%\setcounter{tocdepth}{2}
+{\hypersetup{linkcolor=black}\tableofcontents}
+\thispagestyle{empty}
+
+% \pagenumbering{arabic}
+\mainmatter
 \input{Sections/1-introduction}
 \input{Sections/2-theory}
 \input{Sections/3-Problem setup}
+\input{Sections/4-An Ideal Observer Solution}
+\input{Sections/5-Softmax}
 \input{Sections/6-probabilities}
 %\input{Sections/7-Trees}
+\input{Sections/notes about the data}
+\input{Sections/Bootstrapping}
 
 
 \newpage

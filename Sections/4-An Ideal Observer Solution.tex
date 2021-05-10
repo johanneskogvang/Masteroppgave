@@ -1,0 +1,75 @@
+
+\chapter[An Ideal Observer Solution of the Box Task]{An Ideal Observer Solution of the Box Task}
+\chaptermark{An Ideal Observer Solution}
+%Then, something about that we first need the ideal observer solution. 
+To be able to do fit the parameters in the model, we firstly need to find and Ideal Observer solution of the box task. %If you dont do it above, you need to explain what an IO solution is. 
+
+Let $X_i$ be the colour of the $i$-th opened box. If the box is blue, $X_i$ is 0 and if the box is red, $X_i$ is one. Thus,
+\begin{equation*}
+    X_i = \begin{cases}
+    0,& \quad \text{if box } i \text{ is blue,}\\
+    1,& \quad \text{if box } i \text{ is red.}
+    \end{cases}
+\end{equation*}
+We assume that each $X_i$ has a Bernoulli distribution with success probability $\theta$, such that
+\begin{equation*}
+    X_i \sim \text{Bernoulli}(\theta).
+\end{equation*}
+Additionally, let $U_i$ bet the number of the first $i$ opened boxes that are red. Thus, $U_i$ is a stochastic variable defined as
+\begin{equation*}
+    U_i = \sum_{j=1}^{i} X_j. 
+\end{equation*}
+The sum of Bernoulli distributed variables is binomial distributed(kilde!!!). Thus, $U_i$ is binomial distributed with parameters $i$ and $\theta$. We have another stochastic variable, $V_i$, that is the number of red boxes for the $12-i$ boxes that are not opened yet, which yields,
+\begin{equation*}
+    V_i = \sum_{j=i+1}^{12} X_j.
+\end{equation*}
+This variable is also binomial distributed, but with parameters $12-i$ and $\theta$. Thus,
+\begin{equation*}
+    \begin{aligned}
+        U_i &\sim \text{Binomial}(i,\theta)\\
+        V_i &\sim \text{Binomial}(12-i,\theta).
+    \end{aligned}
+\end{equation*}
+Consequently, if $U_i+V_i$ is bigger than 6, it is a red majority in the box task, and if it is smaller than 6, the true majority colour is blue. 
+
+sjekk dette avsnittet: har forandre definisjonen av $\delta_i.$
+Each time a box is opened, we have three choices. The first is to choose that blue is the majority colour, the second that red is and the third is to open another box. Let $\delta_{i+1}$ denote the different choices when $i$ boxes are opened. If $\delta_{i+1}=0$, we have chosen that blue is the majority colour, $\delta_{i+1}=1$ shows that red is chosen as the majority and $\delta_{i+1}=2$ represents the choice of opening the next box, which is box $i+1$. Moreover, let $\delta_{(i+2):12}$ be the choices made after box $i+1$ is opened. 
+
+We can, for each of these choices, find loss functions that says something about the cost of each choice. From these loss functions we can find the expected losses for each choice. If we each time a box is opened chooses the alternative with the least expected loss, we end up with the IO solution. 
+
+
+In the specialization thesis we found one IO solution where we assumed that the number of red boxes is uniformly distributed with possible values from 0 to 12, where $6$ is not included as one of the colours have to be in majority. We will find a generalisation of this IO solution here, assuming that ... We can still use the same loss functions and expected losses, but the probabilities we use are generalised. 
+
+I dont know how much I should write about this as the things that I did here is a generalization of this? Maybe just include the loss functions and the expected losses?
+
+\section{Loss Functions and Expected Losses}
+When setting up the loss functions, we first defined a parameter, $\alpha$, that is the loss we get when opening a new box. We assume that $\alpha$ mostly takes small values, and that it could be zero for some participants, but that it reflects that one might get tired or restless when opening many boxes. (kanksje ta dette lenger ned når du faktisk snakker om loss for å åpne flere bokser?)
+
+We denote the loss function when $i$ boxes are opened as $L_i[Z(X_{1:12}),\Delta_{i:12}]$, as it depends on the true majority colour and the choices that are made after box $i$ is opened.
+The loss functions, and therefore also the expected loss, is the same for both the unlimited and the limited versions in the event of choosing red as the majority colour. The same holds for choosing blue as majority colour. The loss function for choosing blue as majority colour is
+\begin{equation}
+\label{loss_func_blue}
+    L_i[Z(X_{1:12}),\Delta_i=0,\Delta_{(i+1):12}] =  I(Z(X_{1:12})=1),
+\end{equation}
+where $I(\cdot)$ is an indicator function that is one if the expression inside is true and zero if not. We find the expected loss for choosing blue as the majority colour by taking the expectation of this loss function. The expected loss is dependent on the colours of the boxes that already are opened, $x_{1:i}$. Thus, the expected loss when choosing blue as the majority colour is expressed by $E \big[ L_i (Z(X_{1:12}), \Delta_i=0, \Delta_{(i+1):12})|X_{1:i}=x_{1:i} \big]$, but we denote it as $EL_{0i}$ here. From the specialisation thesis we have that
+\begin{equation}
+    \label{exp_loss_blue}
+    \begin{aligned}
+     EL_{0i} = P(Z(X_{1:i})=1|X_{1:i}=x_{1:i}),
+    \end{aligned}
+\end{equation}
+which is the probability that the majority colour is red given the colour of the $i$ first boxes. 
+
+
+Similarly, the loss function for choosing red as the majority colour is 
+\begin{equation}
+    \label{loss_func_red}
+    L_i[Z(X_{1:12}),\Delta_i=1,\Delta_{(i+1):12}] =  I(Z(X_{1:12})=0),
+\end{equation}
+and teh expected loss is
+\begin{equation}
+    \label{exp_loss_red}
+    EL_{1i} = P(Z(X_{1:12})=0|X_{1:i}=x_{1:i}).
+\end{equation}
+
+
