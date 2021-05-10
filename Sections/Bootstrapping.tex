@@ -1,0 +1,23 @@
+\chapter{Bootstrapping}
+\section{Notes from 'An Introduction to the Bootstrap'}
+Simulation based on the data to for example find intervals for estimators. Bootstrap estimate of the standard error exists no matter how complicated the estimator is. So maybe that's a good alternative if the interval cannot be found. 
+
+A bootstrap sample is sample from the population, that is drawn with replacement. The bootstrap sample of $n$ values is often denoted $\textbf{x}^*=(x_1^*,x_2^*,...,x_n^*)$. If the estimator is $\theta$, we can find the bootstrap replication of $\hat{\theta}$, $\hat{\theta}^*$ as
+\begin{equation*}
+    \hat{\theta}^* = s(\textbf{x}^*),
+\end{equation*}
+where $s(\cdot)$ is the estimator. 
+
+Choosing 200 bootstrap samples instead of infinity, gives almost the same answer. B = 50 is often enough to give a good estimate of the standard error. More that 200 replications are very seldom needed for standard error estimation. 
+
+You should have a good look at the data, for example by making a histogram of the sampled data. 
+
+advantages using nonparametric bootstrap: you dont have mo make any assumptions about the distribution of the population.
+
+A standard confidence interval with coverage probability $1-2\alpha$, implies that intervals constructed in this way (mean value +- std.error * z) will in 90\% of the times cover the real value of the parameter. 
+
+percentile interval commonly used. But this does not account for biases. Instead, one uses BC$_a$ intervals, which stands for bias-corrected and accelerated intervals. However, these are not computationally efficient, to get more efficient, we can use ABC intervals, which is approximate bootstrap confidence intervals. 
+
+From meeting with Håkon:
+You have fitted a model, softmax, with the estimates for the paramters. This is one individual model for each person. For each person and each potetntial decision, you have a probability distribution $P(\delta_i=0| \hat{\alpha}, \hat{\beta}, \hat{\eta})$, $P(\delta_i=1| \hat{\alpha}, \hat{\beta}, \hat{\eta})$ and $P(\delta_i=2| \hat{\alpha}, \hat{\beta}, \hat{\eta})$.
+Then you have a probailitiy for each choice for each step. Then, simulate/draw with these probabilities what choices that person would take. Do this multiple times, then you ahve a lot of datasets. Treat them as real data and estimate the parameters the same way you did with the real data set. (use the real estimates of the parametrs as start values in the minimizing of the likelihood function). Then use percentile interval to find the intervals. Write about that you know there are better alternatives, but that you use this for simplicity. 

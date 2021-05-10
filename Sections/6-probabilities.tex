@@ -1,5 +1,5 @@
 \newpage
-\section{Finding the probabilities}
+\chapter{Finding the probabilities}
 We need the probabilities $P(U_{12} \geq 7|U_i=u_i)$ and $P(X_{i+1}=1|X_{1:i}=x_{1:i})$.
 
 We let $\theta$ be the probability that a box is red, and assume that 
@@ -25,7 +25,8 @@ such that
 $U_i$ and $V_i$ are conditionally independent given $\theta$ because each box that is opened is independent of the other boxes that are opened, given $\theta$.
 
 
-\subsection{$P(U_{12}\geq 7|U_i=u_i,U_{12}\neq6)$}
+\section{Prob that red is majority colour}
+$P(U_{12}\geq 7|U_i=u_i,U_{12}\neq6)$
 We can now find the probability that red is the majority colour given the colour of the boxes that already are opened. Firstly, we find the probability that there are $j$ red boxes when all twelve boxes are opened given $i$ opened boxes, hence we find $P(U_i+V_i = j | U_i=u_i)$.
 %But, we start by finding this given $P$. 
 %\begin{equation*}
@@ -157,8 +158,8 @@ This is the probability that there is a red majority in total, given the colour 
 
 
 
-\subsection{$P(X_{i+1}=1|U_i=u_i,U_i+V_i\neq6)$}
-
+\section{Prob that the next is red}
+$P(X_{i+1}=1|U_i=u_i,U_i+V_i\neq6)$
 To be able to find $P(X_{i+1}=1|U_i=u_i,U_i+V_i\neq6)$, we are again using the law of total probability. As we are going to use this later, we start with the situation where we are not conditioning on $U_i+V_i\neq6$, hence, we start by finding $P(X_{i+1}=1|U_i=u_i)$. Using the law of total probability, we get
 \begin{equation}
 \label{xiplus1_given_ui1}
