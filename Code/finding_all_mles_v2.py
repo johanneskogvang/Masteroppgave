@@ -17,6 +17,7 @@ from pylab import meshgrid,cm,imshow,contour,clabel,colorbar,axis,title,show
 import matplotlib.pyplot as plt
 import random
 import time
+#import multiprocessing as mp
 
 
 '''
@@ -32,21 +33,13 @@ data = data.rename(columns={'Unnamed: 0':'ID'}) #putting ID as the name of the f
 
 
 
-"""
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            firstly finding the negative loss function in the unlimited case. 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ """
+Starting to find the expected losses for trial 2,3 and 4 which are the unlimited trials. Making a function for it.
 """
 
-def neg_log_likel_unlim(x, df, person,gamma,kappa):
-    eta = x[0]
-    alpha = x[1]
-#    gamma = 1
-#    kappa = 1
-    
-    """
-    Starting to find the expected losses for trial 2 which is the first unlimited trial.
-    """
+def all_exp_losses_unlim(alpha,gamma,kappa):
+
     #finding the matrix with the expected loss for all possible combinations of red and blue boxes.
     exp_loss_mat = make_matrix_unlim(12,alpha,gamma,kappa,True)
     
@@ -62,7 +55,7 @@ def neg_log_likel_unlim(x, df, person,gamma,kappa):
     #print('expL_2',expL_2)
     expL_3 = np.zeros(13,dtype=dict) #these are the exp loss for trial 3. 
     expL_4 = np.zeros(13,dtype=dict) #these are the exp loss for trial 4. 
-
+    
     #The second entry for the matrix for trial 2:
     j2=0    
     #the second entry for the matrix for trial 3:
@@ -92,17 +85,19 @@ def neg_log_likel_unlim(x, df, person,gamma,kappa):
     expL_2[-1] = {'prob':1,'Loss0':1,'Loss1':0,'Loss2':1}
     expL_3[-1] = {'prob':0,'Loss0':0,'Loss1':1,'Loss2':1}
     expL_4[-1] = {'prob':0,'Loss0':0,'Loss1':1,'Loss2':1}
-    
+        
     all_expL = [expL_2,expL_3,expL_4]
-    #print('expL_2',expL_2)
-    
-    
-    """
-    finding the choices that the participant make. firslty only for the second participant in the first unlimited trial (=trial2)
-    """
-    
-    #person=0
-    #only finding the data for the first participant now., that is row 0.
+        #print('expL_2',expL_2)
+    return all_expL
+
+#expL = all_exp_losses_unlim(0.01,1,1)
+#print(expL)
+
+
+'''
+%%%%%%%%%%%% finding the choices that each particiant make %%%%%%%%%
+'''
+def participant_choices_unlim(df,person):
     dtd2 = df['BoxNormExtDtD2'][person] #dette er riktig
     choice2 = df['BoxNormExtChoice2'][person] #dette er riktig
     all_choices2 = 2*np.ones(dtd2,dtype=int) #making an array of the decisions that the participant make (2 untli last choice)
@@ -138,11 +133,31 @@ def neg_log_likel_unlim(x, df, person,gamma,kappa):
         
     #all_choices = [all_choices2]
     all_choices = [all_choices2,all_choices3,all_choices4]
-    #print('all_choices: ',all_choices)
+    return all_choices
+
+#print(participant_choices_unlim(data,0))
+
+
+
+
+"""
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            firstly finding the negative loss function in the unlimited case. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+"""
+def neg_log_likel_unlim(x, person,gamma,kappa,all_choices):
+#def neg_log_likel_unlim(x, df, person,gamma,kappa,all_choices):
+    eta = x[0]
+    alpha = x[1]
+
+    #starting to find the expected losses for teh three trials
+    all_expL = all_exp_losses_unlim(alpha,gamma,kappa)
     
-    """
-    now that we have the exp losses and the choices that the participant make, we can start finding the negative log likelihood
-    """
+    #finding the choices that the participant make.
+    #all_choices =  participant_choices_unlim(df,person) #these choices should be as an input in the function to make it easier when you dp this for simulated data
+    
+    
+    #now that we have the exp losses and the choices that the participant make, we can start finding the negative log likelihood
     neg_l = 0
     for trial in range(3):
         choices = all_choices[trial]
@@ -164,11 +179,8 @@ def neg_log_likel_unlim(x, df, person,gamma,kappa):
             neg_l += eta*e_delta + const + np.log(np.exp(-eta*e0-const)
                                                +np.exp(-eta*e1-const)
                                               +np.exp(-eta*e2-const))
-            
-            
             i+=1
             
-
     return neg_l
     #return neg_l, all_expL
 
@@ -188,15 +200,16 @@ def neg_log_likel_unlim(x, df, person,gamma,kappa):
 #this is only for one person
 #trying to do this for many different values of x0, and then choosing hte values that give the lowest function value.
 tic = time.perf_counter()
+person=58
 result_unlim = {'eta':0,'alpha':0,'f':inf}    
 bnds = ((-inf,inf),(0,inf))
-for k in range(1000):
+for k in range(200):
     #alpha0 should be a random number between 0 and 0.1:
     alpha_0 = 0.1*random.random()
     #eta_0 schould be a random number between 3 and 20:
     eta_0 = 3 + 17*random.random()
     x0_unlim = [eta_0,alpha_0]
-    mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,13,0.5,0.5),bounds=bnds,method='L-BFGS-B')
+    mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(person,1,1,participant_choices_unlim(data,person)),bounds=bnds,method='L-BFGS-B')
     if mles.fun < result_unlim['f']:
         print('old:',result_unlim['f'])
         print('new:',mles.fun)
@@ -207,24 +220,6 @@ for k in range(1000):
 print(result_unlim)
 toc = time.perf_counter()
 print(f'Code ran in {toc - tic:0.4f} seconds')
-#mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person),bounds=bnds)
-#mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person),bounds=bnds,method='L-BFGS-B')
-#opt = {'ftol':1e-100,'gtol':1e-100,'maxiter':1500000,'maxfun':15000000}
-#opt = {'ftol':1e-100,'gtol':1e-100,'maxiter':150000,'maxfun':150000}
-#mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,13,1,1),bounds=bnds,method='L-BFGS-B',options=opt)
-#mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person),bounds=bnds,method='BFGS',options={'g-tol':1e-40})
-#mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person),bounds=bnds,method='Nelder-Mead')
-#print(mles)
-
-
-
-
-
-'''
-%%%%%%%%%%%%%%%% Bootstrapping %%%%%%%%%%%%%%%
-'''
-#first finding the probabilities for one person in the first step, then simulating what 
-
 
 
 
@@ -248,13 +243,13 @@ for person in range(len(data)):
     ID = data['ID'][person]
     print(person, ID)    
     df_mles['ID'][person] = ID
-    for k in range(1000):
+    for k in range(200):
     #alpha0 should be a random number between 0 and 0.1:
         alpha_0 = 0.1*random.random()
         #eta_0 schould be a random number between 3 and 20:
         eta_0 = 3 + 17*random.random()
         x0_unlim = [eta_0,alpha_0]
-        mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(data,person,1,1),bounds=bnds,method='L-BFGS-B')
+        mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(person,1,1,participant_choices_unlim(data,person)),bounds=bnds,method='L-BFGS-B')
         if mles.fun < df_mles['fun'][person]:
             print('old:',df_mles['fun'][person])
             print('new:',mles.fun)
@@ -279,15 +274,314 @@ for person in range(len(data)):
 df_mles.head()
 #df_mles['fun'][0]
 
-#try saving this datafram in excel file:
-excel_file_name_and_loc = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\mles_unlimited_x0_1000_times_v2.xlsx'
-df_mles.to_excel(excel_file_name_and_loc)
+#try saving this datafram in csv file:
+csv_file_name_and_loc = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\mles_unlimited_x0_200_times.csv'
+df_mles.to_csv(csv_file_name_and_loc)
 
 
 
 
 
+'''
+%%%%%%%%%%%%%%%% Bootstrapping %%%%%%%%%%%%%%%
+'''
+#starting w the first unlimited trial
+#first finding the probabilities for one person in the first step, then simulating what that person would do in that step
+#then do the same for the next step
 
+
+
+def simulating_decisions_unlim(person, alpha_hat,eta_hat,gamma,kappa):
+    #starting to find the expected losses for the three trials
+    all_expL = all_exp_losses_unlim(alpha_hat,gamma,kappa) #the expected losses based on what colours that the boxes will be in. 
+    
+    expL_2 = all_expL[0]
+    decisions2 = [] #array that holds all decisions that are simulated.
+    i=0 #how many boxes that are opened
+    dec=2 #decising to opn a box
+    while dec==2:
+        if i == 13: #if they havent made a decision yet, and there are no more boxes to open. 
+            break
+    #for the first step, find p0, p1 and p2, which are the probs that choice 0, 1 and 2 are made, respectively.
+        e0 = expL_2[i]['Loss0'] 
+        e1 = expL_2[i]['Loss1']
+        e2 = expL_2[i]['Loss2']
+        #print('e0:',e0)
+        #print('e1:',e1)
+        #print('e2:',e2)
+        const = min(eta_hat*e0,eta_hat*e1,eta_hat*e2)
+        denom = np.exp(-eta_hat*e0+const) + np.exp(-eta_hat*e1+const) + np.exp(-eta_hat*e2+const)
+        #print('denom:',denom)
+        p0 = np.exp(-eta_hat*e0+const)/denom
+        p1 = np.exp(-eta_hat*e1+const)/denom
+        p2 = np.exp(-eta_hat*e2+const)/denom
+        
+        '''
+        denom = np.exp(-eta_hat*e0) + np.exp(-eta_hat*e1) + np.exp(-eta_hat*e2)
+        print('denom:',denom)
+        p0 = np.exp(-eta_hat*e0)/denom
+        p1 = np.exp(-eta_hat*e1)/denom
+        p2 = np.exp(-eta_hat*e2)/denom
+        '''
+        #print('probabilities_2:',p0,p1,p2)
+        dec = np.random.choice([0,1,2],p=[p0,p1,p2]) #making a decision based on those probabilities. 
+        #print('probs:',p0,p1,p2)
+        #print(dec)
+        decisions2.append(dec)
+        i+=1
+    #print(decisions2)
+    
+    expL_3 = all_expL[1]
+    decisions3 = [] #array that holds all decisions that are simulated.
+    i=0 #how many boxes that are opened
+    dec=2 #decising to opn a box
+    while dec==2:
+        if i == 13: #if they havent made a decision yet, and there are no more boxes to open. 
+            break
+    #for the first step, find p0, p1 and p2, which are the probs that choice 0, 1 and 2 are made, respectively.
+        e0 = expL_3[i]['Loss0'] 
+        e1 = expL_3[i]['Loss1']
+        e2 = expL_3[i]['Loss2']
+        #print('e0:',e0)
+        #print('e1:',e1)
+        #print('e2:',e2)
+        const = min(eta_hat*e0,eta_hat*e1,eta_hat*e2)
+        denom = np.exp(-eta_hat*e0+const) + np.exp(-eta_hat*e1+const) + np.exp(-eta_hat*e2+const)
+        #print('denom:',denom)
+        p0 = np.exp(-eta_hat*e0+const)/denom
+        p1 = np.exp(-eta_hat*e1+const)/denom
+        p2 = np.exp(-eta_hat*e2+const)/denom
+        '''
+        denom = np.exp(-eta_hat*e0) + np.exp(-eta_hat*e1) + np.exp(-eta_hat*e2)
+        p0 = np.exp(-eta_hat*e0)/denom
+        p1 = np.exp(-eta_hat*e1)/denom
+        p2 = np.exp(-eta_hat*e2)/denom
+        '''
+        #print('probabilities_3:',p0,p1,p2)
+        dec = np.random.choice([0,1,2],p=[p0,p1,p2]) #making a decision based on those probabilities. 
+        #print('probs:',p0,p1,p2)
+        #print(dec)
+        decisions3.append(dec)
+        i+=1
+    #print(decisions3)
+    
+    expL_4 = all_expL[1]
+    decisions4 = [] #array that holds all decisions that are simulated.
+    i=0 #how many boxes that are opened
+    dec=2 #decising to opn a box
+    while dec==2:
+    #for the first step, find p0, p1 and p2, which are the probs that choice 0, 1 and 2 are made, respectively.
+        if i == 13: #if they havent made a decision yet, and there are no more boxes to open. 
+            break
+        e0 = expL_4[i]['Loss0'] 
+        e1 = expL_4[i]['Loss1']
+        e2 = expL_4[i]['Loss2']
+        #print('e0:',e0)
+        #print('e1:',e1)
+        #print('e2:',e2)
+        const = min(eta_hat*e0,eta_hat*e1,eta_hat*e2)
+        denom = np.exp(-eta_hat*e0+const) + np.exp(-eta_hat*e1+const) + np.exp(-eta_hat*e2+const)
+        #print('denom:',denom)
+        p0 = np.exp(-eta_hat*e0+const)/denom
+        p1 = np.exp(-eta_hat*e1+const)/denom
+        p2 = np.exp(-eta_hat*e2+const)/denom
+        '''        
+        denom = np.exp(-eta_hat*e0) + np.exp(-eta_hat*e1) + np.exp(-eta_hat*e2)
+        p0 = np.exp(-eta_hat*e0)/denom #prob that the particiapnt chooses blue as majority colour
+        p1 = np.exp(-eta_hat*e1)/denom #prob that the particiapnt chooses red as majority colour
+        p2 = np.exp(-eta_hat*e2)/denom #prob that part chooses to open another box. 
+        '''
+        #print('probabilities_4:',p0,p1,p2)
+        dec = np.random.choice([0,1,2],p=[p0,p1,p2]) #making a decision based on those probabilities.  dec=decison. 
+        #print('probs:',p0,p1,p2)
+        #print(dec)
+        decisions4.append(dec)
+        i+=1
+    #print(decisions4)
+    decisions = [decisions2,decisions3,decisions4]
+    #print(decisions)
+    return decisions
+
+ 
+def simulating_200(person,df,gamma,kappa):
+    num_sim = 200
+    alpha_200 = np.zeros(num_sim)
+    eta_200 = np.zeros(num_sim)
+    alpha_hat = df['alpha'][person]
+    eta_hat = df['eta'][person]
+    alpha_0 = df['alpha_0'][person]
+    eta_0 = df['eta_0'][person]
+    for k in range(num_sim):
+        simulated_decisions = simulating_decisions_unlim(person,alpha_hat,eta_hat,gamma,kappa)
+        bnds = ((-inf,inf),(0,inf)) #bounds for eta and alpha when minimizing
+        '''
+        f = inf
+        for m in range(20):
+            alpha_0 = 0.1*random.random()
+            #eta_0 should be a random number between 3 and 20:
+            eta_0 = 3 + 17*random.random()
+            x0_unlim = [eta_0,alpha_0]
+            mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(person,gamma,kappa,simulated_decisions),bounds=bnds,method='L-BFGS-B')
+            if mles.fun < f:
+                eta_200[k] = mles.x[0]
+                alpha_200[k] = mles.x[1]
+                f = mles.fun
+                print(f)
+    return eta_200,alpha_200
+
+'''            
+        mles_simulations_1 = minimize(neg_log_likel_unlim,[eta_hat,alpha_hat],args=(person,gamma,kappa,simulated_decisions),bounds=bnds,method='L-BFGS-B')
+        mles_simulations_2 = minimize(neg_log_likel_unlim,[eta_0,alpha_0],args=(person,gamma,kappa,simulated_decisions),bounds=bnds,method='L-BFGS-B')
+        #Choosing the mles that have the smallest negative log likelihood:
+        if mles_simulations_1.fun < mles_simulations_2.fun:
+            eta_200[k] = mles_simulations_1.x[0]
+            alpha_200[k] = mles_simulations_1.x[1]
+        else:
+            eta_200[k] = mles_simulations_2.x[0]
+            alpha_200[k] = mles_simulations_2.x[1]
+    return eta_200, alpha_200
+    
+    
+ #   simulated_decisions = simulating_decisions_unlim(person,alpha_hat,eta_hat,gamma,kappa)
+ #   bnds = ((-inf,inf),(0,inf)) #bounds for eta and alpha when minimizing
+ #   x0_unlim = [eta_hat,alpha_hat]
+ #   mles_simulations = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(person,gamma,kappa,simulated_decisions),bounds=bnds,method='L-BFGS-B')
+ #   print(mles_simulations)
+    
+  
+'''
+%%%%%%%%%%%%%%%%%%% plotting the simulated eta and alpha for one person %%%%%%%%%%%%%%%%%%%%%%
+'''
+path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\mles_unlimited_x0_200_times.csv'
+df_unlim = pd.read_csv(path,sep=',',usecols=['ID','eta','alpha','fun','eta_0','alpha_0'])
+df_unlim.head()
+person=
+
+e, a = simulating_200(person,df_unlim,1,1)
+
+plt.scatter(a,e,s=10)
+plt.yscale('log') #for log scale of eta.
+plt.title("MLE of eta and alpha based on 200 simulated trials, unlimited")
+plt.xlabel('alpha')
+plt.ylabel('eta')
+plt.show()
+
+
+a_5 = np.percentile(a,5)
+a_95 = np.percentile(a,95)
+#print('90% CI alpha: ',a_5,a_95)
+e_5 = np.percentile(e,5)
+e_95 = np.percentile(e,95)
+
+print('CI alpha:', a_5,a_95)
+print('CI eta',e_5,e_95)
+
+
+
+'''
+%%%%%%%%%%%%%%% finding CI's for all participants %%%%%%%%%%%%%%%%%%%%%%%%
+'''    
+
+path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\mles_unlimited_x0_200_times.csv'
+df_unlim = pd.read_csv(path,sep=',',usecols=['ID','eta','alpha','fun','eta_0','alpha_0'])
+df_unlim.head()    
+df_unlim['alpha_5_p'] = np.nan
+df_unlim['alpha_95_p'] = np.nan
+df_unlim['eta_5_p'] = np.nan
+df_unlim['eta_95_p'] = np.nan
+
+def ci(person,df):
+    #adding columns that will contain the confidene intervals
+    e, a = simulating_200(person,df_unlim,1,1)
+    a_5 = np.percentile(a,5)
+    a_95 = np.percentile(a,95)
+    #print('90% CI alpha: ',a_5,a_95)
+    e_5 = np.percentile(e,5)
+    e_95 = np.percentile(e,95)
+    #print('90% CI eta: ',e_5,e_95)
+    df['alpha_5_p'][person] = a_5
+    df['alpha_95_p'][person] = a_95
+    df['eta_5_p'][person] = e_5
+    df['eta_95_p'][person] = e_95
+    return df
+
+
+#df_unlim = [ci(p,df_unlim) for p in range(76)]
+
+for p in range(0,76):
+    tic = time.perf_counter()
+    print(p)
+    df_unlim = ci(p,df_unlim) #this is what you can make as a parallell process. 
+    toc = time.perf_counter()
+    print(f'Code ran in {toc - tic:0.4f} seconds')
+
+#csv_file_name_and_loc = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\CI_2x0_200B.csv'
+#df_unlim.to_csv(csv_file_name_and_loc)
+#mabye save the samples of eta and alpha as well and plot them. need to find a way to do that
+
+
+'''
+#trying to use parallell processes:
+# Step 1: Init multiprocessing.Pool()
+pool = mp.Pool(mp.cpu_count())
+#Step 2: pool.apply
+df_unlim = [pool.apply(ci,args=(p,df_unlim)) for p in range(3)]
+pool.close()
+
+df_ci.head()
+'''
+
+
+    
+df_test = ci(0,df_unlim)    
+df_test.head()
+df_unlim.head()
+
+    '''
+    print(person)
+    e, a = simulating_200(person,df_unlim,1,1)
+    a_5 = np.percentile(a,5)
+    a_95 = np.percentile(a,95)
+    print('90% CI alpha: ',a_5,a_95)
+    e_5 = np.percentile(e,5)
+    e_95 = np.percentile(e,95)
+    print('90% CI eta: ',e_5,e_95)
+    df_unlim['alpha_5_percentile'][person] = a_5
+    df_unlim['alpha_95_percentile'][person] = a_95
+    df_unlim['eta_5_percentile'][person] = e_5
+    df_unlim['eta_95_percentile'][person] = e_95
+    '''
+#df_unlim.head()
+df_unlim[50:65]
+
+
+tic = time.perf_counter()    
+e,a = simulating_200(0,df_unlim,1,1)    
+print(a)
+print(e)
+toc = time.perf_counter()
+print(f'Code ran in {toc - tic:0.4f} seconds')
+
+
+'''
+%%%%%%%%%%%% finding percentiles from this %%%%%%%%%%%%%
+'''
+
+a_5 = np.percentile(a,5)
+a_95 = np.percentile(a,95)
+print('90% CI alpha: ',a_5,a_95)
+
+e_5 = np.percentile(e,5)
+e_95 = np.percentile(e,95)
+print('90% CI eta: ',e_5,e_95)
+print(np.sort(e))
+
+plt.scatter(a,e,s=10)
+plt.yscale('log') #for log scale of eta.
+plt.title("Mle's of simulated alpha and eta, unlimited")
+plt.xlabel('alpha')
+plt.ylabel('eta')
+plt.show()
 
 
 
@@ -348,6 +642,12 @@ plt.show()
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 '''
+
+
+
+
+
+
 
 
 def neg_log_likel_lim(x,df,person,gamma,kappa):
