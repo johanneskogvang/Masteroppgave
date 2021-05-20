@@ -1,0 +1,73 @@
+%% PACKAGE LOADING
+
+\RequirePackage[utf8]{inputenc}             % for special characters in input
+\RequirePackage[T1]{fontenc}                % modern font encoding
+\RequirePackage[charter, cal=cmcal]{mathdesign} % main font with math support
+\RequirePackage[scaled=.88]{berasans}       % sans serif font
+\RequirePackage[scaled=.82]{DejaVuSansMono} % monospace font (for code)
+\RequirePackage{listings}                   % code listings
+\RequirePackage{babel}                      % language specifics
+\RequirePackage{geometry}                   % page layout
+\RequirePackage{enumitem}                   % customising list appearance
+\RequirePackage{graphicx}                   % including figures
+\RequirePackage{amsmath}                    % advanced math typesetting
+\RequirePackage[                            % subfigures with captions within figures
+    font=small,                             % and customisation of captions
+    labelfont=bf,
+    margin=\parindent
+]{caption}
+\RequirePackage[                           % and subfigures with captions within figures
+    font=small,
+    labelfont=bf,
+    margin=\parindent
+]{subcaption}
+\RequirePackage{xcolor}                     % selecting text color
+\RequirePackage{emptypage}                  % empty pages should be blank
+%\RequirePackage{csquotes}                   % recommended for biblatex
+
+\RequirePackage{csvsimple}                  % tables from csv files
+\RequirePackage{booktabs}                   % better formatting of tables
+\RequirePackage{gnuplottex}                 % for generating gnuplots on the fly
+\RequirePackage{hyperref}                   % interactive cross references
+%\ifcapitalize
+%    \RequirePackage[capitalize,noabbrev]{cleveref}   % automatic cross references
+%\else
+%    \RequirePackage[noabbrev]{cleveref}
+%\fi
+%\RequirePackage[acronym]{glossaries}        % create a glossary and acronym list
+
+
+
+
+%% CUSTOMISATION
+
+% Page geometry and spacing (same for even and odd pages)
+\geometry{left=4cm, right=4cm, top=4cm, bottom=4.5cm}
+\frenchspacing
+
+% Roman page numbers from the beginning of the document
+%\pagenumbering{roman}
+%\setcounter{page}{3}
+
+% Switch to Arabic page numbering at the beginning of the first numbered chapter
+%\newif\iffirstchapter
+%\firstchaptertrue
+%\let\std@chapter\@chapter
+%\def\@chapter{
+%    \iffirstchapter
+%        \pagenumbering{arabic}
+%        \firstchapterfalse
+%    \fi
+%    \std@chapter
+%}
+
+% Add unnumbered chapters to table of contents and headings
+%\let\std@schapter\@schapter
+%\def\@schapter#1{
+%    \std@schapter{#1}
+%    \addcontentsline{toc}{chapter}{#1}
+%    \def\ch@ptermark{#1}
+%}
+
+% Dotted line and tighter vertical spacing for chapters in the table of contents
+%\def\l@chapter#1#2{\@dottedtocline{1}{0em}{1.5em}{\bf #1}{\bf #2}}

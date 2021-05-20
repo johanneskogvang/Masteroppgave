@@ -1,0 +1,33 @@
+\newpage
+\chapter{Softmax model}
+$\delta_{i+1}$: the participant's choice when $i$ boxes are opened, $\delta_i = 0,1,2$. This is the decision about whether to open the next box when $i$ boxes are opened, or to choose what the majority colour is.\\
+$\EE _{0i}$: The loss of choosing blue when $i$ boxes are opened. \\
+$\EE_{1i}$: The loss of choosing red when $i$ boxes are opened. \\
+$\EE_{2i}$: The loss of opening another box when $i$ boxes are opened.
+\begin{equation*}
+    f(\delta_{i+1}|\eta,\alpha,\beta) = \frac{e^{-\eta \EE_{\delta_{i}i}(\alpha,\beta)}}
+    {e^{-\eta \EE_{0i}(\alpha,\beta)} + e^{-\eta \EE_{1i}(\alpha,\beta)} + e^{-\eta \EE_{2i}(\alpha,\beta)}}.
+\end{equation*}
+
+Finding the likelihood. Using that $N$ is all the available decisions that are made. More precisely, the number of decisions the participant has made in all the trials all together. $\EE$ is still dependent on $\alpha$ and $\beta$, but we skip those here for easier notation. 
+\begin{equation*}
+    \begin{aligned}
+        L = &\prod_{j=0}^N f(\delta_{j+1}|\eta,\alpha,\beta) \\
+        = &\prod_{j=0}^N \frac{e^{-\eta \EE_{\delta_{j+1}j}}}
+    {e^{-\eta \EE_{0j}} + e^{-\eta \EE_{1j}} + e^{-\eta \EE_{2j}}}.
+    \end{aligned}
+\end{equation*}
+Taking the logarithm to find the log likelihood.
+\begin{equation*}
+    \begin{aligned}
+        l =& \sum_{j=0}^N \text{log}( \frac{e^{-\eta \EE_{\delta_{j+1}j}}}
+        {e^{-\eta \EE_{0j}} + e^{-\eta \EE_{1j}} + e^{-\eta \EE_{2j}}}) \\
+        =& \sum_{j=0}^N -\eta \EE_{\delta_{j+1}j} 
+        - \text{log}(e^{-\eta \EE_{0j}} + e^{-\eta \EE_{1j}} + e^{-\eta \EE_{2j}}).
+    \end{aligned}
+\end{equation*}
+For each participant we want to maximize the likelihood, or the log-likelihood, to find the maximum likelihood estimators for $\eta$, $\alpha$ and $\beta$. (but only $\beta$ for the limited case.)
+
+
+\section{Notes from coding part}
+Limited: When the trial termiates, teh loss is beta. so this is what the loss2 is put as when the test terminates. But that is wrong. when the test terminates, there are no more choices to make, hence we don't have any loss after the test terminates. 

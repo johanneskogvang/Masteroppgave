@@ -1,12 +1,89 @@
 \newpage
-\section{Problem Setup}
+%\section{Problem Setup}
+\chapter{Problem Setup}
+%Describe the box task, both versions. 
+The box task is an information sampling task that is used to assess a 'jumping to conclusions' (JTC) bias \citep{balzan2017}. In the box task used in this report the participants are shown a grid of twelve boxes, and each time a box is opened, one out of two colours, for example blue or red, is displayed. The participants are told that one of the colours is always in majority, and that their task is to find out which one. There are two different versions of the box task. In the first one the participant can open as many of the twelve boxes as they want to before deciding which of the two colours that is in majority. We call this the unlimited version. In the second one, which we call the limited version, the participants are told that the test will terminate at one point when a random box is opened. If the participant already have decided on what the majority colour is, this does not influence anything, but if they have not decided yet when the test terminates, this counts as a failed trial \citep{moritz2017} (trenger jeg egentlig kilde her? beskriver jo bare hvordan situasjonen er i dette tilfellet). 
 
-Small part about the inference and how we will do that.
-
-%Then, something about that we first need the ideal observer solution. 
-To be able to do that (describe that), we firstly need to find a model(?) for the Ideal Observer solution. In the specialization thesis we found one IO solution where we assumed that the number of red boxes is uniformly distributed with possible values $(0,1,2,3,4,5,7,8,9,10,11,12)$, where $6$ is not included here as one of the colours have to be in majority. 
+%About the data and where it is from:
+We have data from 76 participants that have done multiple trials of both versions of the box task. The experiment was   carried out by Professor Gerit Pfuhl and Doctoral Research Fellow Kristoffer Klevjer at UiT The Arctic University of Norway in February 2020. The participants were recruited from an undergraduate psychology course. They did a practice limited trial first that terminated after three boxes where opened, such that if they tried to open a fourth box, the test terminated before they could make a decision. That trial is not analyzed here. Following the practice trial where three unlimited trials. The participants could in these trials open as many of the twelve boxes as they wanted before deciding on what they think is the dominant colour. Lastly, there where six limited trials that either terminated after either six or nine boxes had been opened. The two colours were changed for each new trial, they could for example be green and pink in the first trial and blue and yellow in the second trial. This is because the participants could have a bias towards a colour, and to eliminate this bias, the colours are changed. For simplicity, we are in this report operating with blue and red boxes for all trials. 
 
 
-Have one IO solution form the specialization thesis, generalising that one here to be able to have different prior for $\theta$. 
+In this report we want to model how the participants make decisions when they do the box task. We model the decisions that the participants do with a softmax model, where we use so-called loss functions, or more precisely, the expectation of the loss functions. These loss functions say something about how far away one are from the optimal solution, and how much each choice that is made costs. Each time a box is opened, the participants have three choices. The first is to choose that blue is the dominant colour, the second that red is, and the third is to choose to open another box. We denote these decisions as $\delta_i$, where $i$ is the number of boxes that are opened. If $\delta_i = 0$, the participant has chosen that blue is the more prominent colour, thus that there are in total more blue boxes than red. Moreover, $\delta_i=1$ means that red is the dominant colour, and $\delta_i=2$ represents the situation where the participant chooses to open the next box. For each time a box is opened, we have found loss functions for all of these three decisions. Taking the expectation of these loss functions and conditioning on the colour of the boxes that already are opened, we get the expected loss of choosing each of these three alternatives. We denote these expected losses when $i$ boxes are opened as $\EE_{\delta_i,i}$, where $\delta_i$ is either $0,$ $1,$ or $2$. Then, the expected loss of choosing blue as the dominant colour when $i$ boxes are opened is $\EE_{0,i}$, of choosing red is $\EE_{1,i}$ and of choosing to open the next box is $\EE_{2,i}$. However, we imagine that some participants have some small penalty or loss of opening another box. This might be because it is tiresome for them to sit through a whole trial and they want to finish fast, or that they get some kind of inner reward or feeling of victory when they finish early. This is represented by a parameter, $\alpha$. Additionally, we have a parameter, $\beta$, that only appears in the limited trials. 
+We define it as the loss the participant gets/feels when the test terminates before he or she is able to choose what the majority colour is. These parameters are input values in the functions for the expected losses. Thus, we denote the expected losses as $\EE_{\delta_i,i}(\alpha,\beta)$.
 
-From the specialisation thesis we have the loss functions. Talk about the three different choices, and state the loss functions as you found them earlier. Then, say that you need those two probabilities, and say how you find them in this case 
+%However, these expected losses are dependent on two parameters, $\alpha$ and $\beta$. We imagine that some participants have some small penalty or loss of opening another box. This might be because it is tiresome for them to sit through a whole trial and they want to finish fast, or that they get some kind of inner reward or feeling of victory when they finish early. This is represented as the parameter $\alpha$. The $\beta$ parameter only shows up in the limited trials. We define it as the loss the participant gets/feels when the test terminates before he or she is able to choose what the majority colour is. Thus, we denote the expected losses as $\EE_{\delta_i,i}(\alpha,\beta)$.
+
+These expected losses can be used in a so called Ideal Observer solution of the box task. An Ideal Observer would always make optimal decisions \citep{idealObs}. In the case of the box task, the optimal decision for each opened box is the decision that gives the least expected loss. If one make the decision with the lowest expected loss each time a box is opened, the total solution is the Ideal Observer solution. We will have a closer look a what that looks like in the next chapter. Then we will also see what the loss functions and the expected losses could be.
+
+
+Having the notation for the expected losses and decisions, we can define the probability mass function for the decisions as a softmax function. In the softmax function we include a parameter, $\eta$. 
+
+
+This can be interpreted as a measure of how consistent the participants are in their choices. If $\eta$ is 0, the participant is not consistent at all, and make arbitrarily decisions. If $\eta$ is infinity, the participant make optimal choices. Thus, the probability mass function for the decisions can be expressed as
+\begin{equation}
+\label{softmax_real}
+    f(\delta_{i}|\alpha,\beta,\eta) = \frac{\text{exp}(- \eta \EE_{\delta_{i},i}(\alpha,\beta))}{\sum_{j=0}^{2} \text{exp}(-\eta \EE_{j,i}(\alpha,\beta))}.
+\end{equation}
+
+When we have this model, we can find the parameters $\alpha$, $\beta$ and $\eta$ for each participant such that the model is adapted to each one. This is done by finding the maximum likelihood estimates (MLEs) as described in Chapter \ref{section_theory_mle}. We denote these MLEs as $\hat{\alpha}$, $\hat{\beta}$ and $\hat{\eta}$. We can also find confidence intervals tied to each of the parameters for all of the participants using the bootstrap as described in Chapter \ref{section_theory_bootstrap}. 
+
+
+
+
+
+
+%For all combinations of red and blue boxes that are opened, we have loss functions and expected losses for all three choices. We also find an Ideal Observer solution of the box task. An Ideal Observer would always make optimal decisions \citep{idealObs}. In the case of the box task, the optimal decision for each opened box is the decision that gives the least expected loss. If one chooses this each time a box is opened, the resulting solution is an Ideal Observer solution of the box task. 
+
+%For the box task, we define the situation similarly to the example in Chapter \ref{section_theory_softmax}. Thus, $\delta_{i}$ is the decision that is made wen $i$ boxes are opened. Then, $\delta_{i}$ is 0 and 1 when blue and red are chosen as majority colours, and 2 when the choice is to open the next box, which is box $i+1$. Also let $\EE_{0,i}(\alpha,\beta)$ be the expected loss when choosing blue to be the majority colour when $i$ boxes are opened, which depends on parameters $\alpha$ and $\beta$. Similarly, let $\EE_{1,i}(\alpha,\beta)$ be the expected loss when choosing red as majority, and $\EE_{2,i}(\alpha,\beta)$ when you choose to open another box. We will talk more about what these functions might look like later (eller burde jeg ta det med her?). 
+%Having these expected losses and decisions, we can define the probability mass function for the decisions as
+%\begin{equation}
+%\label{softmax_real}
+%    f(\delta_{i}|\alpha,\beta,\eta) = \frac{\text{exp}(- \eta \EE_{\delta_{i},i}(\alpha,\beta))}{\sum_{j=0}^{2} \text{exp}(-\eta %\EE_{j,i}(\alpha,\beta))}.
+%\end{equation}
+%Writing out the sum in the denominator, this is 
+%\begin{equation*}
+%    f(\delta_{i}|\alpha,\beta,\eta) = \frac{\text{exp}(- \eta \EE_{\delta_{i},i}(\alpha,\beta))}
+%    {\text{exp}(- \eta \EE_{0,i}(\alpha,\beta))
+%    +\text{exp}(- \eta \EE_{1,i}(\alpha,\beta))
+%    +\text{exp}(- \eta \EE_{2,i}(\alpha,\beta))}
+%\end{equation*}
+
+
+\begin{comment}
+
+However, to be able to do this, we need the loss functions and the expected losses. Thus, we start with finding an Ideal Observer solution of the box task.
+
+Skal jeg skrive mer om loss finctions etc her eller bare ta det i neste kap? 
+
+
+
+disposisjon:
+\begin{itemize}
+    \item What is the box task?
+    \item About the data and where it is from
+    \item What we want to do with the data. We want to model how the participants make decisions. Make a model and find the parameters for each participant, and then find the uncertainty in that model.
+    \item About the softmax model, and that including expected losses that are the expectations of loss functions.
+    \item loss functions from the ideal observer solution of the box task. 
+\end{itemize}
+
+
+
+For the discusssion: maybe the limited trial where the test terminated after 3 boxes impacted the decisions in the subsequent limited trials? Although it might not look like that as so many of the parameters are zero. 
+
+
+\begin{equation*}
+    f(\delta_{}|\eta) = \frac{\text{exp}(- \eta \EE_{\delta_{}})}{\sum_{j=0}^{2} \text{exp}(-\eta \EE_{j})}.
+\end{equation*}
+
+\begin{equation*}
+    f(\delta_{}|\eta) = \frac{\text{exp}(- \eta \EE_{\delta_{}})}
+    {\text{exp}(-\eta \EE_{0})
+    +\text{exp}(-\eta \EE_{1})
+    +\text{exp}(-\eta \EE_{2})}
+\end{equation*}
+
+
+\begin{equation*}
+    f(\delta_{}|\alpha,\beta,\eta) = \frac{\text{exp}(- \eta \EE_{\delta_{}}(\alpha,\beta))}{\sum_{j=0}^{2} \text{exp}(-\eta \EE_{j}(\alpha,\beta))}
+\end{equation*}
+\end{comment}

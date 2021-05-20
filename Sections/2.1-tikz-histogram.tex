@@ -1,0 +1,28 @@
+\begin{tikzpicture}[font=\small]
+\begin{axis}[
+ybar,
+bar width=17pt,
+xlabel={Value of $\hat{\eta}$, rounded to the closest integer},
+ylabel={Number of $\hat{\eta}$},
+ymin=0,
+ytick={5,10,15,20,25,30,35,40},
+xtick=data,
+axis x line=bottom,
+axis y line=left,
+enlarge x limits=0.2,
+]
+\addplot[fill=myblue] coordinates {
+    (0,2)
+    (1, 6)
+    (2, 14)
+    (3, 29)
+    (4, 36)
+    (5, 36)
+    (6, 15)
+    (7, 7)
+    (8, 4)
+};
+\end{axis}
+\draw[dashed,red](1.6,0) -- (1.6,5.7);
+\draw[dashed,red](5.27,0) -- (5.27,5.7);
+\end{tikzpicture}
