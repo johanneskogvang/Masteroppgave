@@ -1,3 +1,436 @@
+lagrer koden min:
+ryddet prosjektoppgave: 
+
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Feb 23 15:30:45 2021
+
+@author: Johan
+"""
+
+
+
+import numpy as np
+import scipy.special as sc
+from scipy.stats import hypergeom
+from itertools import chain
+
+
+
+"""
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The following code is for finding the probabilities needed when assuming uniform
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+"""
+
+#find all the probabilities and losses fro the uniform solution
+def zeta(u_i,i,n):
+    #zeta(i,u_i,n)=P(U_i=u_i)
+    concat_range=chain(range(int(n/2)),range(int(n/2)+1,n+1))
+    prob=0
+    for j in concat_range:
+        prob+=hypergeom.pmf(u_i,n,j,i)
+    return prob/n
+    
+def unif_rho(i,u_i,n):
+    #=number of boxes
+    #Rho(i,x,n) = P(u_n >= (n/2)+1 | U_i=u_i) = P(red majority given U_i=u_i)
+    #If n=12: Rho(i,x,12)=P(u_12 >=7 | U_i=u_i)
+    
+    #numerator=P(u_n >= (n/2)+1 and u_i=x) = P(majority red and u_i=x)
+    nume=0
+    for j in range(int((n/2))+1,n+1):
+        #P(u_i=x|u_n=j)=hypergeom.pmf(x,n,j,i)
+        nume+=hypergeom.pmf(u_i,n,j,i)
+    nume=nume/n    
+    #denumerator=P(U_i=u_i)
+    denume=zeta(u_i,i,n)
+    return nume/denume
+
+
+#making functions to find loss2:
+def gamma(k,u_i,i,n):
+    #gamma(k,u_i,n)=P(X_i+1 | U_i=u_i)
+    #correction: gamma(k,u_i,i,n)=P(X_{i+1}=1|U_n=k,U_i=u_i)
+    if u_i>k or k==int(n/2) or (k-u_i)>(n-i):
+        return 0
+    else :
+        return (k-u_i)/(n-i)
+
+
+def unif_epsilon(u_i,i,n):
+    #epsilon(u_i,i,n)=P(X_i+1 = 1 | U_i=u_i)
+    prob=0
+    b = zeta(u_i,i,n)
+    concat_range=chain(range(int(n/2)),range(int(n/2)+1,n+1))
+    for k in concat_range:
+        prob+=gamma(k,u_i,i,n)*hypergeom.pmf(u_i,n,k,i)
+    prob=prob/(n*b)        
+    return prob
+
+
+
+
+"""
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The following code is for finding the probabilities needed when assuming binomial
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+"""
+
+#def binom_rho(i,u_i,n,gamma,kappa):
+#    return 1
+
+#def binom_epsilon(u_i,i,n,gamma,kappa):
+#    return 1
+def u12equalj(j,i,ui,gamma,kappa):
+#P(U_i+V_i = j | U_i=u_i)
+    #ui <= j <= 12
+    #ui <= i <= 12   
+    #j <= 12- (i-ui) 
+    if j > ui + 12-i: #cant have more red boxes than ui + the numer of boxes that are left to open
+        return 0
+    if ui>j:
+        return 0
+    if j>12:
+        raise ValueError('j has to be smaller than or equal to 12')
+    if i>12:
+        raise ValueError('i has to be smaller than or equal to 12')
+    if ui>i:
+        raise ValueError('i has to be bigger than or equal to ui')
+    if i>12:
+        raise ValueError('i has to be smaller than or equal to 12')
+    if ui>12:
+        raise ValueError('ui has to be smaller than or equal to 12')
+    
+    
+    nume = sc.beta(j+gamma,12-j+kappa) #runtime warning her
+    nume = nume*sc.binom(12-i,j-ui)
+    denume = sc.beta(ui+gamma,i-ui+kappa)
+    return nume/denume
+
+    
+def binom_rho(i,ui,n,gamma,kappa):
+#def redmajority(i,ui,gamma,kappa):
+    #P(U_i+V_i >= 7 | U_i=u_i, U_i+V_i neq 6)
+    #ui <= i <= 12 
+    if ui>6:
+        return 1
+    elif ui+12-i<6:
+        return 0
+       
+    nume = 0
+    for j in [7,8,9,10,11,12]:
+        nume += u12equalj(j,i,ui,gamma,kappa)
+    
+    denume= 1 - u12equalj(6,i,ui,gamma,kappa)
+    
+    return nume/denume
+
+
+    
+
+
+
+
+def nextisred(i,ui,gamma,kappa):
+    #P(X_i+1 = 1 | U_i=u_i) = P(X_i+1 = 1)
+    return (gamma+ui)/(gamma+kappa+i)
+
+def majority_givennextisred(i,ui,gamma,kappa):
+    #P(U_i+V_i neq 6 | U_i=u_i, X_i+1 = 1)
+    if ui>i:
+        raise ValueError('i has to be bigger than or equal to ui')
+    a = sc.binom(11-i,5-ui)
+    b = sc.beta(6+gamma,6+kappa)/sc.beta(gamma+ui+1,kappa+i-ui)
+    return 1 - (a*b)
+   
+    
+def majority_given_ui(i,ui,gamma,kappa):
+    a = sc.binom(12-i,6-ui)
+    b = sc.beta(6+gamma,6+kappa)/sc.beta(ui+gamma,i-ui+kappa)
+    return 1 - (a*b)
+
+def binom_epsilon(ui,i,n,gamma,kappa):
+#def nextisred_givenmajority(i,ui,gamma,kappa):
+    #P(X_i+1 = 1 | U_i=u_i, U_i+V_i neq 6)
+    return nextisred(i,ui,gamma,kappa)*majority_givennextisred(i,ui,gamma,kappa)/majority_given_ui(i,ui,gamma,kappa)
+
+
+
+
+
+
+""""
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The following code is for finding the losses and visualising them. This code works for both the uniform and binomial cases
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+"""
+
+#finding the propabilities that red and blue are majority colours in addition to loss0 and loss1. 
+def prob_loss_0_1(n,alpha,gamma,kappa,binom):
+    if n%2 != 0 or n==0:
+            raise ValueError('Number of boxes must be an even number above zero.')
+    
+    m = np.zeros((n,n),dtype=dict)
+    for i in range(0,n):
+            for u_i in range(0,i+1):
+                if binom==False:
+                    r=unif_rho(i,u_i,n) #Rho(i,x,n) = P(u_n >= (n/2)+1 | U_i=u_i)
+                else: #binom==True:
+                    r=binom_rho(i,u_i,n,gamma,kappa) #Rho(i,x,n) = P(u_n >= (n/2)+1 | U_i=u_i)
+                #r=rho(i,u_i,n) #Rho(i,x,n) = P(u_n >= (n/2)+1 | U_i=u_i)
+                L0=r #Expected loss when choosing blue
+                L1=1-r #Expected loss when chosing red 
+                
+                #Loss2:
+                if i==(n-1): #if we are at the last row of the tree. 
+                    #making the last "Loss2"=alpha
+                    m[i,u_i]={"prob":r,"Loss0":L0,"Loss1":L1,"Loss2":alpha}
+                else: #If we are anywhere but the kast row of the tree, use the function find_loss2.
+                    #don't know the rest of the "loss2" yet, just putting it tp a high value. 
+                    m[i,u_i]={"prob":r,"Loss0":L0,"Loss1":L1,"Loss2":1000}
+    return m
+
+def loss2_unlim(matrix,n,alpha,gamma,kappa,binom): 
+    for i in range(n-2,-1,-1): 
+        #looping from the second to last row of the matrix to the first one
+        for u_i in range(0,i+1):
+            #expected loss if the next one is blue:
+            EL_0 = min(matrix[i+1,u_i]["Loss0"],matrix[i+1,u_i]["Loss1"],matrix[i+1,u_i]["Loss2"])
+            #expected loss if the next one is red. 
+            EL_1 = min(matrix[i+1,u_i+1]["Loss0"],matrix[i+1,u_i+1]["Loss1"],matrix[i+1,u_i+1]["Loss2"])
+            if binom == False:
+                eps = unif_epsilon(u_i,i,n)
+            else: #binom==True
+                eps = binom_epsilon(u_i,i,n,gamma,kappa)
+                
+            matrix[i,u_i]["Loss2"]=alpha + (1-eps)*EL_0 + eps*EL_1    
+    return matrix
+
+def loss2_lim(matrix,n,alpha,beta,gamma,kappa,binom):
+#def find_loss2(matrix,n,alpha): 
+    for i in range(n-2,-1,-1): 
+        #looping from the second to last row of the matrix to the first one
+        #P(T=i+1|T>i) = 1/(12-i) =  P(get stopped in next | not stopped until now) = PT
+        PT = 1/(n-i)
+        if i==0: #P(T=1|T>0)=0. means that you are able to open the first box without getting stopped
+            PT = 0
+        #print(PT)
+        for u_i in range(0,i+1):
+            #expected loss if the next one is blue:
+            EL_0 = min(matrix[i+1,u_i]["Loss0"],matrix[i+1,u_i]["Loss1"],matrix[i+1,u_i]["Loss2"])
+            #expected loss if the next one is red. 
+            EL_1 = min(matrix[i+1,u_i+1]["Loss0"],matrix[i+1,u_i+1]["Loss1"],matrix[i+1,u_i+1]["Loss2"])
+            if binom == False:
+                eps = unif_epsilon(u_i,i,n)
+            else: #binom==True
+                eps = binom_epsilon(u_i,i,n,gamma,kappa)
+            matrix[i,u_i]["Loss2"]=alpha + (1-PT)*((1-eps)*EL_0 + eps*EL_1) + PT*beta    
+    return matrix
+ 
+
+def make_matrix_unlim(n,alpha,gamma,kappa,binom):
+    matrix=prob_loss_0_1(n,alpha,gamma,kappa,binom)
+    matrix=loss2_unlim(matrix,n,alpha,gamma,kappa,binom)
+    return matrix
+
+def make_matrix_lim(n,alpha,beta,gamma,kappa,binom):
+    matrix=prob_loss_0_1(n,alpha,gamma,kappa,binom)
+    matrix=loss2_lim(matrix,n,alpha,beta,gamma,kappa,binom)
+    return matrix
+
+#print(make_matrix_unlim(12,0.001,1,1,False))
+#print(make_matrix_unlim(12,0.001,1,1,True))
+
+
+
+
+
+
+#making these matrixes into tikz-trees:
+#We have the matrix with the expected losses, the next step is then to find the optimal solution:
+#making decision trees using tikz.
+def make_node_matrix(matrix):
+    node_mat=np.zeros_like(matrix)
+    n = len(matrix)
+    
+    for i in range(n):
+        for j in range(i+1):
+            l0 = matrix[i][j]["Loss0"]
+            l1 = matrix[i][j]["Loss1"]
+            l2 = matrix[i][j]["Loss2"]
+            e0 = round(l1+l2,14) #=sum of losses - l0 = l1+l2
+            e1 = round(l0+l2,14) #= l0+l2
+            e2 = round(l0+l1,14) #=l0+l1
+            
+            col1 = "green!70!black"
+            col2 = "green!70!black"
+            
+            if l0<l2 and round(l0,5)<round(l1,5): #if blue has the smallest loss
+                col1 = "blue"
+                col2 = "blue"
+            elif l1<l2 and round(l1,5)<round(l0,5): #red has the smallest loss
+                col1 = "red"
+                col2 = "red"
+            elif l0<l2 and round(l0,5) == round(l1,5): #red and blue has the smallest loss, but they are equal
+                col1 = "blue"
+                col2 = "red"
+            
+        
+            name = "N" + str(i) + "-" + str(j)
+            #making each entry in the matrix a dict. col1 and col2 is the colour that haas the least expected loss.
+            #if there are two colours that has the same loss and that is the least expected loss, then col1 is one of them and col2 is the other colour.
+            #e0 is the "inverse" expected loss for choosing blue as the majority colour, e1 for choosing red and
+            #e2 is the inverse expected loss for choosing to open another box.
+            node_mat[i][j] = {"name":name, "col1":col1, "col2":col2, "e0":e0, "e1":e1, "e2":e2}
+    return node_mat
+
+#making tikz code to visualise the IO solution
+def visualise_optimal(mat,file_location_and_name, radius):
+    file = open(file_location_and_name,"w")
+
+    start_of_doc=r"""
+\begin{tikzpicture}[
+    treenodeT/.style={
+      circle, align=center},
+    node distance=1cm,
+    ]
+    """
+    file.write(start_of_doc)
+    
+    #the first node:
+    string = "\DoNode{N0-0}{" + str(mat[0][0]["e0"]) + "}{" + str(mat[0][0]["e1"]) + "}{1}{" + str(mat[0][0]["col1"]) + "}{" + str(mat[0][0]["col2"]) + "}{" + str(radius) + "};\n    "
+    file.write(string)
+    
+    n = len(mat)
+    for i in range(1,n):
+        
+        #to check if we have to break the loop (we have reached a decision in all of the nodes above)
+        g=0
+        if i>1:
+            for j in range(i):
+                if str(mat[i-1][j]["col1"]) == "green!70!black": #checing if any of the nodes in the row above are green
+                    g=1
+            if g == 0: #if none of the nodes on the row above are green, break out of the for loop
+                    #break out of the for loop
+                print("breaking loop at row", i)
+                break
+            
+        for j in range(i+1):
+            
+            if j==0: #we are at the left side of the tree. the only possible parent i at (i-1,j)
+                if mat[i-1][j]["col1"] == "green!70!black": #if we continue to open boxes in the last node
+                    string = "\DoNode[below of=" + mat[i-1][j]["name"] + ", left of= " + mat[i-1][j]["name"] + "]{"+ mat[i][j]["name"] +"}{" + str(mat[i][j]["e0"]) + "}{" + str(mat[i][j]["e1"]) + "}{1}{" + str(mat[i][j]["col1"]) + "}{" + str(mat[i][j]["col2"]) + "}{" + str(radius) + "};\n    "
+                    file.write(string)
+                    string2 = "\draw[->] (" + str(mat[i-1][j]["name"]) + ") -- (" + mat[i][j]["name"] + ");\n    "
+                    file.write(string2)
+            elif j==i: #we are at the right side of the tree. the only possible parent is at (i-1,j-1)
+                if mat[i-1][j-1]["col1"] == "green!70!black": #if we continue to open boxes in the last node.
+                    string = "\DoNode[below of=" + mat[i-1][j-1]["name"] + ", right of= " + mat[i-1][j-1]["name"] + "]{"+ mat[i][j]["name"] +"}{" + str(mat[i][j]["e0"]) + "}{" + str(mat[i][j]["e1"]) + "}{1}{" + str(mat[i][j]["col1"]) + "}{" + str(mat[i][j]["col2"]) + "}{" + str(radius) + "};\n    "
+                    file.write(string)
+                    string2 = "\draw[->] (" + str(mat[i-1][j-1]["name"]) + ") -- (" + mat[i][j]["name"] + ");\n    "
+                    file.write(string2)
+            else: #we are not on either side of the tree
+                if mat[i-1][j-1]["col1"]=="green!70!black": #if the left top node is a parent
+                    string = "\DoNode[below of=" + mat[i-1][j-1]["name"] + ", right of= " + mat[i-1][j-1]["name"] + "]{"+ mat[i][j]["name"] +"}{" + str(mat[i][j]["e0"]) + "}{" + str(mat[i][j]["e1"]) + "}{1}{" + str(mat[i][j]["col1"]) + "}{" + str(mat[i][j]["col2"]) + "}{" + str(radius) + "};\n    "
+                    file.write(string)
+                    string2 = "\draw[->] (" + str(mat[i-1][j-1]["name"]) + ") -- (" + mat[i][j]["name"] + ");\n    "
+                    file.write(string2)
+                    if mat[i-1][j]["col1"] == "green!70!black": #if the top right node also is a parent
+                        string3 = "\draw[->] (" + str(mat[i-1][j]["name"]) + ") -- (" + mat[i][j]["name"] + ");\n    "
+                        file.write(string3)
+                elif mat[i-1][j-1]["col1"] != "green!70!black" and mat[i-1][j]["col1"]=="green!70!black": #left is not a parent, but the right is
+                    string = "\DoNode[below of=" + mat[i-1][j]["name"] + ", left of= " + mat[i-1][j]["name"] + "]{"+ mat[i][j]["name"] +"}{" + str(mat[i][j]["e0"]) + "}{" + str(mat[i][j]["e1"]) + "}{1}{" + str(mat[i][j]["col1"]) + "}{" + str(mat[i][j]["col2"]) + "}{" + str(radius) + "};\n    "
+                    file.write(string)
+                    string2 = "\draw[->] (" + str(mat[i-1][j]["name"]) + ") -- (" + mat[i][j]["name"] + ");\n    "
+                    file.write(string2)
+                    
+    end_of_file= r"""
+\end{tikzpicture}
+"""
+    file.write(end_of_file)
+    
+    file.close()
+
+
+
+
+
+
+
+
+
+
+
+
+def main(alpha,beta,unlim=True,binom=True,gamma=1,kappa=1):
+    n=12
+    node_radius=0.4
+    file_loc= "C:\\Users\\Johan\\OneDrive\\Documents\\Masteroppgave\\Masteroppgave\\tikz-trees"
+    
+    #uniform unlimited
+    if unlim==True and binom==False:
+        file = file_loc + "\\unif_unlim_a"+str(alpha)+".tex"
+        mat_losses = make_matrix_unlim(n,alpha,gamma,kappa,binom=False)
+        nodes = make_node_matrix(mat_losses)
+        visualise_optimal(nodes,file,node_radius)
+        print("Uniform unlimited")
+    
+    #limted uniform
+    if unlim==False and binom==False:
+        file = file_loc + "\\unif_lim_a"+str(alpha)+"_b"+str(beta)+".tex"
+        mat_losses = make_matrix_lim(n,alpha,beta,gamma,kappa,binom=False)
+        nodes = make_node_matrix(mat_losses)
+        visualise_optimal(nodes,file,node_radius)
+        print("Uniform limited")
+    
+    #unlimited binomial
+    if unlim==True and binom==True:
+        file = file_loc + "\\binom_unlim_a"+str(alpha)+"_g"+str(gamma)+ "_k"+str(kappa)+".tex"
+        mat_losses = make_matrix_unlim(n,alpha,gamma,kappa,binom=True)
+        nodes = make_node_matrix(mat_losses)
+        visualise_optimal(nodes,file,node_radius)
+        print("Binomial unlimited")
+    
+    #limited binomial
+    if unlim==False and binom==True:
+        file = file_loc + "\\binom_lim_a"+str(alpha)+"_b"+str(beta)+"_g"+str(gamma)+ "_k"+str(kappa)+".tex"
+        mat_losses = make_matrix_lim(n,alpha,beta,gamma,kappa,binom=True)
+        nodes = make_node_matrix(mat_losses)
+        visualise_optimal(nodes,file,node_radius)
+        print("Binomial limited")
+    
+    
+    
+#uniform unlimited
+#main(0.01,1,True,False)
+
+#uniform limited
+#main(0.01,0.4,False,False)
+
+
+#unlimited binomial:
+#main(0.01,0.6,True,True,5,5)
+
+
+#limited binomial:
+#main(0.01,0.6,False,True,5,5)
+
+
+
+
+
+Masteren::: 
+
 # -*- coding: utf-8 -*-
 """
 Created on Thu Apr  8 08:39:57 2021
@@ -168,8 +601,7 @@ def neg_log_likel_unlim(x, person,gamma,kappa,all_choices):
             #her må du får med at choice noen ganger er -1, og da er loss lik 1, altså e_delta er 1 
             #nå sier jeg at det regnes som et faield trial hvos man ikke velger farge. altså loss er 1 for å ikke velge farge. 
             if choice == -1:
-                e_delta = 1 #men skal jeg egntlig har med noe her??? man har jo ikke noe exp loss når testen terminerer??
-            '''%%%%%%%%%%%%%%% obs, se linjen over, er dette riktig????%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'''    
+                e_delta = 1
             else:
                 loss = 'Loss'+str(choice)
                 e_delta = expL[i][loss]
@@ -456,7 +888,7 @@ def simulating_200(person,df,gamma,kappa):
 path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\mles_unlimited_x0_200_times.csv'
 df_unlim = pd.read_csv(path,sep=',',usecols=['ID','eta','alpha','fun','eta_0','alpha_0'])
 df_unlim.head()
-person=0
+person=
 
 e, a = simulating_200(person,df_unlim,1,1)
 
@@ -644,141 +1076,14 @@ plt.show()
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 '''
 
-#making code that displayes all the expected losses in each step for each participant
-def all_exp_losses_lim(alpha,beta,gamma,kappa):
-
-    #finding the matrix with the expected loss for all possible combinations of red and blue boxes.
-    exp_loss_mat = make_matrix_lim(12,alpha,beta,gamma,kappa,True)
-    
-    
-    #the first unlimited trial is the second trial. 
-    trial5 = [0,0,0,1,0,0,0,0,1]    #Light blue=0 and Red=1. 
-    trial6 = [1,0,0,1,0,0]          #Yellow=0, Light Green=1
-    trial7 = [1,0,0,0,1,0,1,0,0]    #Light purple=0, Yellowish white=1
-    trial8 = [0,1,0,1,0,1,0,1,0]    #Red = 0, Green = 1
-    trial9 = [0,0,1,0,1,0]          #Pink = 0, Green = 1
-    trial10 = [0,0,0,1,0,0]         #Blue = 0, Light Yellow = 1
-
-    
-    #need to find the expected losses for the case we have here:
-    #first initializing
-    expL_5 = np.zeros(13,dtype=dict) #these are the exp loss for trial 5.
-    #print('expL_5',expL_5)
-    expL_6 = np.zeros(13,dtype=dict) #these are the exp loss for trial 6. 
-    expL_7 = np.zeros(13,dtype=dict) #these are the exp loss for trial 7.
-    expL_8 = np.zeros(13,dtype=dict)
-    expL_9 = np.zeros(13,dtype=dict)
-    expL_10 = np.zeros(13,dtype=dict)
-    
-    
-    j5=0 #The second entry for the matrix for trial 2:
-    j6=0 #the second entry for the matrix for trial 6
-    j7=0 #The second entry for the matrix for trial 7
-    j8=0
-    j9=0
-    j10=0
-    
-    #need to make different for loops for the one with 6 boxes and the ones with 9 boxes. 
-    k=0 #the elements in expL_5, expL_6 ... and the first entry in the matrix
-    for a in range(10):
-        expL_5[k] = exp_loss_mat[k][j5] #finding the expected losses for trial 5 in this situation in the matrix with all the exp losses.
-        expL_7[k] = exp_loss_mat[k][j7]
-        expL_8[k] = exp_loss_mat[k][j8]
-        k+=1 #for finding the next element in expL2,3,4 and going down one row in the matrix
-        #i+=1 #going down one row in the loss matrix
-        if a!=9:
-            if trial5[a] == 1: #if the box that is opened is red, we also go one element to the right in the matrix
-                j5+=1
-            if trial7[a] == 1: 
-                j7+=1
-            if trial8[a] == 1: 
-                j8+=1
-
-    k=0 #the elements in expL_5, expL_6 ... and the first entry in the matrix
-    for a in range(7):
-        expL_6[k] = exp_loss_mat[k][j6] #finding the expected losses for trial 6 in this situation in the matrix with all the exp losses.
-        expL_9[k] = exp_loss_mat[k][j9] 
-        expL_10[k] = exp_loss_mat[k][j10]
-        k+=1 #for finding the next element in expL2,3,4 and going down one row in the matrix
-        #i+=1 #going down one row in the loss matrix
-        if a!=6:
-            if trial6[a] == 1: #if the box that is opened is green, we also go one element to the right in the matrix
-                j6+=1
-            if trial9[a] == 1: 
-                j9+=1
-            if trial10[a] == 1: 
-                j10+=1
-        
-    all_expL = [expL_5,expL_6,expL_7,expL_8,expL_9,expL_10]
-        #print('expL_2',expL_2)
-    return all_expL
-#dette ser bra ut!
-print(all_exp_losses_lim(0.01,0.8,1,1))
-print(make_matrix_lim(12,0.01,0.8,1,1,True))
-
-
-
-def participant_choices_lim(df,person):
-    all_choices = [[],[],[],[],[],[]]
-    neg_l = 0
-    for a in range(6): #six trials
-        dtd_string = 'BoxNormExtDtD'+str(a+5)
-        choice_string = 'BoxNormExtChoice' + str(a+5)
-        dtd = df[dtd_string][person]
-        choice = df[choice_string][person]
-        all_choices[a] = 2*np.ones(dtd,dtype=int)
-        
-        #find choice as 0,1 or -1, depending on trial
-        choice01 = 1
-        if (a==0 and choice=='Light blue') or (a==1 and choice=='Yellow') or (a==2 and choice=='Light purple') or (a==3 and choice=='Red') or (a==4 and choice=='Pink') or (a==5 and choice=='Blue'):
-            choice01=0
-        elif choice == '-1':
-            choice01=-1   
-        all_choices[a] = np.append(all_choices[a],choice01)
-    
-    return all_choices
-
-
-print(participant_choices_lim(data,2)) #ser bra ut
 
 
 
 
-def neg_log_likel_lim(x,person,gamma,kappa,all_choices):
-    eta = x[0]
-    alpha = x[1]
-    beta = x[2]
-    all_expL = all_exp_losses_lim(alpha,beta,gamma,kappa) #array of arrays containing all the expected losses for the 6 trials.
-    neg_l = 0
-    for trial in range(6): #6 trials
-        choices = all_choices[trial] #finding the choices for this particular trial
-        expL = all_expL[trial] #finding the exp losses for this trial
-        i=0 #the number of boxes that are opened
-        for choice in choices:
-            if choice != -1: 
-                #if choice ==-1: e_delta = beta #if test terminates, the loss is beta
-                loss = 'Loss'+str(choice)
-                e_delta = expL[i][loss] # the expected loss of the choice that is made
-                e0 = expL[i]['Loss0']
-                e1 = expL[i]['Loss1']
-                e2 = expL[i]['Loss2']
-                const = max(-eta*e0,-eta*e1,-eta*e2)
-                neg_l += eta*e_delta + const + np.log(np.exp(-eta*e0-const)+np.exp(-eta*e1-const)+np.exp(-eta*e2-const))
-            i+=1
-    return neg_l
-
-neg_log_likel_lim([10,0.01,0.8],0,1,1,participant_choices_lim(data,0)) 
-# this give the same value as the old neg log likel
 
 
-                
-        
-        
-        
 
-neg_log_likel_lim([10,0.01,0.8],data,0,1,1)
-
-def neg_log_likel_lim(x,df,person,gamma,kappa): #old, long version
+def neg_log_likel_lim(x,df,person,gamma,kappa):
     eta = x[0]
     alpha = x[1]
     beta = x[2]
@@ -804,7 +1109,7 @@ def neg_log_likel_lim(x,df,person,gamma,kappa): #old, long version
     #for when all trials are included:
     exp_losses = [[],[],[],[],[],[]]
     neg_l = 0
-    for a in range(6): #six trials
+    for a in range(6):
         trial = all_trials[a]
         dtd_string = 'BoxNormExtDtD'+str(a+5)
         choice_string = 'BoxNormExtChoice' + str(a+5)
@@ -914,7 +1219,7 @@ MLE's for all participants:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 '''
 #finding mles for all participants:
-df_mles_lim = pd.DataFrame(columns = ['ID','eta','alpha','beta','fun','eta_0','alpha_0','beta_0'], index = np.arange(0,76))
+df_mles_lim = pd.DataFrame(columns = ['ID','eta','alpha','beta','fun'], index = np.arange(0,76))
 df_mles_lim['fun']=inf
 bnds = ((-inf,inf),(0,inf),(0,inf)) #bounds for eta, alpha and beta when minimizing
 #x0_lim = [5,0.1,0.5] #start values of eta, alpha and beta
@@ -923,12 +1228,12 @@ bnds = ((-inf,inf),(0,inf),(0,inf)) #bounds for eta, alpha and beta when minimiz
 #x0_lim = [0,0,0]
 #opt = {'ftol':1e-100,'gtol':1e-100,'maxiter':150000,'maxfun':150000}
 
-for person in range(len(data)):
+for person in range(3,len(data)):
 #for person in range(len(data)):
     ID = data['ID'][person]
     print(person, ID)  
     df_mles_lim['ID'][person] = ID
-    for k in range(200):
+    for k in range(1000):
         eta_0 = 3 + 17*random.random() #random number between 3 and 20
         alpha_0 = 0.1*random.random() #random number between 0 and 0.1
         beta_0 = random.random() #radnom number between 0 and 1
@@ -942,14 +1247,11 @@ for person in range(len(data)):
              df_mles_lim['alpha'][person] = mles.x[1]
              df_mles_lim['beta'][person] = mles.x[2]
              df_mles_lim['fun'][person] = mles.fun
-             df_mles_lim['eta_0'][person] = eta_0
-             df_mles_lim['alpha_0'][person] = alpha_0
-             df_mles_lim['beta_0'][person] = beta_0
              print('new',df_mles_lim['fun'][person])
             
-df_mles_lim.head()
 
-path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\mles_limited_x0_200_times.csv"
+
+path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=0.1\mles_limited_x0_1000_times.csv"
 df_mles_lim.to_csv(path)
 
         
@@ -1026,137 +1328,8 @@ plt.show()
 
 
 
-'''
-%%%%%%%%%%%%%%%%%%%%%%%%% Bootstrapping %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-'''
 
 
-
-def simulating_decisions_lim(person,eta_hat,alpha_hat,beta_hat,gamma,kappa):
-    all_expL = all_exp_losses_lim(alpha_hat,beta_hat,gamma,kappa)
-    decisions = [[],[],[],[],[],[]]
-    
-    for trial in range(6):
-        expL = all_expL[trial]
-        i=0
-        dec=2 #first decision in each trial is to open a box
-        while dec==2: 
-            if i==6 and (trial == 1 or trial==4 or trial==5):
-                decisions[trial].append(-1)
-                break
-            elif i == 9 and (trial == 0 or trial == 2 or trial == 3):
-                decisions[trial].append(-1)
-                break
-            else: 
-                e0 = expL[i]['Loss0']
-                e1 = expL[i]['Loss1']
-                e2 = expL[i]['Loss2']
-                const = min(eta_hat*e0,eta_hat*e1,eta_hat*e2)
-                denom = np.exp(-eta_hat*e0+const) + np.exp(-eta_hat*e1+const) + np.exp(-eta_hat*e2+const)
-                p0 = np.exp(-eta_hat*e0+const)/denom
-                p1 = np.exp(-eta_hat*e1+const)/denom
-                p2 = np.exp(-eta_hat*e2+const)/denom
-                dec = np.random.choice([0,1,2],p=[p0,p1,p2])
-                decisions[trial].append(dec)
-            i+=1
-    return decisions
-
-#print(simulating_decisions_lim(0,13.16,0,0.26,1,1))        
-#print(simulating_decisions_lim(1,26.466,0,0.467,1,1))
-
-
-#write code that imulates 200 times per person, then find all 200*3 mles, and plot them and find CI's
-
-
-def simulating_200_lim(person,df,gamma,kappa):
-    num_sim = 200
-    alpha_200 = np.zeros(num_sim)
-    beta_200 = np.zeros(num_sim)
-    eta_200 = np.zeros(num_sim)
-    
-    alpha_hat = df['alpha'][person]
-    beta_hat = df['beta'][person]
-    eta_hat = df['eta'][person]
-    
-    alpha_0 = df['alpha_0'][person]
-    beta_0 = df['beta_0'][person]
-    eta_0 = df['eta_0'][person]
-    
-    for k in range(num_sim):
-        #print('Iteration: ',k)
-        simulated_decisions = simulating_decisions_lim(person,eta_hat,alpha_hat,beta_hat,gamma,kappa)
-        #print('simulations')
-        bnds = ((-inf,inf),(0,inf),(0,inf)) #bounds for eta and alpha when minimizing
-        
-        mles_simulations_1 = minimize(neg_log_likel_lim,[eta_hat,alpha_hat,beta_hat],args=(person,gamma,kappa,simulated_decisions),bounds=bnds,method='L-BFGS-B')
-        #print('mles1')
-        mles_simulations_2 = minimize(neg_log_likel_lim,[eta_0,alpha_0,beta_0],args=(person,gamma,kappa,simulated_decisions),bounds=bnds,method='L-BFGS-B')
-        
-        #Choosing the mles that have the smallest negative log likelihood:
-        if mles_simulations_1.fun < mles_simulations_2.fun:
-            eta_200[k] = mles_simulations_1.x[0]
-            alpha_200[k] = mles_simulations_1.x[1]
-            beta_200[k] = mles_simulations_1.x[2]
-        else:
-            eta_200[k] = mles_simulations_2.x[0]
-            alpha_200[k] = mles_simulations_2.x[1]
-            beta_200[k] = mles_simulations_2.x[2]
-    return eta_200, alpha_200, beta_200
-
-
-
-#path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\mles_limited_x0_1000_times.csv'
-#df_lim = pd.read_csv(path,sep=',',usecols = ['ID','eta','alpha','beta'])
-#df_lim['eta_0'] = 0
-#df_lim['alpha_0'] = 0
-#df_lim['beta_0'] = 0
-
-
-
-'''
-%%%%%%%%%%%%% bootstrap for all participants %%%%%%%%%%%%%
-'''
-
-
-path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\mles_limited_x0_200_times.csv'
-df_lim = pd.read_csv(path,sep=',',usecols=['ID','eta','alpha','beta','eta_0','alpha_0','beta_0'])
-df_lim.head()    
-df_lim['eta_5_p'] = np.nan
-df_lim['eta_95_p'] = np.nan
-df_lim['alpha_5_p'] = np.nan
-df_lim['alpha_95_p'] = np.nan
-df_lim['beta_5_p'] = np.nan
-df_lim['beta_95_p'] = np.nan
-df_lim['eta200'] = np.zeros(76,dtype='<U2') #to save the array containing the 200 eta values
-df_lim['alpha200'] = np.zeros(76,dtype='<U2') 
-df_lim['beta200'] = np.zeros(76,dtype='<U2')
-
-
-
-#e,a,b = simulating_200_lim(0,df_lim,1,1)
-
-
-
-
-
-#bootstrap for alle 75 deltakere: 
-for person in range(76):
-    print(person)
-    e,a,b = simulating_200_lim(person,df_lim,1,1)
-    df_lim['eta200'][person] = e
-    df_lim['alpha200'][person] = a
-    df_lim['beta200'][person] = b
-
-    df_lim['eta_5_p'][person] = np.percentile(e,5)
-    df_lim['eta_95_p'][person] = np.percentile(e,95)
-    df_lim['alpha_5_p'][person] = np.percentile(a,5)
-    df_lim['alpha_95_p'][person] = np.percentile(a,95)
-    df_lim['beta_5_p'][person] = np.percentile(b,5)
-    df_lim['beta_95_p'][person] = np.percentile(b,95)
-
-
-path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\bootstrap_limited.csv"
-df_lim.to_csv(path)
 
 
 '''

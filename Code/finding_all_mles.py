@@ -11,6 +11,9 @@ import pandas as pd
 from math import inf
 from scipy.optimize import minimize
 from ryddet_prosjektoppgave import make_matrix_unlim, make_matrix_lim
+from pylab import meshgrid,cm,imshow,contour,clabel,colorbar,axis,title,show
+import matplotlib.pyplot as plt
+
 
 
 
@@ -42,10 +45,7 @@ def neg_likelihood_unlim(x):
         losses_trial2[h] = loss_mat[f][g]
         if h==11:
             break
-    #print(losses_trial2)
-    
-    
-    
+   
     losses_trial3 = np.zeros(12,dtype=dict)
     #print(losses_trial3)
     h=0 #number of boxes that are opened (index of losses_trial2)
@@ -61,8 +61,6 @@ def neg_likelihood_unlim(x):
         losses_trial3[h] = loss_mat[f][g]
         if h==11:
             break
-    #print(losses_trial3)
-    
     
     losses_trial4 = np.zeros(12,dtype=dict)
     #print(losses_trial4)
@@ -79,23 +77,24 @@ def neg_likelihood_unlim(x):
         losses_trial4[h] = loss_mat[f][g]
         if h==11:
             break
-    #print(losses_trial4)
+
+    list_of_losses = [losses_trial2,losses_trial3,losses_trial4]
     
     
     
     
-    
+    #Opening the data with the choices that the participants make. 
     data = "C:\\Users\\Johan\\OneDrive\\Documents\\Masteroppgave\\Data\\data1.csv"
     df = pd.read_csv(data,sep=",")
     df.head()
     
-    #for the first participant in the first real tiral = trial2 in the data:
+    #for the first participant in the first real tiral = trial2 in the data: the first is just a practice trial that is limited. 
     dtd2 = df['BoxNormExtDtD2'][0]
     choices2 = np.ones(dtd2,dtype=int)*2
     final_choice2 = df['BoxNormExtChoice2'][0]
-    if final_choice2 == 'Blue':
+    if final_choice2 == 'Blue': #if the choice is that blue is the majority colour, that decision is denoted as 0, hence that is what we appendt to the array
         choices2 = np.append(choices2,0)
-    else:
+    else: #id the choice is red, we append a 1 to the the array.
         choices2 = np.append(choices2,1)
     #print(choices2)
     #you need to find the losses of each of the choices
@@ -126,23 +125,79 @@ def neg_likelihood_unlim(x):
     
     
     neg_l = 0
+    trial=0
     for liste in list_of_choices:
-        i=0
+        i=0 #i is each choice
         for choice in liste:
+            #print("Trial: ",trial)
             loss = "Loss" + str(choice)
-            neg_l += eta*losses_trial2[i][loss] + np.log(np.exp(-eta*losses_trial2[i]['Loss0'])+
-                                                  np.exp(-eta*losses_trial2[i]['Loss1'])+
-                                                  np.exp(-eta*losses_trial2[i]['Loss2']))
+            losses_trial = list_of_losses[trial]
+            #print(losses_trial[0])
+            #using the following expression for the neg-log-likelihood, we get infinity for some combinatons of alpha and eta, 
+            #neg_l += eta*losses_trial2[i][loss] + np.log(np.exp(-eta*losses_trial[i]['Loss0'])+
+            #                                      np.exp(-eta*losses_trial[i]['Loss1'])+
+            #                                      np.exp(-eta*losses_trial[i]['Loss2']))
+            #thus, we try to get the exponents to be smaller. 
+            #scaling the expressions in the exponents
+            const = max(-eta*losses_trial[i]['Loss0'],-eta*losses_trial[i]['Loss1'],-eta*losses_trial[i]['Loss2'])
+            neg_l += eta*losses_trial[i][loss] + const +  np.log(np.exp(-eta*losses_trial[i]['Loss0']-const)
+                                                               +np.exp(-eta*losses_trial[i]['Loss1']-const)
+                                                               +np.exp(-eta*losses_trial[i]['Loss2']-const))
+                    
             i+=1
+        trial+=1
     return neg_l
 
 
+
+
+
+
 bnds = ((-inf,inf),(0,inf)) #bounds for eta and alpha. 
-#bnds = ((0,1),(0,inf)) #bounds for eta and alpha. 
-x0 = [1,0.001] #initial guess of eta and alpha
-#opt_result = minimize(neg_likelihood_unlim,x0,bounds=bnds) #the optimal eta and alpha for this function. 
-#opt_result_unlim = minimize(neg_likelihood_unlim,x0,method='TNC',bounds=bnds)
-#print(opt_result_unlim)
+#bnds = ((-1,inf),(0,inf)) #bounds for eta and alpha. 
+x0 = [0,0.11] #initial guess of eta and alpha
+#opt_result_unlim = minimize(neg_likelihood_unlim,x0,bounds=bnds) #the optimal eta and alpha for this function. 
+opt_result_unlim = minimize(neg_likelihood_unlim,x0,method='TNC',bounds=bnds)
+print(opt_result_unlim)
+
+
+
+#plot the neg likelihood func for a grid og values of alpha and eta to chech if the min is the right min. 
+#e = np.arange(-1,199,20)
+e = np.arange(32,33,0.01)
+#a = np.arange(0,2000,50)
+a = np.arange(-0.00001,0.00001,0.000001)
+l = np.zeros((len(e),len(a)))
+
+for i in range(len(e)):
+    for j in range(len(a)):
+        l[i][j] = neg_likelihood_unlim([e[i],a[j]])
+    
+plt.pcolormesh(l)
+plt.show()
+
+
+
+
+
+a[15]
+
+e[3]
+a[35]
+print(l[3][35])
+neg_likelihood_unlim([e[3],a[35]])
+
+
+
+
+plt.imshow(l,extent=[-1,1,0,2500])
+plt.colorbar()
+plt.show()
+
+
+
+
+
 
 
 
@@ -184,13 +239,13 @@ def neg_likelihood_lim(x):
     
     
     '''
-    losses_trial3 = np.zeros(12,dtype=dict)
-    #print(losses_trial3)
-    h=0 #number of boxes that are opened (index of losses_trial2)
+    losses_trial6 = np.zeros(6,dtype=dict)
+    #print(losses_trial6)
+    h=0 #number of boxes that are opened (index of losses_trial6)
     f=0 #first index in matrix
     g=0 #second index in matrix of losses
-    losses_trial3[h] = loss_mat[f][g]
-    for elem in trial3:
+    losses_trial6[h] = loss_mat[f][g]
+    for elem in trial6:
         h += 1
         f += 1 #for each new box we go one element down in the matrix
         if elem == 1:
@@ -233,7 +288,8 @@ def neg_likelihood_lim(x):
     final_choice5 = df['BoxNormExtChoice5'][0]
     if final_choice5 == 'Light blue':
         choices5 = np.append(choices5,0)
-    elif final_choice5 == '-1':
+    elif final_choice5 == '-1': #men dette påvirker jo ikke resultate, hvis testen terminerer så tar man jo ikke noen valg!!
+        ######### Se på dette #####################
         choices5 = np.append(choices5,-1)
     else:
         choices5 = np.append(choices5,1)
@@ -267,7 +323,7 @@ def neg_likelihood_lim(x):
     #print(choices4)
     
     list_of_choices = [choices5,choices6,choices7]
-    print(list_of_choices)
+    #print(list_of_choices)
     
     
     
@@ -286,21 +342,7 @@ def neg_likelihood_lim(x):
                                                       np.exp(-eta*losses_trial5[i]['Loss1'])+
                                                       np.exp(-eta*losses_trial5[i]['Loss2']))
             i+=1
-    '''
-    i=0
-    for choice in choices5:
-        if choice == -1: #if the test has terminated, the loss is beta. 
-            neg_l += eta*beta + np.log(np.exp(-eta*losses_trial5[i]['Loss0'])+
-                                np.exp(-eta*losses_trial5[i]['Loss1'])+
-                                np.exp(-eta*beta))
-        else:
-            loss = "Loss" + str(choice)
-            neg_l += eta*losses_trial5[i][loss] + np.log(np.exp(-eta*losses_trial5[i]['Loss0'])+
-                                                  np.exp(-eta*losses_trial5[i]['Loss1'])+
-                                                  np.exp(-eta*losses_trial5[i]['Loss2']))
-       
-        i+=1 
-        '''
+   
     return neg_l
 
 
@@ -308,9 +350,9 @@ def neg_likelihood_lim(x):
 bnds = ((-inf,inf),(0,inf),(0,inf)) #bounds for eta and alpha and beta 
 #bnds = ((0,1),(0,inf)) #bounds for eta and alpha. 
 x0_lim = [1,0.001,0.8] #initial guess of eta and alpha
-opt_result_lim = minimize(neg_likelihood_lim,x0_lim,bounds=bnds) #the optimal eta, alpha and beta for this function. 
+#opt_result_lim = minimize(neg_likelihood_lim,x0_lim,bounds=bnds) #the optimal eta, alpha and beta for this function. 
 #opt_result_lim = minimize(neg_likelihood_lim,x0_lim,method='TNC',bounds=bnds)
-print(opt_result_lim)
+#print(opt_result_lim)
 
 
 
