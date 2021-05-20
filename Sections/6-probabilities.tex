@@ -27,7 +27,8 @@ $U_i$ and $V_i$ are conditionally independent given $\theta$ because each box th
 
 \section{Prob that red is majority colour}
 $P(U_{12}\geq 7|U_i=u_i,U_{12}\neq6)$
-We can now find the probability that red is the majority colour given the colour of the boxes that already are opened. Firstly, we find the probability that there are $j$ red boxes when all twelve boxes are opened given $i$ opened boxes, hence we find $P(U_i+V_i = j | U_i=u_i)$.
+We can now find the probability that red is the majority colour given the colour of the boxes that already are opened. 
+Firstly, we find the probability that there are $j$ red boxes when all twelve boxes are opened given $i$ opened boxes, hence we find $P(U_i+V_i = j | U_i=u_i)$.
 %But, we start by finding this given $P$. 
 %\begin{equation*}
 %    \begin{aligned}
@@ -61,19 +62,22 @@ We assume a beta prior for $\Theta$,
 \begin{equation*}
     \Theta \sim \text{Beta}(\gamma,\kappa).
 \end{equation*}
+
 Hence,
 \begin{equation*}
-    P(\Theta=\theta) = \frac{1}{\text{B}(\gamma,\kappa)}\theta^{\gamma-1}(1-\theta)^{\kappa-1}.
+    f(\theta) = \frac{1}{\text{B}(\gamma,\kappa)}\theta^{\gamma-1}(1-\theta)^{\kappa-1}.
 \end{equation*}
-We can find $P(\Theta=\theta| U_i=u_i)$ using Bayes rule. Hence,
+
+
+We can find $f(\theta| U_i=u_i)$ using Bayes rule. Hence,
 \begin{equation*}
-    P(\Theta=\theta| U_i=u_i) = \frac{P(U_i=u_i|\Theta=\theta)P(\Theta=\theta)}{P(U_i=u_i)},
+    f(\theta| U_i=u_i) = \frac{P(U_i=u_i|\Theta=\theta)f(\theta)}{P(U_i=u_i)},
 \end{equation*}
 which is proportional to the numerator of the right hand side. Using that $U_i|\Theta$ has a binomial distribution and that $\theta$ has a Beta prior, we get that
 \begin{equation*}
     \begin{aligned}
-        P(\Theta=\theta|U_i=u_i) 
-        &\propto P(U_i=u_i|\Theta=\theta)P(\Theta=\theta)\\[6pt] 
+        f(\theta|U_i=u_i) 
+        &\propto P(U_i=u_i|\Theta=\theta)f(\theta)\\[6pt] 
         &\propto \theta^{u_i}(1-\theta)^{i-u_i}\theta^{\gamma-1}(1-\theta)^{\kappa-1}\\[6pt]
         &= \theta^{u_i+\gamma-1}(1-\theta)^{i-u_i+\kappa-1}.
     \end{aligned}
@@ -85,11 +89,11 @@ This is proportional to a beta-distribution with parameters $u_i+\gamma$ and $i-
 and therefore that 
 \begin{equation}
 \label{p_given_ui}
-    P(\Theta=\theta|U_i=u_i) = \frac{1}{\text{B}(u_i+\gamma,i-u_i+\kappa)}\theta^{u_i+\gamma-1}(1-\theta)^{i-u_i+\kappa-1}.
+    f(\theta|U_i=u_i) = \frac{1}{\text{B}(u_i+\gamma,i-u_i+\kappa)}\theta^{u_i+\gamma-1}(1-\theta)^{i-u_i+\kappa-1}.
 \end{equation}
 As we now have the probabilities $P(V_i=j-u_i|\Theta=\theta)$ and $P(\Theta=\theta|U_i=u_i)$, we can put this into \eqref{prob_red_major}.
 \begin{equation}
-\label{red_12_equal_j}
+%\label{red_12_equal_j}
     \begin{aligned}
          P(&U_i+V_i = j | U_i=u_i) \\[6pt]
         =& \int_0^1 P(V_i = j-u_i | \Theta=\theta) P(\Theta=\theta| U_i=u_i) \dd \theta \\[6pt]
@@ -110,35 +114,40 @@ Therefore,
 \end{equation*}
 Putting this into \eqref{red_12_equal_j}, we get
 \begin{equation}
-\label{red_12_equal_j_final}
+%\label{red_12_equal_j_final}
     \begin{aligned}
         P(U_i+&V_i = j | U_i=u_i) = \binom{12-i}{j-u_i} \frac{\text{B}(j+\gamma,12-j+\kappa)}{\text{B}(u_i+\gamma,i-u_i+\kappa)}.
     \end{aligned}
 \end{equation}
 We want to find the probability that there is a red majority when all twelve boxes are opened. This is equal to the probability that there are seven or more red boxes. 
 \begin{equation}
-\label{redmajor1}
+%\label{redmajor1}
     \begin{aligned}
         P(U_i+V_i \geq 7 | U_i=u_i) 
         &= \sum_{j=7}^{12} P(U_i+V_i = j | U_i=u_i)\\[6pt]
         &= \sum_{j=7}^{12} \binom{12-i}{j-u_i} \frac{\text{B}(j+\gamma,12-j+\kappa)}{\text{B}(u_i+\gamma,i-u_i+\kappa)}.
     \end{aligned}
 \end{equation}
+
+
+
 As one of the colour always is in majority, there cannot be six red and six blue boxes when all twelve boxes are opened, hence we need to condition on that as well. Hence, we want to find $P(U_i+_i \geq 7 | U_i=u_i,U_i+V_i \neq 6)$. Using Bayes rule we get that
 \begin{equation}
-\label{redmajor2}
+%\label{redmajor2}
     \begin{aligned}
         P(&U_i+V_i \geq 7 | U_i=u_i,U_i+V_i \neq 6) \\[6pt]
         &= \frac{P(U_i+V_i\neq6|U_i=u_i,U_i+V_i\geq7)P(U_i+V_i\geq7|U_i=u_i)}{P(U_i+V_i\neq6|U_i=u_i)}.
     \end{aligned}
 \end{equation}
+
+
 We have that
 \begin{equation*}
     P(U_i+V_i\neq6|U_i=u_i,U_i+V_i\geq7)=1
 \end{equation*}
 and, using \eqref{red_12_equal_j_final}, we get 
 \begin{equation}
-\label{u12neq6}
+%\label{u12neq6}
     \begin{aligned}
         P(U_i+V_i\neq6|U_i=u_i) 
         &= 1-P(U_i+V_i=6|U_i=u_i)\\[6pt]
@@ -146,9 +155,11 @@ and, using \eqref{red_12_equal_j_final}, we get
         &= 1-\binom{12-i}{6-u_i} \frac{\text{B}(6+\gamma,6+\kappa)}{\text{B}(u_i+\gamma,i-u_i+\kappa)}.
     \end{aligned}
 \end{equation}
+
+
 Putting this and \eqref{redmajor1} into \eqref{redmajor2}, we get
 \begin{equation*}
-\label{redmajor_final}
+%\label{redmajor_final}
     \begin{aligned}
         P(U_i+V_i \geq 7 | U_i=u_i,U_i+V_i \neq 6) 
         &= \frac{\sum_{j=7}^{12} \binom{12-i}{j-u_i} \frac{\text{B}(j+\gamma,12-j+\kappa)}{\text{B}(u_i+\gamma,i-u_i+\kappa)}}{1-\binom{12-i}{6-u_i} \frac{\text{B}(6+\gamma,6+\kappa)}{\text{B}(u_i+\gamma,i-u_i+\kappa)}}.
@@ -158,14 +169,16 @@ This is the probability that there is a red majority in total, given the colour 
 
 
 
+
+
 \section{Prob that the next is red}
 $P(X_{i+1}=1|U_i=u_i,U_i+V_i\neq6)$
 To be able to find $P(X_{i+1}=1|U_i=u_i,U_i+V_i\neq6)$, we are again using the law of total probability. As we are going to use this later, we start with the situation where we are not conditioning on $U_i+V_i\neq6$, hence, we start by finding $P(X_{i+1}=1|U_i=u_i)$. Using the law of total probability, we get
 \begin{equation}
-\label{xiplus1_given_ui1}
+%\label{xiplus1_given_ui1}
     \begin{aligned}
         P(X_{i+1}=1|U_i=u_i)
-        = \int_0^1 P(X_{i+1}=1|U_i=u_i,\Theta=\theta)P(\Theta=\theta|U_i=u_i) \dd \theta.
+        = \int_0^1 P(X_{i+1}=1|U_i=u_i,\Theta=\theta)f(\theta|U_i=u_i) \dd \theta.
     \end{aligned}
 \end{equation}
 The expression for $P(\Theta=\theta|U_i=u_i)$ is as given in \eqref{p_given_ui}. All of the $x$'s are Bernoulli distributed with probability $\theta$. They are conditionally independent of each other, given $\theta$. Therefore, the probability that $X_{i+1}$ is one, or red, is independent of the colour of the of the boxes that already are opened. The probability that a box that is opened is 1 is also equal to $\theta$. Hence,
@@ -176,7 +189,7 @@ The expression for $P(\Theta=\theta|U_i=u_i)$ is as given in \eqref{p_given_ui}.
 \end{equation*}
 Putting this and \eqref{p_given_ui} into \eqref{xiplus1_given_ui1} gives
 \begin{equation}
-\label{xiplus1_given_ui2}
+%\label{xiplus1_given_ui2}
     \begin{aligned}
         P(X_{i+1}=1|U_i=u_i)
         &= \int_0^1 \theta \frac{1}{\text{B}(u_i+\gamma,i-u_i+\kappa)}\theta^{u_i+\gamma-1}(1-\theta)^{i-u_i+\kappa-1}  \dd \theta\\[6pt]
@@ -223,7 +236,7 @@ Using the property of the gamma function that
 \end{equation*}
 we get that 
 \begin{equation}
-\label{xiplus1_given_ui3}
+%\label{xiplus1_given_ui3}
     \begin{aligned}
         P(X_{i+1}=1|U_i=u_i) 
         &= \frac{\frac{(\gamma+u_i)\Gamma(u_i+\gamma)}{(\gamma+\kappa+i)\Gamma(\gamma+i+\kappa)}}
@@ -232,7 +245,10 @@ we get that
         {\gamma+\kappa+i}.
     \end{aligned}
 \end{equation}
-We now have the probability that the next box we open is red, but we have not yet conditioned on there being a majority of either red or blue. Hence, we have to condition on $U_i+V_i\neq6$. Using Bayes' rule we get
+We now have the probability that the next box we open is red, but we have not yet conditioned on there being a majority of either red or blue. Hence, we have to condition on $U_i+V_i\neq6$. 
+
+Har skrevet om akkurat dette med bayes rule:
+Using Bayes' rule we get
 \begin{equation}
 \label{nextisred_given_majority}
     \begin{aligned}
@@ -241,6 +257,8 @@ We now have the probability that the next box we open is red, but we have not ye
         {P(U_i+V_i\neq6|U_i=u_i)}.
     \end{aligned}
 \end{equation}
+
+
 We have $P(X_{i+1}=1|U_i=u_i)$ from \eqref{xiplus1_given_ui3} and $P(U_i+V_i\neq6|U_i=u_i)$ is given in \eqref{u12neq6}. It remains to find $P(U_i+V_i\neq6|U_i=u_i,X_{i+1}=1)$.
 Firstly, (er dette riktig?)
 \begin{equation*}
@@ -259,7 +277,7 @@ From \eqref{u12neq6} we have that
 \end{equation}
 Putting $i+1$ into this instead of $i$ and $u_i+1$ instead of $u_i$, we get that
 \begin{equation}
-\label{u12neq6_givennextisred}
+%\label{u12neq6_givennextisred}
     \begin{aligned}
         P&(U_i+V_i\neq6|U_i=u_i,X_{i+1}=1)\\[6pt] 
         &= P(U_i+V_i\neq6|U_{i+1}=u_i+1)\\[6pt]
