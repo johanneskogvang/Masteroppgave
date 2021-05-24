@@ -1,0 +1,13 @@
+
+\begin{tikzpicture}[
+    treenodeT/.style={
+      circle, align=center},
+    node distance=1cm,
+    ]
+    \DoNode{N0-0}{0.75833333333333}{0.75833333333333}{1}{green!70!black}{green!70!black}{0.4};
+    \DoNode[below of=N0-0, left of= N0-0]{N1-0}{1.01382001836547}{0.43048668503214}{1}{blue}{blue}{0.4};
+    \draw[->] (N0-0) -- (N1-0);
+    \DoNode[below of=N0-0, right of= N0-0]{N1-1}{0.43048668503214}{1.01382001836547}{1}{red}{red}{0.4};
+    \draw[->] (N0-0) -- (N1-1);
+    
+\end{tikzpicture}

@@ -115,29 +115,84 @@ As we have presented Ideal Observer solutions in the unlimited case for differen
 \subsection{An Ideal Observer Solution in the Limited case}
 Having the expected losses in the limited case as given in \eqref{exp_loss_blue}, \eqref{exp_loss_red} and \eqref{exp_loss_limited_final}, we can visualise them in the same way as Figure \ref{fig:unlim_a0.0001_gk1}. In the limited trials, we have to parameters, $\alpha$ and $\beta$. Thus, we have solutions with both of these parameters varying. 
 
-
+In Figures \ref{fig:lim_a0.01_b0.6_gk1} and \ref{fig:lim_a0.01_b0.4_gk1}, we see two solutions, both with $\alpha=0.01$. They have different values of $\beta$, 0.6 and 0.4 respectively. Both trees have the same width, but we see that the tree with the higher $\beta$ value is shorter. Thus, an Ideal Observer with $\beta=0.6$ would open fewer boxes than one with $\beta=0.4$, which is what we would imagine as $\beta$ is the loss of the test terminating. 
 \begin{figure}
     \centering
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \scalebox{0.5}{\input{tikz-trees/lim_a0.01_b0.6_gk1}}
+        \scalebox{0.8}{\input{tikz-trees/lim_a0.01_b0.6_gk1}}
         \caption[Limited something]{Limited, $\alpha=0.01$, $\beta=0.6$. $\gamma=\kappa=1$.}
         \label{fig:lim_a0.01_b0.6_gk1}
     \end{minipage}\hfill
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \scalebox{0.5}{\input{tikz-trees/lim_a0.01_b0.4_gk1}}
+        \scalebox{0.8}{\input{tikz-trees/lim_a0.01_b0.4_gk1}}
         \caption[Limited something]{Limited, $\alpha=0.01$, $\beta=0.4$. $\gamma=\kappa=1$.}
         \label{fig:lim_a0.01_b0.4_gk1}
     \end{minipage}
 \end{figure}
 
 
+The trees in the limited case are in general slimmer than in the unlimited case. This is because of the penalty we get when the test terminates before we have made a decision. The expected losses for opening another box in the limited case are bigger than in the unlimited case. Hence, in the limited case, these surpass the expected losses of choosing blue or red as majority colour earlier than in the unlimited case. Small values of $\alpha$ and $\beta$ in combination makes the trees wider, as in Figure \ref{fig:lim_a0.0001_b0.2_gk1}.
+\begin{figure}
+    \centering
+    \scalebox{0.8}{\input{tikz-trees/lim_a0.0001_b0.2_gk1}}
+    \caption[IO solution, limited. $\alpha=0.0001, \beta=0.2$. $\gamma=\kappa=1$.]{IO solution, limited. $\alpha=0.0001, \beta=0.2$. $\gamma=\kappa=1$.}
+    \label{fig:lim_a0.0001_b0.2_gk1}
+\end{figure}
+
+As in the unlimited case, there are trials where the ideal observer solution is to choose the majority colour after one box is opened. This is the case in Figures \ref{fig:lim_a0.05_b0.4_gk1} and \ref{fig:lim_a0.05_b0.6_gk1}. The only thing that has changed from Figure \ref{fig:lim_a0.01_b0.4_gk1} to Figure \ref{fig:lim_a0.05_b0.4_gk1} and from Figure \ref{fig:lim_a0.01_b0.6_gk1} to Figure \ref{fig:lim_a0.05_b0.6_gk1} is the $\alpha$ value, which has increased from 0.01 to 0.05. In the cases with the bigger $\alpha$ values, the expected loss for opening box two is bigger than for choosing the majority colour. This is a result of these expected losses being dependent on the next expected losses, which again depend on the expected losses for opening another box after that and so on. Additionally, these could potentially be big if the amount of red and blue boxes are close to each other, meaning that we for example first open a red box, then a blue, then a red and so forth. 
+
+\begin{figure}
+    \centering
+    \begin{minipage}[t]{0.45\textwidth} 
+        \centering
+        \scalebox{0.8}{\input{tikz-trees/lim_a0.05_b0.4_gk1}}
+        \caption{A decision tree for a limited trial with $\alpha = 0.05$, $\beta=0.4$ and $\gamma=\kappa=1$. It can bee interpreted as the tree in Figure (input here!).}
+        \label{fig:lim_a0.05_b0.4_gk1}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.45\textwidth} 
+        \centering
+        \scalebox{0.8}{\input{tikz-trees/lim_a0.05_b0.4_gk1}}
+        \caption{A decision tree for a limited trial with $\alpha = 0.05$, $\beta=0.6$ and $\gamma=\kappa=1$ that can be interpreted in the same way as the tree in Figure (input here!).}
+        \label{fig:lim_a0.05_b0.6_gk1}
+    \end{minipage}
+\end{figure}
+
+In Figure \ref{fig:trial8_IO_a0.01_b0.6_gk1}, we see the IO solution for trial 8 where $\alpha=0.01$ and $\beta=0.6$. We see that an Ideal Observer would choose majority colour after seven boxes are opened, where four are blue and three are red. In Figure \ref{fig:trial8_IO_a0.0001_b0.2_gk1}, we see another IO solution for trial 8, where $\alpha=0.0001$ and $\beta=0.2$. Here, an Ideal Observer would not choose before the test terminates, and that would be a failed trial. This, the Ideal Observer is not perfect, as it is based on expected losses based on the previously opened boxes, and not based on what actually is going to happen.
+
+\begin{figure}
+    \centering
+     \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \scalebox{0.7}{\input{tikz-trees/trial8_lim_a0.01_b0.6_gk1}}
+        \caption[IO solution, trial 8. $\alpha=0.01$, $\beta=0.6$ and $\gamma=\kappa=1$.]{IO solution, trial 8. $\alpha=0.01$, $\beta=0.6$ and $\gamma=\kappa=1$.}
+        \label{fig:trial8_IO_a0.01_b0.6_gk1}
+     \end{minipage}\hfill
+     \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \scalebox{0.7}{\input{tikz-trees/trial8_lim_a0.0001_b0.2_gk1}}
+        \caption[IO solution, trial 8. $\alpha=0.0001$, $\beta=0.2$ and $\gamma=\kappa=1$.]{IO solution, trial 8. $\alpha=0.0001$, $\beta=0.2$ and $\gamma=\kappa=1$.}
+        \label{fig:trial8_IO_a0.0001_b0.2_gk1}
+     \end{minipage}
+\end{figure}
+
+%\begin{figure}
+%    \centering
+%    \scalebox{0.8}{\input{tikz-trees/trial8_lim_a0.01_b0.6_gk1}}
+%    \caption[IO solution, trial 8. $\alpha=0.01$, $\beta=0.6$ and $\gamma=\kappa=1$.]{IO solution, trial 8. $\alpha=0.01$, $\beta=0.6$ and $\gamma=\kappa=1$.}
+    %\label{fig:trial8_IO_a0.01_b0.6_gk1}
+%\end{figure}
 
 
+%\begin{figure}
+%    \centering
+%    \scalebox{0.8}{\input{tikz-trees/trial8_lim_a0.0001_b0.2_gk1}}
+%    \caption[IO solution, trial 8. $\alpha=0.0001$, $\beta=0.2$ and $\gamma=\kappa=1$.]{IO solution, trial 8. $\alpha=0.0001$, $\beta=0.2$ and $\gamma=\kappa=1$.}
+    %\label{fig:trial8_IO_a0.0001_b0.2_gk1}
+%\end{figure}
 
-
-
+sentence about where we are and what we will do next. 
 
 
 
