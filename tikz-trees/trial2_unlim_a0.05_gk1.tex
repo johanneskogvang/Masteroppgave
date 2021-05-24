@@ -1,0 +1,68 @@
+
+\begin{tikzpicture}[
+    treenodeT/.style={
+      circle, align=center},
+    node distance=1cm,
+    ]
+    \DoNode{N0-0}{0.72772727272727}{0.72772727272727}{1}{green!70!black}{green!70!black}{0.4};
+    \DoNodePale[below of=N0-0, left of= N0-0]{N1-0}{0.96939393939394}{0.38606060606061}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->,gray!50] (N0-0) -- (N1-0);
+    \DoNode[below of=N0-0, right of= N0-0]{N1-1}{0.38606060606061}{0.96939393939394}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->] (N0-0) -- (N1-1);
+    \DoNodePale[below of=N1-0, left of= N1-0]{N2-0}{1.03769372693727}{0.18529520295203}{1}{blue}{blue}{0.4};
+    \draw[->,gray!50] (N1-0) -- (N2-0);
+    \DoNodePale[below of=N1-0, right of= N1-0]{N2-1}{0.74464}{0.74464}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->,gray!50] (N1-0) -- (N2-1);
+    \draw[->,gray!50] (N1-1) -- (N2-1);
+    \DoNode[below of=N1-1, right of= N1-1]{N2-2}{0.18529520295203}{1.03769372693727}{1}{red}{red}{0.4};
+    \draw[->] (N1-1) -- (N2-2);
+    \DoNodePale[below of=N2-1, left of= N2-1]{N3-1}{0.94664}{0.44264}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->,gray!50] (N2-1) -- (N3-1);
+    \DoNodePale[below of=N2-1, right of= N2-1]{N3-2}{0.44264}{0.94664}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->,gray!50] (N2-1) -- (N3-2);
+    \DoNodePale[below of=N3-1, left of= N3-1]{N4-1}{1.02677806341045}{0.21700942587832}{1}{blue}{blue}{0.4};
+    \draw[->,gray!50] (N3-1) -- (N4-1);
+    \DoNodePale[below of=N3-1, right of= N3-1]{N4-2}{0.72627118644068}{0.72627118644068}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->,gray!50] (N3-1) -- (N4-2);
+    \draw[->,gray!50] (N3-2) -- (N4-2);
+    \DoNodePale[below of=N3-2, right of= N3-2]{N4-3}{0.21700942587832}{1.02677806341045}{1}{red}{red}{0.4};
+    \draw[->,gray!50] (N3-2) -- (N4-3);
+    \DoNodePale[below of=N4-2, left of= N4-2]{N5-2}{0.92344632768362}{0.42909604519774}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->,gray!50] (N4-2) -- (N5-2);
+    \DoNodePale[below of=N4-2, right of= N4-2]{N5-3}{0.42909604519774}{0.92344632768362}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->,gray!50] (N4-2) -- (N5-3);
+    \DoNodePale[below of=N5-2, left of= N5-2]{N6-2}{1.01631455399061}{0.19471830985915}{1}{blue}{blue}{0.4};
+    \draw[->,gray!50] (N5-2) -- (N6-2);
+    \DoNodePale[below of=N5-2, right of= N5-2]{N6-3}{0.6822695035461}{0.6822695035461}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->,gray!50] (N5-2) -- (N6-3);
+    \draw[->,gray!50] (N5-3) -- (N6-3);
+    \DoNodePale[below of=N5-3, right of= N5-3]{N6-4}{0.19471830985915}{1.01631455399061}{1}{red}{red}{0.4};
+    \draw[->,gray!50] (N5-3) -- (N6-4);
+    \DoNodePale[below of=N6-3, left of= N6-3]{N7-3}{0.89822695035461}{0.36631205673759}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->,gray!50] (N6-3) -- (N7-3);
+    \DoNodePale[below of=N6-3, right of= N6-3]{N7-4}{0.36631205673759}{0.89822695035461}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->,gray!50] (N6-3) -- (N7-4);
+    \DoNodePale[below of=N7-3, left of= N7-3]{N8-3}{1.01352941176471}{0.13117647058824}{1}{blue}{blue}{0.4};
+    \draw[->,gray!50] (N7-3) -- (N8-3);
+    \DoNodePale[below of=N7-3, right of= N7-3]{N8-4}{0.61785714285714}{0.61785714285714}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->,gray!50] (N7-3) -- (N8-4);
+    \draw[->,gray!50] (N7-4) -- (N8-4);
+    \DoNodePale[below of=N7-4, right of= N7-4]{N8-5}{0.13117647058824}{1.01352941176471}{1}{red}{red}{0.4};
+    \draw[->,gray!50] (N7-4) -- (N8-5);
+    \DoNodePale[below of=N8-4, left of= N8-4]{N9-4}{0.88928571428571}{0.24642857142857}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->,gray!50] (N8-4) -- (N9-4);
+    \DoNodePale[below of=N8-4, right of= N8-4]{N9-5}{0.24642857142857}{0.88928571428571}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->,gray!50] (N8-4) -- (N9-5);
+    \DoNodePale[below of=N9-4, left of= N9-4]{N10-4}{1.05}{0.05}{1}{blue}{blue}{0.4};
+    \draw[->,gray!50] (N9-4) -- (N10-4);
+    \DoNodePale[below of=N9-4, right of= N9-4]{N10-5}{0.55}{0.55}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->,gray!50] (N9-4) -- (N10-5);
+    \draw[->,gray!50] (N9-5) -- (N10-5);
+    \DoNodePale[below of=N9-5, right of= N9-5]{N10-6}{0.05}{1.05}{1}{red}{red}{0.4};
+    \draw[->,gray!50] (N9-5) -- (N10-6);
+    \DoNodePale[below of=N10-5, left of= N10-5]{N11-5}{1.05}{0.05}{1}{blue}{blue}{0.4};
+    \draw[->,gray!50] (N10-5) -- (N11-5);
+    \DoNodePale[below of=N10-5, right of= N10-5]{N11-6}{0.05}{1.05}{1}{red}{red}{0.4};
+    \draw[->,gray!50] (N10-5) -- (N11-6);
+    
+\end{tikzpicture}

@@ -1,7 +1,7 @@
 \newpage
 \chapter{Background Theory}
 %\section{Theory}
-In this section we will go through some of the statistical theory used in this report. That includes the theorem of total probability, Bayes' theorem, the beta and gamma functions, Bayesian modelling, loss functions, the softmax function, maximum likelihood estimation and bootstrapping.  
+In this chapter we will go through some of the statistical theory used in this report. That includes the theorem of total probability, Bayes' theorem, the beta and gamma functions, Bayesian modelling, loss functions, the softmax function, maximum likelihood estimation and bootstrapping.  
 
 \section{The Theorem of Total Probability}
 The theorem of total probability is often used when we want to find some probability, and this probability is hard to find. Then, sometimes it might be easier to find that probability if we condition on something, and use the theorem of total probability. 
@@ -340,7 +340,7 @@ As in \eqref{expectation_of_loss_func_general}, this expectation is the probabil
 
 
 \section{The Law of Total Expectation}
-Let $A_i$ be a partition of the sample space, $S$. Then, there are $k$ non-overlapping parts, such that $A_i \cap A_j = \emptyset$, $\forall \:
+Let $A_i$ be a partition of the sample space, $S$. Thus, there are $k$ non-overlapping parts, such that $A_i \cap A_j = \emptyset$, $\forall \:
 i \neq j$. Then we also have that $S = A_1 \cup A_2 \cup...\cup A_k$. If we want to find the expectation of an event, $B$, and we have the expectation of $B$ on each of these partitions, we can use the law of total expectation. It states that
 \begin{equation}
     E[B] = \sum_i E[B|A_i]P(A_i).
@@ -405,19 +405,21 @@ where $\theta$ contains the parameters in the probability mass function. If the 
     L(\theta|\delta_1,\delta_2,...,\delta_n) =  \prod_{i=1}^{n} f(\delta_i|\theta).
 \end{equation} 
 The MLEs are then the estimates of $\theta$ that maximises this function, and they are often denoted $\hat{\theta}$. It is often hard to maximize the likelihood function, then it might be easier to take the logarithm of the likelihood function and maximize that instead. This is called the log likelihood function, and is normally denoted as $l$. Thus,
-\begin{equation*}
+\begin{equation}
+\label{chap2:log_likelihood}
     \begin{aligned}
         l(\theta|\delta_1,\delta_2,...,\delta_n) 
         =& \text{log}\big(L(\theta|\delta_1,\delta_2,...,\delta_n)\big)\\
         =& \text{log}\big(\prod_{i=1}^{n} f(\delta_i|\theta) \big).
     \end{aligned}
-\end{equation*}
+\end{equation}
 As the logarithm of products is the sum of the logarithms, we get that the log likelihood is
-\begin{equation*}
+\begin{equation}
+\label{chap2:log_likelihood2}
     \begin{aligned}
         l(\theta|\delta_1,\delta_2,...,\delta_n) = \sum_{i=1}^n \text{log}(f(\delta_i|\theta)).
     \end{aligned}
-\end{equation*}
+\end{equation}
 Maximizing this will give the same maximum point as if we maximize the likelihood function \citep{statinf}. 
 
 As an example, consider that the $\delta_i$'s have probability mass function as in \eqref{softmax_in_theory}. The parameters that we want to find estimates for are then $\theta$ and $\eta$. If we have $n$ samples of $\Delta$, denoted $\delta_i$, where $i \in \{1,2,...,n\}$,
@@ -448,7 +450,7 @@ The maximum likelihood estimators of $\theta$ and $\eta$ would then be the value
 
 \section{Bootstrapping}
 \label{section_theory_bootstrap}
-Consider a sample, $(\delta_1,\delta_2,...,\delta_n)$, where the samples are identically and independently distributed from an unknown distribution, $F$. We can then use this sample to estimate this distribution, thus, find $\hat{F}$. To get some ideas about the properties of $F$, we can find the properties of $\hat{F}$. It is often hard to do this analytically, then we can do it with simulations instead. This is where bootstrapping is useful. Bootstrapping is a way to find those samples, either from the original sample, $(\delta_1,\delta_2,...,\delta_n)$, or from the estimated distribution, $\hat{F}$. We can then use those samples to for example find standard error, bias, variance, or perhaps the most common, confidence intervals \citep{bootstrap}.
+Consider a sample, $(\delta_1,\delta_2,...,\delta_n)$, where the samples are identically and independently distributed from an unknown distribution, $F$. We can use this sample to estimate this distribution, thus, find $\hat{F}$. To get some ideas about the properties of $F$, we can find the properties of $\hat{F}$. Sometimes it is challenging to do this analytically, and we can then use simulations instead. This is where bootstrapping is useful. Bootstrapping is a way of finding those samples, either from the original sample, $(\delta_1,\delta_2,...,\delta_n)$, or from the estimated distribution, $\hat{F}$. We can then use those samples to for example find standard error, bias, variance, or perhaps the most common, confidence intervals \citep{bootstrap}.
 
 
 %a sample (iid) from an unknown distribution ($F$). can use that sample to estimate the distribution, hence find $\hat{F}$. To get some knowledge about the properties of $F$, we can find out things about the properties of $\hat{F}$. Often hard to do this analytically, thus, instead we use simulations. Then we can use bootstrapping. 
@@ -456,11 +458,11 @@ Consider a sample, $(\delta_1,\delta_2,...,\delta_n)$, where the samples are ide
 
 %Bootstrapping is a way of doing statistical inference using samples from a dataset. It can be used to measure the accuracy of parameters. We can for example find standard errors, bias, variance, or perhaps the most common, confidence intervals. In that way we do not need any formulas, only many samples \citep{bootstrap}. However, with many samples, we are dependent on a computer. 
 
-There are two types of bootstrapping, nonparametric and parametric. In the nonparametric bootstrap, we take samples from our original sample. Consider for example that you have a dataset $\boldsymbol{\delta}=(\delta_1,\delta_2,\delta_3,\delta_4,\delta_{5})$. A bootstrap sample of this might then be $(\delta_5,\delta_5,\delta_2,\delta_3,\delta_1)$ and another might be $(\delta_2,\delta_{4},\delta_{2},\delta_{2},\delta_{1})$. These are then resampled versions of $\boldsymbol{\delta}$. Thus, the bootstrap samples consists of elements from the original dataset, but some of them might not appear at all in a bootstrap sample while others might appear more than once. Drawing $B$ of these samples, we can do inference about the population the original data is from. 
+There are two types of bootstrapping, nonparametric and parametric. In the nonparametric bootstrap, we take samples from our original sample. Consider for example that you have a dataset $\boldsymbol{\delta}=(\delta_1,\delta_2,\delta_3,\delta_4,\delta_{5})$. A bootstrap sample of this might then be $(\delta_5,\delta_5,\delta_2,\delta_3,\delta_1)$ and another might be $(\delta_2,\delta_{4},\delta_{2},\delta_{2},\delta_{1})$. These are resampled versions of $\boldsymbol{\delta}$. Thus, the bootstrap samples consists of elements from the original dataset, but some of them might not appear at all in a bootstrap sample while others might appear more than once. Drawing $B$ of these samples, we can do inference about the population the original data is from. 
 
-In the parametric bootstrap, we have to make assumptions about the population. Consider a sample, ($\delta_1,\delta_2,...,\delta_n$), from a distribution that has a probability mass function $f(\delta|\theta)$, where $\theta$ might be a vector of parameters \citep{statinf}. We can for example find an estimate for $\theta$, $\hat{\theta}$, using maximum likelihood estimation as in Section \ref{section_theory_mle}. When we have done that, we can draw new samples, denoted $\delta_i^*$ from $f(\delta|\hat{\theta})$, such that
+In the parametric bootstrap, we have to make assumptions about the population. Consider a sample, ($\delta_1,\delta_2,...,\delta_n$), from a distribution that has a probability mass function $f(\delta|\theta)$, where $\theta$ might be a vector of parameters \citep{statinf}. We can for example find an estimate for $\theta$, $\hat{\theta}$, using maximum likelihood estimation as in Chapter \ref{section_theory_mle}. When we have done that, we can draw new samples, denoted $\delta_i^*$ from $f(\delta|\hat{\theta})$, such that
 \begin{equation*}
-    \delta_1,\delta_2,...,\delta_n \sim f(\delta|\hat{\theta}).
+    \delta_1^*,\delta_2^*,...,\delta_n^* \sim f(\delta|\hat{\theta}).
 \end{equation*}
 If we draw $B$ samples, we can, as for the nonparametric bootstrap, do inference. 
 
@@ -471,7 +473,8 @@ If we draw $B$ samples, we can, as for the nonparametric bootstrap, do inference
 %If we have a distribution for the $x$'s, we could instead of using a nonparametric bootstrapping, use a parametric version. Then we simulate new $x$'s based on the MLE of $\eta$. If the distribution is $f(x|\eta)$, and the MLE of $\eta$ is denoted $\hat{\eta}$, then we simulate new $x$'s with $f(x|\hat{\eta})$, and get new samples, $(\hat{x}_1,\hat{x}_2,\hat{x}_3,\hat{x}_4,\hat{x}_5)$. As for the nonparametric bootstrap, we can simulate many samples, and for example find standard errors and confidence intervals (CIs) for parameters. 
 
 \subsection{Confidence Intervals with Bootstrap Samples}
-When we have $B$ bootstrap samples, there are multiple methods for finding confidence intervals. 
+\label{theory_ci_bootstrap}
+One way of doing inference is to find confidence intervals. When we have $B$ bootstrap samples, there are multiple methods for finding these.  
 A confidence interval (CI) for a parameter is an interval that will contain the true value of the parameter some per cents of the times an interval is constructed. If we for example have a 90\% CI, then the true value of the parameter will be in the interval 90\% of the times an interval is constructed \citep{bootstrap}.
 
 One method for finding CIs with bootstrap samples is the percentile method. The percentile method is simple to both understand and implement. However, these confidence intervals might be biased. Then, one could instead use approaches such as \textit{bias corrected and accelerated} intervals or \textit{approximate bootstrap confidence} intervals. For simplicity, we are in this report using the percentile confidence intervals. 

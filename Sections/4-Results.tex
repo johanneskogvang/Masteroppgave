@@ -1,0 +1,159 @@
+\chapter{Results}
+
+As we have found the maximum likelihood estimates and their respective confidence intervals, next step is to show some of these results. However, we will firstly introduce the Ideal Observer solutions for different values of the parameters, which depends on the expected losses. We firstly look at the situations where $\gamma$ and $\kappa$ are 1, thus that the prior is uniform. 
+
+\section{Uniform Prior}
+When we present the results, we start with the results where we have a uniform prior. Recall that this means that it is equally likely that $\theta$ is anywhere between 0 and 1. We start with having a look at the probabilities that either blue or red are the majority colours. 
+
+\subsection{Conditional Probabilities}
+We will here have a look at the probability that blue is the dominant colour, and the probability that red is the dominant colour, as shown in \eqref{blue_major_final} and \eqref{redmajor_final}, respectively. These probabilities can be represented for each possible combination of blue and red boxes. Thus, we can find those probabilities for all the trials the participants have done. 
+
+We present the probabilities in Figure \ref{fig:probability_gamma_kappa_1}. Here, the top node represents the situation where no boxes are opened. The probability that blue is the majority colour is then equal to the probability of red being the majority colour. This is represented as the proportion of blue and red inside the nodes, which in this case are equal quantities. The circle around the node represent which of the colours that have the highest probability of being in majority. In the top node, the probabilities are equal, thus, this circle is split in two. The node down to the left of the top node represents the situation where one box is opened, and that box is blue. One node down to the left of that one again represents the situation where two boxes are opened and both are blue, and so on. Similarly, the node down to the right of the top node represents the situation where one box is opened, and that box is red and so fourth down the tree. We see that in the last row of the tree, the middle node is missing. This is because the last row represents the situations where twelve boxes are opened, and as there cannot be six of each colours, that node is not included in the tree. In the row above, we see that all the nodes are completely red or completely blue. That means that we can be sure what the majority colour is after eleven boxes are opened. This is because there cannot be six boxes of each of the colours. Then, if there are six of one colour and five of the other, we know that the colour with six boxes is the majority colour. 
+\begin{figure}
+    \centering
+    \scalebox{0.4}{\input{tikz-trees/probability_gamma_kappa_1}}
+    \caption[Probabilities, majority colour. $\gamma=\kappa=1$]{Probabilities, $\gamma=\kappa =1$.}
+    \label{fig:probability_gamma_kappa_1}
+\end{figure}
+
+
+
+When we have these probabilities, the next step is to look at the Ideal Observer solution we have found.
+
+
+
+
+\subsection{An Ideal Observer Solution in the Unlimited case}
+
+As we have all the expected losses for each possible combination of opened boxes, we can present these similarly to the probabilities in Figure \ref{fig:probability_gamma_kappa_1}. 
+The expected losses in the unlimited case is as given in \eqref{exp_loss_blue}, \eqref{exp_loss_red} and \eqref{exp_loss_next_box_unlim}. In the unlimited case, we get different solutions for different values of $\alpha$. We have looked at numerous solutions, but only a handful of them will be presented here. 
+
+Recall that an Ideal Observer solution is a solution where the decisions tied to the least expected loss is chosen each time a box is opened. In Figure \ref{fig:unlim_a0.0001_gk1}, we see the expected losses for a person with $\alpha=0.0001$ visualised. As in Figure \ref{fig:probability_gamma_kappa_1}, the top node represents the situation where no boxes are opened, and the node down to the left represents the situation where one box is opened, and that box is blue and so forth. The circles around the nodes represents the decision with the least expected loss, thus the decision that an Ideal Observer would make. A blue circle indicates that choosing blue as the majority colour has the least expected loss, and a red circle indicates that choosing red has the least expected loss. A green circle means that the the decision to open the next box has the least expected loss. The colours inside the nodes represent what we could call the inverse of the expected losses. That means that if the decision of choosing red as the majority colour has a low expected loss, the amount of red inside that node is big. That means that the colour that represents the Ideal Observer solution is the most prominent in the different nodes. The inverse expected losses are found by adding together all the expected losses and then subtracting the expected loss in question. Late we are normalising these inverse expected losses as they do not sum to one. Let $\tau_i(\delta_i)$ be the inverse expected losses. Then, the inverse expected loss for choosing blue as the majority colour is 
+\begin{equation*}
+    \tau_i(0) = \sum_{j=0}^2 \EE_{\delta_j}^i(\alpha) - \EE_0^i(\alpha).
+\end{equation*}
+Similarly, for red it would be
+\begin{equation*}
+    \tau_i(1) = \sum_{j=0}^2 \EE_{\delta_j}^i(\alpha) - \EE_1^i(\alpha),
+\end{equation*}
+and for opening the next box it will be
+\begin{equation*}
+    \tau_i(2) = \sum_{j=0}^2 \EE_{\delta_j}^i(\alpha) - \EE_2^i(\alpha).
+\end{equation*}
+We need to normalise these. The proportion of blue in each node would then be
+\begin{equation*}
+    \frac{\tau_i(0)}{\tau_i(0)+\tau_i(1)+\tau_i(2)}.
+\end{equation*}
+\begin{figure}
+    \centering
+    \scalebox{0.7}{\input{tikz-trees/unlim_a_0.0001_g_k_1}}
+    \caption[IO solution, unlimited. $\alpha=0.0001$, $\gamma=\kappa=1$]{Unlimited, $\alpha = 0.0001$, $\gamma=\kappa=1$.}
+    \label{fig:unlim_a0.0001_gk1}
+\end{figure}
+
+
+As we can see in Figures \ref{fig:unlim_a0.0001_gk1}, \ref{fig:unlim_a0.01_gk1} and \ref{fig:unlim_a0.05_gk1}, where the $\alpha$ values are 0.0001, 0.01 and 0.05, respectively, the trees are slimmer for bigger values of $\alpha$. Recall that $\alpha$ is the penalty of opening a box and that the expected loss for choosing to open another box increases with it. Hence the threshold for when that expected loss surpasses the expected loss for choosing either blue or red as majority colour decreases with increasing $\alpha$. Therefore, we make a decision at an earlier point, which makes the trees slimmer.
+\begin{figure}
+    \centering
+    \begin{minipage}{0.45\textwidth} 
+        \centering
+        \scalebox{0.5}{\input{tikz-trees/unif_unlim_a0.01v2}}
+        \caption[IO solution, unlimited. $\alpha=0.01$,$\gamma=\kappa=1$]{A decision tree for an unlimited trial with $\alpha = 0.01$. 
+        We can interpret this tree in the same way as Figure (input here) where the circles around each node shows which decision the Ideal Observer would do.}
+        \label{fig:unlim_a0.01_gk1}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth} 
+        \centering
+        \scalebox{0.5}{\input{tikz-trees/unlim_a0.05_gk1}}
+        \caption[IO solution, unlimited. $\alpha=0.05$,$\gamma=\kappa=1$]{A decision tree in the unlimited case with $\alpha = 0.05$ that can be understood in the same way as Figure (input here) where the circles around each node shows which decision the Ideal Observer would do.}
+        \label{fig:unlim_a0.05_gk1}
+    \end{minipage}
+\end{figure}
+
+At some point, $\alpha$ could get so big that the ideal observer would decide what the majority colour is after only one box is opened. The expected loss for opening another box is dependent on both $\alpha$ and the expected losses for continuing to open boxes. In contrast, the expected losses for choosing the majority colour are only dependent on the probabilities that one of the colours is in majority. For example, if the first box is red, the probability that red is in majority increases. Therefore, if $\alpha$ is big enough, the expected loss for opening another box could be higher than the probabilities that one of the colours is in majority; thus the ideal observer would decide after one box is opened. This is the situation when $\alpha$ is 0.1 as in Figure \ref{fig:unlim_a0.1_gk1}. Here, the expected loss before any boxes are opened is 0.5 both for choosing blue and red as the majority colour. For the choice of opening a box, the expected loss is 0.308. This is then the choice an ideal observer would make before any boxes are opened. If the box that opens is blue, the expected loss for choosing that blue is the majority colour is 0.208, 0.792 for choosing red, and 0.260 for opening another box. Hence, the ideal observer would decide that blue is the majority colour. This problem is symmetric. That means that if the opened box is red, the expected loss for choosing that red is the majority colour is 0.208, 0.792 for choosing blue and 0.260 for opening another box. In this case, the expected loss is smallest when we choose red as the majority colour.
+\begin{figure}
+    \centering
+    \scalebox{1}{\input{tikz-trees/unlim_a0.1_gk1}}
+    \caption[IO solution, unlimited. $\alpha=0.1$,$\gamma=\kappa=1$]{A decision tree for an unlimited trial with $\alpha = 0.1$, that can be interpreted in the same way as Figure (input here).}
+    \label{fig:unlim_a0.1_gk1}
+\end{figure}
+
+In Figure \ref{fig:IO_trial2_a0.01} we see the Ideal Observer solution in trial 2 for a person with $\alpha=0.01$. Here we see that the Ideal Observer would choose after six boxes are opened, hence before we can be completely sure that red is the majority colour, but the probability is .... (find this one), so it is very likely that we choose the right colour here. The expected loss of choosing red is then (1-that prob), hence very low. 
+We see that if a participant has an $\alpha=0.05$, then an Ideal Observer would choose after two boxes are opened, as shown in Figure \ref{fig:IO_trial2_a0.05}.Then, the penalty for opening the next box is much higher than in Figure \ref{fig:IO_trial2_a0.01}, thus, the IO would choose sooner. 
+
+%\begin{figure}
+%    \centering
+%    \scalebox{0.5}{\input{tikz-trees/test_of_trial2_unlim_a0.01_gamma_kappa_1}}
+%    \caption{Trial 2, IO solution for a participant with $\alpha = 0.01$.}
+%    \label{fig:IO_trial2_a0.01}
+%\end{figure}
+%\begin{figure}
+%    \centering
+%    \scalebox{0.5}{\input{tikz-trees/trial2_unlim_a0.05_gk1}}
+%    \caption{Trial 2, IO solution for a participant with $\alpha = 0.05$.}
+%    \label{fig:IO_trial2_a0.05}
+%\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \scalebox{0.5}{\input{tikz-trees/trial2_unlim_a0.01_gk1}}
+        \caption[IO solution for trial 2. $\alpha=0.01$,$\gamma=\kappa=1$]{Trial 2, IO solution for a participant with $\alpha = 0.01$.}
+        \label{fig:IO_trial2_a0.01}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \scalebox{0.5}{\input{tikz-trees/trial2_unlim_a0.05_gk1}}
+        \caption[IO solution for trial 2. $\alpha=0.05$,$\gamma=\kappa=1$]{Trial 2, IO solution for a participant with $\alpha = 0.05$.}
+        \label{fig:IO_trial2_a0.05}
+    \end{minipage}
+\end{figure}
+
+As we have presented Ideal Observer solutions in the unlimited case for different values of $\alpha$, the next step is to show some of the solutions in the limited case. 
+
+\subsection{An Ideal Observer Solution in the Limited case}
+Having the expected losses in the limited case as given in \eqref{exp_loss_blue}, \eqref{exp_loss_red} and \eqref{exp_loss_limited_final}, we can visualise them in the same way as Figure \ref{fig:unlim_a0.0001_gk1}. In the limited trials, we have to parameters, $\alpha$ and $\beta$. Thus, we have solutions with both of these parameters varying. 
+
+
+\begin{figure}
+    \centering
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \scalebox{0.5}{\input{tikz-trees/lim_a0.01_b0.6_gk1}}
+        \caption[Limited something]{Limited, $\alpha=0.01$, $\beta=0.6$. $\gamma=\kappa=1$.}
+        \label{fig:lim_a0.01_b0.6_gk1}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \scalebox{0.5}{\input{tikz-trees/lim_a0.01_b0.4_gk1}}
+        \caption[Limited something]{Limited, $\alpha=0.01$, $\beta=0.4$. $\gamma=\kappa=1$.}
+        \label{fig:lim_a0.01_b0.4_gk1}
+    \end{minipage}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Maximum Likelihood estimates}
+
+\subsubsection{Notes to self}
+Kanskje presentere IO sol for noen participants, slik at mna kan sammenligne denne og de valgene de faktisk tok?
+
+klarer jeg å få de andre fargene litt svakere og den løsningen man faktisk har i feks trial 2 litt sterkere?
+
+
+\subsection{Confidence intervals}
+
+
+\section{Non-uniform Prior?}
+gamma nd kappa smaller give more 'weight' to the colour of the boxes that are oepned. hence, we choose earlier because the prob that blue is majority is bigger here than for unif if one blue box is opened. 
