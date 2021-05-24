@@ -70,6 +70,15 @@ As we can see in Figures \ref{fig:unlim_a0.0001_gk1}, \ref{fig:unlim_a0.01_gk1} 
     \end{minipage}
 \end{figure}
 
+\begin{figure}
+    \centering
+    \scalebox{0.7}{\input{tikz-trees/unlim_a_0.0_g_k_1}}
+    \caption[IO solution, unlimited. $\alpha=0.0001$, $\gamma=\kappa=1$]{Unlimited, $\alpha = 0.0001$, $\gamma=\kappa=1$.}
+    \label{fig:unlim_a0.0001_gk1}
+\end{figure}
+
+
+
 At some point, $\alpha$ could get so big that the ideal observer would decide what the majority colour is after only one box is opened. The expected loss for opening another box is dependent on both $\alpha$ and the expected losses for continuing to open boxes. In contrast, the expected losses for choosing the majority colour are only dependent on the probabilities that one of the colours is in majority. For example, if the first box is red, the probability that red is in majority increases. Therefore, if $\alpha$ is big enough, the expected loss for opening another box could be higher than the probabilities that one of the colours is in majority; thus the ideal observer would decide after one box is opened. This is the situation when $\alpha$ is 0.1 as in Figure \ref{fig:unlim_a0.1_gk1}. Here, the expected loss before any boxes are opened is 0.5 both for choosing blue and red as the majority colour. For the choice of opening a box, the expected loss is 0.308. This is then the choice an ideal observer would make before any boxes are opened. If the box that opens is blue, the expected loss for choosing that blue is the majority colour is 0.208, 0.792 for choosing red, and 0.260 for opening another box. Hence, the ideal observer would decide that blue is the majority colour. This problem is symmetric. That means that if the opened box is red, the expected loss for choosing that red is the majority colour is 0.208, 0.792 for choosing blue and 0.260 for opening another box. In this case, the expected loss is smallest when we choose red as the majority colour.
 \begin{figure}
     \centering
@@ -200,6 +209,57 @@ sentence about where we are and what we will do next.
 
 
 \subsection{Maximum Likelihood estimates}
+As we have presented some Ideal Observer solutions, we will now have a look at the parameter estimates we have found for each of the participants. 
+
+
+\subsubsection{Unlimited}
+Presentere mles i plott. Så velge ut noen og vise hva de gjør vs hva en IO med deres parametere ville gjort. 
+
+In the unlimited version, we have the parameters $\alpha$ and $\eta$. We have found the maximum likelihood estimates for both of these for each participant. These are plotted in Figure \ref{fig:plot_all_mles_unlim_zoom0}. We see that there are some outliers of both $\alpha$ and $\eta$. To get a better pictures of the other values, we zoom in closer to zero for both parameters. This is done i Figure \ref{fig:plot_all_mles_unlim_zoom1}, and we have zoomed even more in Figure \ref{fig:plot_all_mles_unlim_zoom2}.
+
+\begin{comment}
+\begin{figure}
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[scale=0.4]{pictures/plotted_mles_unlim_gk1.png}
+        \caption[All MLEs plotted, unlimited]{Caption}
+        \label{fig:plot_all_mles_unlim_zoom0}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[scale=0.4]{pictures/plotted_mles_unlim_gk1_zoom1.png}
+        \caption[Some MLEs plotted, unlimited]{Caption}
+        \label{fig:plot_all_mles_unlim_zoom1}
+    \end{minipage}
+\end{figure}
+\end{comment}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.7]{pictures/plotted_mles_unlim_gk1.png}
+    \caption[All MLEs plotted, unlimited]{Caption}
+    \label{fig:plot_all_mles_unlim_zoom0}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.7]{pictures/plotted_mles_unlim_gk1_zoom1.png}
+    \caption[Some MLEs plotted, unlimited]{Caption}
+    \label{fig:plot_all_mles_unlim_zoom1}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.7]{pictures/plotted_mles_unlim_gk1_zoom2.png}
+    \caption[Some MLEs plotted, unlimited]{Caption}
+    \label{fig:plot_all_mles_unlim_zoom2}
+\end{figure}
+
+
+
+\subsubsection{Limited}
+
+
 
 \subsubsection{Notes to self}
 Kanskje presentere IO sol for noen participants, slik at mna kan sammenligne denne og de valgene de faktisk tok?
