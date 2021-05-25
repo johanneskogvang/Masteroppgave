@@ -269,14 +269,46 @@ Burde jeg også se på en 'vanlig' person?
 
 
 \subsubsection{Limited}
-In the limited version, we have three parameters, $\alpha$, $\beta$ and $\eta$, and we have found maximum likelihood estimates for these for all of the 76 participants. 
-
+In the limited version, we have three parameters, $\alpha$, $\beta$ and $\eta$, and we have found maximum likelihood estimates for these for all of the 76 participants. The MLEs of $\alpha$ and $\eta$ for all participants are plotted in Figure \ref{fig:mles_limited_alpha_eta}. We see that many of the participants have $\hat{\alpha}=0$. (why??). 
+There are to prominent outliers, one with $\hat{\eta}=30.7573$ and another with $\hat{\alpha}=2.2997$. There are participants number 75 and 11, respectively. 
 \begin{figure}
     \centering
     \includegraphics[scale=0.7]{pictures/plotted_mles_limited_alpha_eta_gk1.png}
-    \caption{Mles limited, alpha and eta for all participants}
+    \caption{Mles limited, alpha and eta for all participants. Bytt ut disse plottene så du får på en hatt!!}
     \label{fig:mles_limited_alpha_eta}
 \end{figure}
+
+
+In Figure \ref{fig:mles_limited_alpha_beta}, we also see one person with a high value if $\hat{\beta}$. This is the same person that has the high $\hat{\eta}$ value, person 75. This person is also seen in the top right corner of Figure \ref{fig:mles_limited_beta_eta} that displays $\hat{\beta}$ and $\hat{\eta}$ for all participants. He has parameter estimates $\hat{\alpha}=0$, $\hat{\beta}=40.7103$ and $\hat{\eta}=30.7573$. This person chooses after one box is opened in all of the six limited trials, thus, the high value of $\hb$. At the same time, person 75 always chooses the colour of that first box as the majority colour, which is the colour with the least expected loss. The expected loss of opening the next box might be lower than the expected loss of choosing that as the majority colour. However, these expected losses are often close to each other, whereas the expected loss of choosing the other colour as the majority is often further away. 
+
+
+about that person with the big  eta vlaue being the same as teh one with the big beta value as seen in Figure \ref{fig:mles_limited_alpha_beta}. This is shown in Figure \ref{fig:mles_limited_beta_eta}, where the this is the person up to the right. 
+Talk about that she always chooses after one box, but then always chooses the colour w the least exp loss. 
+Find IO sol for this person
+
+Then talk about person 11. High alpha value and neg eta value, and the choices he makes.
+Also find IO sol for this person
+
+Then talk about the zoomed plots. 
+
+
+
+\begin{figure}
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[scale=0.38]{pictures/plotted_mles_limited_alpha_beta_gk1.png}
+        \caption{Mles limited, alpha and beta for all participants. Not zoomed}
+        \label{fig:mles_limited_alpha_beta}
+    \end{minipage}\hspace{0.2cm}%\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[scale=0.38]{pictures/plotted_mles_limited_alpha_beta_zoomed_gk1.png}
+        \caption{Mles limited, alpha and beta for participants, zoomed}
+        \label{fig:mles_limited_alpha_beta_zoomed}
+    \end{minipage}
+\end{figure}
+
 
 \begin{figure}
     \centering
@@ -292,7 +324,19 @@ In the limited version, we have three parameters, $\alpha$, $\beta$ and $\eta$, 
     \label{fig:mles_limited_alpha_beta_zoomed}
 \end{figure}
 
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.7]{pictures/plotted_mles_limited_beta_eta_gk1.png}
+    \caption{Mles limited, beta and eta for all participants}
+    \label{fig:mles_limited_beta_eta}
+\end{figure}
 
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.7]{pictures/plotted_mles_limited_beta_eta_zoomed_gk1.png}
+    \caption{Mles limited, beta and eta for all participants, zoomed}
+    \label{fig:mles_limited_beta_eta_zoomed}
+\end{figure}
 
 
 \subsubsection{Notes to self}
