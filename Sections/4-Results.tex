@@ -70,20 +70,6 @@ As we can see in Figures \ref{fig:unlim_a0.0001_gk1}, \ref{fig:unlim_a0.01_gk1} 
     \end{minipage}
 \end{figure}
 
-\begin{figure}
-    \centering
-    \scalebox{0.5}{\input{tikz-trees/binom_unlim_a0_g1_k1}}
-    \caption[IO solution, unlimited. $\alpha=0$, $\gamma=\kappa=1$]{Unlimited, $\alpha = 0$, $\gamma=\kappa=1$.}
-    \label{fig:unlim_a0_gk1}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \scalebox{0.5}{\input{tikz-trees/unif_unlim_a0}}
-    \caption[IO solution, unlimited. $\alpha=0$, $\gamma=\kappa=1$]{Unlimited, $\alpha = 0$, $\gamma=\kappa=1$.}
-    \label{fig:unif_unlim_a0_gk1}
-\end{figure}
-
 
 At some point, $\alpha$ could get so big that the ideal observer would decide what the majority colour is after only one box is opened. The expected loss for opening another box is dependent on both $\alpha$ and the expected losses for continuing to open boxes. In contrast, the expected losses for choosing the majority colour are only dependent on the probabilities that one of the colours is in majority. For example, if the first box is red, the probability that red is in majority increases. Therefore, if $\alpha$ is big enough, the expected loss for opening another box could be higher than the probabilities that one of the colours is in majority; thus the ideal observer would decide after one box is opened. This is the situation when $\alpha$ is 0.1 as in Figure \ref{fig:unlim_a0.1_gk1}. Here, the expected loss before any boxes are opened is 0.5 both for choosing blue and red as the majority colour. For the choice of opening a box, the expected loss is 0.308. This is then the choice an ideal observer would make before any boxes are opened. If the box that opens is blue, the expected loss for choosing that blue is the majority colour is 0.208, 0.792 for choosing red, and 0.260 for opening another box. Hence, the ideal observer would decide that blue is the majority colour. This problem is symmetric. That means that if the opened box is red, the expected loss for choosing that red is the majority colour is 0.208, 0.792 for choosing blue and 0.260 for opening another box. In this case, the expected loss is smallest when we choose red as the majority colour.
 \begin{figure}
@@ -91,6 +77,16 @@ At some point, $\alpha$ could get so big that the ideal observer would decide wh
     \scalebox{1}{\input{tikz-trees/unlim_a0.1_gk1}}
     \caption[IO solution, unlimited. $\alpha=0.1$,$\gamma=\kappa=1$]{A decision tree for an unlimited trial with $\alpha = 0.1$, that can be interpreted in the same way as Figure (input here).}
     \label{fig:unlim_a0.1_gk1}
+\end{figure}
+
+
+Write about the tree for $\alpha=0$. 
+That we assume that the IO would choose when the exp losses for opening and choosing both are zero. But having $\alpha$ equal to zero gives no restrictions in opening boxes, so one could continue opening boxes, but we actually know the answer after 6 boxes of one colour have been opened. And about this being almost the same as for $\alpha=0.0001$, because that small value of $\alpha$ is so close to zero that it hardy affects the solution. 
+\begin{figure}
+    \centering
+    \scalebox{0.5}{\input{tikz-trees/unif_unlim_a1e-15}}
+    \caption[IO solution, unlimited. $\alpha=0$, $\gamma=\kappa=1$]{Unlimited, $\alpha = 0$, $\gamma=\kappa=1$. Here we choose that the IO chooses majority colour if the expected loss of opening the next box is the same as for choosing majority colour (which both are zero if there are six of one of the colours. The expected loss for opening the next box will always be zero, in the whole trial).}
+    \label{fig:unlim_a0_gk1}
 \end{figure}
 
 In Figure \ref{fig:IO_trial2_a0.01} we see the Ideal Observer solution in trial 2 for a person with $\alpha=0.01$. Here we see that the Ideal Observer would choose after six boxes are opened, hence before we can be completely sure that red is the majority colour, but the probability is .... (find this one), so it is very likely that we choose the right colour here. The expected loss of choosing red is then (1-that prob), hence very low. 
@@ -214,15 +210,15 @@ sentence about where we are and what we will do next.
 
 
 
-\subsection{Maximum Likelihood estimates}
+\subsection{Maximum Likelihood Estimates}
 As we have presented some Ideal Observer solutions, we will now have a look at the parameter estimates we have found for each of the participants. 
 
 
 \subsubsection{Unlimited}
 Presentere mles i plott. Så velge ut noen og vise hva de gjør vs hva en IO med deres parametere ville gjort. 
 
-In the unlimited version, we have the parameters $\alpha$ and $\eta$. We have found the maximum likelihood estimates for both of these for each participant. These are plotted in Figure \ref{fig:plot_all_mles_unlim_zoom0}. We see that there are some outliers of both $\alpha$ and $\eta$. To get a better pictures of the other values, we zoom in closer to zero for both parameters. This is done i Figure \ref{fig:plot_all_mles_unlim_zoom1}, and we have zoomed even more in Figure \ref{fig:plot_all_mles_unlim_zoom2}.
-
+In the unlimited version, we have the parameters $\alpha$ and $\eta$. We have found the maximum likelihood estimates for both of these for each participant. These are plotted in Figure \ref{fig:plot_all_mles_unlim_zoom0}. We see that there are some outliers of both $\alpha$ and $\eta$. To get a better picture of the other values, we zoom in closer to zero for both parameters. This is done i Figure \ref{fig:plot_all_mles_unlim_zoom1}, and we have zoomed even more in Figure \ref{fig:plot_all_mles_unlim_zoom2}. Many of the participants have $\hat{\alpha}$ equal to or close to zero, meaning that they have none or little loss of opening boxes. 
+(litt usikker på hva jeg skal si om disse plottene?)
 \begin{comment}
 \begin{figure}
     \centering
@@ -262,9 +258,18 @@ In the unlimited version, we have the parameters $\alpha$ and $\eta$. We have fo
 \end{figure}
 
 
+ 
+If we look at the outliers in Figure \ref{fig:plot_all_mles_unlim_zoom0}, we find one person with a very high value of $\eta$ and small value of $\alpha$. This is person 58 (or: we call this person 1). In each of the three unlimited trial, this person chooses the majority colour exactly when there are six of one of the colours, which is when we can be completely sure what the true majority colour is. That means that Person 58 chooses after seven boxes are opened in trial 2, and she then chooses red. In trial 3 and 4 she chooses after 10 and 9 boxes are opened, respectively. Thus, she always chooses the decision with the least expected loss. This is the reason for the estimate of $\eta$ being so high. (something about this almost being the same as eta = infinity?) Person 58 has $\alpha=0.0016$, which is quite small. However, this might be because she does not open any more boxes than necessary. This might indicate a small loss of opening boxes, or some kind of reward of finishing early. However, this $\alpha$ value is so small that it would give an IO solution similar to the one in Figure \ref{fig:unlim_a0.0001_gk1}, such that one always chooses after six of one of the colours have been displayed. 
+
+Looking at the other outlier in Figure \ref{fig:plot_all_mles_unlim_zoom0}, person 13, we see that this person has a high value of $\alpha$ and a small value of $\eta$. In fact, the value of $\eta$ is negative,  with $\hat{\eta}=-0.4290$ and $\hat{\alpha}=4.222$. In trial 2, he chooses after two boxes are opened, where both boxes are red. In both trial 3 and 4, he chooses when three boxes are opened, where two of them are blue and one is red. He then chooses red as the majority colour despite the fact that choosing blue as the majority colour has lower expected loss. Thus, he tends to choose the decisions with higher expected losses, and therefore he has a negative estimate of $\eta$. He also chooses quite early, thus he gets a high estimate of $\alpha$. However, an ideal obs with this high alpha would always choose after 1 box. (hvorfor har jeg da fått en så høy alpha når denne personen velger etter to og tre bokser?)
+
+
+Burde jeg også se på en 'vanlig' person?
+
+
 
 \subsubsection{Limited}
-
+In the limited version, we have three parameters, $\alpha$, $\beta$ and $\eta$, and we have found maximum likelihood estimates for these for all of the 76 participants. 
 
 
 \subsubsection{Notes to self}
