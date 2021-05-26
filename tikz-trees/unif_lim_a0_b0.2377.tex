@@ -1,0 +1,86 @@
+
+\begin{tikzpicture}[
+    treenodeT/.style={
+      circle, align=center},
+    node distance=1cm,
+    ]
+    \DoNode{N0-0}{0.59765491850321}{0.59765491850321}{1}{green!70!black}{green!70!black}{0.4};
+    \DoNode[below of=N0-0, left of= N0-0]{N1-0}{0.88932158516988}{0.30598825183655}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->] (N0-0) -- (N1-0);
+    \DoNode[below of=N0-0, right of= N0-0]{N1-1}{0.30598825183655}{0.88932158516988}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->] (N0-0) -- (N1-1);
+    \DoNode[below of=N1-0, left of= N1-0]{N2-0}{0.98909920356704}{0.1367006795818}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->] (N1-0) -- (N2-0);
+    \DoNode[below of=N1-0, right of= N1-0]{N2-1}{0.62863742666667}{0.62863742666667}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->] (N1-0) -- (N2-1);
+    \draw[->] (N1-1) -- (N2-1);
+    \DoNode[below of=N1-1, right of= N1-1]{N2-2}{0.1367006795818}{0.98909920356704}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->] (N1-1) -- (N2-2);
+    \DoNode[below of=N2-0, left of= N2-0]{N3-0}{1.02131342303935}{0.06447889066525}{1}{blue}{blue}{0.4};
+    \draw[->] (N2-0) -- (N3-0);
+    \DoNode[below of=N2-0, right of= N2-0]{N3-1}{0.86851936296296}{0.36451936296296}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->] (N2-0) -- (N3-1);
+    \draw[->] (N2-1) -- (N3-1);
+    \DoNode[below of=N2-1, right of= N2-1]{N3-2}{0.36451936296296}{0.86851936296296}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->] (N2-1) -- (N3-2);
+    \draw[->] (N2-2) -- (N3-2);
+    \DoNode[below of=N2-2, right of= N2-2]{N3-3}{0.06447889066525}{1.02131342303935}{1}{red}{red}{0.4};
+    \draw[->] (N2-2) -- (N3-3);
+    \DoNode[below of=N3-1, left of= N3-1]{N4-1}{0.98372168487575}{0.17395304734362}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->] (N3-1) -- (N4-1);
+    \DoNode[below of=N3-1, right of= N3-1]{N4-2}{0.63851537782486}{0.63851537782486}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->] (N3-1) -- (N4-2);
+    \draw[->] (N3-2) -- (N4-2);
+    \DoNode[below of=N3-2, right of= N3-2]{N4-3}{0.17395304734362}{0.98372168487575}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->] (N3-2) -- (N4-3);
+    \DoNode[below of=N4-1, left of= N4-1]{N5-1}{1.02869904234757}{0.08158957125286}{1}{blue}{blue}{0.4};
+    \draw[->] (N4-1) -- (N5-1);
+    \DoNode[below of=N4-1, right of= N4-1]{N5-2}{0.87152128732849}{0.37717100484262}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->] (N4-1) -- (N5-2);
+    \draw[->] (N4-2) -- (N5-2);
+    \DoNode[below of=N4-2, right of= N4-2]{N5-3}{0.37717100484261}{0.87152128732849}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->] (N4-2) -- (N5-3);
+    \draw[->] (N4-3) -- (N5-3);
+    \DoNode[below of=N4-3, right of= N4-3]{N5-4}{0.08158957125286}{1.02869904234757}{1}{red}{red}{0.4};
+    \draw[->] (N4-3) -- (N5-4);
+    \DoNode[below of=N5-2, left of= N5-2]{N6-2}{0.99340856807512}{0.17181232394366}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->] (N5-2) -- (N6-2);
+    \DoNode[below of=N5-2, right of= N5-2]{N6-3}{0.63996193853428}{0.63996193853428}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->] (N5-2) -- (N6-3);
+    \draw[->] (N5-3) -- (N6-3);
+    \DoNode[below of=N5-3, right of= N5-3]{N6-4}{0.17181232394366}{0.99340856807512}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->] (N5-3) -- (N6-4);
+    \DoNode[below of=N6-2, left of= N6-2]{N7-2}{1.04403122807018}{0.07911894736842}{1}{blue}{blue}{0.4};
+    \draw[->] (N6-2) -- (N7-2);
+    \DoNode[below of=N6-2, right of= N6-2]{N7-3}{0.88637177304965}{0.35445687943262}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->] (N6-2) -- (N7-3);
+    \draw[->] (N6-3) -- (N7-3);
+    \DoNode[below of=N6-3, right of= N6-3]{N7-4}{0.35445687943262}{0.88637177304965}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->] (N6-3) -- (N7-4);
+    \draw[->] (N6-4) -- (N7-4);
+    \DoNode[below of=N6-4, right of= N6-4]{N7-5}{0.07911894736842}{1.04403122807018}{1}{red}{red}{0.4};
+    \draw[->] (N6-4) -- (N7-5);
+    \DoNode[below of=N7-3, left of= N7-3]{N8-3}{1.02716794117647}{0.144815}{1}{blue}{blue}{0.4};
+    \draw[->] (N7-3) -- (N8-3);
+    \DoNode[below of=N7-3, right of= N7-3]{N8-4}{0.64007321428571}{0.64007321428571}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->] (N7-3) -- (N8-4);
+    \draw[->] (N7-4) -- (N8-4);
+    \DoNode[below of=N7-4, right of= N7-4]{N8-5}{0.144815}{1.02716794117647}{1}{red}{red}{0.4};
+    \draw[->] (N7-4) -- (N8-5);
+    \DoNode[below of=N8-4, left of= N8-4]{N9-4}{0.92895952380952}{0.28610238095238}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->] (N8-4) -- (N9-4);
+    \DoNode[below of=N8-4, right of= N8-4]{N9-5}{0.28610238095238}{0.92895952380952}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->] (N8-4) -- (N9-5);
+    \DoNode[below of=N9-4, left of= N9-4]{N10-4}{1.11885}{0.11885}{1}{blue}{blue}{0.4};
+    \draw[->] (N9-4) -- (N10-4);
+    \DoNode[below of=N9-4, right of= N9-4]{N10-5}{0.61885}{0.61885}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->] (N9-4) -- (N10-5);
+    \draw[->] (N9-5) -- (N10-5);
+    \DoNode[below of=N9-5, right of= N9-5]{N10-6}{0.11885}{1.11885}{1}{red}{red}{0.4};
+    \draw[->] (N9-5) -- (N10-6);
+    \DoNode[below of=N10-5, left of= N10-5]{N11-5}{1.0}{0.0}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->] (N10-5) -- (N11-5);
+    \DoNode[below of=N10-5, right of= N10-5]{N11-6}{0.0}{1.0}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->] (N10-5) -- (N11-6);
+    
+\end{tikzpicture}
