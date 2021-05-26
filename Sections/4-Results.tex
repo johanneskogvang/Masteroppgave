@@ -80,8 +80,7 @@ At some point, $\alpha$ could get so big that the ideal observer would decide wh
 \end{figure}
 
 
-Write about the tree for $\alpha=0$. 
-That we assume that the IO would choose when the exp losses for opening and choosing both are zero. But having $\alpha$ equal to zero gives no restrictions in opening boxes, so one could continue opening boxes, but we actually know the answer after 6 boxes of one colour have been opened. And about this being almost the same as for $\alpha=0.0001$, because that small value of $\alpha$ is so close to zero that it hardy affects the solution. 
+As $\alpha$ is the loss we get when we open a box, we can imagine that it also could be zero. In Figure \ref{fig:unlim_a0_gk1} we see the decision tree for $\alpha=0$. When we have six boxes of one of the colours, for example red, the expected loss of choosing red as the majority colour is zero, but so is the expected loss of opening the next box. Thus, and Ideal Observer would choose arbitrarily between those. However, we have decided here that the IO would rather choose majority colour than to open the next box if both of the expected losses are zero, such that one does not open any more boxes than necessary. We see that this tree resembles the tree where $\alpha=0.001$ as shown in Figure \ref{fig:unlim_a0.0001_gk1}. This indicated that such a small value of $\alpha$ is almost the same as having $\alpha$ equal to zero. 
 \begin{figure}
     \centering
     \scalebox{0.5}{\input{tikz-trees/unif_unlim_a1e-15}}
@@ -265,12 +264,13 @@ Looking at the other outlier in Figure \ref{fig:plot_all_mles_unlim_zoom0}, pers
 
 
 Burde jeg også se på en 'vanlig' person?
+for example person 28, $\ha=0$, $\hb=0.3628$ and $\he=10.5168$ ish. 
 
 
 
 \subsubsection{Limited}
 In the limited version, we have three parameters, $\alpha$, $\beta$ and $\eta$, and we have found maximum likelihood estimates for these for all of the 76 participants. The MLEs of $\alpha$ and $\eta$ for all participants are plotted in Figure \ref{fig:mles_limited_alpha_eta}. We see that many of the participants have $\hat{\alpha}=0$. (why??). 
-There are to prominent outliers, one with $\hat{\eta}=30.7573$ and another with $\hat{\alpha}=2.2997$. There are participants number 75 and 11, respectively. 
+There are two prominent outliers, one with $\hat{\eta}=30.7573$ and another with $\hat{\alpha}=2.2997$. There are participants number 75 and 11, respectively. 
 \begin{figure}
     \centering
     \includegraphics[scale=0.7]{pictures/plotted_mles_limited_alpha_eta_gk1.png}
@@ -278,24 +278,8 @@ There are to prominent outliers, one with $\hat{\eta}=30.7573$ and another with 
     \label{fig:mles_limited_alpha_eta}
 \end{figure}
 
-
-In Figure \ref{fig:mles_limited_alpha_beta}, we also see one person with a high value if $\hat{\beta}$. This is the same person that has the high $\hat{\eta}$ value, person 75. This person is also seen in the top right corner of Figure \ref{fig:mles_limited_beta_eta} that displays $\hat{\beta}$ and $\hat{\eta}$ for all participants. He has parameter estimates $\hat{\alpha}=0$, $\hat{\beta}=40.7103$ and $\hat{\eta}=30.7573$. This person chooses after one box is opened in all of the six limited trials, thus, the high value of $\hb$. At the same time, person 75 always chooses the colour of that first box as the majority colour, which is the colour with the least expected loss. The expected loss of opening the next box might be lower than the expected loss of choosing that as the majority colour. However, these expected losses are often close to each other, whereas the expected loss of choosing the other colour as the majority is often further away. Thus, he tends to choose decisions with low expected losses. That is the reason for the high value of $\he$ compared to the other participants. (but why is alpha 0?). In Figure \ref{fig:IO_sol_person_75_lim} we see the IO solution for a person with the parameters as person 75 has. We see that an IO with these estimates also would choose after one box is opened in all trials. 
-\begin{figure}
-    \centering
-    \scalebox{0.8}{\input{tikz-trees/lim_a0_b40.71_g1_k1}}
-    \caption[IO solution for person 75, limited]{IO sol for person 75}
-    \label{fig:IO_sol_person_75_lim}
-\end{figure}
-
-The other outlier in Figure \ref{fig:mles_limited_alpha_eta} is person 11 with $\ha=2.2997$, $\hb=0$ and $\he=-0.8474$. We also see this person as an outlier in Figure \ref{fig:mles_limited_alpha_beta} that shows the MLEs of $\alpha$ and $\beta$ in the limited trial. 
-
-Then talk about person 11. High alpha value and neg eta value, and the choices she makes.
-Also find IO sol for this person
-
-Then talk about the zoomed plots. (maybe general about the zoomed plots should be before you give examples of participants)?
-
-
-
+%Talk about the two other plots here, and the zoomed ones. 
+In Figure \ref{fig:mles_limited_alpha_beta} we have plotted the MLEs of $\alpha$ and $\beta$ for all participants. We see a person with a high value if $\hat{\beta}$. This is the same person that has the high $\hat{\eta}$ value in Figure \ref{fig:mles_limited_alpha_eta}, person 75. This person is also seen in the top right corner of Figure \ref{fig:mles_limited_beta_eta} that displays $\hat{\beta}$ and $\hat{\eta}$ for all participants.
 \begin{figure}
     \centering
     \begin{minipage}{0.48\textwidth}
@@ -311,28 +295,25 @@ Then talk about the zoomed plots. (maybe general about the zoomed plots should b
         \label{fig:mles_limited_alpha_beta_zoomed}
     \end{minipage}
 \end{figure}
-
-
 \begin{figure}
     \centering
     \includegraphics[scale=0.7]{pictures/plotted_mles_limited_alpha_beta_gk1.png}
     \caption{Mles limited, alpha and beta for all participants}
     \label{fig:mles_limited_alpha_beta}
 \end{figure}
-
 \begin{figure}
     \centering
     \includegraphics[scale=0.7]{pictures/plotted_mles_limited_alpha_beta_zoomed_gk1.png}
     \caption{Mles limited, alpha and beta for all participants, zoomed}
     \label{fig:mles_limited_alpha_beta_zoomed}
 \end{figure}
-
 \begin{figure}
     \centering
     \includegraphics[scale=0.7]{pictures/plotted_mles_limited_beta_eta_gk1.png}
     \caption{Mles limited, beta and eta for all participants}
     \label{fig:mles_limited_beta_eta}
 \end{figure}
+Zooming in more on the plot in Figure \ref{fig:mles_limited_alpha_beta}, like in Figure \ref{fig:mles_limited_alpha_beta_zoomed}, we see that many participants have $\ha=0$, and that $\hb$ typically is between 0.1 and 0.6. (what more should I say about this?? why is it like this? so many that have alpha=0??). In Figure \ref{fig:mles_limited_beta_eta_zoomed} we have zoomed in on the plot in Figure \ref{fig:mles_limited_beta_eta}. Here we see that many of the $\hb$ values are zero, and the ones different from zero is spread around between 0.1 and 0.6 as seen in the $\ha$-$\hb$ plot. We also see that participants with low $\he$ tends to have high $\hb$. WHY?? 
 
 \begin{figure}
     \centering
@@ -340,6 +321,29 @@ Then talk about the zoomed plots. (maybe general about the zoomed plots should b
     \caption{Mles limited, beta and eta for all participants, zoomed}
     \label{fig:mles_limited_beta_eta_zoomed}
 \end{figure}
+
+This is all about person 75, write sentecne about that:
+He has parameter estimates $\hat{\alpha}=0$, $\hat{\beta}=40.7103$ and $\hat{\eta}=30.7573$. This person chooses after one box is opened in all of the six limited trials, thus, the high value of $\hb$. At the same time, person 75 always chooses the colour of that first box as the majority colour, which is the colour with the least expected loss. The expected loss of opening the next box might be lower than the expected loss of choosing that as the majority colour. However, these expected losses are often close to each other, whereas the expected loss of choosing the other colour as the majority is often further away. Thus, he tends to choose decisions with low expected losses. That is the reason for the high value of $\he$ compared to the other participants. (but why is alpha 0?). In Figure \ref{fig:IO_sol_person_75_lim} we see the IO solution for a person with the parameters as person 75 has. We see that an IO with these estimates also would choose after one box is opened in all trials. 
+\begin{figure}
+    \centering
+    \scalebox{0.8}{\input{tikz-trees/lim_a0_b40.71_g1_k1}}
+    \caption[IO solution for person 75, limited]{IO sol for person 75}
+    \label{fig:IO_sol_person_75_lim}
+\end{figure}
+
+The other outlier in Figure \ref{fig:mles_limited_alpha_eta} is person 11 with $\ha=2.2997$, $\hb=0$ and $\he=-0.8474$. We also see this person as an outlier in Figure \ref{fig:mles_limited_alpha_beta} that shows the MLEs of $\alpha$ and $\beta$ in the limited trial. This person tends to choose the alternatives with the highest expected loss, and thus has a negative value of $\he$. Making those decisions also indicated that one are not afraid to make wrong choices, thus $\hb=0$. (why is $\ha=2.2997$??) A person with these parameter estimates has IO solution as shown in Figure \ref{fig:IO_sol_person_11_lim}. Having such a high value of $\ha$ makes the expected loss of opening the next box higher than the expected loss of choosing the majority colour before any boxes are opened. Recall that the expected loss of for example choosing red as the majority colour is the probability that blue is the majority colour given the colours of the boxes that are opened, as seen in \eqref{exp_loss_red}. As no boxes are opened, this probability is 0.5. The expected loss of opening the first box is $\alpha$ plus the expected loss when the first box is opened as seen in \eqref{exp_loss_limited_final}. Thus, the expected loss of opening the next box is much higher than the expected loss of choosing between blue and red randomly before any boxes are opened. 
+\begin{figure}
+    \centering
+    \scalebox{0.8}{\input{tikz-trees/lim_a2.2997_b0_g1_k1}}
+    \caption[IO solution for person 11, limited]{IO sol for person 11}
+    \label{fig:IO_sol_person_11_lim}
+\end{figure}
+
+
+
+
+
+
 
 
 \subsubsection{Notes to self}
