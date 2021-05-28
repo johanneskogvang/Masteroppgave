@@ -28,7 +28,7 @@ In \citet{schay2016introduction}, the theorem of total probability for continuou
 
 
 
-Consider, for example, two discrete random variables $U$ and $V$ that are conditionally independent given the continuous stochastic variable $\theta$. To find the probability that $U+V$ is equal to some integer $j$, we can use the theorem of total probability to condition on theta. Thus,
+Consider, for example, two discrete random variables $U$ and $V$ that are conditionally independent given the continuous stochastic variable $\Theta$. To find the probability that $U+V$ is equal to some integer $j$, we can use the theorem of total probability to condition on theta. Thus,
 \begin{equation*}
     P(U+V=j) = \int_{-\infty}^\infty P(U+V=j|\Theta=\theta)f_{\Theta}(\Theta=\theta) \: d\theta.
 \end{equation*}
@@ -185,10 +185,11 @@ Hence, the probability that we have $u$ successes out of twelve, given $\theta$,
 \label{binomial_12_ex}
     f(u|\theta) = \binom{12}{u} \theta^{u} (1-\theta)^{12-u}.
 \end{equation}
-As $\theta$ is a probability, its value is on the interval $[0,1]$. We know that the beta distribution is conjugated with the binomial distribution and has value between 0 and 1 \citep{statinf}, thus we choose a beta prior for $\theta$ with parameters $\gamma$ and $\kappa$. Hence,
-\begin{equation*}
+As $\theta$ is a probability, its value is on the interval $[0,1]$. We know that the beta distribution is conjugate with the binomial distribution and has value between 0 and 1 \citep{statinf}, thus we choose a beta prior for $\theta$ with parameters $\gamma$ and $\kappa$. Hence,
+\begin{equation}
+\label{theta_with_beta_prior}
     \Theta \sim \mathrm{Beta}(\gamma,\kappa). 
-\end{equation*}
+\end{equation}
 The prior density of $\Theta$ is then
 \begin{equation}
     \label{betadistribution}
@@ -202,7 +203,7 @@ We can find the posterior distribution of $\theta$ using \eqref{posterior_propor
         &\propto \binom{12}{u} \theta^{u} (1-\theta)^{12-u} \frac{1}{\mathrm{B}(\gamma,\kappa)}\theta^{\gamma-1}(1-\theta)^{\kappa-1}
     \end{aligned}
 \end{equation*}
-All the parts that do not include $\theta$ are constants, and we collect them together as one constant, denoted $C$. Then
+All the factors that do not include $\theta$ are constants, and we collect them together as one constant, denoted $C$. Then
 \begin{equation*}
     \begin{aligned}
         f(\theta|u) 
@@ -225,11 +226,11 @@ A loss function typically says something about the cost, or loss, of an action r
 \begin{equation*}
     \delta \in \Omega_{\delta}.
 \end{equation*}
-Additionally, let $z$ be the true value of $\delta$ or of some function dependent on $\delta$, where 
+Additionally, let $z$ be the true, but unknown state of nature, where 
 \begin{equation*}
     z \in \Omega_z.
 \end{equation*} 
-We can find a loss function that depends on $z$ and $\delta$, which we denote $L(z,\delta)$. This is then the loss when making a decisions, $\delta$, regarding the truth, $z$ \citep{statisticalDecisionTheoryLiese2008}.
+We can define a loss function that depends on $z$ and $\delta$, which we denote $L(z,\delta)$. This is then the loss when making a decisions, $\delta$, regarding $z$ \citep{statisticalDecisionTheoryLiese2008}.
 
 A loss function could for example be the 0-1-loss function. If for example $\Omega_{\delta}= \Omega_z = \{0,1\}$, the loss function could be
 \begin{equation}
@@ -288,14 +289,14 @@ As an example, consider the box task with twelve boxes that could be either blue
         1,& \text{if box }i \text{ is red.}
     \end{cases}
 \end{equation*}
-When $i$ boxes are opened, let $\textbf{X}_i$ denote the colours of the i boxes, such that
+When $i$ boxes are opened, let $\textbf{X}_{1:i}$ denote the colours of the i boxes, such that
 \begin{equation*}
-    \textbf{X}_i = (X_1,X_2,...,X_{i}).
+    \textbf{X}_{1:i} = (X_1,X_2,...,X_{i}).
 \end{equation*}
 Additionally, let $Z$ be the colour that is in majority when all twelve boxes are opened, the true majority colour. This is also as stochastic variable as it depends on the colours of the twelve boxes, the $X_i$'s. We define $Z$ as
 \begin{equation}
 \label{def_of_Z}
-    Z = I\Big(\sum_{j=1}^{12}X_j > 6\Big).
+    Z = I\left(\sum_{j=1}^{12}X_j > 6\right).
 \end{equation}
 Then,
 \begin{equation}
@@ -314,21 +315,21 @@ Also, let $\delta$ be the choice the participant makes about which colour that i
         1,& \text{if the participant chooses red as the majority colour}.
     \end{cases}
 \end{equation*}
-We can then define a loss function for the choice that the participant makes. This is a 0-1 loss as in \eqref{loss_func_indicator}, and the loss function can therefore be defined as 
+We can then define a loss function for the choice that the participant makes. This can be a 0-1 loss as in \eqref{loss_func_indicator}, and the loss function can therefore be defined as 
 \begin{equation}
 \label{loss_func_example}
     L(Z,\delta) = I(Z \neq \delta),
 \end{equation}
 Then, the loss is 0 if the participant chooses the right colour as the majority colour, and 1 if the wrong colour is chosen. 
 
-To find the expected loss, we take the expectation of the loss function. As $Z$ depends on the colours of the twelve boxes, we have to condition on the colour of the boxes that already are opened, $ \textbf{X}_i=\textbf{x}_i$, which we for short write as $\textbf{x}_i$ (litt usikker på hvordan jeg skal skrive dette?). The expectation of the loss function is then
+To find the expected loss, we take the expectation of the loss function. As $Z$ depends on the colours of the twelve boxes, we have to condition on the colour of the boxes that already are opened, $ X_{1:i}=x_{1:i}$. The expectation of the loss function is then
 \begin{equation*}
-    E[L(Z,\delta)|\textbf{x}_i] = E[I(Z\neq \delta)|\textbf{x}_i].
+    E[L(Z,\delta)|X_{1:i}=x_{1:i}] = E[I(Z\neq \delta)|X_{1:i}=x_{1:i}].
 \end{equation*}
 As in \eqref{expectation_of_loss_func_general}, this expectation is the probability that $\delta \neq Z$, but here the probability is dependent on $X$. Thus,
 \begin{equation}
 \label{exp_loss_theory}
-    E[L(Z,\delta)|\textbf{x}_i] = P(Z\neq \delta|\textbf{x}_i).
+    E[L(Z,\delta)|X_{1:i}=x_{1:i}] = P(Z\neq \delta|X_{1:i}=x_{1:i}).
 \end{equation}
 
 
@@ -340,7 +341,7 @@ As in \eqref{expectation_of_loss_func_general}, this expectation is the probabil
 
 
 \section{The Law of Total Expectation}
-Let $A_i$ be a partition of the sample space, $S$. Thus, there are $k$ non-overlapping parts, such that $A_i \cap A_j = \emptyset$, $\forall \:
+Let $\{A_1,A_2,...,A_k\}$ be a partition of the sample space, $S$. Thus, there are $k$ non-overlapping parts, such that $A_i \cap A_j = \emptyset$, $\forall \:
 i \neq j$. Then we also have that $S = A_1 \cup A_2 \cup...\cup A_k$. If we want to find the expectation of an event, $B$, and we have the expectation of $B$ on each of these partitions, we can use the law of total expectation. It states that
 \begin{equation}
     E[B] = \sum_i E[B|A_i]P(A_i).
@@ -368,11 +369,11 @@ Later we will use the law of total expectation when we find the expectation of a
 
 
 \section{The Softmax Function} \label{section_theory_softmax}
-The softmax function is commonly used in classification problems with more that two classes \citep{softmax}. Consider decisions $\delta$. If we want to find a probability mass function for $\delta$, we can use a softmax function. Let each of the decisons that can be made be classes, and let there be $D$ classes or decisions. Then, 
+The softmax function is commonly used in classification problems with more that two classes \citep{softmax}. Consider a decision, $\Delta$, which now is a stochastic variable for which we want to construct a distribution. We find a probability mass function for $\Delta=\delta$ using a softmax function. Let there be $D$ decisions, such that
 \begin{equation*}
     \delta \in \{0,1,2,...,D-1\}.
 \end{equation*}
-Additionally, let $\EE_{\delta}(\theta)$ be values tied to each decision that depends on some parameters, $\theta$. The probability mass function for each decision, $\delta$, could be found using a softmax function, such that
+Additionally, let $\EE_{\delta}(\vp)$ be values tied to each decision that depends on some parameters, $\vp$. The probability mass function for each decision, $\delta$, could be found using a softmax function, such that
 %\begin{equation*}
 %    \begin{aligned}
 %        f(\delta_i|\textbf{x}) = \frac{\text{exp}(- \eta \EE_{\delta_i})}{\sum_{j=0}^{K-1} \text{exp}(-\eta \EE_{\delta_j})}.
@@ -382,68 +383,64 @@ Additionally, let $\EE_{\delta}(\theta)$ be values tied to each decision that de
 \begin{equation}
 \label{softmax_in_theory}
     \begin{aligned}
-        f(\delta|\theta,\eta) = \frac{\text{exp}(- \eta \EE_{\delta}(\theta))}{\sum_{d=0}^{D-1} \text{exp}(-\eta \EE_{d}(\theta))},
+        f(\delta|\vp,\eta) = \frac{\text{exp}(- \eta \EE_{\delta}(\vp))}{\sum_{d=0}^{D-1} \text{exp}(-\eta \EE_{d}(\vp))},
     \end{aligned}
 \end{equation}
 where $\eta$ is some parameter. 
 
 
-These decisions could for example be the three choices you have each time a box is opened in the box task. These choices are that blue is the majority colour, or that red is, denoted $\delta=0$ and $\delta=1$, respectively. The last choice is to open another box, which is denoted $\delta=2$. Then, we let $\EE_0(\theta)$ be the expected loss when choosing that blue is the majority colour, similarly to \eqref{exp_loss_theory}. Additionally, we let $\EE_1(\theta)$ and $\EE_2(\theta)$ be the expected loss of choosing red as the majority colour and of opening another box, respectively. Then, the probability mass function for $\delta$ is as in \eqref{softmax_in_theory}. We then have probability mass functions for each of the three decisions that depends on the expected losses, parameters $\theta$ and some parameter $\eta$.
+These decisions could for example be the three choices you have each time a box is opened in the box task. These choices are that blue is the majority colour, or that red is, denoted $\delta=0$ and $\delta=1$, respectively. The last choice is to open another box, which is denoted $\delta=2$. Then, we let $\EE_0(\vp)$ be the expected loss when choosing that blue is the majority colour, similarly to \eqref{exp_loss_theory}. Additionally, we let $\EE_1(\vp)$ and $\EE_2(\vp)$ be the expected loss of choosing red as the majority colour and of opening another box, respectively. Then, the probability mass function for $\delta$ could be as in \eqref{softmax_in_theory}. We then have a probability mass function for each of the three decisions that depends on the expected losses, parameters $\vp$ and some parameter $\eta$.
 
 
 
 \section{Maximum Likelihood Estimation}
 \label{section_theory_mle}
 
-Maximum likelihood estimation is used to find estimates for parameters in a distribution. These are the estimates that, as the name implies, maximises the likelihood, and for short, we call them MLEs. Assume that we have probability distribution for a parameter $\Delta$, and consider $n$ samples, $\delta_1,\delta_2,...,\delta_n$, of $\Delta$ . Denote the probability mass function for $\Delta$ as
-\begin{equation*}
-    f(\delta_i|\theta), \quad i \in \{1,2,...,n\},
-\end{equation*}
-where $\theta$ contains the parameters in the probability mass function. If the $\delta_i$'s are independent, the likelihood function is defined as
+Maximum likelihood estimation is used to find estimates for parameters in a distribution. These are the estimates that, as the name implies, maximises the likelihood, and for short, we call them MLEs. Assume that we have probability distribution for a stochastic variable, $\Delta$, and consider $n$ samples, $\delta_1,\delta_2,...,\delta_n$, of $\Delta$. Denote the probability mass function for each of these $\delta$'s as $f(\delta|\vp)$, where $\vp$ contains the parameters in the probability mass function. If the $\delta_i$'s are independent, the likelihood function is defined as
 \begin{equation}
 \label{likelihood}
-    L(\theta|\delta_1,\delta_2,...,\delta_n) =  \prod_{i=1}^{n} f(\delta_i|\theta).
+    L(\vp|\delta_1,\delta_2,...,\delta_n) =  \prod_{i=1}^{n} f(\delta_i|\vp).
 \end{equation} 
-The MLEs are then the estimates of $\theta$ that maximises this function, and they are often denoted $\hat{\theta}$. It is often hard to maximize the likelihood function, then it might be easier to take the logarithm of the likelihood function and maximize that instead. This is called the log likelihood function, and is normally denoted as $l$. Thus,
+The MLEs are then the estimates of $\vp$ that maximises this function, and they are often denoted $\hat{\vp}$. It is often hard to maximize the likelihood function, then it might be easier to take the logarithm of the likelihood function and maximize that instead. This is called the log likelihood function, and is normally denoted as $l$. Thus,
 \begin{equation}
 \label{chap2:log_likelihood}
     \begin{aligned}
-        l(\theta|\delta_1,\delta_2,...,\delta_n) 
-        =& \text{log}\big(L(\theta|\delta_1,\delta_2,...,\delta_n)\big)\\
-        =& \text{log}\big(\prod_{i=1}^{n} f(\delta_i|\theta) \big).
+        l(\vp|\delta_1,\delta_2,...,\delta_n) 
+        =& \text{log}\left(L(\vp|\delta_1,\delta_2,...,\delta_n)\right)\\
+        =& \text{log}\left(\prod_{i=1}^{n} f(\delta_i|\vp) \right).
     \end{aligned}
 \end{equation}
 As the logarithm of products is the sum of the logarithms, we get that the log likelihood is
 \begin{equation}
 \label{chap2:log_likelihood2}
     \begin{aligned}
-        l(\theta|\delta_1,\delta_2,...,\delta_n) = \sum_{i=1}^n \text{log}(f(\delta_i|\theta)).
+        l(\vp|\delta_1,\delta_2,...,\delta_n) = \sum_{i=1}^n \text{log}(f(\delta_i|\vp)).
     \end{aligned}
 \end{equation}
 Maximizing this will give the same maximum point as if we maximize the likelihood function \citep{statinf}. 
 
-As an example, consider that the $\delta_i$'s have probability mass function as in \eqref{softmax_in_theory}. The parameters that we want to find estimates for are then $\theta$ and $\eta$. If we have $n$ samples of $\Delta$, denoted $\delta_i$, where $i \in \{1,2,...,n\}$,
+As an example, consider that the $\delta_i$'s have probability mass function as in \eqref{softmax_in_theory}. The parameters that we want to find estimates for are then $\vp$ and $\eta$. If we have $n$ samples of $\Delta$, denoted $\delta_i$, where $i \in \{1,2,...,n\}$,
 the likelihood function would be
 \begin{equation*}
     \begin{aligned}
-        L(\theta,\eta|\delta_1,\delta_2,...,\delta_n) 
-        =& \prod_{i=1}^{n} f(\delta_i|\theta,\eta)\\[6pt]
+        L(\vp,\eta|\delta_1,\delta_2,...,\delta_n) 
+        =& \prod_{i=1}^{n} f(\delta_i|\vp,\eta)\\[6pt]
         =& \prod_{i=1}^{n}
-        \frac{\text{exp}(- \eta \EE_{\delta_i}(\theta))}{\sum_{d=0}^{2} \text{exp}(-\eta \EE_{d}(\theta))}.
+        \frac{\text{exp}(- \eta \EE_{\delta_i}(\vp))}{\sum_{d=0}^{2} \text{exp}(-\eta \EE_{d}(\vp))}.
     \end{aligned}
 \end{equation*}
 
 The log likelihood would then be
 \begin{equation*}
     \begin{aligned}
-        l(\theta,\eta|\delta_1,\delta_2,...,\delta_n) =& \sum_{i=0}^N \text{log}\Big( \frac{e^{-\eta \EE_{\delta_{i}}(\theta)}}
-        {\sum_{d=0}^{2} \text{exp}(-\eta \EE_{d}(\theta))}\Big) \\[6pt]
-        =& \sum_{i=0}^N \Bigg(
+        l(\vp,\eta|\delta_1,\delta_2,...,\delta_n) =& \sum_{i=0}^N \text{log}\left( \frac{e^{-\eta \EE_{\delta_{i}}(\vp)}}
+        {\sum_{d=0}^{2} \text{exp}(-\eta \EE_{d}(\vp))}\right) \\[6pt]
+        =& \sum_{i=0}^N \left(
         -\eta \EE_{\delta_{i}} 
-        - \text{log}\Big(\sum_{d=0}^{2} \text{exp}(-\eta \EE_{d}(\theta))\Big) \Bigg).
+        - \text{log} \left( \sum_{d=0}^{2} \text{exp} \left(-\eta \EE_{d}(\vp)\right) \right) \right).
     \end{aligned}
 \end{equation*}
-The maximum likelihood estimators of $\theta$ and $\eta$ would then be the values that maximises this log likelihood function. We denote them as $\hat{\theta}$ and $\hat{\eta}$.
+The maximum likelihood estimators of $\vp$ and $\eta$ would then be the values that maximises this log likelihood function. We denote them as $\hat{\vp}$ and $\hat{\eta}$.
 
 
 
@@ -458,11 +455,11 @@ Consider a sample, $(\delta_1,\delta_2,...,\delta_n)$, where the samples are ide
 
 %Bootstrapping is a way of doing statistical inference using samples from a dataset. It can be used to measure the accuracy of parameters. We can for example find standard errors, bias, variance, or perhaps the most common, confidence intervals. In that way we do not need any formulas, only many samples \citep{bootstrap}. However, with many samples, we are dependent on a computer. 
 
-There are two types of bootstrapping, nonparametric and parametric. In the nonparametric bootstrap, we take samples from our original sample. Consider for example that you have a dataset $\boldsymbol{\delta}=(\delta_1,\delta_2,\delta_3,\delta_4,\delta_{5})$. A bootstrap sample of this might then be $(\delta_5,\delta_5,\delta_2,\delta_3,\delta_1)$ and another might be $(\delta_2,\delta_{4},\delta_{2},\delta_{2},\delta_{1})$. These are resampled versions of $\boldsymbol{\delta}$. Thus, the bootstrap samples consists of elements from the original dataset, but some of them might not appear at all in a bootstrap sample while others might appear more than once. Drawing $B$ of these samples, we can do inference about the population the original data is from. 
+There are two types of bootstrapping, nonparametric and parametric. In the nonparametric bootstrap, $\hat{F}$ is the empirical distribution of the data, and we take samples from our original sample. Consider for example that you have a dataset $\boldsymbol{\delta}=(\delta_1,\delta_2,\delta_3,\delta_4,\delta_{5})$. A bootstrap sample of this might then be $(\delta_5,\delta_5,\delta_2,\delta_3,\delta_1)$ and another might be $(\delta_2,\delta_{4},\delta_{2},\delta_{2},\delta_{1})$. These are resampled versions of $\boldsymbol{\delta}$. Thus, the bootstrap samples consists of elements from the original dataset, but some of them might not appear at all in a bootstrap sample while others might appear more than once. Drawing $B$ of these samples, we can do inference about the population the original data is from. 
 
-In the parametric bootstrap, we have to make assumptions about the population. Consider a sample, ($\delta_1,\delta_2,...,\delta_n$), from a distribution that has a probability mass function $f(\delta|\theta)$, where $\theta$ might be a vector of parameters \citep{statinf}. We can for example find an estimate for $\theta$, $\hat{\theta}$, using maximum likelihood estimation as in Chapter \ref{section_theory_mle}. When we have done that, we can draw new samples, denoted $\delta_i^*$ from $f(\delta|\hat{\theta})$, such that
+In the parametric bootstrap, we make assumptions about the population, and $\hat{F}$ is the parametric distribution. Consider a sample, ($\delta_1,\delta_2,...,\delta_n$), from a distribution that has a probability mass function $f(\delta|\vp)$, where $\vp$ might be a vector of parameters \citep{statinf}. We can for example find an estimate for $\vp$, $\hat{\vp}$, using maximum likelihood estimation as in Chapter \ref{section_theory_mle}. When we have done that, we can draw new samples, denoted $\delta_i^*$ from $f(\delta|\hat{\vp})$, such that
 \begin{equation*}
-    \delta_1^*,\delta_2^*,...,\delta_n^* \sim f(\delta|\hat{\theta}).
+    \delta_1^*,\delta_2^*,...,\delta_n^* \sim f(\delta|\hat{\vp}).
 \end{equation*}
 If we draw $B$ samples, we can, as for the nonparametric bootstrap, do inference. 
 
@@ -475,12 +472,12 @@ If we draw $B$ samples, we can, as for the nonparametric bootstrap, do inference
 \subsection{Confidence Intervals with Bootstrap Samples}
 \label{theory_ci_bootstrap}
 One way of doing inference is to find confidence intervals. When we have $B$ bootstrap samples, there are multiple methods for finding these.  
-A confidence interval (CI) for a parameter is an interval that will contain the true value of the parameter some per cents of the times an interval is constructed. If we for example have a 90\% CI, then the true value of the parameter will be in the interval 90\% of the times an interval is constructed \citep{bootstrap}.
+A confidence interval (CI) for a parameter is an interval that will contain the true value of the parameter a given proportion of the times an interval is constructed. If we for example have a 90\% CI, then the true value of the parameter will be in the interval 90\% of the times an interval is constructed \citep{bootstrap}.
 
 One method for finding CIs with bootstrap samples is the percentile method. The percentile method is simple to both understand and implement. However, these confidence intervals might be biased. Then, one could instead use approaches such as \textit{bias corrected and accelerated} intervals or \textit{approximate bootstrap confidence} intervals. For simplicity, we are in this report using the percentile confidence intervals. 
 
 
-Consider a situation with $B$ bootstrap samples. Let the vector $\theta$ be one parameter, $\eta$, such that  $\theta = \eta$. If the intention is to find a CI for $\eta$, we find the MLE of each of the $B$ samples and plot those samples in a histogram. If we want to find a 90\% confidence interval using the percentile method, then we find the 5-th and 95-th percentiles. The 5-th percentile is the value of $\hat{\eta}$ in the histogram where 5\% of the samples are below. The 95-th is where 5\% of the values are above. This is visualised in Figure \ref{percentile_ci_example}. Here we have 150 bootstrap samples, and we have that $\theta=\eta$. The MLE of $\eta$ is found for each sample. These values are plotted in a histogram, where the red dashed lines represent the 5 and 95 percentiles. That means that 5\% of the MLEs lie to the left of or at the left red line, and 5\% lie to the right or at the right red line. The 90\% CI for $\eta$, rounded to the closest integer, is then somewhere around (1,7) when we use the percentile method.
+Consider a situation with $B$ bootstrap samples. Let the vector $\vp$ be one parameter. If the intention is to find a CI for $\vp$, we find the MLE of each of the $B$ samples and plot those samples in a histogram. If we want to find a 90\% confidence interval using the percentile method, then we find the 5-th and 95-th percentiles. The 5-th percentile is the value of $\hat{\vp}$ in the histogram where 5\% of the samples are below. The 95-th is where 5\% of the values are above. This is visualised in Figure \ref{percentile_ci_example}. Here we have 150 bootstrap samples, and the MLE of $\vp$ is found for each sample. These values are plotted in a histogram, where the red dashed lines represent the 5 and 95 percentiles. That means that 5\% of the MLEs lie to the left of or at the left red line, and 5\% lie to the right or at the right red line. The 90\% CI for $\vp$, rounded to the closest integer, is then somewhere around (1.4,7) when we use the percentile method.
 \begin{figure}
     \centering
     %\includegraphics{}
