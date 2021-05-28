@@ -1,6 +1,6 @@
 \chapter{Results}
 
-As we have found the maximum likelihood estimates and their respective confidence intervals, next step is to show some of these results. However, we will firstly introduce the Ideal Observer solutions for different values of the parameters, which depends on the expected losses. We firstly look at the situations where $\gamma$ and $\kappa$ are 1, thus that the prior is uniform. 
+As we have found the maximum likelihood estimates and their respective confidence intervals, next step is to show some of these results. However, we will firstly introduce the Ideal Observer solutions for different values of the parameters, which depends on the expected losses. We firstly look at the situations where $\gamma=\kappa=1$, thus that the prior is uniform. 
 
 \section{Uniform Prior}
 When we present the results, we start with the results where we have a uniform prior. Recall that this means that it is equally likely that $\theta$ is anywhere between 0 and 1. We start with having a look at the probabilities that either blue or red are the majority colours. 
@@ -264,6 +264,13 @@ If we look at the outliers in Figure \ref{fig:plot_all_mles_unlim_zoom0}, we fin
 Looking at the other outlier in Figure \ref{fig:plot_all_mles_unlim_zoom0}, Individual 13, we see that she has a high value of $\alpha$ and a small value of $\eta$. In fact, the value of $\eta$ is negative,  with $\hat{\eta}=-0.4290$ and $\hat{\alpha}=4.222$. In Trial 2, she chooses after two boxes are opened, where both boxes are red. In both Trial 3 and Trial 4, she chooses when three boxes are opened, where two of them are blue and one is red. She then chooses red as the majority colour despite the fact that choosing blue as the majority colour has lower expected loss. Thus, she tends to choose the decisions with higher expected losses, and therefore she has a negative estimate of $\eta$. She also chooses quite early, thus she gets a high estimate of $\alpha$. However, an ideal obs with this high alpha would always choose after 1 box. (hvorfor har jeg da fått en så høy alpha når denne personen velger etter to og tre bokser?)
 
 
+If we look at one of the individuals that is not an outlier, we find, for example, individual 61. She has $\ha=0.0135$ and $\he=19.9432$. In the unlimited trials, she chooses what she thinks is the majority colour after five, six and four boxes are opened. She chooses majority colour before she can be completely sure, and therefore has $\ha>0$. When she chooses however, she chooses the colour with the least expected loss, and thus have a positive $\he$. An IO with the parameters equal to individual 61s estimates would choose after 3, 10 and 9 boxes were opened, this her decisions do not coincide with the IO decisions. 
+\begin{figure}
+    \centering
+    \scalebox{0.7}{\input{tikz-trees/unlim_a0.0135_g1_k1}}
+    \caption{IO sol unlim individual 61. $\ha=0.0135$.}
+    \label{fig:IO_sol_individual61}
+\end{figure}
 
 
 
@@ -342,7 +349,7 @@ The other outlier in Figure \ref{fig:mles_limited_alpha_eta} is individual numbe
 
 
 
-If we look at an individual that has estimates more in the middle of the range, we find, for example, individual 32. She has  $\ha=0$, $\hb=0.2377$, $\he=7.4835$. The IO solution for someone with these parameters is shown in Figure \ref{fig:IO_sol_lim_person32and32}. We see that we wait much longer before choosing here than for individuals 75 and 11. This is because the parameter estimates are much lower, thus the expected loss of opening the next box is lower than in Figures \ref{fig:IO_sol_person_75_lim} and \ref{fig:IO_sol_person_11_lim}.
+If we look at an individual that has estimates more in the middle of the range, we find, for example, individual 32. She has  $\ha=0$, $\hb=0.2377$, $\he=7.4835$. The IO solution for someone with these parameters is shown in Figure \ref{fig:IO_sol_lim_person32and33}. We see that we wait much longer before choosing here than for individuals 75 and 11. This is because the parameter estimates are much lower, thus the expected loss of opening the next box is lower than in Figures \ref{fig:IO_sol_person_75_lim} and \ref{fig:IO_sol_person_11_lim}.
 Individual 32 mostly chooses majority colour in Trial 5 after two boxes are opened, after three are opened in Trial 3, and after four in the last limited trials. An IO with the same parameters would actually end up with Trials 6, 8 and 9 terminating. thus, one might argue that individual 32 makes better choices than the IO. 
 \begin{figure}
     \centering
