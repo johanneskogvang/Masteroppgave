@@ -25,6 +25,7 @@ import time
                                 putting data from participants into a dataframe
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 '''
+
 #start by loading the data:
 data = pd.read_csv(r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\data1.csv',sep=',')
 data = data.rename(columns={'Unnamed: 0':'ID'}) #putting ID as the name of the first column. 
@@ -168,8 +169,7 @@ def neg_log_likel_unlim(x, person,gamma,kappa,all_choices):
             #her må du får med at choice noen ganger er -1, og da er loss lik 1, altså e_delta er 1 
             #nå sier jeg at det regnes som et faield trial hvos man ikke velger farge. altså loss er 1 for å ikke velge farge. 
             if choice == -1:
-                e_delta = 1 #men skal jeg egntlig har med noe her??? man har jo ikke noe exp loss når testen terminerer??
-            '''%%%%%%%%%%%%%%% obs, se linjen over, er dette riktig????%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'''    
+                e_delta = 1 #men skal jeg egntlig har med noe her??? man har jo ikke noe exp loss når testen terminerer??   
             else:
                 loss = 'Loss'+str(choice)
                 e_delta = expL[i][loss]
@@ -250,7 +250,7 @@ for person in range(len(data)):
         #eta_0 schould be a random number between 3 and 20:
         eta_0 = 3 + 17*random.random()
         x0_unlim = [eta_0,alpha_0]
-        mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(person,1,1,participant_choices_unlim(data,person)),bounds=bnds,method='L-BFGS-B')
+        mles = minimize(neg_log_likel_unlim,x0=x0_unlim,args=(person,0.5,0.5,participant_choices_unlim(data,person)),bounds=bnds,method='L-BFGS-B')
         if mles.fun < df_mles['fun'][person]:
             print('old:',df_mles['fun'][person])
             print('new:',mles.fun)
@@ -276,7 +276,7 @@ df_mles.head()
 #df_mles['fun'][0]
 
 #try saving this datafram in csv file:
-csv_file_name_and_loc = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\mles_unlimited_x0_200_times.csv'
+csv_file_name_and_loc = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=0.5\mles_unlimited_x0_200_times.csv'
 df_mles.to_csv(csv_file_name_and_loc)
 
 
@@ -405,7 +405,7 @@ def simulating_decisions_unlim(person, alpha_hat,eta_hat,gamma,kappa):
 
  
 def simulating_200(person,df,gamma,kappa):
-    num_sim = 200
+    num_sim = 1000
     alpha_200 = np.zeros(num_sim)
     eta_200 = np.zeros(num_sim)
     alpha_hat = df['alpha'][person]
@@ -480,8 +480,17 @@ print('CI eta',e_5,e_95)
 
 
 '''
-%%%%%%%%%%%%%%% finding CI's for all participants %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%% finding CI's for all participants %%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 '''    
+#path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\mles_unlimited_x0_200_times.csv'
+#df_unlim = pd.read_csv(path,sep=',',usecols=['ID','eta','alpha','fun','eta_0','alpha_0'])
+#df_unlim.head()
+#csv_file_name_and_loc = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\CI_2x0_200B.csv'
+#df_unlim.to_csv(csv_file_name_and_loc)
+#mabye save the samples of eta and alpha as well and plot them. need to find a way to do that
+
 
 path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\mles_unlimited_x0_200_times.csv'
 df_unlim = pd.read_csv(path,sep=',',usecols=['ID','eta','alpha','fun','eta_0','alpha_0'])
@@ -490,10 +499,14 @@ df_unlim['alpha_5_p'] = np.nan
 df_unlim['alpha_95_p'] = np.nan
 df_unlim['eta_5_p'] = np.nan
 df_unlim['eta_95_p'] = np.nan
+df_unlim['eta200'] = np.zeros(76,dtype='<U2') #to save the array containing the 200 eta values
+df_unlim['alpha200'] = np.zeros(76,dtype='<U2') 
 
 def ci(person,df):
     #adding columns that will contain the confidene intervals
     e, a = simulating_200(person,df_unlim,1,1)
+    df['eta200'][person] = e
+    df['alpha200'][person] = a
     a_5 = np.percentile(a,5)
     a_95 = np.percentile(a,95)
     #print('90% CI alpha: ',a_5,a_95)
@@ -509,6 +522,9 @@ def ci(person,df):
 
 #df_unlim = [ci(p,df_unlim) for p in range(76)]
 
+df_test = ci(0,df_unlim)
+df_test.head()
+
 for p in range(0,76):
     tic = time.perf_counter()
     print(p)
@@ -516,9 +532,18 @@ for p in range(0,76):
     toc = time.perf_counter()
     print(f'Code ran in {toc - tic:0.4f} seconds')
 
-#csv_file_name_and_loc = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\CI_2x0_200B.csv'
-#df_unlim.to_csv(csv_file_name_and_loc)
+csv_file_name_and_loc = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\bootstrap_1000_unlim.csv'
+df_unlim.to_csv(csv_file_name_and_loc)
 #mabye save the samples of eta and alpha as well and plot them. need to find a way to do that
+
+
+
+
+
+
+
+
+
 
 
 '''
@@ -933,7 +958,7 @@ for person in range(len(data)):
         alpha_0 = 0.1*random.random() #random number between 0 and 0.1
         beta_0 = random.random() #radnom number between 0 and 1
         x0_lim = [eta_0,alpha_0,beta_0]
-        mles = minimize(neg_log_likel_lim,x0=x0_lim,args=(data,person,0.1,0.1),bounds=bnds,method='L-BFGS-B')
+        mles = minimize(neg_log_likel_lim,x0=x0_lim,args=(data,person,0.5,0.5),bounds=bnds,method='L-BFGS-B')
         #mles = minimize(neg_log_likel_lim,x0=x0_lim,args=(data,person,1,1),bounds=bnds)
         if mles.fun < df_mles_lim['fun'][person]:
              print('old:',df_mles_lim['fun'][person])
@@ -949,7 +974,7 @@ for person in range(len(data)):
             
 df_mles_lim.head()
 
-path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\mles_limited_x0_200_times.csv"
+path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=0.5\mles_limited_x0_200_times.csv"
 df_mles_lim.to_csv(path)
 
         
@@ -1069,7 +1094,8 @@ def simulating_decisions_lim(person,eta_hat,alpha_hat,beta_hat,gamma,kappa):
 
 
 def simulating_200_lim(person,df,gamma,kappa):
-    num_sim = 200
+    #num_sim = 200
+    num_sim=1000
     alpha_200 = np.zeros(num_sim)
     beta_200 = np.zeros(num_sim)
     eta_200 = np.zeros(num_sim)
@@ -1136,11 +1162,18 @@ df_lim['beta200'] = np.zeros(76,dtype='<U2')
 #e,a,b = simulating_200_lim(0,df_lim,1,1)
 
 
+path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\bootstrap_limited.csv"
+df_lim.to_csv(path)
 
 
 
+path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\bootstrap_limited.csv'
+df_lim = pd.read_csv(path,sep=',',usecols=['ID','eta','alpha','beta','eta_0','alpha_0','beta_0','eta_5_p',
+                                           'eta_95_p','alpha_5_p','alpha_95_p','beta_5_p','beta_95_p','eta200',
+                                           'alpha200','beta200'],dtype={'eta200':'object','alpha200':'object','beta200':'object'})
 #bootstrap for alle 75 deltakere: 
-for person in range(76):
+for person in range(2,4): #start with 4 next time
+    tic = time.perf_counter()
     print(person)
     e,a,b = simulating_200_lim(person,df_lim,1,1)
     df_lim['eta200'][person] = e
@@ -1153,6 +1186,8 @@ for person in range(76):
     df_lim['alpha_95_p'][person] = np.percentile(a,95)
     df_lim['beta_5_p'][person] = np.percentile(b,5)
     df_lim['beta_95_p'][person] = np.percentile(b,95)
+    toc = time.perf_counter()
+    print(f'Code ran in {toc - tic:0.4f} seconds')
 
 
 path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\bootstrap_limited.csv"
