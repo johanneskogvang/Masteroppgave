@@ -964,31 +964,34 @@ When we have the MLEs for $\alpha$, $\beta$ and $\eta$, it remains to find confi
 To be able to say something about the uncertainty of the parameter estimates we have found, we now find confidence intervals for each of them. We then use parametric bootstrapping which is described in Chapter \ref{section_theory_bootstrap}.
 
 Consider a person with parameter estimates $\hat{\alpha}$, $\hat{\beta}$ and $\hat{\eta}$. Recall that $\hat{\vp}=\hat{\alpha}$ in the unlimited case and $\hat{\vp}=\hat{\alpha},\hat{\beta}$ in the limited case. 
-We can, using the softmax model, find the probabilities for each of the three choices in all the steps in the nine trials. That is, we find the probability that the participant chooses blue as the majority colour, that she chooses red and that she chooses to open the next box. The probability that she chooses blue as the majority colour, given the $i$ boxes that already are opened, is 
+We can, using the softmax model, find the probabilities for each of the three choices in all the steps in the nine trials. That is, we find the probability that the participant chooses blue as the majority colour, that she chooses red and that she chooses to open the next box. These probabilities are then
 \begin{equation}
-\label{prob_choose_blue}
-    P(\delta_{j}=0|\hat{\vp},\hat{\eta},x_{1:i}) = \frac{\text{exp}(- \hat{\eta} \EE^i_{0}(\hat{\vp}))}{\sum_{d=0}^{2} \text{exp}(-\hat{\eta} \EE^i_{d}(\hat{\vp}))}. 
+\label{probabilities_bootstrap}
+    P(\delta_{j}|\hat{\vp},\hat{\eta},x_{1:i}) = \frac{\text{exp}(- \hat{\eta} \EE^i_{\delta_j}(\hat{\vp}))}{\sum_{d=0}^{2} \text{exp}(-\hat{\eta} \EE^i_{d}(\hat{\vp}))},
 \end{equation}
-Similarly, the probability that she chooses red is
-\begin{equation}
-\label{prob_choose_red}
-    P(\delta_{j}=1|\hat{\vp},\hat{\eta},x_{1:i}) = \frac{\text{exp}(- \hat{\eta} \EE^i_{1}(\hat{\vp}))}{\sum_{d=0}^{2} \text{exp}(-\hat{\eta} \EE^i_{d}(\hat{\vp}))}, 
-\end{equation}
-and the probability that she chooses to open the next box is
-\begin{equation}
-\label{prob_choose_open_next}
-    P(\delta_{j}=2|\hat{\vp},\hat{\eta},x_{1:i}) = \frac{\text{exp}(- \hat{\eta} \EE^i_{2}(\hat{\vp}))}{\sum_{d=0}^{2} \text{exp}(-\hat{\eta} \EE^i_{d}(\hat{\vp}))}. 
-\end{equation}
+for $\delta_j \in \{0,1,2 \}$
 We can then for each opened box simulate the decisions the participant would make using these probabilities. Then we get whole new sequences of decisions. Consider for example Trial 2, where the order of the boxes is as shown in Figure \ref{fig:trial2_order}. Before any boxes are opened, we can imagine that the probability that the participant chooses to open the next box, that $\delta_0=2$, is quite high, and the other two probabilities quite small and of equal size. The first box that opens is a red one, $X_1=1$. The probability that she chooses red as the majority colour is then higher than the probability that she chooses blue, but whether it is higher than the probability of $\delta_1=2$ or not, depends on the parameter estimates. We find these probabilities and draw decisions until the participant has chosen what the majority colour is. We do that for each of the nine trials, and then end up with a new set of decisions. In the limited trials we either stop when $\delta_i=0$ or $\delta_i=1$, or when the test terminates. This is then a failed trial, and the loss is $\beta$. 
 
-For those simulated decisions, we find new estimates for the parameters, again using maximum likelihood estimation as in Chapter \ref{section:mles}. We simulate these decisions and find the new MLEs 200 times. Then we have 200 estimates for $\alpha$, 200 estimates for $\beta$ and 200 for $\eta$. For each of these three parameters we use the percentile method to construct confidence intervals as described in Chapter \ref{theory_ci_bootstrap}. We find 90\% CIs for each of the parameters, thus we find the 5-ht and 95-th percentiles. 
+For those simulated decisions, we find new estimates for the parameters, again using maximum likelihood estimation as in Chapter \ref{section:mles}. We simulate these decisions and find the new MLEs 1000 times. We then have 1000 bootstrap samples for all teh parameters for each participant. These samples are denoted
+\begin{equation*}
+    \{\vp^{*(b)}, b=1,2,...,1000 \}
+\end{equation*}
+and 
+\begin{equation*}
+    \{\eta^{*(b)}, b=1,2,...,1000 \}.
+\end{equation*}
+For each of these parameters we use the percentile method to construct confidence intervals as described in Chapter \ref{theory_ci_bootstrap}. We find 90\% CIs for each of the parameters, and we denote them as
+\begin{equation*}
+    [\hat{\vp}^{*(5)}_{1000},\hat{\vp}^{*(95)}_{1000}]
+\end{equation*}
+and
+\begin{equation*}
+    [\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}].
+\end{equation*}
+Thus, we are finding the 5-th and 95-th percentiles. 
 
-Skrive mer notasjon om CIs her!!
-feks er bootstraps samplesene $\vp^{*(b)}$ og $\eta^{*(b)}$, where $b\in (1,2,...,1000)$. De kan feks noteres som $\{\eta^{*(b)}, b=1,2,...,1000 \}$ og $\{\vp^{*(b)}, b=1,2,...,1000 \}$.
-finn notasjon på kvantiler i bootstrap boka. 
+We do this for each of the participants, and get confidence intervals for $\alpha$ and $\eta$ in the unlimited case and for $\alpha$, $\beta$ and $\eta$ in the limited case for all 76 participants. 
 
-We do this for each of the participants, and get confidence intervals for the three parameters for all 76 participants. 
-
-Si noe om at vi skal 'se på' bootstrap samplene. 
+Si noe om at vi skal 'se på' bootstrap samplene. hva mener du med det, Håkon??
 
 We now have an Ideal Observer solution of the box task and parameter estimates and confidence intervals for all three parameters for all of the 76 participants. Now we will show some results.

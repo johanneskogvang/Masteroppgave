@@ -211,13 +211,14 @@ sentence about where we are and what we will do next.
 
 
 \subsection{Maximum Likelihood Estimates}
+\label{chapter:mles}
 As we have presented some Ideal Observer solutions, we will now have a look at the parameter estimates we have found for each of the participants. 
 
 
 \subsubsection{Unlimited}
 Presentere mles i plott. Så velge ut noen og vise hva de gjør vs hva en IO med deres parametere ville gjort. 
 
-In the unlimited version, we have the parameters $\alpha$ and $\eta$. We have found the maximum likelihood estimates for both of these for each participant. These are plotted in Figure \ref{fig:plot_all_mles_unlim_zoom0}. We see that there are some outliers of both $\alpha$ and $\eta$. To get a better picture of the other values, we zoom in closer to zero for both parameters. This is done i Figure \ref{fig:plot_all_mles_unlim_zoom1}, and we have zoomed even more in Figure \ref{fig:plot_all_mles_unlim_zoom2}. Many of the participants have $\hat{\alpha}$ equal to or close to zero, meaning that they have none or little loss of opening boxes. 
+In the unlimited version, we have the parameters $\alpha$ and $\eta$. We have found the maximum likelihood estimates for both of these for each participant. These are plotted in Figure \ref{fig:plot_all_mles_unlim_zoom0}. We see that there are some outliers of both $\ha$ and $\he$. To get a better picture of the other values, we zoom in closer to zero for both parameters. This is done i Figure \ref{fig:plot_all_mles_unlim_zoom1}, and we have zoomed even more in Figure \ref{fig:plot_all_mles_unlim_zoom2}. Many of the participants have $\hat{\alpha}$ equal to or close to zero, meaning that they have none or little loss of opening boxes. 
 (litt usikker på hva jeg skal si om disse plottene?)
 \begin{comment}
 \begin{figure}
@@ -261,7 +262,7 @@ In the unlimited version, we have the parameters $\alpha$ and $\eta$. We have fo
  
 If we look at the outliers in Figure \ref{fig:plot_all_mles_unlim_zoom0}, we find one participant with a very high value of $\eta$ and small value of $\alpha$. This is individual 58. In each of the three unlimited trials, this individual chooses the majority colour exactly when there are six of one of the colours, which is when we can be completely sure what the true majority colour is. That means that individual 58 chooses after seven boxes are opened in Trial 2, and she then chooses red. In Trials 3 and 4 she chooses after 10 and 9 boxes are opened, respectively. Thus, she always chooses the decision with the least expected loss. This is the reason for the estimate of $\eta$ being so high. (something about this almost being the same as eta = infinity?) Individual 58 has $\alpha=0.0016$, which is quite small. However, this might be because she does not open any more boxes than necessary. This might indicate a small loss of opening boxes, or some kind of reward of finishing early. However, this $\alpha$ value is so small that it would give an IO solution similar to the one in Figure \ref{fig:unlim_a0.0001_gk1}, such that one always chooses after six of one of the colours have been displayed. 
 
-Looking at the other outlier in Figure \ref{fig:plot_all_mles_unlim_zoom0}, Individual 13, we see that she has a high value of $\alpha$ and a small value of $\eta$. In fact, the value of $\eta$ is negative,  with $\hat{\eta}=-0.4290$ and $\hat{\alpha}=4.222$. In Trial 2, she chooses after two boxes are opened, where both boxes are red. In both Trial 3 and Trial 4, she chooses when three boxes are opened, where two of them are blue and one is red. She then chooses red as the majority colour despite the fact that choosing blue as the majority colour has lower expected loss. Thus, she tends to choose the decisions with higher expected losses, and therefore she has a negative estimate of $\eta$. She also chooses quite early, thus she gets a high estimate of $\alpha$. However, an ideal obs with this high alpha would always choose after 1 box. (hvorfor har jeg da fått en så høy alpha når denne personen velger etter to og tre bokser?)
+Looking at the other outlier in Figure \ref{fig:plot_all_mles_unlim_zoom0}, Individual 13, we see that she has a high value of $\alpha$ and a small value of $\eta$. In fact, the value of $\eta$ is negative,  with $\hat{\eta}=-0.4290$ and $\hat{\alpha}=4.2224$. In Trial 2, she chooses after two boxes are opened, where both boxes are red. In both Trial 3 and Trial 4, she chooses when three boxes are opened, where two of them are blue and one is red. She then chooses red as the majority colour despite the fact that choosing blue as the majority colour has lower expected loss. Thus, she tends to choose the decisions with higher expected losses, and therefore she has a negative estimate of $\eta$. She also chooses quite early, thus she gets a high estimate of $\alpha$. However, an ideal obs with this high alpha would always choose after 1 box. (hvorfor har jeg da fått en så høy alpha når denne personen velger etter to og tre bokser?)
 
 
 If we look at one of the individuals that is not an outlier, we find, for example, individual 61. She has $\ha=0.0135$ and $\he=19.9432$. In the unlimited trials, she chooses what she thinks is the majority colour after five, six and four boxes are opened. She chooses majority colour before she can be completely sure, and therefore has $\ha>0$. When she chooses however, she chooses the colour with the least expected loss, and thus have a positive $\he$. An IO with the parameters equal to individual 61s estimates would choose after 3, 10 and 9 boxes were opened, this her decisions do not coincide with the IO decisions. 
@@ -276,7 +277,7 @@ If we look at one of the individuals that is not an outlier, we find, for exampl
 
 
 \subsubsection{Limited}
-In the limited version, we have three parameters, $\alpha$, $\beta$ and $\eta$, and we have found maximum likelihood estimates for these for all of the 76 participants. The MLEs of $\alpha$ and $\eta$ for all participants are plotted in Figure \ref{fig:mles_limited_alpha_eta}. We see that many of the participants have $\hat{\alpha}=0$. (why??). 
+In the limited version, we have three parameters, $\alpha$, $\beta$ and $\eta$, and we have found maximum likelihood estimates for these for all of the 76 participants. The MLEs of $\alpha$ and $\eta$ for all participants are plotted in Figure \ref{fig:mles_limited_alpha_eta}. We see that many of the participants have $\hat{\alpha}=0$. (why?? talk about that it might be unnecessary to have alpha in lmited model? ). 
 There are two prominent outliers, one with $\hat{\eta}=30.7573$ and another with $\hat{\alpha}=2.2997$. There are participants number 75 and 11, respectively. 
 \begin{figure}
     \centering
@@ -302,18 +303,18 @@ In Figure \ref{fig:mles_limited_alpha_beta} we have plotted the MLEs of $\alpha$
         \label{fig:mles_limited_alpha_beta_zoomed}
     \end{minipage}
 \end{figure}
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.7]{pictures/plotted_mles_limited_alpha_beta_gk1.png}
-    \caption{Mles limited, alpha and beta for all participants}
-    \label{fig:mles_limited_alpha_beta}
-\end{figure}
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.7]{pictures/plotted_mles_limited_alpha_beta_zoomed_gk1.png}
-    \caption{Mles limited, alpha and beta for all participants, zoomed}
-    \label{fig:mles_limited_alpha_beta_zoomed}
-\end{figure}
+%\begin{figure}
+%    \centering
+%    \includegraphics[scale=0.7]{pictures/plotted_mles_limited_alpha_beta_gk1.png}
+%    \caption{Mles limited, alpha and beta for all participants}
+%    \label{fig:mles_limited_alpha_beta}
+%\end{figure}
+%\begin{figure}
+%    \centering
+%    \includegraphics[scale=0.7]{pictures/plotted_mles_limited_alpha_beta_zoomed_gk1.png}
+%    \caption{Mles limited, alpha and beta for all participants, zoomed}
+%    \label{fig:mles_limited_alpha_beta_zoomed}
+%\end{figure}
 \begin{figure}
     \centering
     \includegraphics[scale=0.7]{pictures/plotted_mles_limited_beta_eta_gk1.png}
@@ -338,7 +339,7 @@ He has parameter estimates $\hat{\alpha}=0$, $\hat{\beta}=40.7103$ and $\hat{\et
     \label{fig:IO_sol_person_75_lim}
 \end{figure}
 
-The other outlier in Figure \ref{fig:mles_limited_alpha_eta} is individual number 11 with $\ha=2.2997$, $\hb=0$ and $\he=-0.8474$. We also her as an outlier in Figure \ref{fig:mles_limited_alpha_beta} that shows the MLEs of $\alpha$ and $\beta$ in the limited trial. This participant tends to choose the alternatives with the highest expected loss, and thus has a negative value of $\he$. Making those decisions also indicated that one are not afraid to make wrong choices, thus $\hb=0$. (why is $\ha=2.2997$??) An individual with these parameter estimates has IO solution as shown in Figure \ref{fig:IO_sol_person_11_lim}. Having such a high value of $\ha$ makes the expected loss of opening the next box higher than the expected loss of choosing the majority colour before any boxes are opened. Recall that the expected loss of for example choosing red as the majority colour is the probability that blue is the majority colour given the colours of the boxes that are opened, as seen in \eqref{exp_loss_red}. As no boxes are opened, this probability is 0.5. The expected loss of opening the first box is $\alpha$ plus the expected loss when the first box is opened as seen in \eqref{exp_loss_limited_final}. Thus, the expected loss of opening the next box is much higher than the expected loss of choosing between blue and red randomly before any boxes are opened. 
+The other outlier in Figure \ref{fig:mles_limited_alpha_eta} is individual number 11 with $\ha=2.2997$, $\hb=0$ and $\he=-0.8474$. We also see her as an outlier in Figure \ref{fig:mles_limited_alpha_beta} that shows the MLEs of $\alpha$ and $\beta$ in the limited trial. This participant tends to choose the alternatives with the highest expected loss, and thus has a negative value of $\he$. Making those decisions also indicated that one are not afraid to make wrong choices, thus $\hb=0$. (why is $\ha=2.2997$??) An individual with these parameter estimates has IO solution as shown in Figure \ref{fig:IO_sol_person_11_lim}. Having such a high value of $\ha$ makes the expected loss of opening the next box higher than the expected loss of choosing the majority colour before any boxes are opened. Recall that the expected loss of for example choosing red as the majority colour is the probability that blue is the majority colour given the colours of the boxes that are opened, as seen in \eqref{exp_loss_red}. As no boxes are opened, this probability is 0.5. The expected loss of opening the first box is $\alpha$ plus the expected loss when the first box is opened as seen in \eqref{exp_loss_limited_final}. Thus, the expected loss of opening the next box is much higher than the expected loss of choosing between blue and red randomly before any boxes are opened. (somethin about alpha being necessary when teh participants chooses badly, bc than beta is zero, but if they still open few boxes they tend to be reluctant to open to many. thus, tehy get a higher alpha value. Also say that these arguments hold for the other person with alpha different from zero.)
 \begin{figure}
     \centering
     \scalebox{0.8}{\input{tikz-trees/lim_a2.2997_b0_g1_k1}}
@@ -378,27 +379,83 @@ Individuals 32 and 33 have same estimates of alpha and beta, but different eta, 
 
 
 
-\subsection{Confidence intervals}
+\subsection{Confidence Intervals}
+We have presented and Ideal Observer solution of the box task and the maximum likelihood estimates for different participants. Now, we will show some of the confidence intervals that we have found. 
 
+\subsubsection{Unlimited}
+We start with the CIs for the unlimited case. In Chapter \ref{chapter:mles} we talked about individual 61 that has MLEs in the middle of the range of the MLEs. The MLEs are
+\begin{equation*}
+    \begin{aligned}
+        \ha &= 0.0135\\
+        \he &= 19.9432.
+    \end{aligned}
+\end{equation*}
+For this person we have 1000 bootstrap samples and thus 1000 values of both $\hat{\alpha}$ and $\he$. These are plotted in Figure \ref{fig:ci_unlim_person_61}. There, we have also plotted the confidence interval as black lines. We see that most of the bootstrap samples are accumulated in the bottom left corner. Thus we zoom in there in Figure \ref{fig:ci_unlim_person_61_zoomed}, where we also have plotted the CI. We have that
+\begin{equation*}
+    [\hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}] = [0,0.0362]
+\end{equation*}
+and
+\begin{equation*}
+    [\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}] = [10.0449,110.3661].
+\end{equation*}
+(jeg vet ikke helt hva jeg skal si om disse CI??)
 
 \begin{figure}
     \centering
     \begin{minipage}{0.48\textwidth}
         \centering
-        \includegraphics[scale=0.39]{pictures/ci_unlim_person61.png}
+        \includegraphics[scale=0.37]{pictures/ci_unlim_person61.png}
         \caption{ci unlim person 61}
         \label{fig:ci_unlim_person_61}
     \end{minipage}\hfill
     \begin{minipage}{0.48\textwidth}
         \centering
-        \includegraphics[scale=0.39]{pictures/ci_unlim_person61_zoomed.png}
-        \caption{ci unlim peron 61 zoomed}
+        \includegraphics[scale=0.37]{pictures/ci_unlim_person61_zoomed.png}
+        \caption{ci unlim person 61 zoomed}
         \label{fig:ci_unlim_person_61_zoomed}
     \end{minipage}
 \end{figure}
 
+In Chapter \ref{chapter:mles} we also talked about individual number 13 that had a high $\ha$ compared to the other participants. Her MLEs are
+\begin{equation*}
+    \begin{aligned}
+        \ha &= 4.2224\\
+        \he &= -0.4290.
+    \end{aligned}
+\end{equation*}
+The 1000 bootstrap samples for participant number 13 are plotted in Figure \ref{fig:ci_unlim_person_13}, and zoomed on the $\he$ axis in Figure \ref{fig:ci_unlim_person_13_zoomed}. We see that many of the values of $\ha$ are very high, much higher than the MLE. It might look like we have found local minimum points in the negative log likelihood function many times. Having values of $\ha$ this high indicates that one does not open any boxes before choosing, whereas this participant actually open two or three boxes before choosing majority colour. 
+
+persn 13: might lok like we find local minimums in many of the cases. 
+maybe see what the samples look like for alpha between 0 and 5? as 
+\begin{figure}
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[scale=0.37]{pictures/ci_unlim_person13.png}
+        \caption{ci unlim person 13}
+        \label{fig:ci_unlim_person_13}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[scale=0.37]{pictures/ci_unlim_person13_zoomed.png}
+        \caption{ci unlim person 13 zoomed}
+        \label{fig:ci_unlim_person_13_zoomed}
+    \end{minipage}
+\end{figure}
+
+Another outlier we looked at in Chapter \ref{chapter:mles} is individual number 58. 
+
+probabilities in \eqref{probabilities_bootstrap} are teh either 0 or 1.  
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.5]{pictures/ci_unlim_person58.png}
+    \caption{ci unlim person 58}
+    \label{fig:ci_unlim_person_58}
+\end{figure}
 
 
+\subsubsection{Limited}
 
 \section{Non-uniform Prior?}
 gamma nd kappa smaller give more 'weight' to the colour of the boxes that are oepned. hence, we choose earlier because the prob that blue is majority is bigger here than for unif if one blue box is opened. 
