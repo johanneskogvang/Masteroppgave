@@ -423,9 +423,17 @@ In Chapter \ref{chapter:mles} we also talked about individual number 13 that had
         \he &= -0.4290.
     \end{aligned}
 \end{equation*}
-The 1000 bootstrap samples for participant number 13 are plotted in Figure \ref{fig:ci_unlim_person_13}, and zoomed on the $\he$ axis in Figure \ref{fig:ci_unlim_person_13_zoomed}. We see that many of the values of $\ha$ are very high, much higher than the MLE. It might look like we have found local minimum points in the negative log likelihood function many times. Having values of $\ha$ this high indicates that one does not open any boxes before choosing, whereas this participant actually open two or three boxes before choosing majority colour. 
+The 1000 bootstrap samples for participant number 13 are plotted in Figure \ref{fig:ci_unlim_person_13}, and zoomed on the $\he$ axis in Figure \ref{fig:ci_unlim_person_13_zoomed}. The CIs are
+\begin{equation*}
+    [\hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}] = [0,1246.3510]
+\end{equation*}
+and
+\begin{equation*}
+    [\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}] = [-9.9272,18.3986].
+\end{equation*}
+We see that many of the values of $\ha$ are very high, much higher than the MLE, thus the upper limit of the CI is very high.  It might look like we have found local minimum points in the negative log likelihood function many times (jeg er ikke helt sikker på dette, men det kan være??). Having values of $\ha$ this high indicates that one does not open any boxes before choosing, whereas this participant actually open two or three boxes before choosing majority colour. Thus, the more relevant data points might be the ones closer to $\ha=0$. 
 
-persn 13: might lok like we find local minimums in many of the cases. 
+persn 13: might look like we find local minimums in many of the cases. 
 maybe see what the samples look like for alpha between 0 and 5? as 
 \begin{figure}
     \centering
@@ -445,23 +453,40 @@ maybe see what the samples look like for alpha between 0 and 5? as
 \begin{figure}
     \centering
     \includegraphics[scale=0.7]{pictures/ci_unlim_person13_zoomed2.png}
-    \caption{ci unlim person 13 zoomed even more}
+    \caption{ci unlim person 13 zoomed even more. Kanskje ikke zoome såå mye siden mle er på4.2???}
     \label{fig:ci_unlim_person_13_zoomed2}
 \end{figure}
 
-Another outlier we looked at in Chapter \ref{chapter:mles} is individual number 58. 
-
-probabilities in \eqref{probabilities_bootstrap} are teh either 0 or 1.  
-
+Another outlier we looked at in Chapter \ref{chapter:mles} is individual number 58. The MLEs are 
+\begin{equation*}
+    \begin{aligned}
+        \ha &= 0.0016\\
+        \he &= 443422.7.
+    \end{aligned}
+\end{equation*}
+Having such a high value of $\he$ makes the probabilities in \eqref{probabilities_bootstrap} be approximate either zero or one. This, when we draw decisions based on those probabilities, we will always end up with the same decisions, and those are the decisions that the participant have made. Thus, all the simulated decisions are identical to the decisions the participant has made, and the MLEs will be identical. Thus, the length of the two CIs will be zero, and the values will be equal to the MLEs. Hence, the CIs are
+\begin{equation*}
+    [\hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}] = [0.0016,0.0016]
+\end{equation*}
+and
+\begin{equation*}
+    [\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}] = [443422.7,443422.7].
+\end{equation*}
+We also see in Figure \ref{fig:ci_unlim_person_58} that all the data points are collected at one spot. 
 \begin{figure}
     \centering
-    \includegraphics[scale=0.5]{pictures/ci_unlim_person58.png}
+    \includegraphics[scale=0.7]{pictures/ci_unlim_person58.png}
     \caption{ci unlim person 58}
     \label{fig:ci_unlim_person_58}
 \end{figure}
 
+Having shown some of the confidence intervals for the unlimited trials we continue with the limited trials.
 
 \subsubsection{Limited}
+
+
+
+
 
 \section{Non-uniform Prior?}
 gamma nd kappa smaller give more 'weight' to the colour of the boxes that are oepned. hence, we choose earlier because the prob that blue is majority is bigger here than for unif if one blue box is opened. 

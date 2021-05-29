@@ -3,76 +3,104 @@
 %\section{Box task trials, something}
 \label{appendix_a}
 
-\begin{figure}
-    \centering
-    \scalebox{0.8}{\input{visualize_trials_tikz/trial2}}
-    %\includegraphics{}
-    \caption[Order of boxes in trial 2]{The order of the boxes in trial 2. This is an unlimited trial.}
-    \label{fig:trial2_order_appendix}
-\end{figure}
+
 
 \begin{figure}
     \centering
-    \scalebox{0.8}{\input{visualize_trials_tikz/trial3}}
-    %\includegraphics{}
-    \caption[Order of boxes in trial 3]{The order of the boxes in trial 3. This is an unlimited trial.}
-    \label{fig:trial3_order_appendix}
-\end{figure}
-
-\begin{figure}
-    \centering
+    \scalebox{0.8}{\input{visualize_trials_tikz/trial2}}\\
+    \vspace{0.1cm}
+    \scalebox{0.8}{\input{visualize_trials_tikz/trial3}}\\
+    \vspace{0.1cm}
     \scalebox{0.8}{\input{visualize_trials_tikz/trial4}}
-    %\includegraphics{}
-    \caption[Order of boxes in trial 4]{The order of the boxes in trial 4. This is an unlimited trial.}
-    \label{fig:trial4_order}
-\end{figure}
-
-
-\begin{figure}
-    \centering
-    \scalebox{0.8}{\input{visualize_trials_tikz/trial5}}
-    %\includegraphics{}
-    \caption[Order of boxes in trial 5]{The order of the boxes in trial 5. This is a limited trial that terminates after six boxes are opened.}
-    \label{fig:trial5_order_appendix}
+    \caption{Caption}
+    \label{fig:unlimited_trials_order}
 \end{figure}
 
 \begin{figure}
     \centering
-    \scalebox{0.8}{\input{visualize_trials_tikz/trial6}}
-    %\includegraphics{}
-    \caption[Order of boxes in trial 6]{The order of the boxes in trial 6. This is a limited trial that terminates after six boxes are opened.}
-    \label{fig:trial6_order}
+    \scalebox{0.8}{\input{visualize_trials_tikz/all_limited}}
+    \caption{Caption}
+    \label{fig:all_limited_trials_order}
 \end{figure}
-
-\begin{figure}
-    \centering
-    \scalebox{0.8}{\input{visualize_trials_tikz/trial7}}
-    \caption[Order of boxes in trial 7]{The order of the boxes in trial 7. This is a limited trial that terminates after nine boxes are opened.}
-    \label{fig:trial7_order}
+\begin{comment}
+\begin{figure}	
+	\begin{subfigure}{1\textwidth}
+		\scalebox{0.8}{\input{visualize_trials_tikz/trial5}}
+	\end{subfigure}
+	\\
+	\vfill
+	%\vspace{0.5cm}
+	\begin{subfigure}{1\textwidth}
+		\scalebox{0.8}{\input{visualize_trials_tikz/trial6}}
+	\end{subfigure}
+	\\
+	\vfill
+	%\vspace{0.2cm}
+	\begin{subfigure}{1\textwidth}
+		\scalebox{0.8}{\input{visualize_trials_tikz/trial7}}
+	\end{subfigure}
+	\\	%\vspace{0.2cm}
+	\vfill
+	\begin{subfigure}{1\textwidth}
+		\scalebox{0.8}{\input{visualize_trials_tikz/trial8}}
+	\end{subfigure}
+	\\%\vspace{0.2cm}
+	\vfill
+	\begin{subfigure}{1\textwidth}
+		\scalebox{0.8}{\input{visualize_trials_tikz/trial9}}
+	\end{subfigure}
+	\\%\vspace{0.2cm}
+	\vfill
+	\begin{subfigure}{1\textwidth}
+		\scalebox{0.8}{\input{visualize_trials_tikz/trial10}}
+	\end{subfigure}
+	\caption{Main figure caption}\label{fig:1}
 \end{figure}
-
-\begin{figure}
-    \centering
-    \scalebox{0.8}{\input{visualize_trials_tikz/trial8}}
-    %\includegraphics{}
-    \caption[Order of boxes in trial 8]{The order of the boxes in trial 8. This is a limited trial that terminates after six boxes are opened.}
-    \label{fig:trial8_order_appendix}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \scalebox{0.8}{\input{visualize_trials_tikz/trial9}}
-    %\includegraphics{}
-    \caption[Order of boxes in trial 9]{The order of the boxes in trial 9. This is a limited trial that terminates after six boxes are opened.}
-    \label{fig:trial9_order}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \scalebox{0.8}{\input{visualize_trials_tikz/trial10}}
-    %\includegraphics{}
-    \caption[Order of boxes in trial 10]{The order of the boxes in trial 10. This is a limited trial that terminates after six boxes are opened.}
-    \label{fig:trial10_order}
-\end{figure}
+\end{comment}
 
 Maybe include histograms here as well?
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[scale=0.38]{pictures/dtd2_histogram.png}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[scale=0.38]{pictures/dtd3_histogram.png}
+    \end{subfigure}
+    \vfill
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[scale=0.38]{pictures/dtd4_histogram.png}
+    \end{subfigure}
+    \caption{Caption}
+    \label{fig:dtd_unlimited_trials}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[scale=0.38]{pictures/dtd5_histogram.png}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[scale=0.38]{pictures/dtd6_histogram.png}
+    \end{subfigure}
+    \vfill
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[scale=0.38]{pictures/dtd7_histogram.png}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[scale=0.38]{pictures/dtd8_histogram.png}
+    \end{subfigure}
+     \vfill
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[scale=0.38]{pictures/dtd9_histogram.png}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[scale=0.38]{pictures/dtd10_histogram.png}
+    \end{subfigure}
+    \caption{Caption}
+    \label{fig:dtd_limited_trials}
+\end{figure}
