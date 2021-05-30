@@ -1,4 +1,18 @@
-\chapter{Future Work/Closing Remarks}
+\chapter{Closing Remarks}
+In this report we model decisions in the box task using a softmax model. There, we have parameters $\alpha$, $\beta$ and $\eta$. We have data from 76 participants that have done several trials of the box task, and we find maximum likelihood estimates for each participant and confidence intervals tied to each parameter using parametric bootstrapping. The MLEs are plotted for all participants, and the bootstrap samples and CIs are plotted together for each participants, and only a handful of them are shown here. 
+We also develop an Ideal Observer solution of the box task. This is done by finding the expected losses for the three choices we have each time a box is opened and then always making the decision with the least expected loss. These expected losses are the expected loss of choosing that blue is the majority colour, choosing that red is the majority colour and the expected loss of opening the next box. These IO solutions are visualised as decision trees which are dependent on parameters $\alpha$ and $\beta$.
+
+
+
+What have we done in this report? 
+\begin{itemize}
+    \item found a model for how participants have made choices in the box task. model it as a softmax function. 
+    \item found paramtere estimates and confidence intervals for each participant. using mle and parametric bootstrapping.
+    \item found an ideal observer solution of the box task
+\end{itemize}
+
+
+
 
 Future work:
 \begin{itemize}

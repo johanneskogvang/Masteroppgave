@@ -404,7 +404,7 @@ and
 \begin{equation*}
     E \big[L_{i+1}[Z,IO(x_{1:i},X_{i+1});\vp] |X_{1:i}=x_{1:i},X_{i+1}=1\big] = \EE^{i+1}_{IO(x_{1:i},1)}(\vp).
 \end{equation*}
-The expression for the expected loss of opening the next box in the unlimited case, \eqref{intermediate_exp_loss_2}, is then
+The expression for the expected loss of opening the next box in the unlimited case, \eqref{intermediate_exp_loss_2_unlim}, is then
 \begin{equation}
 \label{exp_loss_next_box_unlim}
     \begin{aligned}
@@ -550,7 +550,7 @@ We can find $f(\theta| U_i=u_i)$ using Bayes rule. Hence,
 \begin{equation*}
     f(\theta| U_i=u_i) = \frac{P(U_i=u_i|\Theta=\theta)f(\theta)}{P(U_i=u_i)},
 \end{equation*}
-which is proportional to the numerator of the right hand side as in \eqref{posterior_proportional}. Using that $U_i|\Theta$ has a binomial distribution with probability mass function as in \eqref{ui_prob_mass}, and that $\theta$ has a Beta prior, with density function as in \eqref{beta_density_func}, we get that
+which is proportional to the numerator of the right hand side as in \eqref{posterior_proportional}. Using that $U_i|\Theta$ has a binomial distribution with probability mass function as in \eqref{ui_prob_mass}, and that $\theta$ has a Beta prior, with density function as in \eqref{betadistribution}, we get that
 \begin{equation*}
     \begin{aligned}
         f(\theta|U_i=u_i) 
