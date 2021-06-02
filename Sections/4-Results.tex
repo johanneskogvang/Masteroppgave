@@ -420,7 +420,7 @@ Individual 32 chooses majority colour in Trial 5 after two boxes are opened, aft
 
 
 We also find that individuals 32 ad 33  have the same values of $\ha$ and $\hb$, but different values of $\he$. Thus, individual 33 has $\ha$ and $\hb$ as in \eqref{mles_limited_person32}, but $\he=10.5099$. Individual 33 opens 3, 3, 4, 5, 4 and 4 boxes in Trials 5, 6, 7, 8, 9 and 10, respectively. Thus, individual 33 opens more boxes that 32, but the choices are closer to the Ideal Observer choices. (men hvorfor har de samme estimater for alpha og beta??)
-Burde jeg skrive om at det er vanskel
+vanseklig å si noe om fordi vi ikke vet hvordan mleene tolkes?
 
 %for example person 28, $\ha=0$, $\hb=0.3628$ and $\he=10.5168$ ish. 
 
@@ -443,7 +443,8 @@ Burde jeg skrive om at det er vanskel
 We have presented and Ideal Observer solution of the box task and the maximum likelihood estimates for different participants. Now, we will show some of the confidence intervals that we have found. 
 
 \subsubsection{Unlimited}
-We start with the CIs for the unlimited case. In Figure \ref{fig:all_cis_alpha_unlim_v2} we see the confidence intervals for each person for $\alpha$ except for individual 13. The reason for her not being included here is that the percentiles in confidence interval is very large. Recall that the MLE of $\alpha$ for person 13 is very large, and we also have large values of $\ha_{1000}^{(5)}$ and $\ha_{1000}^{(95)}$. 
+We start with the CIs for the unlimited case. In Figure \ref{fig:all_cis_alpha_unlim_v2} we see the confidence intervals for $\alpha$ for
+each person except individual 13. The reason for her not being included here is that the percentiles in confidence interval are very large. Recall that the MLE of $\alpha$ for person 13 is very large, and we also have large values of $\ha_{1000}^{(5)}$ and $\ha_{1000}^{(95)}$. We see that many of the CIs include zero
 
 \begin{figure}
     \centering
@@ -452,8 +453,7 @@ We start with the CIs for the unlimited case. In Figure \ref{fig:all_cis_alpha_u
     \label{fig:all_cis_alpha_unlim_v2}
 \end{figure}
 
-In Figure \ref{fig:all_cis_eta_unlim_v2} we see all the CIs in the unlimited case. 
-
+In Figure \ref{fig:all_cis_eta_unlim_v2} we see all the CIs in the unlimited case for $\eta$. We see that some of the participants have the whole CI above 500, the threshold value of $\he$. We can for these participants conclude that they always make the decision with the least expected loss. We also see that many of the CIs include the threshold value. In Figure \ref{fig:all_cis_eta_unlim_zoomed} we have zoomed in on the CIs, and added line at zero. Only one CI include zero, the Ci for individual number 13. Recall that she has a negative value of $\he$ and a very high $\ha$.
 \begin{figure}
     \centering
     \includegraphics[scale=0.38]{pictures/test_cis_eta_unlim.png}
@@ -461,9 +461,15 @@ In Figure \ref{fig:all_cis_eta_unlim_v2} we see all the CIs in the unlimited cas
     \label{fig:all_cis_eta_unlim_v2}
 \end{figure}
 
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.38]{pictures/all_cis_unlim_eta_zoomed.png}
+    \caption{All cis eta unlim, unif prior, zoomed.}
+    \label{fig:all_cis_eta_unlim_zoomed}
+\end{figure}
 
 
-In Chapter \ref{chapter:mles} we talked about individual 61 that has MLEs in the middle of the range of the MLEs. The MLEs are as given i \eqref{mles_unilim_person61}.
+In Chapter \ref{chapter:mles} we talked about individual 61 that has MLEs in the middle of the range of the MLEs. The MLEs are as given in \eqref{mles_unilim_person61}.
 We have 1000 bootstrap samples and thus 1000 values of both $\hat{\alpha}$ and $\he$ for this participant. These are plotted in Figure \ref{fig:ci_unlim_person_61}. There, we have also plotted the confidence interval as black lines. We see that most of the bootstrap samples are accumulated in the bottom left corner. Thus we zoom in there in Figure \ref{fig:ci_unlim_person_61_zoomed}, where we also have plotted the CI. We have that
 \begin{equation*}
     [\hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}] = [0,0.0362]
@@ -546,6 +552,7 @@ We also see in Figure \ref{fig:ci_unlim_person_58} that all the data points are 
     \caption{ci unlim person 58, unif prior}
     \label{fig:ci_unlim_person_58}
 \end{figure}
+This is also the case for the other participants that have CIs of length zero. 
 
 Having shown some of the confidence intervals for the unlimited trials we continue with the limited trials.
 
