@@ -93,7 +93,7 @@ plt.hist(trial4,bins=[-0.5,0.5,1.5,2.5,3.5,4.5,5.5,6.5,7.5,8.5,9.5,10.5,11.5,12.
 plt.title('Trial 4')
 plt.xlabel('Draws to decision')
 plt.ylabel('Number of participants')
-plt.show
+plt.show()
 
 
 trial5 = data['BoxNormExtDtD5']
@@ -110,7 +110,7 @@ plt.hist(trial6,bins=[-0.5,0.5,1.5,2.5,3.5,4.5,5.5,6.5],color='mediumseagreen')
 plt.title('Trial 6')
 plt.xlabel('Draws to decision')
 plt.ylabel('Number of participants')
-plt.show
+plt.show()
 
 trial7 = data['BoxNormExtDtD7']
 trial7 = trial7.tolist()
@@ -118,7 +118,7 @@ plt.hist(trial7,bins=[-0.5,0.5,1.5,2.5,3.5,4.5,5.5,6.5,7.5,8.5,9.5],color='mediu
 plt.title('Trial 7')
 plt.xlabel('Draws to decision')
 plt.ylabel('Number of participants')
-plt.show
+plt.show()
 
 trial8 = data['BoxNormExtDtD8']
 trial8 = trial8.tolist()
@@ -134,7 +134,7 @@ plt.hist(trial9,bins=[-0.5,0.5,1.5,2.5,3.5,4.5,5.5,6.5],color='mediumseagreen')
 plt.title('Trial 9')
 plt.xlabel('Draws to decision')
 plt.ylabel('Number of participants')
-plt.show
+plt.show()
 
 trial10 = data['BoxNormExtDtD10']
 trial10 = trial10.tolist()
@@ -142,7 +142,7 @@ plt.hist(trial10,bins=[-0.5,0.5,1.5,2.5,3.5,4.5,5.5,6.5],color='mediumseagreen')
 plt.title('Trial 10')
 plt.xlabel('Draws to decision')
 plt.ylabel('Number of participants')
-plt.show
+plt.show()
 
 
 

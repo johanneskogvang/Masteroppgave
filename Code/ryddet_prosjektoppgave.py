@@ -281,6 +281,13 @@ def make_node_matrix(matrix):
             elif l0<l2 and round(l0,5) == round(l1,5): #red and blue has the smallest loss, but they are equal
                 col1 = "blue"
                 col2 = "red"
+            #de to elifene under her er nye:
+            elif (round(l0,5)==round(l2,5) and round(l0,5) < round(l1,5)):
+                col1 = "blue"
+                col2 = "green!70!black"
+            elif (round(l1,5)==round(l2,5) and round(l1,5) < round(l0,5)):
+                col1 = "green!70!black"
+                col2 = "red"
             
         
             name = "N" + str(i) + "-" + str(j)
@@ -331,21 +338,26 @@ def visualise_optimal(mat,file_location_and_name, radius):
                     string2 = "\draw[->] (" + str(mat[i-1][j]["name"]) + ") -- (" + mat[i][j]["name"] + ");\n    "
                     file.write(string2)
             elif j==i: #we are at the right side of the tree. the only possible parent is at (i-1,j-1)
-                if mat[i-1][j-1]["col1"] == "green!70!black": #if we continue to open boxes in the last node.
+            #!!!!!!!!!!!the and statement in next line is new!!!!!!!!!!!!!!!!!!!:
+                if mat[i-1][j-1]["col1"] == "green!70!black" and mat[i-1][j-1]["col2"] == "green!70!black": #if we continue to open boxes in the last node.
                     string = "\DoNode[below of=" + mat[i-1][j-1]["name"] + ", right of= " + mat[i-1][j-1]["name"] + "]{"+ mat[i][j]["name"] +"}{" + str(mat[i][j]["e0"]) + "}{" + str(mat[i][j]["e1"]) + "}{1}{" + str(mat[i][j]["col1"]) + "}{" + str(mat[i][j]["col2"]) + "}{" + str(radius) + "};\n    "
                     file.write(string)
                     string2 = "\draw[->] (" + str(mat[i-1][j-1]["name"]) + ") -- (" + mat[i][j]["name"] + ");\n    "
                     file.write(string2)
             else: #we are not on either side of the tree
-                if mat[i-1][j-1]["col1"]=="green!70!black": #if the left top node is a parent
+                #!!!!!!!!!and statemant is new!!!!
+                if mat[i-1][j-1]["col1"]=="green!70!black" and mat[i-1][j-1]["col2"]=="green!70!black": #if the left top node is a parent
                     string = "\DoNode[below of=" + mat[i-1][j-1]["name"] + ", right of= " + mat[i-1][j-1]["name"] + "]{"+ mat[i][j]["name"] +"}{" + str(mat[i][j]["e0"]) + "}{" + str(mat[i][j]["e1"]) + "}{1}{" + str(mat[i][j]["col1"]) + "}{" + str(mat[i][j]["col2"]) + "}{" + str(radius) + "};\n    "
                     file.write(string)
                     string2 = "\draw[->] (" + str(mat[i-1][j-1]["name"]) + ") -- (" + mat[i][j]["name"] + ");\n    "
                     file.write(string2)
-                    if mat[i-1][j]["col1"] == "green!70!black": #if the top right node also is a parent
+                    #!!!!!!!!!and statemant is new!!!!
+                    if mat[i-1][j]["col1"] == "green!70!black" and mat[i-1][j]["col2"] == "green!70!black": #if the top right node also is a parent
                         string3 = "\draw[->] (" + str(mat[i-1][j]["name"]) + ") -- (" + mat[i][j]["name"] + ");\n    "
                         file.write(string3)
-                elif mat[i-1][j-1]["col1"] != "green!70!black" and mat[i-1][j]["col1"]=="green!70!black": #left is not a parent, but the right is
+                #new: first ting behind first and third and
+                        #left top node not a parent, but right top node is
+                elif (mat[i-1][j-1]["col1"] != "green!70!black" or mat[i-1][j-1]["col2"] != "green!70!black") and (mat[i-1][j]["col1"]=="green!70!black" and mat[i-1][j]["col2"]=="green!70!black"): #left is not a parent, but the right is
                     string = "\DoNode[below of=" + mat[i-1][j]["name"] + ", left of= " + mat[i-1][j]["name"] + "]{"+ mat[i][j]["name"] +"}{" + str(mat[i][j]["e0"]) + "}{" + str(mat[i][j]["e1"]) + "}{1}{" + str(mat[i][j]["col1"]) + "}{" + str(mat[i][j]["col2"]) + "}{" + str(radius) + "};\n    "
                     file.write(string)
                     string2 = "\draw[->] (" + str(mat[i-1][j]["name"]) + ") -- (" + mat[i][j]["name"] + ");\n    "
@@ -392,7 +404,7 @@ def main(alpha,beta,unlim=True,binom=True,gamma=1,kappa=1):
     
     #unlimited binomial
     if unlim==True and binom==True:
-        file = file_loc + "\\binom_unlim_a"+str(alpha)+"_g"+str(gamma)+ "_k"+str(kappa)+".tex"
+        file = file_loc + "\\unlim_a"+str(alpha)+"_g"+str(gamma)+ "_k"+str(kappa)+".tex"
         mat_losses = make_matrix_unlim(n,alpha,gamma,kappa,binom=True)
         nodes = make_node_matrix(mat_losses)
         visualise_optimal(nodes,file,node_radius)
@@ -400,7 +412,7 @@ def main(alpha,beta,unlim=True,binom=True,gamma=1,kappa=1):
     
     #limited binomial
     if unlim==False and binom==True:
-        file = file_loc + "\\binom_lim_a"+str(alpha)+"_b"+str(beta)+"_g"+str(gamma)+ "_k"+str(kappa)+".tex"
+        file = file_loc + "\\lim_a"+str(alpha)+"_b"+str(beta)+"_g"+str(gamma)+ "_k"+str(kappa)+".tex"
         mat_losses = make_matrix_lim(n,alpha,beta,gamma,kappa,binom=True)
         nodes = make_node_matrix(mat_losses)
         visualise_optimal(nodes,file,node_radius)
@@ -409,15 +421,15 @@ def main(alpha,beta,unlim=True,binom=True,gamma=1,kappa=1):
     
     
 #uniform unlimited
-#main(0.01,1,True,False)
+#main(0.05,1,True,False)
 
 #uniform limited
-#main(0.01,0.4,False,False)
+#main(0,0.2377,False,False)
 
 
 #unlimited binomial:
-main(0.01,0.6,True,True,2,0.5)
+main(0.0135,0,True,True,1,1)
 
 
 #limited binomial:
-#main(0.01,0.6,False,True,1,1)
+#main(0.0,0.2377,False,True,1,1)

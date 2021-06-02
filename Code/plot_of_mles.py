@@ -11,7 +11,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\bootstrap_unlimited.csv'
+'''
+%%%%%%%%%%%%%%%%% Unlimited %%%%%%%%%%%%%%%%%%%%%%%%
+'''
+
+path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=0.5\bootstrap_1000_unlim.csv'
 df_unlim = pd.read_csv(path,sep=',')
 df_unlim=df_unlim.drop('Unnamed: 0',axis=1)
 
@@ -42,8 +46,8 @@ plt.scatter(alpha_vec,eta_vec,s=10,color='mediumseagreen')
 #plt.title(r"MLE of $\alpha$ and $\eta$ for the 76 participants, unlimited. $\gamma=\kappa=1$.")
 plt.xlabel(r'$\hat{\alpha}$')
 plt.ylabel(r'$\hat{\eta}$')
-plt.xlim([-0.01,0.2])
-plt.ylim([-10,300])
+plt.xlim([-0.01,0.20])
+plt.ylim([-50,4500])
 plt.show()
 
 #zoomed even more:
@@ -52,7 +56,8 @@ plt.scatter(alpha_vec,eta_vec,s=10,color='mediumseagreen')
 #plt.title(r"MLE of $\alpha$ and $\eta$ for the 76 participants, unlimited. $\gamma=\kappa=1$.")
 plt.xlabel(r'$\hat{\alpha}$')
 plt.ylabel(r'$\hat{\eta}$')
-plt.xlim([-0.01,0.075])
+plt.xlim([-0.002,0.07])
+#plt.ylim([-10,180])
 plt.ylim([-2,75])
 plt.show()
 
