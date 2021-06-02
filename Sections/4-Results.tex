@@ -444,8 +444,7 @@ We have presented and Ideal Observer solution of the box task and the maximum li
 
 \subsubsection{Unlimited}
 We start with the CIs for the unlimited case. In Figure \ref{fig:all_cis_alpha_unlim_v2} we see the confidence intervals for $\alpha$ for
-each person except individual 13. The reason for her not being included here is that the percentiles in confidence interval are very large. Recall that the MLE of $\alpha$ for person 13 is very large, and we also have large values of $\ha_{1000}^{(5)}$ and $\ha_{1000}^{(95)}$. We see that many of the CIs include zero
-
+each person except individual 13. The reason for her not being included here is that the percentiles in confidence interval are very large. Recall that the MLE of $\alpha$ for person 13 is very large, and we also have large values of $\ha_{1000}^{(5)}$ and $\ha_{1000}^{(95)}$. We see that many of the CIs include zero, meaning that many participants might not have that small loss of opening the next box. 
 \begin{figure}
     \centering
     \includegraphics[scale=0.38]{pictures/all_cis_unlim_alpha.png}
@@ -453,7 +452,7 @@ each person except individual 13. The reason for her not being included here is 
     \label{fig:all_cis_alpha_unlim_v2}
 \end{figure}
 
-In Figure \ref{fig:all_cis_eta_unlim_v2} we see all the CIs in the unlimited case for $\eta$. We see that some of the participants have the whole CI above 500, the threshold value of $\he$. We can for these participants conclude that they always make the decision with the least expected loss. We also see that many of the CIs include the threshold value. In Figure \ref{fig:all_cis_eta_unlim_zoomed} we have zoomed in on the CIs, and added line at zero. Only one CI include zero, the Ci for individual number 13. Recall that she has a negative value of $\he$ and a very high $\ha$.
+In Figure \ref{fig:all_cis_eta_unlim_v2} we see all the CIs in the unlimited case for $\eta$. We see that some of the participants have the whole CI above 500, the threshold value of $\he$. We can for these participants conclude that they always make the decision with the least expected loss. We also see that many of the CIs include the threshold value. In Figure \ref{fig:all_cis_eta_unlim_zoomed} we have zoomed in on the CIs, and added line at zero. Only one CI include zero, the CI for individual number 13. Recall that she has a negative value of $\he$ and a very high $\ha$.
 \begin{figure}
     \centering
     \includegraphics[scale=0.38]{pictures/test_cis_eta_unlim.png}
@@ -478,7 +477,7 @@ and
 \begin{equation*}
     [\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}] = [10.0449,110.3661].
 \end{equation*}
-(jeg vet ikke helt hva jeg skal si om disse CI??)
+(jeg vet ikke helt hva jeg skal si om disse CIene??)
 
 \begin{figure}
     \centering
@@ -496,7 +495,7 @@ and
     \end{minipage}
 \end{figure}
 
-In Chapter \ref{chapter:mles} we also talked about individual number 13 that had a high $\ha$ compared to the other participants as seen in \eqref{mles_unlim_person13}. The 1000 bootstrap samples for participant number 13 are plotted in Figure \ref{fig:ci_unlim_person_13}, and zoomed on the $\he$ axis in Figure \ref{fig:ci_unlim_person_13_zoomed}. The CIs are
+In Chapter \ref{chapter:mles} we also talked about individual number 13 that has a high $\ha$ compared to the other participants, as seen in \eqref{mles_unlim_person13}. The 1000 bootstrap samples for participant number 13 are plotted in Figure \ref{fig:ci_unlim_person_13}, and zoomed on the $\he$ axis in Figure \ref{fig:ci_unlim_person_13_zoomed}. The CIs are
 \begin{equation*}
     [\hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}] = [0,1246.3510]
 \end{equation*}
@@ -504,10 +503,8 @@ and
 \begin{equation*}
     [\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}] = [-9.9272,18.3986].
 \end{equation*}
-We see that many of the values of $\ha$ are very high, much higher than the MLE, thus the upper limit of the CI is very high.  It might look like we have found local minimum points in the negative log likelihood function many times (jeg er ikke helt sikker på dette, men det kan være??). Having values of $\ha$ this high indicates that one does not open any boxes before choosing, whereas this participant actually open two or three boxes before choosing majority colour. Thus, the more relevant data points might be the ones closer to $\ha=0$. 
+We see that many of the values of $\ha$ are very high, much higher than the MLE, thus the upper limit of the CI is very high.  It might look like we have found local minimum points in the negative log likelihood function many times (jeg er ikke helt sikker på dette, men det kan være??). Having values of $\ha$ this high indicates that one does not open any boxes before choosing, whereas this participant actually opens two or three boxes before choosing majority colour. Thus, the more relevant data points might be the ones closer to $\ha=0$. 
 
-persn 13: might look like we find local minimums in many of the cases. 
-maybe see what the samples look like for alpha between 0 and 5? as 
 \begin{figure}
     \centering
     \begin{minipage}{0.48\textwidth}
@@ -537,7 +534,7 @@ Another outlier we looked at in Chapter \ref{chapter:mles} is individual number 
         \he &= 443422.7.
     \end{aligned}
 \end{equation*}
-Having such a high value of $\he$ makes the probabilities in \eqref{probabilities_bootstrap} be approximate either zero or one. This, when we draw decisions based on those probabilities, we will always end up with the same decisions, and those are the decisions that the participant have made. Thus, all the simulated decisions are identical to the decisions the participant has made, and the MLEs will be identical. Thus, the length of the two CIs will be zero, and the values will be equal to the MLEs. Hence, the CIs are
+This value of $\he$ is above the threshold value, which makes the probabilities in \eqref{probabilities_bootstrap} be approximate either zero or one. Thus, when we draw decisions based on those probabilities, we will always end up with the same decisions, and those are the decisions that the participant have made. Thus, all the simulated decisions are identical to the decisions the participant has made, and the MLEs will be identical. Thus, the length of the two CIs will be zero, and the values will be equal to the MLEs. Hence, the CIs are
 \begin{equation*}
     [\hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}] = [0.0016,0.0016]
 \end{equation*}
@@ -557,7 +554,9 @@ This is also the case for the other participants that have CIs of length zero.
 Having shown some of the confidence intervals for the unlimited trials we continue with the limited trials.
 
 \subsubsection{Limited}
-plot of all cis except person 11 for alpha
+We will now have a look at the confidence intervals in the limited case. In Figure \ref{fig:all_cis_alpha_lim} we see the CIs for $\alpha$ for all of the participants except participant 11. In \eqref{mles_lim_person11} we see that she has a very high $\ha$, and thus the values of the CI are high. 
+
+
 
 
 \begin{figure}
@@ -583,7 +582,12 @@ plot of all cis except person 11 for alpha
     \label{fig:all_cis_eta_lim}
 \end{figure}
 
-
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.37]{pictures/all_cis_lim_eta_zoomed.png}
+    \caption{All cis eta, uniform prior, limited, zoomed.}
+    \label{fig:all_cis_eta_lim_zoomed}
+\end{figure}
 
 
 
