@@ -576,8 +576,7 @@ Having shown some of the confidence intervals for the unlimited trials we contin
 
 
 \subsubsection{Limited}
-We will now have a look at the confidence intervals in the limited case. In Figure \ref{fig:all_cis_alpha_lim} we see the CIs for $\alpha$ for all of the participants 
-
+We will now have a look at the confidence intervals in the limited case. In Figure \ref{fig:all_cis_alpha_lim} we see the CIs for $\alpha$ for all of the participants. Individual number 11 has a much larger upper limit of the CI that the range of the axis here, thus, the CI continues outside of the plot. We also see that participant 13 has a higher interval than the other participants. These to are also the individuals with the high values of $\ha$ in Figure \ref{fig:mles_limited_alpha_eta}. We also see that all participants except these two have upper limits smaller than 0.2, meaning that most participants has none or a small loss of opening the next box. 
 \begin{figure}
     \centering
     \includegraphics[scale=0.37]{pictures/all_cis_lim_alpha.png} %wrong name, right plot
@@ -585,8 +584,7 @@ We will now have a look at the confidence intervals in the limited case. In Figu
     \label{fig:all_cis_alpha_lim}
 \end{figure}
 
-
-
+In Figure \ref{fig:all_cis_beta}, we have plotted all the confidence intervals for $\beta$ in the limited case. Again, we see that individual 11 has  large interval that spans beyond the axis here. Many of the intervals include zero, which means that one does not feel any loss if the test terminates, although this is defined as a failed trial. We also see that most of the participants have upper limits below one, meaning that failed trials are not disastrous for most participants. 
 \begin{figure}
     \centering
     \includegraphics[scale=0.38]{pictures/all_cis_lim_beta.png}
@@ -594,14 +592,50 @@ We will now have a look at the confidence intervals in the limited case. In Figu
     \label{fig:all_cis_beta}
 \end{figure}
 
-
-
+We have also plotted the confidence interval for $\eta$ for each participant. This is shown in Figure \ref{fig:all_cis_eta_lim}. The CI for participant 70 is not included here as it is much higher than the range of the axis. There are only two CIs that include zero, the ones for participants 11 and 13. The rest of the intervals are above zero. That indicates that most participants make  choices with little expected loss, whereas individuals 11 and 13 might tend to make decisions with higher expected losses. Many participants have long intervals which might mean that there is uncertainty tied to their estimates. 
 \begin{figure}
     \centering
     \includegraphics[scale=0.37]{pictures/all_cis_lim_eta.png}
     \caption{All cis eta, uniform prior, limited. person 70 not included as ci too high.}
     \label{fig:all_cis_eta_lim}
 \end{figure}
+
+
+We have three participants where all of the confidence intervals have length zero. These are individuals 21, 70 and 75. As for individual 75 in the unlimited case, they have very high values of $\he$, which makes the probabilities of each of the decisions as seen in \eqref{probabilities_bootstrap} be approximately zero or approximately one. Thus, all the simulated decisions are the same as the decisions they have done. All of the 1000 MLEs are therefore the same, and finding the percentiles therefore give the same value as the MLEs. It should be noted that individual 75 has $\he=70.87$ as seen in \ref{mles_lim_person75}, which is far below the threshold value of 1000 that we defined for $\eta$. She has a quite high estimate of $\beta$, which makes the expected loss of opening the next box relatively high. Therefore, the expected losses differ considerably, and it takes a much lower value of $\he$ for the probabilities in \eqref{probabilities_bootstrap} to be approximately zero or one. 
+
+
+
+
+
+Then, indiv 11 with high values of alpha and beta and negative value of eta. (similar with 13, she can be interpreted in the same way, but 11 is more extreme)
+
+
+\begin{figure}
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[scale=0.37]{pictures/ci_lim_a_e_person11.png}
+        \caption{ci lim person 11}
+        \label{fig:ci_lim_a_e_person_11}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[scale=0.37]{pictures/ci_lim_a_e_person11_zoomed.png}
+        \caption{ci lim person 11 zoomed}
+        \label{fig:ci_lim_a_e_person_11_zoomed}
+    \end{minipage}
+\end{figure}
+
+
+
+Then about a more regualr person, person 40. 
+
+
+
+
+
+
+
 
 
 
@@ -618,12 +652,12 @@ In Figure \ref{fig:all_cis_eta_lim} we see all the CIs of $\eta$. We see here th
 
 
 
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.37]{pictures/all_cis_lim_eta_zoomed.png}
-    \caption{All cis eta, uniform prior, limited, zoomed.}
-    \label{fig:all_cis_eta_lim_zoomed}
-\end{figure}
+%\begin{figure}
+%    \centering
+%    \includegraphics[scale=0.37]{pictures/all_cis_lim_eta_zoomed.png}
+%    \caption{All cis eta, uniform prior, limited, zoomed.}
+%    \label{fig:all_cis_eta_lim_zoomed}
+%\end{figure}
 
 If we again have a look at person 32, we find that the CIs are
 \begin{equation*}
@@ -714,21 +748,7 @@ In Figures \ref{fig:ci_lim_a_b_person_11} and \ref{fig:ci_lim_a_e_person_11} we 
         \label{fig:ci_lim_a_b_person_11_zoomed}
     \end{minipage}
 \end{figure}
-\begin{figure}
-    \centering
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[scale=0.37]{pictures/ci_lim_a_e_person11.png}
-        \caption{ci lim person 11}
-        \label{fig:ci_lim_a_e_person_11}
-    \end{minipage}\hfill
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[scale=0.37]{pictures/ci_lim_a_e_person11_zoomed.png}
-        \caption{ci lim person 11 zoomed}
-        \label{fig:ci_lim_a_e_person_11_zoomed}
-    \end{minipage}
-\end{figure}
+
 In Figure \ref{fig:ci_lim_b_e_person_11} we see $\hb$ and $\he$ for the 1000 bootstrap samples plotted, and zoomed in Figure \ref{fig:ci_lim_b_e_person_11_zoomed}.
 \begin{figure}
     \centering
