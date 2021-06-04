@@ -1,9 +1,9 @@
 \appendix
-\chapter{Box task, trials, data,...}
+\chapter[Trials and Draws To Decision]{The Trials and Draws to Decision in the Box Task}
 %\section{Box task trials, something}
 \label{appendix_a}
 
-
+As we have data from 76 participants that have done the box task, we are presenting the order of the boxes in the nine trials they have done. We also include histograms of how many boxes the participants opened before they either chose the majority colour or the test terminated. This is called draws to decision. 
 
 \begin{figure}
     \centering
@@ -12,16 +12,17 @@
     \scalebox{0.8}{\input{visualize_trials_tikz/trial3}}\\
     \vspace{0.1cm}
     \scalebox{0.8}{\input{visualize_trials_tikz/trial4}}
-    \caption{Caption}
+    \caption[Order of boxes in the unlimited trials]{The order of the boxes in the three unlimited trials. That is, Trial 2, 3 and 4.}
     \label{fig:unlimited_trials_order}
 \end{figure}
 
 \begin{figure}
     \centering
     \scalebox{0.8}{\input{visualize_trials_tikz/all_limited}}
-    \caption{Caption}
+    \caption[Order of the boxes in the limited trials]{The order of the boxes in the six limited trials. That is, Trials 5, 6, 7, 8 , 9 and 10. We see that Trials 5, 7 and 8 terminate after nine boxes are opened, whereas the other trials terminate after six boxes are opened.}
     \label{fig:all_limited_trials_order}
 \end{figure}
+
 \begin{comment}
 \begin{figure}	
 	\begin{subfigure}{1\textwidth}
@@ -54,11 +55,12 @@
 	\begin{subfigure}{1\textwidth}
 		\scalebox{0.8}{\input{visualize_trials_tikz/trial10}}
 	\end{subfigure}
-	\caption{Main figure caption}\label{fig:1}
+	\caption[Order of the boxes in the limited trials]{The order of the boxes in the six limited trials. That is, Trials 5, 6, 7, 8 , 9 and 10. We see that Trials 5, 7 and 8 terminate after nine boxes are opened, whereas the other trials terminate after six boxes are opened.}
+	\label{fig:limited_trials_order}
 \end{figure}
 \end{comment}
 
-Maybe include histograms here as well?
+
 \begin{figure}
     \centering
     \begin{subfigure}{0.48\textwidth}
@@ -72,9 +74,10 @@ Maybe include histograms here as well?
     \begin{subfigure}{0.48\textwidth}
         \includegraphics[scale=0.38]{pictures/dtd4_histogram.png}
     \end{subfigure}
-    \caption{Caption}
+    \caption[Draws to decision in the unlimited trials]{Histogram of the draws to decisions for all participants in the three unlimited trials.}
     \label{fig:dtd_unlimited_trials}
 \end{figure}
+
 
 \begin{figure}
     \centering
@@ -101,6 +104,6 @@ Maybe include histograms here as well?
     \begin{subfigure}{0.48\textwidth}
         \includegraphics[scale=0.38]{pictures/dtd10_histogram.png}
     \end{subfigure}
-    \caption{Caption}
+    \caption[Draws to decision in the limited trials]{The draws to decisions for all participants in the six limited trials. That is, how many boxes they open before they choose what they think is the majority colour, or before the test terminates.}
     \label{fig:dtd_limited_trials}
 \end{figure}
