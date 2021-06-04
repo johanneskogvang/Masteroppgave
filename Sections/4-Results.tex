@@ -12,7 +12,7 @@ We present the probabilities in Figure \ref{fig:probability_gamma_kappa_1}. In t
 \begin{figure}
     \centering
     \scalebox{0.4}{\input{tikz-trees/probability_gamma_kappa_1}}
-    \caption[Probabilities, majority colour. $\gamma=\kappa=1$]{Probabilities, $\gamma=\kappa =1$.}
+    \caption[The probabilities of majority colour plotted. $\gamma=\kappa=1$]{This tree represents the probabilities that either red or blue are in majority in the box task with a uniform prior. The top node is the situation where no boxes are opened, where we do not have any information. Hence, the probabilities are equal, and the fraction that is blue inside the node is the same as the blue part. The circle around the nodes represents which colour that is most likely to be in majority, hence the circle is split between red and blue in the top node. The node down to the left is the situation when a blue box is opened, the node down to the right is when one red box is opened, and so forth.}
     \label{fig:probability_gamma_kappa_1}
 \end{figure}
 
@@ -47,7 +47,7 @@ We need to normalise these. The proportion of blue in each node would then be
 \begin{figure}
     \centering
     \scalebox{0.7}{\input{tikz-trees/unlim_a_0.0001_g_k_1}}
-    \caption[IO solution, unlimited. $\alpha=0.0001$, $\gamma=\kappa=1$]{Unlimited, $\alpha = 0.0001$, $\gamma=\kappa=1$.}
+    \caption[IO solution, unlimited. $\alpha=0.0001$, $\gamma=\kappa=1$]{This is a decision tree for the unlimited version of the box task with $\alpha = 0.0001$ and $\gamma=\kappa=1$. Green circles around each node show that opening another box has the least expected loss, and blue and red circles show that the least expected loss is for choosing the majority colour to be blue and red respectively. The colours inside the nodes represent the inverse expected losses. As in Figure \ref{fig:probability_gamma_kappa_1}, the top node is the situation before any boxes are opened, and the node down to the left of the top node is when one blue box is opened and so on.}
     \label{fig:unlim_a0.0001_gk1}
 \end{figure}
 
@@ -58,14 +58,14 @@ As we can see in Figures \ref{fig:unlim_a0.0001_gk1}, \ref{fig:unlim_a0.01_gk1} 
     \begin{minipage}{0.45\textwidth} 
         \centering
         \scalebox{0.5}{\input{tikz-trees/unif_unlim_a0.01v2}}
-        \caption[IO solution, unlimited. $\alpha=0.01$,$\gamma=\kappa=1$]{A decision tree for an unlimited trial with $\alpha = 0.01$. 
-        We can interpret this tree in the same way as Figure (input here) where the circles around each node shows which decision the Ideal Observer would do.}
+        \caption[IO solution, unlimited. $\alpha=0.01$,$\gamma=\kappa=1$]{A decision tree for an unlimited trial with $\alpha = 0.01$ and $\gamma=\kappa=1$.
+        We can interpret this tree in the same way as Figure \ref{fig:unlim_a0.0001_gk1} where the circles around each node shows which decision the Ideal Observer would do.}
         \label{fig:unlim_a0.01_gk1}
     \end{minipage}\hfill
-    \begin{minipage}{0.45\textwidth} 
+    \begin{minipage}{0.45\textwidth}
         \centering
         \scalebox{0.5}{\input{tikz-trees/unlim_a0.05_gk1}}
-        \caption[IO solution, unlimited. $\alpha=0.05$,$\gamma=\kappa=1$]{A decision tree in the unlimited case with $\alpha = 0.05$ that can be understood in the same way as Figure (input here) where the circles around each node shows which decision the Ideal Observer would do.}
+        \caption[IO solution, unlimited. $\alpha=0.05$,$\gamma=\kappa=1$]{A decision tree in the unlimited case with $\alpha = 0.05$ and $\gamma=\kappa=1$ that can be understood in the same way as Figure \ref{fig:unlim_a0.0001_gk1} where the circles around each node shows which decision the Ideal Observer would do.}
         \label{fig:unlim_a0.05_gk1}
     \end{minipage}
 \end{figure}
@@ -76,7 +76,7 @@ At some point, $\alpha$ could get so big that the ideal observer would decide wh
 \begin{figure}
     \centering
     \scalebox{1}{\input{tikz-trees/unlim_a0.1_gk1}}
-    \caption[IO solution, unlimited. $\alpha=0.1$,$\gamma=\kappa=1$]{A decision tree for an unlimited trial with $\alpha = 0.1$, that can be interpreted in the same way as Figure (input here).}
+    \caption[IO solution, unlimited. $\alpha=0.1$,$\gamma=\kappa=1$]{A decision tree for an unlimited trial with $\alpha = 0.1$, that can be interpreted in the same way as Figure \ref{fig:unlim_a0.0001_gk1}}
     \label{fig:unlim_a0.1_gk1}
 \end{figure}
 
@@ -85,7 +85,7 @@ As $\alpha$ is the loss we get when we open a box, we can imagine that it also c
 \begin{figure}
     \centering
     \scalebox{0.5}{\input{tikz-trees/unif_unlim_a0}}
-    \caption[IO solution, unlimited. $\alpha=0$, $\gamma=\kappa=1$]{Unlimited, $\alpha = 0$, $\gamma=\kappa=1$. Here we choose that the IO chooses majority colour if the expected loss of opening the next box is the same as for choosing majority colour (which both are zero if there are six of one of the colours. The expected loss for opening the next box will always be zero, in the whole trial).}
+    \caption[IO solution, unlimited. $\alpha=0$, $\gamma=\kappa=1$]{An Ideal Observer solution of the unlimited version of the box task with $\alpha = 0$ and $\gamma=\kappa=1$. This tree can be interpreted the same way as the tree in Figure \ref{fig:unlim_a0.0001_gk1}.  Here we choose that the IO chooses majority colour if the expected loss of opening the next box is the same as for choosing majority colour. These are both zero if there are six boxes of one of the colour that are displayed, which is the situation in all the nodes that have circles that are split between two colours.}
     \label{fig:unlim_a0_gk1}
 \end{figure}
 
@@ -110,13 +110,13 @@ We see that if a participant has an $\alpha=0.05$, then an Ideal Observer would 
     \begin{minipage}{0.45\textwidth}
         \centering
         \scalebox{0.5}{\input{tikz-trees/trial2_unlim_a0.01_gk1}}
-        \caption[IO solution for Trial 2. $\alpha=0.01$,$\gamma=\kappa=1$]{Trial 2, IO solution for a participant with $\alpha = 0.01$.}
+        \caption[IO Solution for Trial 2. $\alpha=0.01$,$\gamma=\kappa=1$]{This is an Ideal Observer solution for Trial 2 with $\alpha=0.01$ and $\gamma=\kappa=1$. The tree can be interpreted in the same way as Figure \ref{fig:unlim_a0.0001_gk1}.}
         \label{fig:IO_trial2_a0.01}
     \end{minipage}\hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \scalebox{0.5}{\input{tikz-trees/trial2_unlim_a0.05_gk1}}
-        \caption[IO solution for Trial 2. $\alpha=0.05$,$\gamma=\kappa=1$]{Trial 2, IO solution for a participant with $\alpha = 0.05$.}
+        \caption[IO Solution for Trial 2. $\alpha=0.05$,$\gamma=\kappa=1$]{This is an Ideal Observer solution for Trial 2 with $\alpha=0.05$ and $\gamma=\kappa=1$. The tree can be interpreted in the same way as Figure \ref{fig:unlim_a0.0001_gk1}.}
         \label{fig:IO_trial2_a0.05}
     \end{minipage}
 \end{figure}
@@ -131,14 +131,15 @@ In Figures \ref{fig:lim_a0.01_b0.6_gk1} and \ref{fig:lim_a0.01_b0.4_gk1}, we see
     \centering
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \scalebox{0.8}{\input{tikz-trees/lim_a0.01_b0.6_gk1}}
-        \caption[Limited something]{Limited, $\alpha=0.01$, $\beta=0.6$. $\gamma=\kappa=1$.}
+        \scalebox{0.6}{\input{tikz-trees/lim_a0.01_b0.6_gk1}}
+        \caption[IO solution, limited. $\alpha=0.01$, $\beta=0.6$ and $\gamma=\kappa=1$]{A decision tree for an unlimited trial with $\alpha = 0.01$, $\beta=0.6$ and $\gamma=\kappa=1$.
+        We can interpret this tree in the same way as Figure \ref{fig:unlim_a0.0001_gk1} where the circles around each node shows which decision the Ideal Observer would do.}
         \label{fig:lim_a0.01_b0.6_gk1}
     \end{minipage}\hfill
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \scalebox{0.8}{\input{tikz-trees/lim_a0.01_b0.4_gk1}}
-        \caption[Limited something]{Limited, $\alpha=0.01$, $\beta=0.4$. $\gamma=\kappa=1$.}
+        \scalebox{0.6}{\input{tikz-trees/lim_a0.01_b0.4_gk1}}
+        \caption[IO solution, limited. $\alpha=0.01$, $\beta=0.4$ and $\gamma=\kappa=1$]{A decision tree in the limited case with $\alpha = 0.05$, $\beta=0.4$ and $\gamma=\kappa=1$ that can be understood in the same way as Figure \ref{fig:unlim_a0.0001_gk1} where the circles around each node shows which decision the Ideal Observer would do.}
         \label{fig:lim_a0.01_b0.4_gk1}
     \end{minipage}
 \end{figure}
@@ -148,7 +149,8 @@ The trees in the limited case are in general slimmer than in the unlimited case.
 \begin{figure}
     \centering
     \scalebox{0.8}{\input{tikz-trees/lim_a0.0001_b0.2_gk1}}
-    \caption[IO solution, limited. $\alpha=0.0001, \beta=0.2$. $\gamma=\kappa=1$.]{IO solution, limited. $\alpha=0.0001, \beta=0.2$. $\gamma=\kappa=1$.}
+    \caption[IO solution, limited. $\alpha=0.0001, \beta=0.2$. $\gamma=\kappa=1$.]{A decision tree for an unlimited trial with $\alpha = 0.01$, $\beta=0.2$ and $\gamma=\kappa=1$.
+    We can interpret this tree in the same way as Figure \ref{fig:unlim_a0.0001_gk1} where the circles around each node shows which decision the Ideal Observer would do.}
     \label{fig:lim_a0.0001_b0.2_gk1}
 \end{figure}
 
@@ -159,31 +161,30 @@ As in the unlimited case, there are trials where the Ideal Observer solution is 
     \begin{minipage}[t]{0.45\textwidth} 
         \centering
         \scalebox{0.8}{\input{tikz-trees/lim_a0.05_b0.4_gk1}}
-        \caption{A decision tree for a limited trial with $\alpha = 0.05$, $\beta=0.4$ and $\gamma=\kappa=1$. It can bee interpreted as the tree in Figure (input here!).}
+        \caption[IO solution limited. $\alpha=0.05$, $\beta=0.4$ and $\gamma=\kappa=1$.]{A decision tree for a limited trial with $\alpha = 0.05$, $\beta=0.4$ and $\gamma=\kappa=1$. It can bee interpreted as the tree in Figure \ref{fig:unlim_a0.0001_gk1}.}
         \label{fig:lim_a0.05_b0.4_gk1}
     \end{minipage}\hfill
     \begin{minipage}[t]{0.45\textwidth} 
         \centering
         \scalebox{0.8}{\input{tikz-trees/lim_a0.05_b0.4_gk1}}
-        \caption{A decision tree for a limited trial with $\alpha = 0.05$, $\beta=0.6$ and $\gamma=\kappa=1$ that can be interpreted in the same way as the tree in Figure (input here!).}
+        \caption[IO solution limited. $\alpha=0.05$, $\beta=0.6$ and $\gamma=\kappa=1$.]{A decision tree for a limited trial with $\alpha = 0.05$, $\beta=0.6$ and $\gamma=\kappa=1$ that can be interpreted in the same way as the tree in Figure \ref{fig:unlim_a0.0001_gk1}).}
         \label{fig:lim_a0.05_b0.6_gk1}
     \end{minipage}
 \end{figure}
 
 In Figure \ref{fig:trial8_IO_a0.01_b0.6_gk1}, we see the IO solution for Trial 8 where $\alpha=0.01$ and $\beta=0.6$. We see that an Ideal Observer would choose majority colour after seven boxes are opened, where four are blue and three are red. In Figure \ref{fig:trial8_IO_a0.0001_b0.2_gk1}, we see another IO solution for Trial 8, where $\alpha=0.0001$ and $\beta=0.2$. Here, an Ideal Observer would not choose before the test terminates, and that would be a failed trial. Thus, the Ideal Observer is not perfect, as it is based on expected losses based on the previously opened boxes, and not based on what actually is going to happen.
-
 \begin{figure}
     \centering
      \begin{minipage}[t]{0.45\textwidth}
         \centering
         \scalebox{0.7}{\input{tikz-trees/trial8_lim_a0.01_b0.6_gk1}}
-        \caption[IO solution, Trial 8. $\alpha=0.01$, $\beta=0.6$ and $\gamma=\kappa=1$.]{IO solution, Trial 8. $\alpha=0.01$, $\beta=0.6$ and $\gamma=\kappa=1$.}
+        \caption[IO solution, Trial 8. $\alpha=0.01$, $\beta=0.6$ and $\gamma=\kappa=1$.]{This is an Ideal Observer solution for Trial 8 with $\alpha=0.01$, $\beta=0.6$ and $\gamma=\kappa=1$. The tree can be interpreted in the same way as Figure \ref{fig:unlim_a0.0001_gk1}}
         \label{fig:trial8_IO_a0.01_b0.6_gk1}
      \end{minipage}\hfill
      \begin{minipage}[t]{0.45\textwidth}
         \centering
         \scalebox{0.7}{\input{tikz-trees/trial8_lim_a0.0001_b0.2_gk1}}
-        \caption[IO solution, Trial 8. $\alpha=0.0001$, $\beta=0.2$ and $\gamma=\kappa=1$.]{IO solution, Trial 8. $\alpha=0.0001$, $\beta=0.2$ and $\gamma=\kappa=1$.}
+        \caption[IO solution, Trial 8. $\alpha=0.0001$, $\beta=0.2$ and $\gamma=\kappa=1$.]{This is an Ideal Observer solution for Trial 8 with $\alpha=0.01$, $\beta=0.2$ and $\gamma=\kappa=1$. The tree can be interpreted in the same way as Figure \ref{fig:unlim_a0.0001_gk1}}
         \label{fig:trial8_IO_a0.0001_b0.2_gk1}
      \end{minipage}
 \end{figure}
@@ -216,7 +217,7 @@ As we have presented some Ideal Observer solutions, we will now have a look at t
 
 
 \subsubsection{Unlimited}
-We start with the unlimited case, where we have the parameters $\alpha$ and $\eta$. For each participant we have found the maximum likelihood estimates for both of these parameters, denoted $\ha$ and $\he$. These are plotted in Figure \ref{fig:plot_all_mles_unlim_zoom0}. We see that there are some outliers of both $\ha$ and $\he$. To get a better picture of the other values, we zoom in closer to zero for both parameters. This is done i Figure \ref{fig:plot_all_mles_unlim_zoom1}, and we have zoomed even more in Figure \ref{fig:plot_all_mles_unlim_zoom2}. Many of the participants have $\hat{\alpha}$ equal to or close to zero, meaning that they have none or little loss of opening boxes. 
+We start with the unlimited case, where we have the parameters $\alpha$ and $\eta$. For each participant we have found the maximum likelihood estimates of both of these parameters, denoted $\ha$ and $\he$. These are plotted in Figure \ref{fig:plot_all_mles_unlim_zoom0}. We see that there are some outliers of both $\ha$ and $\he$. To get a better picture of the other values, we zoom in closer to zero for both parameters. This is done in Figure \ref{fig:plot_all_mles_unlim_zoom1}, and we have zoomed even more in Figure \ref{fig:plot_all_mles_unlim_zoom2}. Many of the participants have $\hat{\alpha}$ equal to or close to zero, meaning that they have none or little loss of opening boxes. 
 (litt usikker på hva jeg skal si om disse plottene?)
 \begin{comment}
 \begin{figure}
@@ -235,28 +236,30 @@ We start with the unlimited case, where we have the parameters $\alpha$ and $\et
     \end{minipage}
 \end{figure}
 \end{comment}
+
+
 \begin{figure}
     \centering
     \includegraphics[scale=0.7]{pictures/plotted_mles_unlim_gk1.png}
-    \caption[All MLEs plotted, unlimited]{Caption}
+    \caption[MLEs of $\alpha$ and $\eta$, unlimited with $\gamma=\kappa=1$.]{The MLEs for all the participants plotted for the unlimited case of the box task with $\gamma=\kappa=1$.}
     \label{fig:plot_all_mles_unlim_zoom0}
 \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[scale=0.7]{pictures/plotted_mles_unlim_gk1_zoom1.png}
-    \caption[Some MLEs plotted, unlimited]{Caption}
+    \caption[MLEs of $\alpha$ and $\eta$, unlimited with $\gamma=\kappa=1$, zoomed.]{The MLEs for all the participants plotted for the unlimited case of the box task with $\gamma=\kappa=1$. Here we have zoomed in closer to zero.}
     \label{fig:plot_all_mles_unlim_zoom1}
 \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[scale=0.7]{pictures/plotted_mles_unlim_gk1_zoom2.png}
-    \caption[Some MLEs plotted, unlimited]{Caption}
+    \caption[MLEs of $\alpha$ and $\eta$, unlimited with $\gamma=\kappa=1$, zoomed more]{The MLEs for all the participants plotted for the unlimited case of the box task with $\gamma=\kappa=1$. Here we have zoomed in closer to zero even more than in Figure \ref{fig:plot_all_mles_unlim_zoom2}.}
     \label{fig:plot_all_mles_unlim_zoom2}
 \end{figure}
 
-The log likelihood function is almost flat for high values of $\eta$. That means that the stopping criterion for the optimisation algorithm will be met several places for high values of $\eta$. High values indicates that the participant makes the decisions with the least expected losses,  and when the log likelihood function is as flat as it is, we can find some threshold for $\eta$. Then, we can say that is a participant has $\he$ above that threshold, she always makes the decisions with the least expected loss. If we for example have a majority of red boxes, then the expected loss of choosing red as the majority colour is quite low, but so could the expected loss of opening the next box be. Consider, for example, that we have $\EE_0^i(\vp)=0.98$, $\EE_1^i(\vp)=0.02$ and $\EE_2^i(\vp)=0.01$. Then, an Ideal Observer would make the choice of opening the next box, thus, we want the probability that the participant makes the same decision to be quite high. If $\eta=500$, the probability that the participant chooses to open the next box given these expected losses, is above $0.99$. Thus, we set $\eta=500$ as a threshold for when the participant makes the best choices, that is, the Ideal Observer choices. 
+The log likelihood function is almost flat for high values of $\eta$. That means that the stopping criterion for the optimisation algorithm will be met several places for high values of $\eta$. High values indicates that the participant makes the decisions with the least expected losses,  and when the log likelihood function is as flat as it is, we can find some threshold for $\eta$. Then, we can say that if a participant has $\he$ above that threshold, she always makes the decisions with the least expected loss. If we for example have a majority of red boxes, then the expected loss of choosing red as the majority colour is quite low, but so could the expected loss of opening the next box be. Consider, for example, that we have $\EE_0^i(\vp)=0.98$, $\EE_1^i(\vp)=0.02$ and $\EE_2^i(\vp)=0.01$. Then, an Ideal Observer would make the choice of opening the next box, thus, we want the probability that the participant makes the same decision to be quite high. If $\eta=500$, the probability that the participant chooses to open the next box given these expected losses, is above $0.99$. Thus, we set $\eta=500$ as a threshold for when the participant makes the best choices, that is, the Ideal Observer choices. 
  
 If we look at the outliers in Figure \ref{fig:plot_all_mles_unlim_zoom0}, we find one participant with a very high value of $\he$ and small value of $\ha$. This is individual 58, who has MLEs
 \begin{equation}
@@ -268,7 +271,7 @@ If we look at the outliers in Figure \ref{fig:plot_all_mles_unlim_zoom0}, we fin
 \end{equation}
 In each of the three unlimited trials, this individual chooses the majority colour exactly when there are six of one of the colours, which is when we can be completely sure what the true majority colour is. That means that individual 58 chooses after seven boxes are opened in Trial 2, and she then chooses red. In Trials 3 and 4 she chooses after 10 and 9 boxes are opened, respectively. Thus, she always chooses the decision with the least expected loss, which are the decisions an Ideal Observer would make, and $\he$ is therefore above the threshold value of 500. Individual 58 has $\ha=0.0016$, which is quite small. This might be because she does not open any more boxes than necessary. She might then have a small loss of opening boxes, or some kind of reward of finishing early. This $\ha$ value is so small that it would give an IO solution similar to the one in Figure \ref{fig:unlim_a0.0001_gk1}, such that one always chooses after six boxes of one of the colours have been opened. 
 
-Looking at the other outlier in Figure \ref{fig:plot_all_mles_unlim_zoom0}, Individual 13, we see that she has a high value of $\ha$ and a small value of $\he$. In fact, the value of $\eta$ is negative,  and the values are
+Looking at the other outlier in Figure \ref{fig:plot_all_mles_unlim_zoom0}, which is individual number 13, we see that she has a high value of $\ha$ and a small value of $\he$. In fact, the value of $\eta$ is negative. The values are
 \begin{equation}
 \label{mles_unlim_person13}
     \begin{aligned}
@@ -276,7 +279,7 @@ Looking at the other outlier in Figure \ref{fig:plot_all_mles_unlim_zoom0}, Indi
         \he &= -0.4290.
     \end{aligned}
 \end{equation}
-In Trial 2, she chooses after two boxes are opened, where both boxes are red. In both Trial 3 and Trial 4, she chooses when three boxes are opened, where two of them are blue and one is red. She then chooses red as the majority colour despite the fact that choosing blue as the majority colour has lower expected loss. Thus, she tends to choose the decisions with higher expected losses, and therefore she has a negative estimate of $\eta$. She also chooses quite early, thus she gets a high estimate of $\alpha$. However, an ideal obs with this high alpha would always choose after 1 box. (hvorfor har jeg da fått en så høy alpha når denne personen velger etter to og tre bokser?)
+In Trial 2, she chooses after two boxes are opened, where both boxes are red. In both Trial 3 and Trial 4, she chooses when three boxes are opened, where two of them are blue and one is red. She then chooses red as the majority colour despite the fact that choosing blue as the majority colour has a lower expected loss. Thus, she tends to choose the decisions with higher expected losses, and therefore she has a negative estimate of $\eta$. She also chooses quite early, thus she gets a high estimate of $\alpha$. However, an Ideal Observer with this high value of $\alpha$ would always choose after one box is opened. (hvorfor har jeg da fått en så høy alpha når denne personen velger etter to og tre bokser?)
 kanskje fordi det på en mpte er bedre å velge veldig tidlig, før noen boxer er åpnet, derfro så høy alpha? Finn IO for denne perosne!
 
 If we look at one of the individuals that is not an outlier, we find, for example, individual 61. She has
@@ -291,7 +294,7 @@ In the unlimited trials, she chooses what she thinks is the majority colour afte
 \begin{figure}
     \centering
     \scalebox{0.7}{\input{tikz-trees/unlim_a0.0135_g1_k1}}
-    \caption{IO sol unlim individual 61. $\ha=0.0135$.}
+    \caption[IO solution of individual number 61 with $\ha=0.0135$ and $\gamma=\kappa=1$]{Here we see and Ideal Observer solution of the box task in the unlimited case for individual number 61 with a uniform prior, such that $\gamma=\kappa=1$. She has $\ha=0.0135$. This tree can be interpreted in the same way as the tree in Figure \ref{fig:unlim_a0.0001_gk1}.}
     \label{fig:IO_sol_individual61}
 \end{figure}
 
@@ -299,21 +302,18 @@ Having looked at the MLEs in the unlimited case, we now continue with the limite
 
 
 \subsubsection{Limited}
-In the limited version, we have three parameters, $\alpha$, $\beta$ and $\eta$, and we have found maximum likelihood estimates for these for all of the 76 participants. The MLEs of $\alpha$ and $\eta$ for all participants are plotted in Figure \ref{fig:mles_limited_alpha_eta}. We see that many of the participants have $\hat{\alpha}=0$.
-(why?? talk about that it might be unnecessary to have alpha in limited model? ). In fact, all participants except two have $\ha=0$. 
+In the limited version, we have three parameters, $\alpha$, $\beta$ and $\eta$, and we have found maximum likelihood estimates for these for all of the 76 participants. The MLEs of $\alpha$ and $\eta$ for all participants are plotted in Figure \ref{fig:mles_limited_alpha_eta}. We see that many of the participants have $\hat{\alpha}=0$. In fact, all participants except two have $\ha=0$. 
 We also see that none of the participants are even close to the threshold value of $\eta$, thus none of them are making the choices with the least expected loss each time a box is opened. However, we see that all participants except two have $\he$ higher than zero, meaning that they make choices with low expected losses, but not necessarily the ones with the lowest expected losses.  
-
 \begin{figure}
     \centering
     \includegraphics[scale=0.7]{pictures/plotted_mles_limited_alpha_eta_gk1.png}
     \caption{Mles limited, alpha and eta for all participants. Bytt ut disse plottene så du får på en hatt!!}
     \label{fig:mles_limited_alpha_eta}
 \end{figure}
-
 There are two prominent outliers in Figure \ref{fig:mles_limited_alpha_eta}, one with $\hat{\eta}=30.7573$ and another with $\hat{\alpha}=2.2997$. These are participants number 75 and 11, respectively. 
 
 %Talk about the two other plots here, and the zoomed ones. 
-In Figure \ref{fig:mles_limited_alpha_beta} we have plotted the MLEs of $\alpha$ and $\beta$ for all participants. Again we see that many participants have $\ha=0$. This might indicate that $\alpha$ is unnecessary to include in the limited version. Both $\alpha$ and $\beta$ are values tied to choosing early or not, thus, it might be enough to only include $\beta$. It is also not obvious how the MLEs are interpreting(?) $\alpha$ and $\beta$. We, for example, see an individual with a high value if $\hat{\beta}$ in Figure \ref{fig:mles_limited_alpha_beta}. This is the same individual that has the high $\hat{\eta}$ value in Figure \ref{fig:mles_limited_alpha_eta}, individual 75. She is also seen in the top right corner of Figure \ref{fig:mles_limited_beta_eta} that displays $\hat{\beta}$ and $\hat{\eta}$ for all participants. Indvividual 75 chooses majoity colour after one box is opened in all of the six limited trials. She has a high value of $\hb$, but $\ha=0$. Thus, her actions are interpreted as being very afraid of the test terminating, but that she has no loss of opening a new box.
+In Figure \ref{fig:mles_limited_alpha_beta} we have plotted the MLEs of $\alpha$ and $\beta$ for all participants. Again we see that many participants have $\ha=0$. This might indicate that $\alpha$ is unnecessary to include in the limited version. Both $\alpha$ and $\beta$ are values tied to choosing early or not, thus, it might be enough to only include $\beta$. It is also not obvious how the MLEs are interpreting(?) $\alpha$ and $\beta$. We, for example, see an individual with a high value if $\hat{\beta}$ in Figure \ref{fig:mles_limited_alpha_beta}. This is the same individual that has the high $\hat{\eta}$ value in Figure \ref{fig:mles_limited_alpha_eta}, individual 75. She is also seen in the top right corner of Figure \ref{fig:mles_limited_beta_eta} that displays $\hat{\beta}$ and $\hat{\eta}$ for all participants. Indvividual 75 chooses majoity colour after one box is opened in all of the six limited trials. She has a high value of $\hb$, but $\ha=0$. Thus, her actions are interpreted as her being very afraid of the test terminating, but that she has no loss of opening a new box.
 
 
 \begin{figure}
@@ -343,6 +343,8 @@ In Figure \ref{fig:mles_limited_alpha_beta} we have plotted the MLEs of $\alpha$
 %    \caption{Mles limited, alpha and beta for all participants, zoomed}
 %    \label{fig:mles_limited_alpha_beta_zoomed}
 %\end{figure}
+
+Zooming in more on the plot in Figure \ref{fig:mles_limited_alpha_beta}, like in Figure \ref{fig:mles_limited_alpha_beta_zoomed}, we see that many participants have $\ha=0$, and that $\hb$ typically is between 0.1 and 0.6. In Figure \ref{fig:mles_limited_beta_eta_zoomed} we have zoomed in on the plot in Figure \ref{fig:mles_limited_beta_eta}. Here we see that many of the $\hb$ values are zero, and the ones different from zero is spread around between 0.1 and 0.6 as seen in the $\ha$-$\hb$ plot. 
 \begin{figure}
     \centering
     \begin{minipage}{0.48\textwidth}
@@ -359,8 +361,6 @@ In Figure \ref{fig:mles_limited_alpha_beta} we have plotted the MLEs of $\alpha$
         \label{fig:mles_limited_beta_eta_zoomed}
     \end{minipage}
 \end{figure}
-Zooming in more on the plot in Figure \ref{fig:mles_limited_alpha_beta}, like in Figure \ref{fig:mles_limited_alpha_beta_zoomed}, we see that many participants have $\ha=0$, and that $\hb$ typically is between 0.1 and 0.6. (what more should I say about this?? why is it like this? so many that have alpha=0??). In Figure \ref{fig:mles_limited_beta_eta_zoomed} we have zoomed in on the plot in Figure \ref{fig:mles_limited_beta_eta}. Here we see that many of the $\hb$ values are zero, and the ones different from zero is spread around between 0.1 and 0.6 as seen in the $\ha$-$\hb$ plot. 
-
 
 Having a closer look at individual 75, we see that she has parameter estimates
 \begin{equation}
@@ -447,30 +447,30 @@ We start with the CIs for the unlimited case. In Figure \ref{fig:all_cis_alpha_u
 \begin{figure}
     \centering
     \includegraphics[scale=0.37]{pictures/all_cis_unlim_alpha.png}
-    \caption{All ci for $\alpha$. Individual 13 much larger CI, unif prior, unlimited.}
+    \caption[CIs for $\alpha$, unlimited. $\gamma=\kappa=1$]{Here are the confidence intervals for all the participants for $\alpha$ in the unlimited version of the box task. We see that individual number 13 has an interval outside the range of this plot. $\gamma=\kappa=1$.}
     \label{fig:all_cis_alpha_unlim_v2}
 \end{figure}
 
 
 
-In Figure \ref{fig:all_cis_eta_unlim_v2} we see all the CIs in the unlimited case for $\eta$. We see that some of the participants have the whole CI above 500, the threshold value of $\he$. We can for these participants conclude that they always make the decision with the least expected loss. We also see that many of the CIs include the threshold value. In Figure \ref{fig:all_cis_eta_unlim_zoomed} we have zoomed in on the CIs, and added a line at zero. Only one CI include zero, the CI for individual number 13. Recall that she has a negative value of $\he$ and a very high $\ha$.
+In Figure \ref{fig:all_cis_eta_unlim_v2} we see all the CIs in the unlimited case for $\eta$. We see that some of the participants have the whole CI above 500, the threshold value of $\he$. We can for these participants conclude that they always make decision with small expected losses. We also see that many of the CIs include the threshold value. In Figure \ref{fig:all_cis_eta_unlim_zoomed} we have zoomed in on the CIs, and added a line at zero. Only one CI include zero, the CI for individual number 13. Recall that she has a negative value of $\he$ and a very high $\ha$.
 \begin{figure}
     \centering
     \includegraphics[scale=0.38]{pictures/test_cis_eta_unlim.png}
-    \caption{All ci for $\eta$, unif prior, unlimited. }
+    \caption[CIs for $\eta$, unlimited. $\gamma=\kappa=1$]{Confidence intervals for each participant for $\eta$ in the unlimited version of the box task. $\gamma=\kappa=1$.}
     \label{fig:all_cis_eta_unlim_v2}
 \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[scale=0.38]{pictures/all_cis_unlim_eta_zoomed.png}
-    \caption{All cis eta unlim, unif prior, zoomed.}
+    \caption[CIs for $\eta$ zoomed, unlimited. $\gamma=\kappa=1$]{Confidence intervals of $\eta$ for each participant in the unlimited trials of the box task with $\gamma=\kappa=1$, zoomed.}
     \label{fig:all_cis_eta_unlim_zoomed}
 \end{figure}
 
 
 In Chapter \ref{chapter:mles} we talked about individual 61 that has MLEs in the middle of the range of the MLEs. The MLEs are as given in \eqref{mles_unilim_person61}.
-We have 1000 bootstrap samples and thus 1000 values of both $\hat{\alpha}$ and $\he$ for this participant. These are plotted in Figure \ref{fig:ci_unlim_person_61}. There, we have also plotted the confidence interval as black lines. We see that most of the bootstrap samples are accumulated in the bottom left corner. Thus we zoom in there in Figure \ref{fig:ci_unlim_person_61_zoomed}, where we also have plotted the CI. We have that
+We have 1000 bootstrap samples and thus 1000 values of both $\hat{\alpha}$ and $\he$ for this participant. These are plotted in Figure \ref{fig:ci_unlim_person_61}. There, we have also plotted the confidence interval as black lines. We see that most of the bootstrap samples are accumulated in the bottom left corner. Thus, we zoom in there in Figure \ref{fig:ci_unlim_person_61_zoomed}, where we also have plotted the CI. We have that
 \begin{equation*}
     [\hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}] = [0,0.0362]
 \end{equation*}
@@ -485,18 +485,18 @@ and
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[scale=0.37]{pictures/ci_unlim_person61.png}
-        \caption{ci unlim person 61}
+        \caption[MLEs of bootstrap samples individual number 61, unlimited]{All of the MLEs of the 1000 bootstrap samples plotted for individual number 61 in the unlimited case with $\gamma=\kappa=1$. The confidence intervals for the two parameters are also included.}
         \label{fig:ci_unlim_person_61}
     \end{minipage}\hfill
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[scale=0.37]{pictures/ci_unlim_person61_zoomed.png}
-        \caption{ci unlim person 61 zoomed}
+        \caption[MLEs of bootstrap samples individual number 61, unlimited, zoomed]{Here we have zoomed in on the bootstrap samples and confidence intervals that are plotted in Figure \ref{fig:ci_unlim_person_61}. This is for individual number 61 in the unlimited case with $\gamma=\kappa=1$.}
         \label{fig:ci_unlim_person_61_zoomed}
     \end{minipage}
 \end{figure}
 
-In Chapter \ref{chapter:mles} we also talked about individual number 13 that has a high $\ha$ compared to the other participants, as seen in \eqref{mles_unlim_person13}. The 1000 bootstrap samples for participant number 13 are plotted in Figure \ref{fig:ci_unlim_person_13}, and zoomed on the $\he$ axis in Figure \ref{fig:ci_unlim_person_13_zoomed}. The CIs are
+In Chapter \ref{chapter:mles} we also talked about individual number 13 that has a high $\ha$, as seen in \eqref{mles_unlim_person13}, compared to the other participants. The 1000 bootstrap samples for participant number 13 are plotted in Figure \ref{fig:ci_unlim_person_13}, and zoomed on the $\he$ axis in Figure \ref{fig:ci_unlim_person_13_zoomed}. The CIs are
 \begin{equation*}
     [\hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}] = [0,1246.3510]
 \end{equation*}
@@ -504,29 +504,32 @@ and
 \begin{equation*}
     [\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}] = [-9.9272,18.3986].
 \end{equation*}
-We see that many of the values of $\ha$ are very high, much higher than the MLE, thus the upper limit of the CI for $\alpha$ is very high.  It might look like we have found multiple local minimum points in the negative log likelihood function. Having values of $\ha$ this high indicates that one does not open any boxes before choosing, whereas this participant actually opens two or three boxes before choosing majority colour. Thus, the more relevant data points might be the ones closer to $\ha=0$. 
+We see that many of the values of $\ha$ are very high, much higher than the MLE, thus $\hat{\alpha}^{*(95)}_{1000}$ is very high.  It might look like we have found multiple local maximum points in the log likelihood function. Having values of $\ha$ this high indicates that one does not open any boxes before choosing, whereas this participant actually opens two or three boxes before choosing majority colour. Thus, the more relevant data points might be the ones closer to $\ha=0$. 
 
 \begin{figure}
     \centering
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[scale=0.37]{pictures/ci_unlim_person13.png}
-        \caption{ci unlim person 13}
+        \caption[MLEs of bootstrap samples individual number 13, unlimited]{All of the MLEs of the 1000 bootstrap samples plotted for individual number 13 in the unlimited case with $\gamma=\kappa=1$. The confidence intervals for the two parameters are also included.}
         \label{fig:ci_unlim_person_13}
     \end{minipage}\hfill
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[scale=0.37]{pictures/ci_unlim_person13_zoomed.png}
-        \caption{ci unlim person 13 zoomed}
+        \caption[MLEs of bootstrap samples individual number 13, unlimited, zoomed]{Here we have zoomed in on the bootstrap samples and confidence intervals that are plotted in Figure \ref{fig:ci_unlim_person_61}. This is for individual number 13 in the unlimited case with $\gamma=\kappa=1$.}
         \label{fig:ci_unlim_person_13_zoomed}
     \end{minipage}
 \end{figure}
+%commenting out figure where zooming even more for person 13. 
+\begin{comment}
 \begin{figure}
     \centering
     \includegraphics[scale=0.7]{pictures/ci_unlim_person13_zoomed2.png}
     \caption{ci unlim person 13 zoomed even more. Kanskje ikke zoome såå mye siden mle er på4.2???}
     \label{fig:ci_unlim_person_13_zoomed2}
 \end{figure}
+\end{comment}
 
 Another outlier we looked at in Chapter \ref{chapter:mles} is individual number 58. The MLEs are 
 \begin{equation*}
@@ -547,24 +550,35 @@ We also see in Figure \ref{fig:ci_unlim_person_58} that all the data points are 
 \begin{figure}
     \centering
     \includegraphics[scale=0.7]{pictures/ci_unlim_person58.png}
-    \caption{ci unlim person 58, unif prior}
+    \caption[MLEs of bootstrap samples individual number 58, unlimited]{All MLEs of the 1000 bootstrap samples plotted in the unlimited case for individual number 58. We have a uniform prior here, meaning that $\gamma=\kappa=1$. We see that all the MLEs are in one spot, and thus the CI has length zero, with both ends for each parameter being the values of the MLEs.}
     \label{fig:ci_unlim_person_58}
 \end{figure}
-This is also the case for the other participants that have CIs of length zero. 
+The situation described here where the probabilities are either zero or one and we therefore get identical bootstrap samples is also the case for the other participants that have CIs of length zero. 
 
 Having shown some of the confidence intervals for the unlimited trials we continue with the limited trials.
 
+
+
+
+
+
+
+
+
+
+
+
 \subsubsection{Limited}
-We will now have a look at the confidence intervals in the limited case. In Figure \ref{fig:all_cis_alpha_lim} we see the CIs for $\alpha$ for all of the participants except participant 13. In \eqref{mles_lim_person11} we see that she has a very high $\ha$, and thus the values of the CI are high. 
-
-
+We will now have a look at the confidence intervals in the limited case. In Figure \ref{fig:all_cis_alpha_lim} we see the CIs for $\alpha$ for all of the participants except participant 13. In \eqref{mles_lim_person11} we see that she has a very high $\ha$, and thus the values of the CI are high, and the values are outside the range of the plot here. We also see that individual number 11 has a high value of the upper limit of the CI, and that participant number 75 has a CI that is zero in both the lower and upper limit. All of the CIs include zero except for individual number 13. 
 
 \begin{figure}
     \centering
-    \includegraphics[scale=0.37]{pictures/all_cis_unlim_eta.png} %wrong name, right plot
+    \includegraphics[scale=0.37]{pictures/all_cis_lim_alpha.png} %wrong name, right plot
     \caption{All cis of $\alpha$ except individual 13 (bc much higher vlaues of ci), unif prior, limited}
     \label{fig:all_cis_alpha_lim}
 \end{figure}
+
+In Figure \ref{fig:all_cis_beta} we see all the CIs for $\beta$ plotted. This time it is participant number 75 that is not included because of too high values of the CI.  Participant number 11 has a high upper limit of the CI, just like in the CI for $\alpha$.
 
 \begin{figure}
     \centering
@@ -573,7 +587,7 @@ We will now have a look at the confidence intervals in the limited case. In Figu
     \label{fig:all_cis_beta}
 \end{figure}
 
-
+In Figure \ref{fig:all_cis_eta_lim} we see all the CIs of $\eta$. We see here that participant number 75 has a CI of length zero, just as the CI for $\alpha$. In Figure \ref{fig:all_cis_eta_lim_zoomed} we have zoomed in , and see that only two participants have CIs that include zero. This means that most of the participants make reasonable choices, except for these two. 
 
 \begin{figure}
     \centering
@@ -589,9 +603,7 @@ We will now have a look at the confidence intervals in the limited case. In Figu
     \label{fig:all_cis_eta_lim_zoomed}
 \end{figure}
 
-
-
-CIs for person 32:
+If we again have a look at person 32, we find that the CIs are
 \begin{equation*}
     [\hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}] = [0,0.0818],
 \end{equation*}
@@ -602,7 +614,7 @@ and
 \begin{equation*}
     [\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}] = [4.4340,60.631].
 \end{equation*}
-
+We see the $\ha$ and $\hb$ of the 1000 bootstrap samples and the CIs plotted in Figure \ref{fig:ci_lim_a_b_person_32}. Here we see two outliers in the top right corner, and we therefore zoom in more as in Figure \ref{fig:ci_lim_a_b_person_32_zoomed}. Here we see that many of the bootstrap samples gives $\ha$ and $\hb$ equal to zero. Thus, both of these intervals include zero. 
 \begin{figure}
     \centering
     \begin{minipage}{0.48\textwidth}
@@ -618,7 +630,7 @@ and
         \label{fig:ci_lim_a_b_person_32_zoomed}
     \end{minipage}
 \end{figure}
-
+In Figure \ref{fig:ci_lim_a_e_person_32} we see the $\ha$ and $\he$ values plotted and again zoomed in Figure \ref{fig:ci_lim_a_b_person_32_zoomed}. There are some outliers of $\he$ with very high values, but the CI still has a quite small upper limit. 
 \begin{figure}
     \centering
     \begin{minipage}{0.48\textwidth}
@@ -652,9 +664,7 @@ and
     \end{minipage}
 \end{figure}
 
-
-
-CIs for person 31:
+Individual number 11 has very high upper limits of both the CI for $\alpha$ and for $\beta$, and she is one of the two that has a CI for $\eta$ that includes zero. The CIs are
 \begin{equation*}
     [\hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}] = [0,1092.9440],
 \end{equation*}
@@ -666,6 +676,7 @@ and
     [\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}] = [-5.6640,3.2192].
 \end{equation*}
 
+In Figures \ref{fig:ci_lim_a_b_person_11} and \ref{fig:ci_lim_a_e_person_11} we see $\ha$ and $\hb$ in addition to $\ha$ and $\he$ plotted for the 1000 bootstrap samples. These plots are zoomed in Figures \ref{fig:ci_lim_a_b_person_11_zoomed} and \ref{fig:ci_lim_a_e_person_11_zoomed}, respectively. We see also here that there are many high values of $\ha$, which again could be local maximum points. We also see quite high values of $\hb$, which might also be because of local maximum points. 
 \begin{figure}
     \centering
     \begin{minipage}{0.48\textwidth}
@@ -681,7 +692,6 @@ and
         \label{fig:ci_lim_a_b_person_11_zoomed}
     \end{minipage}
 \end{figure}
-
 \begin{figure}
     \centering
     \begin{minipage}{0.48\textwidth}
@@ -697,8 +707,7 @@ and
         \label{fig:ci_lim_a_e_person_11_zoomed}
     \end{minipage}
 \end{figure}
-
-
+In Figure \ref{fig:ci_lim_b_e_person_11} we see $\hb$ and $\he$ for the 1000 bootstrap samples plotted, and zoomed in Figure \ref{fig:ci_lim_b_e_person_11_zoomed}.
 \begin{figure}
     \centering
     \begin{minipage}{0.48\textwidth}
@@ -715,9 +724,7 @@ and
     \end{minipage}
 \end{figure}
 
-
-
-CIs for person 75:
+Individual 75 has CIs with length zero. These CIs are
 \begin{equation*}
     [\hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}] = [0,0],
 \end{equation*}
@@ -728,9 +735,9 @@ and
 \begin{equation*}
     [\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}] = [45.69408,45.69408].
 \end{equation*}
+In \eqref{mles_lim_person75} we see that the MLEs for $\beta$ and $\eta$ are smaller than the values for the CIs (jeg aner faktisk ikke hvorfor det er sånn?? man får samme sekvens med valg, men forskjellige mleer, og jeg aner ikke hvorfor. såå hva skal jeg si om dette?)
 
-
-
+We have now looked at the results when we have a uniform prior, thus that $\gamma=\kappa =1$. The next we will do is looking at how the results are influenced by a different prior. Thus, we look at the sensitivity of the hyperparameters $\gamma$ and $\kappa$.
 
 
 
@@ -831,3 +838,5 @@ plotting al cis except for perosn 13 with very high value of alpha
     \caption{All cis $\eta$, limited, $\gamma=\kappa=0.5$.}
     \label{fig:all_cis_eta_lim_gk0.5}
 \end{figure}
+
+

@@ -52,18 +52,18 @@
         %    (#2.center) -- (#2.\tmpa) arc(\tmpa:\tmpb:{veclen(\x1,\y1)}) -- cycle;
         %\fill [green!30] let \p1 = ($(#2.0)-(#2.center)$) in
         %    (#2.center) -- (#2.\tmpb) arc(\tmpb:360:{veclen(\x1,\y1)}) -- cycle;
-        \fill [blue!5] let \p1 = ($(#2.0)-(#2.center)$) in
+        \fill [blue!10] let \p1 = ($(#2.0)-(#2.center)$) in
             (#2.center) -- (#2.0) arc(0:\tmpa:{veclen(\x1,\y1)}) -- cycle;
-        \fill [green!5] let \p1 = ($(#2.0)-(#2.center)$) in
+        \fill [green!10] let \p1 = ($(#2.0)-(#2.center)$) in
             (#2.center) -- (#2.\tmpa) arc(\tmpa:\tmpb:{veclen(\x1,\y1)}) -- cycle;
-        \fill [red!5] let \p1 = ($(#2.0)-(#2.center)$) in
+        \fill [red!10] let \p1 = ($(#2.0)-(#2.center)$) in
             (#2.center) -- (#2.\tmpb) arc(\tmpb:450:{veclen(\x1,\y1)}) -- cycle;
 %        \draw [#6!20] let \p1 = ($(#2.0)-(#2.center)$) in
 %            (#2.center) -- (#2.\tmpb) arc(\tmpb:360:{veclen(\x1,\y1)}) -- cycle;
 %        \draw[color = #6] (#2.center) circle (1.5cm);
-        \draw[color= #6!5, very thick] (#2.center)+(0,#8cm) arc (90:270:#8cm);
-        \draw[color = #7!5, very thick] (#2.center)+(0,-#8cm) arc (270:360:#8cm);
-        \draw[color = #7!5, very thick] (#2.center)+(#8cm,0) arc (0:90:#8cm);
+        \draw[color= #6!10, very thick] (#2.center)+(0,#8cm) arc (90:270:#8cm);
+        \draw[color = #7!10, very thick] (#2.center)+(0,-#8cm) arc (270:360:#8cm);
+        \draw[color = #7!10, very thick] (#2.center)+(#8cm,0) arc (0:90:#8cm);
     
     \end{scope}
 }
