@@ -1,0 +1,23 @@
+\begin{tikzpicture}[
+    treenodeT/.style={
+      circle, align=center},
+    node distance=1cm,
+    ]
+    \DoNode{N0-0}{0.7082286271809}{0.7082286271809}{1}{green!70!black}{green!70!black}{0.4};
+    \DoNodePale[below of=N0-0, left of= N0-0]{N1-0}{0.99839529384757}{0.41506196051423}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->,black!10] (N0-0) -- (N1-0);
+    \DoNode[below of=N0-0, right of= N0-0]{N1-1}{0.41506196051423}{0.99839529384757}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->] (N0-0) -- (N1-1);
+    \DoNodePale[below of=N1-0, left of= N1-0]{N2-0}{1.07340992619926}{0.22101140221402}{1}{blue}{blue}{0.4};
+    \draw[->,black!10] (N1-0) -- (N2-0);
+    \DoNode[below of=N1-0, right of= N1-0]{N2-1}{0.80399}{0.80399}{1}{green!70!black}{green!70!black}{0.4};
+    \draw[->,black!10] (N1-0) -- (N2-1);
+    \draw[->] (N1-1) -- (N2-1);
+    \DoNodePale[below of=N1-1, right of= N1-1]{N2-2}{0.22101140221402}{1.07340992619926}{1}{red}{red}{0.4};
+    \draw[->,black!10] (N1-1) -- (N2-2);
+    \DoNode[below of=N2-1, left of= N2-1]{N3-1}{1.00224410074074}{0.49824410074074}{1}{blue}{blue}{0.4};
+    \draw[->] (N2-1) -- (N3-1);
+    \DoNodePale[below of=N2-1, right of= N2-1]{N3-2}{0.49824410074074}{1.00224410074074}{1}{red}{red}{0.4};
+    \draw[->,black!10] (N2-1) -- (N3-2);
+    
+\end{tikzpicture}

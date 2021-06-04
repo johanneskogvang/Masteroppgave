@@ -357,11 +357,46 @@ In Figures \ref{fig:mles_limited_alpha_eta} and \ref{fig:mles_limited_beta_eta} 
         \he &= 23851.9.
     \end{aligned}
 \end{equation}
+She chooses what she thinks is the majority colour after either two or three boxes are opened in the limited trials. When there are two boxes of the same colour, she chooses that colour as the majority colour. In Figure \ref{fig:IO_sol_person_70} we see the Ideal Observer solution for an individual with the values given in \eqref{mles_lim_person70}. We see that the IO would do the exact same thing as individual number 70 has done, that is, choose when we have two boxes of the same colour, and then choose that colour as the dominant colour. In Trial 5 that is after two boxes are opened as the first two boxes are blue. This is visualised in Figure \ref{fig:IO_sol_perosn_70_trial5}. In Trial 6 both the IO and participant number 70 chooses after three boxes are opened as seen in Figure \ref{fig:IO_sol_person70_trial6}.
+\begin{figure}
+    \centering
+    \scalebox{0.7}{\input{tikz-trees/lim_a0.0015_b0.7929_g1_k1}}
+    \caption{IO solution individual number 70}
+    \label{fig:IO_sol_person_70}
+\end{figure}
 
-she chooses after two or three boxes are opened, and always chooses the laternative w the lowest exp loss. find IO sol for her. 
+\begin{figure}
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \scalebox{0.7}{\input{tikz-trees/IO sol person 70, trial 5}}
+        \caption{IO sol person 70, trial 5}
+        \label{fig:IO_sol_perosn_70_trial5}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \scalebox{0.7}{\input{tikz-trees/IO_sol_perosn70_trial6}}
+        \caption{IO sol person 70, trial 6}
+        \label{fig:IO_sol_person70_trial6}
+    \end{minipage}
+\end{figure}
+
+We have two individuals with high values of $\ha$. They both have negative $\he$ and $\hb=0$. These can be interpreted the same way, and we therefore present only the participant with the highest $\ha$ here. This is individual number 11. Her parameter estimates are
+\begin{equation}
+\label{mles_lim_person11}
+    \begin{aligned}
+        \ha &= 1.1798\\
+        \hb &= 0.0\\
+        \he &= -1.9538.
+    \end{aligned}
+\end{equation}
 
 
 
+
+
+\newpage
 Dette neste er gammelt, ikkke sikkert at det er riktig:
 Having a closer look at individual 75, we see that she has parameter estimates
 \begin{equation}
