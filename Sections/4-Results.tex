@@ -320,31 +320,16 @@ In the limited version, we have three parameters, $\alpha$, $\beta$ and $\eta$, 
 \end{figure}
 
 In Figure \ref{fig:mles_limited_alpha_beta} we have plotted the MLEs of $\alpha$ and $\beta$ for all participants. Again we see that many participants have $\ha=0$. This might indicate that $\alpha$ is unnecessary to include in the limited version. Both $\alpha$ and $\beta$ are values tied to choosing early or not, thus, it might be enough to only include $\beta$. It is also not obvious how the MLEs are interpreting(?) $\alpha$ and $\beta$. 
-
-Dette videre her vet jeg ikke om er riktig:
-We, for example, see an individual with a high value if $\hat{\beta}$ in Figure \ref{fig:mles_limited_alpha_beta}. This is the same individual that has the high $\hat{\eta}$ value in Figure \ref{fig:mles_limited_alpha_eta}, individual 75. She is also seen in the top right corner of Figure \ref{fig:mles_limited_beta_eta} that displays $\hat{\beta}$ and $\hat{\eta}$ for all participants. Indvividual 75 chooses majoity colour after one box is opened in all of the six limited trials. She has a high value of $\hb$, but $\ha=0$. Thus, her actions are interpreted as her being very afraid of the test terminating, but that she has no loss of opening a new box.
-
-
 \begin{figure}
     \centering
     \includegraphics[scale=0.38]{pictures/plotted_mles_limited_alpha_beta_gk1.png}
     \caption{Mles limited, alpha and beta for all participants.}
     \label{fig:mles_limited_alpha_beta}
 \end{figure}
-%\begin{figure}
-%    \centering
-%    \includegraphics[scale=0.7]{pictures/plotted_mles_limited_alpha_beta_gk1.png}
-%    \caption{Mles limited, alpha and beta for all participants}
-%    \label{fig:mles_limited_alpha_beta}
-%\end{figure}
-%\begin{figure}
-%    \centering
-%    \includegraphics[scale=0.7]{pictures/plotted_mles_limited_alpha_beta_zoomed_gk1.png}
-%    \caption{Mles limited, alpha and beta for all participants, zoomed}
-%    \label{fig:mles_limited_alpha_beta_zoomed}
-%\end{figure}
 
-Zooming in more on the plot in Figure \ref{fig:mles_limited_alpha_beta}, like in Figure \ref{fig:mles_limited_alpha_beta_zoomed}, we see that many participants have $\ha=0$, and that $\hb$ typically is between 0.1 and 0.6. In Figure \ref{fig:mles_limited_beta_eta_zoomed} we have zoomed in on the plot in Figure \ref{fig:mles_limited_beta_eta}. Here we see that many of the $\hb$ values are zero, and the ones different from zero is spread around between 0.1 and 0.6 as seen in the $\ha$-$\hb$ plot. 
+
+
+We have also plotted the MLEs of $\beta$ and $\eta$ together in Figure \ref{fig:mles_limited_beta_eta}. Again we see that four of the participants have high values of $\he$. Three of these have $\hb$ values close to one, which might indicate that they are afraid of the test terminating, and thus choose early, but that they choose the colour that is most likely to be in majority. Zooming in on the plot as in Figure \ref{fig:mles_limited_beta_eta_zoomed}, we see that the majority of the participants have $\he$ values between 10 and 80 and $\hb$ values between zero and 0.7. We also see that some participants have $\hb$ equal to zero. 
 \begin{figure}
     \centering
     \begin{minipage}{0.48\textwidth}
@@ -362,6 +347,22 @@ Zooming in more on the plot in Figure \ref{fig:mles_limited_alpha_beta}, like in
     \end{minipage}
 \end{figure}
 
+
+In Figures \ref{fig:mles_limited_alpha_eta} and \ref{fig:mles_limited_beta_eta} we see a participant with a very high value of $\he$. This is individual number 70, and she has  parameter estimates
+\begin{equation}
+\label{mles_lim_person70}
+    \begin{aligned}
+        \ha &= 0.0015\\
+        \hb &= 0.7929\\
+        \he &= 23851.9.
+    \end{aligned}
+\end{equation}
+
+she chooses after two or three boxes are opened, and always chooses the laternative w the lowest exp loss. find IO sol for her. 
+
+
+
+Dette neste er gammelt, ikkke sikkert at det er riktig:
 Having a closer look at individual 75, we see that she has parameter estimates
 \begin{equation}
 \label{mles_lim_person75}
@@ -371,6 +372,9 @@ Having a closer look at individual 75, we see that she has parameter estimates
         \he &= 30.7573.
     \end{aligned}
 \end{equation}
+
+
+
 As said earlier, this participant chooses after one box is opened in all of the six limited trials, hence, the high value of $\hb$. At the same time, individual 75 always chooses the colour of that first box as the majority colour, which is the colour with the least expected loss. The expected loss of opening the next box might be lower than the expected loss of choosing that as the majority colour. However, these expected losses are often close to each other, whereas the expected loss of choosing the other colour as the majority is often further away. Thus, she tends to choose decisions with low expected losses. That is the reason for the high value of $\he$ compared to the other participants. (but why is alpha 0? skla jeg heller snakke her om at det er vanseklig å tolke alpha og beta verdiene? eller er det bedre lenger opp som jeg har gjort nå?). In Figure \ref{fig:IO_sol_person_75_lim} we see the IO solution for a participant with the parameters as individual number 75 has. We see that an IO with these estimates also would choose after one box is opened in all trials. 
 \begin{figure}
     \centering
