@@ -831,11 +831,21 @@ As discussed in Chapter \ref{section_notation}, the participants are told that o
 
 With the new prior for $\Theta$, we have done the same as for the uniform prior. That is, we have found MLEs for all of the parameters and confidence intervals tied to each of them. 
 
+In Figure \ref{fig:sensitivity_mls_unlim} we have plotted all the MLEs for both priors. The green dots are the MLEs in the model with the uniform prior for $\Theta$, and the orange points are the MLEs in the model with the new prior.
+We see that the participants that had extreme values with the uniform priors, still have extreme values with the new prior, but the values differ quite a lot. The highest value of $\he$ is considerably lower, but it is still above that threshold value we defined for $\eta$. This might be because of the flat log likelihood function, making the high estimates of $\eta$ are quite uncertain, as discussed in Chapter \ref{chapter:mles}. Thus, the big change in $\he$ might not be because of the new prior, but because of the numerical optimisation. 
+If we zoom in in the plot in Figure \ref{fig:sensitivity_mls_unlim}, as we have done in Figure \ref{fig:sensitivity_mls_unlim_zoom1}, we see that the participants with high, but not extreme, values of $\he$ or $\ha$ have shifted their MLEs considerably. 
+However, zooming even more, as in Figure \ref{fig:sensitivity_mls_unlim_zoom2}, we see that the MLEs of the participants that do not have extreme values are shifted a little, but not considerably, with some exceptions. All the participant that did not have $\ha=0$ from before, has shifted the values of $\ha$ closer to zero with the new prior. 
+
+thius si because more weight to the boxes that are opened, thus 
+(find the probabilities) if many blue boxes are opened, prob of red being major colour is lower now than for the unif prior. Then, the exp loss of choosing blue as major colour is lower. Thus, taht exp loss migh be lower earlier than 
+
+alpha lower makes sense because the model giver more weight to the boxes that are opened already. if many blue boxes opened, then the prob that the major colour is blue is higher. that means that if particioapnt chooses early, it is more compatible(?) with the model with the new prior for $\Theta$. 
 
 
-note to self: gamma and kappa smaller give more 'weight' to the colour of the boxes that are oepned. hence, we choose earlier because the prob that blue is majority is bigger here than for unif if one blue box is opened. 
 
-Sentence about having seen results for uniform prior. We choose $\gamma=\kappa=0.5$, but there are many different priors one could try. but we believe that gamma and kappa are equal. 
+
+
+ 
 
 \begin{figure}
     \centering
@@ -871,9 +881,9 @@ we see that the alpha values tend to be lower than for teh unfirm prior, but the
 
 \begin{figure}
     \centering
-    \includegraphics[scale=0.37]{pictures/Sensitivity/ci_unlim_alpha.png}
-    \caption{CIs for alpha. Oragne is gk0.5. green is uniform}
-    \label{fig:sensitivity_unlim_cis_alpha}
+    \includegraphics[scale=0.37]{pictures/Sensitivity/ci_unlim_eta.png}
+    \caption{CIs for eta. Oragne is gk0.5. green is uniform}
+    \label{fig:sensitivity_unlim_cis_eta}
 \end{figure}
 
 
@@ -881,3 +891,5 @@ the model will now predict that they choose earlier, thus, they are more consist
 
 
 the CIs often start with teh same value as before, but dont end wiht the same vlaue.
+
+note to self: gamma and kappa smaller give more 'weight' to the colour of the boxes that are oepned. hence, we choose earlier because the prob that blue is majority is bigger here than for unif if one blue box is opened. 
