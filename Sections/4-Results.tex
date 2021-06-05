@@ -823,101 +823,14 @@ We have now looked at the results when we have a uniform prior, thus that $\gamm
 
 
 
-\section{Non-uniform Prior?}
+\section{Sensitivity to Hyperparameters}
 note to self: gamma and kappa smaller give more 'weight' to the colour of the boxes that are oepned. hence, we choose earlier because the prob that blue is majority is bigger here than for unif if one blue box is opened. 
 
 Sentence about having seen results for uniform prior. We choose $\gamma=\kappa=0.5$, but there are many different priors one could try. but we believe that gamma and kappa are equal. 
 
-\subsection{Maximum Likelihood Estimators}
-sentece about starting with mles, and staritng with unlimted
-\subsubsection{Unlimited}
-sjekk om det er de samme outliersene som for uniform prior. ja, person 58 og 13. 
 \begin{figure}
     \centering
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[scale=0.37]{pictures/Gamma=kappa=0.5/plotted_mles_unlim_gk0.5.png}
-        \caption{Mles unlimited, alpha and eta for all participants. $\gamma=\kappa=0.5$.    Not zoomed}
-        \label{fig:gk0.5_mles_unlimited}
-    \end{minipage}\hfill%\hspace{0.2cm}%\hfill
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[scale=0.37]{pictures/Gamma=kappa=0.5/plotted_mles_unlim_gk0.5_zoomed.png}
-        \caption{Mles unlimited, alpha and eta for all participants. $\gamma=\kappa=0.5$. Zoomed}
-        \label{fig:gk0.5_mles_unlimited_zoomed}
-    \end{minipage}
-    \vfill
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[scale=0.37]{pictures/Gamma=kappa=0.5/plotted_mles_unlim_gk0.5_zoomed2.png}
-        \caption{Mles unlimited, alpha and eta for all participants. $\gamma=\kappa=0.5$. Zoomed even more.}
-        \label{fig:gk0.5_mles_unlimited_zoomed2}
-    \end{minipage}
+    \includegraphics[scale=0.2]{pictures/Sensitivity/mles_unlim.png}
+    \caption{Mles unlim, sensitivity}
+    \label{fig:sensitivity_mls_unim}
 \end{figure}
-
-
-
-
-\subsection{Confidence Intervals}
-
-
-\subsubsection{Unlimited}
-plotting al cis except for perosn 13 with very high value of alpha
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.37]{pictures/Gamma=kappa=0.5/all_cis_alpha_unlim.png}
-    \caption{All cis alpha except person 13, $\gamma=\kappa=0.5$.}
-    \label{fig:gk0.5_all_cis_alpha_unlim}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.38]{pictures/Gamma=kappa=0.5/all_cis_eta_unlim.png}
-    \caption{All cis eta except person 58, $\gamma=\kappa=0.5$.}
-    \label{fig:gk0.5_all_cis_eta_unlim}
-\end{figure}
-
-
-
-
-\begin{figure}
-    \centering
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[scale=0.37]{pictures/Gamma=kappa=0.5/ci_unlim_person61_gk0.5.png}
-        \caption{ci unlim person 61, gk0.5}
-        \label{fig:ci_unlim_person_61_gk0.5}
-    \end{minipage}\hfill
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[scale=0.37]{pictures/Gamma=kappa=0.5/ci_unlim_person61_gk0.5_zoomed.png}
-        \caption{ci unlim person 61 zoomed, gk0.5}
-        \label{fig:ci_unlim_person_61_zoomed_gk0.5}
-    \end{minipage}
-\end{figure}
-
-
-\subsubsection{Limited}
-
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.48]{pictures/Gamma=kappa=0.5/all_cis_alpha_lim.png}
-    \caption{All cis $\alpha$, limited, $\gamma=\kappa=0.5$.}
-    \label{fig:all_cis_alpha_lim_gk0.5}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.48]{pictures/Gamma=kappa=0.5/all_cis_beta_lim.png}
-    \caption{All cis $\beta$, limited, $\gamma=\kappa=0.5$.}
-    \label{fig:all_cis_beta_lim_gk0.5}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.48]{pictures/Gamma=kappa=0.5/all_cis_eta_lim.png}
-    \caption{All cis $\eta$, limited, $\gamma=\kappa=0.5$.}
-    \label{fig:all_cis_eta_lim_gk0.5}
-\end{figure}
-
-
