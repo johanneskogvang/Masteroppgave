@@ -2,7 +2,7 @@
 
 As we have found the maximum likelihood estimates and their respective confidence intervals, the next step is to show some of these results. However, we first present the Ideal Observer (IO) solutions for different values of the parameters, which depends on the expected losses. We firstly look at the situations where $\gamma=\kappa=1$, thus that the prior distribution for $\Theta$ is uniform. 
 
-\section{Uniform Prior}
+\section{Uniform Prior for $\Theta$}
 When we present the results, we start with the results where we have a uniform prior for $\Theta$. Recall that this means that it is equally likely that $\theta$ is anywhere between 0 and 1. We start with having a look at the probabilities that either blue or red are the majority colours. 
 
 \subsection{Conditional Probabilities}
@@ -829,39 +829,30 @@ Recall that $\theta$ is the success probability in the Bernoulli distribution we
 
 As discussed in Chapter \ref{section_notation}, the participants are told that one of the colours always is in majority, such that one might think that the probability that there are more of one of the colours are higher than the probability that there are six of each of the colours. Thus, we want a prior more like the purple or orange lines in Figure \ref{fig:pdf_beta_distr}. We choose the purple line where $\gamma=\kappa=0.5$.
 
-With the new prior for $\Theta$, we have done the same as for the uniform prior. That is, we have found MLEs for all of the parameters and confidence intervals tied to each of them. 
+With the new prior for $\Theta$, we have done the same as for the uniform prior. That is, we have found MLEs for all of the parameters and confidence intervals tied to each of them.
+
+\subsection{Unlimited}
+When we look at the sensitivity to hyperparameters, we start with the results for the unlimited version.
 
 In Figure \ref{fig:sensitivity_mls_unlim} we have plotted all the MLEs for both priors. The green dots are the MLEs in the model with the uniform prior for $\Theta$, and the orange points are the MLEs in the model with the new prior.
 We see that the participants that had extreme values with the uniform priors, still have extreme values with the new prior, but the values differ quite a lot. The highest value of $\he$ is considerably lower, but it is still above that threshold value we defined for $\eta$. This might be because of the flat log likelihood function, making the high estimates of $\eta$ are quite uncertain, as discussed in Chapter \ref{chapter:mles}. Thus, the big change in $\he$ might not be because of the new prior, but because of the numerical optimisation. 
 If we zoom in in the plot in Figure \ref{fig:sensitivity_mls_unlim}, as we have done in Figure \ref{fig:sensitivity_mls_unlim_zoom1}, we see that the participants with high, but not extreme, values of $\he$ or $\ha$ have shifted their MLEs considerably. 
 However, zooming even more, as in Figure \ref{fig:sensitivity_mls_unlim_zoom2}, we see that the MLEs of the participants that do not have extreme values are shifted a little, but not considerably, with some exceptions. All the participant that did not have $\ha=0$ from before, has shifted the values of $\ha$ closer to zero with the new prior. 
-
-thius si because more weight to the boxes that are opened, thus 
-(find the probabilities) if many blue boxes are opened, prob of red being major colour is lower now than for the unif prior. Then, the exp loss of choosing blue as major colour is lower. Thus, taht exp loss migh be lower earlier than 
-
-alpha lower makes sense because the model giver more weight to the boxes that are opened already. if many blue boxes opened, then the prob that the major colour is blue is higher. that means that if particioapnt chooses early, it is more compatible(?) with the model with the new prior for $\Theta$. 
-
-
-
-
-
- 
-
+This is because with $\gamma=\kappa=0.5$, the model put more weight on the colours of the boxes that are opened. If, for example, many of the opened boxes are blue, then the probability that blue is the majority colour is higher in the model with the new prior. That means that if a participant chooses early, these decisions are more compatible with the model with the lower values of $\gamma$  and $\kappa$. 
+Thus, it is reasonable that we have smaller values of $\ha$ for the new model. 
+Most of the participants that have $\ha=0$ in the first model have the same in the alternative model. We also see that most of these participants have the same or about the same value of $\he$, perhaps slightly shifted upwards, with the two different priors. For the other participants there are, with some exceptions, no huge differences in the values of $\he$, considering the scale we have the values on. Some participants get higher values of $\he$ and others get lower values without there being any clear pattern. 
 \begin{figure}
     \centering
     \includegraphics[scale=0.7]{pictures/Sensitivity/mles_unlim.png}
     \caption{Mles unlim, sensitivity. Orange are with teh prior for theta wiht $\gamma=\kappa=0.5$. }
     \label{fig:sensitivity_mls_unlim}
 \end{figure}
-
-
 \begin{figure}
     \centering
     \includegraphics[scale=0.8]{pictures/Sensitivity/mles_unlim_zoom1.png}
     \caption{Mles unlim, sensitivity zoomed once}
     \label{fig:sensitivity_mls_unlim_zoom1}
 \end{figure}
-
 \begin{figure}
     \centering
     \includegraphics[scale=0.8]{pictures/Sensitivity/mles_unlim_zoom2.png}
@@ -870,6 +861,8 @@ alpha lower makes sense because the model giver more weight to the boxes that ar
 \end{figure}
 
 
+
+In Figure \ref{fig:sensitivity_unlim_cis_alpha} we see the confidence intervals for $\alpha$. The green lines are the CIs we found earlier with the uniform prior, and the orange dots represent the CIs when we have the beta prior for $\Theta$ with $\gamma=\kappa=0.5$. As for the MLEs we see that the confidence intervals are close to each other. Many of the upper limits are slightly shifted to the left, with some exceptions. (jeg vet neste ikke hva jeg skal si? de er jo veldig like?) Again, we see that the interval of individual 13 is long, such that the upper limit is outside of this plot. These upper limits are also quite similar. 
 \begin{figure}
     \centering
     \includegraphics[scale=0.37]{pictures/Sensitivity/ci_unlim_alpha.png}
@@ -877,8 +870,15 @@ alpha lower makes sense because the model giver more weight to the boxes that ar
     \label{fig:sensitivity_unlim_cis_alpha}
 \end{figure}
 
-we see that the alpha values tend to be lower than for teh unfirm prior, but the eta vlaues tend to be higher. 
 
+Figure \ref{fig:sensitivity_unlim_cis_eta} displays the confidence intervals for $\eta$ for each participant. We also have here that the orange dots are the CIs in the case with the new prior and the green lines are the CIs we found in the case with the uniform prior. These intervals differ more than the intervals for $\alpha$. 
+Some of the new intervals are shorter and others are longer than the green lines, withput there being any clear pattern of which ones. They might be slightly shifted to the right. At least for the intervals that are longer than the original intervals. There it is mostly the upper limit that is higher than the original, and the lower limit is often close to the lower limit of the green line. 
+However, these higher upper limits might be because of the flat log likelihood function. 
+
+%The high values of $\eta$ are therefore not reliable, such that if the limit is high, for example higher than 1000, which is the threshold value we defined, we could say that the upper limit is infinity. 
+
+they are both longer and shorter. 
+are tehy shifted to one side? maybe a bit more to the right. at least if longer intervlas, it is mostly the upper limit that is shifted. but that might be because the flat log likel func, thus high values are not necesarilly the 'right' vlaues, but they are 'infinity'. 
 \begin{figure}
     \centering
     \includegraphics[scale=0.37]{pictures/Sensitivity/ci_unlim_eta.png}
