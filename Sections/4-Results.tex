@@ -824,14 +824,23 @@ We have now looked at the results when we have a uniform prior, thus that $\gamm
 
 
 \section{Sensitivity to Hyperparameters}
+The results we have discussed so far have all been for a uniform prior of $\Theta$. 
+Recall that $\theta$ is the success probability in the Bernoulli distribution we have for the $X_i$'s, that are the colours of the boxes as described in \eqref{def_of_Xi}. Later we conditioned on there not being six blue and six red boxes. We have a beta prior for $\Theta$ with hyperparameters $\gamma$ and $\kappa$, as seen in \eqref{theta_with_beta_prior}. As we can see in Figure \ref{fig:pdf_beta_distr}, having $\gamma=\kappa=1$ is the same as having a uniform prior for $\Theta$. We will now have a look at how the results are affected by having a different prior. 
+
+As discussed in Chapter \ref{section_notation}, the participants are told that one of the colours always is in majority, such that one might think that the probability that there are more of one of the colours are higher than the probability that there are six of each of the colours. Thus, we want a prior more like the purple or orange lines in Figure \ref{fig:pdf_beta_distr}. We choose the purple line where $\gamma=\kappa=0.5$.
+
+With the new prior for $\Theta$, we have done the same as for the uniform prior. That is, we have found MLEs for all of the parameters and confidence intervals tied to each of them. 
+
+
+
 note to self: gamma and kappa smaller give more 'weight' to the colour of the boxes that are oepned. hence, we choose earlier because the prob that blue is majority is bigger here than for unif if one blue box is opened. 
 
 Sentence about having seen results for uniform prior. We choose $\gamma=\kappa=0.5$, but there are many different priors one could try. but we believe that gamma and kappa are equal. 
 
 \begin{figure}
     \centering
-    \includegraphics[scale=0.8]{pictures/Sensitivity/mles_unlim.png}
-    \caption{Mles unlim, sensitivity}
+    \includegraphics[scale=0.7]{pictures/Sensitivity/mles_unlim.png}
+    \caption{Mles unlim, sensitivity. Orange are with teh prior for theta wiht $\gamma=\kappa=0.5$. }
     \label{fig:sensitivity_mls_unlim}
 \end{figure}
 
@@ -849,3 +858,26 @@ Sentence about having seen results for uniform prior. We choose $\gamma=\kappa=0
     \caption{Mles unlim, sensitivity zoomed twice}
     \label{fig:sensitivity_mls_unlim_zoom2}
 \end{figure}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.37]{pictures/Sensitivity/ci_unlim_alpha.png}
+    \caption{CIs for alpha. Oragne is gk0.5. green is uniform}
+    \label{fig:sensitivity_unlim_cis_alpha}
+\end{figure}
+
+we see that the alpha values tend to be lower than for teh unfirm prior, but the eta vlaues tend to be higher. 
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.37]{pictures/Sensitivity/ci_unlim_alpha.png}
+    \caption{CIs for alpha. Oragne is gk0.5. green is uniform}
+    \label{fig:sensitivity_unlim_cis_alpha}
+\end{figure}
+
+
+the model will now predict that they choose earlier, thus, they are more consisten with the best choices as in general people tend to choose early, at least earlier than an IO (or earlier than they would need to do if they would choose the alternative with the least exp loss). 
+
+
+the CIs often start with teh same value as before, but dont end wiht the same vlaue.

@@ -282,13 +282,14 @@ In some cases, we would like to find the expected value of the loss function. Ta
 
 
 As an example, consider the box task with twelve boxes that could be either blue or red once they are opened. We define a stochastic variable, $X_i$, that represents the colour of the $i$-th opened box, such that 
-\begin{equation*}
+\begin{equation}
+\label{def_of_Xi}
     X_i =
     \begin{cases}
         0,& \text{if box }i \text{ is blue,}\\
         1,& \text{if box }i \text{ is red.}
     \end{cases}
-\end{equation*}
+\end{equation}
 When $i$ boxes are opened, let $\textbf{X}_{1:i}$ denote the colours of the i boxes, such that
 \begin{equation*}
     \textbf{X}_{1:i} = (X_1,X_2,...,X_{i}).
