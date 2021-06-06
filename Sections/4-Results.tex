@@ -802,8 +802,10 @@ However, these higher upper limits might be because of the flat log likelihood f
 We continue with looking at the estimates and confidence intervals using a new prior for $\Theta$ in the limited case of the box task. 
 
 In the previous results where we have a uniform prior, we have that all the $\ha$ are zero except for two. In Figure \ref{fig:sensitivity_mles_lim_a_e} we have plotted both the new and the old estimates of $\alpha$ and $\eta$. The green dots are the estimates for the model with the uniform prior and the orange are the new estimates with the beta prior having hyperparameters $\gamma=\kappa=0.5$. 
-We see that all $\ha$ that were zero from before are still zero with the new prior. The two participants, individuals 11 and 13 that have the high values of $\ha$ get smaller values of $\ha$. These two also get smaller values of $\he$. 
-All the other participants, that have $\ha=0$, get higher estimates of $\eta$ in the case with the non-uniform prior. Most of them are shifted upwards with about 0.3-0.6, whereas a few of them have between 15 and 40. If there for example are many red boxes that are opened, we have that the probability that red is the majority colour is higher with the non-uniform prior than with the uniform. Thus, the expected loss of choosing red as the majority colour is lower now than it was with the uniform prior. Many of the participants chooses what they think is the majority colour early, meaning that they choose when few boxes are opened. With the new prior giving lower expected losses of choosing majority colour early, that means that the participants make decisions closer to the decision that has the lowest expected loss. Thus, we get higher values of $\he$ if we use the new prior with $\gamma=\kappa=0.5$.
+We see that all $\ha$ that were zero from before are still zero with the new prior. The two participants, individuals 11 and 13 that have the high values of $\ha$ get smaller values of $\ha$. Their values of $\he$ are not affected by the prior as it stays the same in both cases. 
+Almost all the other participants, that have $\ha=0$, get higher estimates of $\eta$ in the case with the non-uniform prior. Most of them are shifted upwards with about 0.02-0.35. 
+If there for example are many red boxes that are opened, we have that the probability that red is the majority colour is higher with the non-uniform prior than with the uniform. Thus, the expected loss of choosing red as the majority colour is lower now than it was with the uniform prior. Many of the participants chooses what they think is the majority colour early, meaning that they choose when few boxes are opened. With the new prior giving lower expected losses of choosing majority colour early, that means that the participants make decisions closer to the decision that has the lowest expected loss. Thus, we get higher values of $\he$ if we use the new prior with $\gamma=\kappa=0.5$.
+A few participants get smaller values of $\he$. The biggest exception is individual number 75. Recall that this is the participant that has confidence intervals of length zero because of the high value of $\he$, and that this is a high value of $\he$ for participant 75 even though it is not generally high. Her MLEs are given in \eqref{mles_lim_person75}. We discussed earlier that the log likelihood function is flat for high values of $\eta$, and that the stopping criterion in the optimisation can be met several places when $\eta$ is high. This might be the reason for the big change in the value of $\he$. 
 \begin{figure}
     \centering
     \includegraphics[scale=0.8]{pictures/Sensitivity/mles_lim_a_e.png}
@@ -811,14 +813,15 @@ All the other participants, that have $\ha=0$, get higher estimates of $\eta$ in
     \label{fig:sensitivity_mles_lim_a_e}
 \end{figure}
 
+In addition to this, we have plotted the MLEs for $\alpha$ and $\beta$ together in Figure \ref{fig:sensitivity_mles_lim_a_b}.
 \begin{figure}
     \centering
-    \includegraphics{}
+    \includegraphics[scale=0.8]{pictures/Sensitivity/mles_lim_a_b.png}
     \caption{Caption}
-    \label{fig:my_label}
+    \label{fig:sensitivity_mles_lim_a_b}
 \end{figure}
 
-As so many of the values of $\ha$ are zero, the plots including this will give little information. We therefore skip the plot with $\ha$ and $\hb$, and continue with the plot for $\hb$ and $\he$. These are shown in Figure \ref{fig:sensitivity_mles_lim_b_e}. Here we find an individual with a high value of $\hb$ that gets an even higher value with the new prior. In addition to this, she gets a higher value of $\he$. 
+As so many of the values of $\ha$ are zero, zooming in on Figure \ref{fig:sensitivity_mles_lim_a_b} will give little information. We therefore go straight to the plot for $\hb$ and $\he$, that is shown in Figure \ref{fig:sensitivity_mles_lim_b_e}. Here we find an individual with a high value of $\hb$ that gets an even higher value with the new prior. In addition to this, she gets a higher value of $\he$. 
 \begin{figure}
     \centering
     \includegraphics[scale=0.8]{pictures/Sensitivity/mles_lim_b_e.png}
