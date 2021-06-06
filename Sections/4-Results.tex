@@ -799,9 +799,9 @@ However, these higher upper limits might be because of the flat log likelihood f
 %note to self: gamma and kappa smaller give more 'weight' to the colour of the boxes that are oepned. hence, we choose earlier because the prob that blue is majority is bigger here than for unif if one blue box is opened. 
 
 \subsection{Limited}
-We continue with looking at the estimates and confidence intervals using a new prior fro $\Theta$ in the limited case of the box task. 
+We continue with looking at the estimates and confidence intervals using a new prior for $\Theta$ in the limited case of the box task. 
 
-In the previous result where we have a uniform prior, we have that all the $\ha$ are zero except for two. In Figure \ref{fig:sensitivity_mles_lim_a_e} we have plotted both the new and the old estimates of $\alpha$ and $\eta$. The green dots are the estimates for the model with the uniform prior and the orange are the new estimates with the beta prior having hyperparameters $\gamma=\kappa=0.5$. 
+In the previous results where we have a uniform prior, we have that all the $\ha$ are zero except for two. In Figure \ref{fig:sensitivity_mles_lim_a_e} we have plotted both the new and the old estimates of $\alpha$ and $\eta$. The green dots are the estimates for the model with the uniform prior and the orange are the new estimates with the beta prior having hyperparameters $\gamma=\kappa=0.5$. 
 We see that all $\ha$ that were zero from before are still zero with the new prior. The two participants, individuals 11 and 13 that have the high values of $\ha$ get smaller values of $\ha$. These two also get smaller values of $\he$. 
 All the other participants, that have $\ha=0$, get higher estimates of $\eta$ in the case with the non-uniform prior. Most of them are shifted upwards with about 0.3-0.6, whereas a few of them have between 15 and 40. If there for example are many red boxes that are opened, we have that the probability that red is the majority colour is higher with the non-uniform prior than with the uniform. Thus, the expected loss of choosing red as the majority colour is lower now than it was with the uniform prior. Many of the participants chooses what they think is the majority colour early, meaning that they choose when few boxes are opened. With the new prior giving lower expected losses of choosing majority colour early, that means that the participants make decisions closer to the decision that has the lowest expected loss. Thus, we get higher values of $\he$ if we use the new prior with $\gamma=\kappa=0.5$.
 \begin{figure}
@@ -809,6 +809,13 @@ All the other participants, that have $\ha=0$, get higher estimates of $\eta$ in
     \includegraphics[scale=0.8]{pictures/Sensitivity/mles_lim_a_e.png}
     \caption{Caption}
     \label{fig:sensitivity_mles_lim_a_e}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics{}
+    \caption{Caption}
+    \label{fig:my_label}
 \end{figure}
 
 As so many of the values of $\ha$ are zero, the plots including this will give little information. We therefore skip the plot with $\ha$ and $\hb$, and continue with the plot for $\hb$ and $\he$. These are shown in Figure \ref{fig:sensitivity_mles_lim_b_e}. Here we find an individual with a high value of $\hb$ that gets an even higher value with the new prior. In addition to this, she gets a higher value of $\he$. 
