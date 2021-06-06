@@ -604,7 +604,7 @@ We have also plotted the confidence interval for $\eta$ for each participant. Th
 We have three participants where all of the confidence intervals have length zero. These are individuals 21, 70 and 75. As for individual 75 in the unlimited case, they have very high values of $\he$, which makes the probabilities of each of the decisions as seen in \eqref{probabilities_bootstrap} be approximately zero or approximately one. Thus, all the simulated decisions are the same as the decisions they have done. All of the 1000 MLEs are therefore the same, and finding the percentiles therefore give the same value as the MLEs. It should be noted that individual 75 has $\he=70.87$ as seen in \ref{mles_lim_person75}, which is far below the threshold value of 1000 that we defined for $\eta$. She has a quite high estimate of $\beta$, which makes the expected loss of opening the next box relatively high. Therefore, the expected losses differ considerably, and it takes a much lower value of $\he$ for the probabilities in \eqref{probabilities_bootstrap} to be approximately zero or one. 
 
 
-In Figures \ref{fig:all_cis_alpha_lim} and \ref{fig:all_cis_beta} we see that individual 11 has long confidence intervals fro $\alpha$ and $\beta$. In Figure \ref{fig:ci_lim_a_b_person_11} we have plotted $\ha$ and $\hb$ of the 1000 bootstrap samples for individual 11 together with the confidence intervals for $\alpha$ and $\beta$.
+In Figures \ref{fig:all_cis_alpha_lim} and \ref{fig:all_cis_beta} we see that individual 11 has long confidence intervals for $\alpha$ and $\beta$. In Figure \ref{fig:ci_lim_a_b_person_11} we have plotted $\ha$ and $\hb$ of the 1000 bootstrap samples for individual 11 together with the confidence intervals for $\alpha$ and $\beta$.
 We have zoomed in in that plot in Figure \ref{fig:ci_lim_a_b_person_11_zoomed}. Additionally, we have plotted the MLEs and the confidence intervals of $\alpha$ and $\eta$ in Figure \ref{fig:ci_lim_a_e_person_11} and zoomed in on that plot in Figure \ref{fig:ci_lim_a_e_person_11_zoomed}.
 The confidence intervals are 
 \begin{equation*}
@@ -667,18 +667,24 @@ In Figure \ref{fig:ci_lim_b_e_person_11} we see $\hb$ and $\he$ for the 1000 boo
     \end{minipage}
 \end{figure}
 
-
-
-
-Then about a more regualr person, person 40. 
+In Figure \ref{fig:ci_lim_a_b_person40}, we have plotted the MLEs of $\alpha$ and $\beta$ for the 1000 bootstrap samples of individual 40 that is a more typical person. We see that $\ha$ and $\hb$ tend to not be zero at the same time, but that both intervals include zero. In Figure \ref{fig:ci_lim_a_e_person_40} we have plotted all $\ha$ and $\he$ together, and zoomed in on that plot in Figure \ref{fig:ci_lim_a_e_person_40_zoomed}. Here we see that there are many high values of $\he$, and that the confidence interval is long. The values of $\hb$ and $\he$ are plotted in Figure \ref{fig:ci_lim_b_e_person_40} and we have zoomed in Figure \ref{fig:ci_lim_b_e_person_40_zoomed}. 
+The confidence intervals are 
+\begin{equation*}
+    [\hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}] = [0,0.0665],
+\end{equation*}
+\begin{equation*}
+    [\hb^{*(5)}_{1000},\hb^{*(95)}_{1000}] = [0,0.6763]
+\end{equation*}
+and
+\begin{equation*}
+    [\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}] = [4.2926,31.287].
+\end{equation*}
 \begin{figure}
     \centering
     \includegraphics[scale=0.5]{pictures/ci_lim_a_b_person40.png}
     \caption{ci lim, alpha beta person 40}
     \label{fig:ci_lim_a_b_person40}
 \end{figure}
-
-
 \begin{figure}
     \centering
     \begin{minipage}{0.48\textwidth}
@@ -694,9 +700,6 @@ Then about a more regualr person, person 40.
         \label{fig:ci_lim_a_e_person_40_zoomed}
     \end{minipage}
 \end{figure}
-
-
-
 \begin{figure}
     \centering
     \begin{minipage}{0.48\textwidth}
@@ -714,109 +717,6 @@ Then about a more regualr person, person 40.
 \end{figure}
 
 
-
-
-
-\newpage
-Old:
-except participant 13. In \eqref{mles_lim_person11} we see that she has a very high $\ha$, and thus the values of the CI are high, and the values are outside the range of the plot here. We also see that individual number 11 has a high value of the upper limit of the CI, and that participant number 75 has a CI that is zero in both the lower and upper limit. All of the CIs include zero except for individual number 13. 
-
-
-
-In Figure \ref{fig:all_cis_beta} we see all the CIs for $\beta$ plotted. This time it is participant number 75 that is not included because of too high values of the CI.  Participant number 11 has a high upper limit of the CI, just like in the CI for $\alpha$.
-
-
-
-In Figure \ref{fig:all_cis_eta_lim} we see all the CIs of $\eta$. We see here that participant number 75 has a CI of length zero, just as the CI for $\alpha$. In Figure \ref{fig:all_cis_eta_lim_zoomed} we have zoomed in , and see that only two participants have CIs that include zero. This means that most of the participants make reasonable choices, except for these two. 
-
-
-
-%\begin{figure}
-%    \centering
-%    \includegraphics[scale=0.37]{pictures/all_cis_lim_eta_zoomed.png}
-%    \caption{All cis eta, uniform prior, limited, zoomed.}
-%    \label{fig:all_cis_eta_lim_zoomed}
-%\end{figure}
-
-If we again have a look at person 32, we find that the CIs are
-\begin{equation*}
-    [\hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}] = [0,0.0818],
-\end{equation*}
-\begin{equation*}
-    [\hb^{*(5)}_{1000},\hb^{*(95)}_{1000}] = [0,0.8690]
-\end{equation*}
-and
-\begin{equation*}
-    [\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}] = [4.4340,60.631].
-\end{equation*}
-We see the $\ha$ and $\hb$ of the 1000 bootstrap samples and the CIs plotted in Figure \ref{fig:ci_lim_a_b_person_32}. Here we see two outliers in the top right corner, and we therefore zoom in more as in Figure \ref{fig:ci_lim_a_b_person_32_zoomed}. Here we see that many of the bootstrap samples gives $\ha$ and $\hb$ equal to zero. Thus, both of these intervals include zero. 
-\begin{figure}
-    \centering
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[scale=0.37]{pictures/ci_lim_a_b_person32.png}
-        \caption{ci lim person 32}
-        \label{fig:ci_lim_a_b_person_32}
-    \end{minipage}\hfill
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[scale=0.37]{pictures/ci_lim_a_b_person32_zoomed.png}
-        \caption{ci lim person 32 zoomed}
-        \label{fig:ci_lim_a_b_person_32_zoomed}
-    \end{minipage}
-\end{figure}
-In Figure \ref{fig:ci_lim_a_e_person_32} we see the $\ha$ and $\he$ values plotted and again zoomed in Figure \ref{fig:ci_lim_a_b_person_32_zoomed}. There are some outliers of $\he$ with very high values, but the CI still has a quite small upper limit. 
-\begin{figure}
-    \centering
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[scale=0.37]{pictures/ci_lim_a_e_person32.png}
-        \caption{ci lim person 32}
-        \label{fig:ci_lim_a_e_person_32}
-    \end{minipage}\hfill
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[scale=0.37]{pictures/ci_lim_a_e_person32_zoomed.png}
-        \caption{ci lim person 32 zoomed}
-        \label{fig:ci_lim_a_e_person_32_zoomed}
-    \end{minipage}
-\end{figure}
-
-
-\begin{figure}
-    \centering
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[scale=0.37]{pictures/ci_lim_b_e_person32.png}
-        \caption{ci lim person 32}
-        \label{fig:ci_lim_b_e_person_32}
-    \end{minipage}\hfill
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[scale=0.37]{pictures/ci_lim_b_e_person32_zoomed.png}
-        \caption{ci lim person 32 zoomed}
-        \label{fig:ci_lim_b_e_person_32_zoomed}
-    \end{minipage}
-\end{figure}
-
-Individual number 11 has very high upper limits of both the CI for $\alpha$ and for $\beta$, and she is one of the two that has a CI for $\eta$ that includes zero. The CIs are
-
-
-In Figures \ref{fig:ci_lim_a_b_person_11} and \ref{fig:ci_lim_a_e_person_11} we see $\ha$ and $\hb$ in addition to $\ha$ and $\he$ plotted for the 1000 bootstrap samples. These plots are zoomed in Figures \ref{fig:ci_lim_a_b_person_11_zoomed} and \ref{fig:ci_lim_a_e_person_11_zoomed}, respectively. We see also here that there are many high values of $\ha$, which again could be local maximum points. We also see quite high values of $\hb$, which might also be because of local maximum points. 
-
-
-Individual 75 has CIs with length zero. These CIs are
-\begin{equation*}
-    [\hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}] = [0,0],
-\end{equation*}
-\begin{equation*}
-    [\hb^{*(5)}_{1000},\hb^{*(95)}_{1000}] = [79.5448,79.5448]
-\end{equation*}
-and
-\begin{equation*}
-    [\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}] = [45.69408,45.69408].
-\end{equation*}
-In \eqref{mles_lim_person75} we see that the MLEs for $\beta$ and $\eta$ are smaller than the values for the CIs (jeg aner faktisk ikke hvorfor det er sånn?? man får samme sekvens med valg, men forskjellige mleer, og jeg aner ikke hvorfor. såå hva skal jeg si om dette?)
 
 We have now looked at the results when we have a uniform prior, thus that $\gamma=\kappa =1$. The next we will do is looking at how the results are influenced by a different prior. Thus, we look at the sensitivity of the hyperparameters $\gamma$ and $\kappa$.
 
