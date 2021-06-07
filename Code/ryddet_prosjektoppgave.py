@@ -428,8 +428,8 @@ def main(alpha,beta,unlim=True,binom=True,gamma=1,kappa=1):
 
 
 #unlimited binomial:
-main(0.0135,0,True,True,1,1)
+#main(0.0015,0.7929,True,True,1,1)
 
 
 #limited binomial:
-#main(0.0,0.2377,False,True,1,1)
+main(1.1798,0,False,True,1,1)

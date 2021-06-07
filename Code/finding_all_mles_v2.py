@@ -741,10 +741,11 @@ def all_exp_losses_lim(alpha,beta,gamma,kappa):
 #dette ser bra ut!
 #print(all_exp_losses_lim(0.01,0.8,1,1))
 #print(make_matrix_lim(12,0.01,0.8,1,1,True))
+    #denne har jeg sjekket mange ganger at er riktig. 
 
 
 
-def participant_choices_lim(df,person):
+def participant_choices_lim(df,person): #denne er riktig
     all_choices = [[],[],[],[],[],[]]
     neg_l = 0
     for a in range(6): #six trials
@@ -784,12 +785,15 @@ def neg_log_likel_lim(x,person,gamma,kappa,all_choices):
             if choice != -1: 
                 #if choice ==-1: e_delta = beta #if test terminates, the loss is beta
                 loss = 'Loss'+str(choice)
+                #print(loss)
                 e_delta = expL[i][loss] # the expected loss of the choice that is made
+                #print(loss, e_delta)
                 e0 = expL[i]['Loss0']
                 e1 = expL[i]['Loss1']
                 e2 = expL[i]['Loss2']
                 const = max(-eta*e0,-eta*e1,-eta*e2)
                 neg_l += eta*e_delta + const + np.log(np.exp(-eta*e0-const)+np.exp(-eta*e1-const)+np.exp(-eta*e2-const))
+                #print(neg_l)
             i+=1
     return neg_l
 
@@ -800,7 +804,21 @@ def neg_log_likel_lim(x,person,gamma,kappa,all_choices):
 choices_75 = participant_choices_lim(data,75)
 mles_75 = minimize(neg_log_likel_lim,args=(75,1,1,choices_75),x0=[12.99,0.067,0.98],bounds=bnds)
 print(mles_75.x)        
-        
+
+
+'''
+sjekke om log likel er riktig:
+'''
+
+#this is supposed to be ish 22.1:
+person = 15
+choices_75 = participant_choices_lim(data,person)
+print(neg_log_likel_lim([1,0,0],person,1,1,choices_75))
+print(neg_log_likel_lim_old([1,0,0],data,person,1,1))
+
+
+
+
         
 #old_version
 #neg_log_likel_lim([10,0.01,0.8],data,0,1,1)
@@ -841,12 +859,14 @@ def neg_log_likel_lim_old(x,df,person,gamma,kappa): #old, long version
         dtd = df[dtd_string][person]
         #print(dtd)
         choice = df[choice_string][person]
-        #print(choice)
+        print(choice)
+        print(type(choice))
         #find choice as 0,1 or -1, depending on trial
         choice01 = 1
         if (a==0 and choice=='Light blue') or (a==1 and choice=='Yellow') or (a==2 and choice=='Light purple') or (a==3 and choice=='Red') or (a==4 and choice=='Pink') or (a==5 and choice=='Blue'):
             choice01=0
-        elif choice == -1:
+        elif choice == '-1': #dette går ikke, går alrdi gjennom dennne løkka!!
+            print(-1)
             choice01=-1
         
         i = 0 #first index in the matrix with losses.
@@ -860,7 +880,9 @@ def neg_log_likel_lim_old(x,df,person,gamma,kappa): #old, long version
             e1 = losses['Loss1']
             e2 = losses['Loss2']
             const = max(-eta*e0,-eta*e1,-eta*e2)
+            print('Loss2',e2)
             neg_l += eta*e2 + const + np.log(np.exp(-eta*e0-const)+np.exp(-eta*e1-const)+np.exp(-eta*e2-const))
+            #print(neg_l)
             i += 1 #going one step down in the matrix
             if trial[l]==1: #if red box we go one elemtn to the right in the matrix
                 j+=1
@@ -873,10 +895,14 @@ def neg_log_likel_lim_old(x,df,person,gamma,kappa): #old, long version
         e2 = losses['Loss2']
         const = max(-eta*e0,-eta*e1,-eta*e2)
         if choice01==0: #If the first colour is chosen as majority colour
+            print('Loss0',e0)
             neg_l += eta*e0 + const + np.log(np.exp(-eta*e0-const)+np.exp(-eta*e1-const)+np.exp(-eta*e2-const))
+            #print(neg_l)
             #neg_l += eta*losses['Loss0'] + np.log(np.exp(-eta*losses['Loss0'])+np.exp(-eta*losses['Loss1'])+np.exp(-eta*losses['Loss2']))
         elif choice01==1:
+            print('Loss1',e1)
             neg_l += eta*e1 + const + np.log(np.exp(-eta*e0-const)+np.exp(-eta*e1-const)+np.exp(-eta*e2-const))
+            #print(neg_l)
             #neg_l += eta*losses['Loss1'] + np.log(np.exp(-eta*losses['Loss0'])+np.exp(-eta*losses['Loss1'])+np.exp(-eta*losses['Loss2']))
         #if choice and choice01 is -1, we dont add something to the neg_l, as the particioant was not able to choose then, the test just terminated. 
 
@@ -953,15 +979,26 @@ bnds = ((-inf,inf),(0,inf),(0,inf)) #bounds for eta, alpha and beta when minimiz
 #x0_lim = [0,0,0]
 #opt = {'ftol':1e-100,'gtol':1e-100,'maxiter':150000,'maxfun':150000}
 
-gamma=1
-kappa=1
+path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\mles_limited_test.csv"
+df_mles_lim = pd.read_csv(path, usecols = ['ID','eta','alpha','beta','fun','eta_0','alpha_0','beta_0'])
+df_mles_lim.head()
+
+
+'''
+%%%%%%%%start here%%%%%%%%%%%%%%%
+'''
+
+bnds = ((-inf,inf),(0,inf),(0,inf))
+
+gamma=0.5
+kappa=0.5
 #for person in range(len(data)):
-for person in range(75,76):
+for person in range(9,76): #start w 377
     ID = data['ID'][person]
     print(person, ID)  
     df_mles_lim['ID'][person] = ID
     choices = participant_choices_lim(data,person)
-    for k in range(200):
+    for k in range(80):
         eta_0 = 3 + 17*random.random() #random number between 3 and 20
         alpha_0 = 0.1*random.random() #random number between 0 and 0.1
         beta_0 = random.random() #radnom number between 0 and 1
@@ -980,9 +1017,12 @@ for person in range(75,76):
              df_mles_lim['beta_0'][person] = beta_0
              print('new',df_mles_lim['fun'][person])
             
-df_mles_lim.tail()
+#df_mles_lim.head()
+#df_mles_lim[:][5:25]
+#df_mles_lim.tail()
 
-path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\mles_limited_x0_200_times.csv"
+path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=0.5\mles_limited_fixed_1000.csv"
+#path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\mles_limited_test3.csv"
 df_mles_lim.to_csv(path)
 
         
@@ -998,7 +1038,7 @@ old version, only on x0_lim
 
 
 
-
+'''
 df_mles_lim.head()
 df_mles_lim.tail()
 df_mles_lim[0:20]
@@ -1055,7 +1095,7 @@ plt.title("Mle's of beta and eta, limited")
 plt.xlabel('beta')
 plt.ylabel('eta')
 plt.show()
-
+'''
 
 
 
@@ -1102,7 +1142,6 @@ def simulating_decisions_lim(person,eta_hat,alpha_hat,beta_hat,gamma,kappa):
 
 
 def simulating_200_lim(person,df,gamma,kappa):
-    #num_sim = 200
     num_sim=1000
     alpha_200 = np.zeros(num_sim)
     beta_200 = np.zeros(num_sim)
@@ -1152,7 +1191,7 @@ def simulating_200_lim(person,df,gamma,kappa):
 '''
 
 
-path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=0.5\mles_limited_x0_200_times.csv'
+path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=0.5\mles_limited_fixed_1000.csv"
 df_lim = pd.read_csv(path,sep=',',usecols=['ID','eta','alpha','beta','eta_0','alpha_0','beta_0'])
 df_lim.head()    
 df_lim['eta_5_p'] = np.nan
@@ -1167,9 +1206,10 @@ df_lim['beta200'] = np.zeros(76,dtype='<U2')
 
 
 
-#e,a,b = simulating_200_lim(0,df_lim,1,1)
-
-
+#e,a,b = simulating_200_lim(75,df_lim,1,1)
+#print(e)
+#print(b)
+#print(a)
 #path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\bootstrap_limited.csv"
 #path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=0.5\mles_limited_x0_200_times.csv"
 #df_lim.to_csv(path)
@@ -1207,14 +1247,14 @@ for person in range(75,76): #start with 15 next time
 '''
 %%%%%% hvis du allerede har lagret noen verider %%%%%%%%%%%%%%
 '''
-path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=0.5\bootstrap_limited.csv'
-df_lim = pd.read_csv(path,sep=',',usecols=['ID','eta','alpha','beta','eta_0','alpha_0','beta_0','eta_5_p',
-                                           'eta_95_p','alpha_5_p','alpha_95_p','beta_5_p','beta_95_p','eta200',
-                                           'alpha200','beta200'],dtype={'eta200':'object','alpha200':'object','beta200':'object'})
+#path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\bootstrap_limited_fixed1.csv'
+#df_lim = pd.read_csv(path,sep=',',usecols=['ID','eta','alpha','beta','eta_0','alpha_0','beta_0','eta_5_p',
+#                                           'eta_95_p','alpha_5_p','alpha_95_p','beta_5_p','beta_95_p','eta200',
+#                                           'alpha200','beta200'],dtype={'eta200':'object','alpha200':'object','beta200':'object'})
 
 
 #bootstrap for alle 75 deltakere: 
-for person in range(75,76): #start på peron 6 neste gang
+for person in range(40,42): 
     tic = time.perf_counter()
     print(person)
     e,a,b = simulating_200_lim(person,df_lim,1,1)
@@ -1232,8 +1272,100 @@ for person in range(75,76): #start på peron 6 neste gang
     print(f'Code ran in {toc - tic:0.4f} seconds')
 
 
-path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=0.5\bootstrap_limited.csv"
+path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=0.5\bootstrap_limited_fixed1000.csv"
 df_lim.to_csv(path)
+
+
+
+path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=0.5\bootstrap_limited_fixed1000.csv'
+df_lim = pd.read_csv(path,sep=',',usecols=['ID','eta','alpha','beta','eta_0','alpha_0','beta_0','eta_5_p',
+                                           'eta_95_p','alpha_5_p','alpha_95_p','beta_5_p','beta_95_p','eta200',
+                                           'alpha200','beta200'],dtype={'eta200':'object','alpha200':'object','beta200':'object'})
+
+for person in range(50,55): 
+    tic = time.perf_counter()
+    print(person)
+    e,a,b = simulating_200_lim(person,df_lim,1,1)
+    df_lim['eta200'][person] = e
+    df_lim['alpha200'][person] = a
+    df_lim['beta200'][person] = b
+
+    df_lim['eta_5_p'][person] = np.percentile(e,5)
+    df_lim['eta_95_p'][person] = np.percentile(e,95)
+    df_lim['alpha_5_p'][person] = np.percentile(a,5)
+    df_lim['alpha_95_p'][person] = np.percentile(a,95)
+    df_lim['beta_5_p'][person] = np.percentile(b,5)
+    df_lim['beta_95_p'][person] = np.percentile(b,95)
+    toc = time.perf_counter()
+    print(f'Code ran in {toc - tic:0.4f} seconds')
+
+
+path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=0.5\bootstrap_limited_fixed1000.csv"
+df_lim.to_csv(path)
+
+
+
+path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=0.5\bootstrap_limited_fixed1000.csv'
+df_lim = pd.read_csv(path,sep=',',usecols=['ID','eta','alpha','beta','eta_0','alpha_0','beta_0','eta_5_p',
+                                           'eta_95_p','alpha_5_p','alpha_95_p','beta_5_p','beta_95_p','eta200',
+                                           'alpha200','beta200'],dtype={'eta200':'object','alpha200':'object','beta200':'object'})
+
+for person in range(55,76): 
+    tic = time.perf_counter()
+    print(person)
+    e,a,b = simulating_200_lim(person,df_lim,1,1)
+    df_lim['eta200'][person] = e
+    df_lim['alpha200'][person] = a
+    df_lim['beta200'][person] = b
+
+    df_lim['eta_5_p'][person] = np.percentile(e,5)
+    df_lim['eta_95_p'][person] = np.percentile(e,95)
+    df_lim['alpha_5_p'][person] = np.percentile(a,5)
+    df_lim['alpha_95_p'][person] = np.percentile(a,95)
+    df_lim['beta_5_p'][person] = np.percentile(b,5)
+    df_lim['beta_95_p'][person] = np.percentile(b,95)
+    toc = time.perf_counter()
+    print(f'Code ran in {toc - tic:0.4f} seconds')
+
+
+path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=0.5\bootstrap_limited_fixed1000.csv"
+df_lim.to_csv(path)
+
+
+
+path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=0.5\bootstrap_limited_fixed1000.csv'
+df_lim = pd.read_csv(path,sep=',',usecols=['ID','eta','alpha','beta','eta_0','alpha_0','beta_0','eta_5_p',
+                                           'eta_95_p','alpha_5_p','alpha_95_p','beta_5_p','beta_95_p','eta200',
+                                           'alpha200','beta200'],dtype={'eta200':'object','alpha200':'object','beta200':'object'})
+
+for person in range(60,76): 
+    tic = time.perf_counter()
+    print(person)
+    e,a,b = simulating_200_lim(person,df_lim,1,1)
+    df_lim['eta200'][person] = e
+    df_lim['alpha200'][person] = a
+    df_lim['beta200'][person] = b
+
+    df_lim['eta_5_p'][person] = np.percentile(e,5)
+    df_lim['eta_95_p'][person] = np.percentile(e,95)
+    df_lim['alpha_5_p'][person] = np.percentile(a,5)
+    df_lim['alpha_95_p'][person] = np.percentile(a,95)
+    df_lim['beta_5_p'][person] = np.percentile(b,5)
+    df_lim['beta_95_p'][person] = np.percentile(b,95)
+    toc = time.perf_counter()
+    print(f'Code ran in {toc - tic:0.4f} seconds')
+
+path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=0.5\bootstrap_limited_fixed1000.csv"
+df_lim.to_csv(path)
+
+
+
+
+
+
+
+
+
 
 
 '''

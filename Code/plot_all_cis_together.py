@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 %%%%%%%%%%%%%%%%%%%%%%%%% Unlimited %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 '''
 
-path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=0.5\bootstrap_1000_unlim.csv"
+path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\bootstrap_1000_unlim.csv"
 df=pd.read_csv(path,usecols=['ID', 'eta', 'alpha','alpha_5_p', 'alpha_95_p', 'eta_5_p', 'eta_95_p'])
 df.head()
 
@@ -45,6 +45,13 @@ for lower,upper,y in zip(df_big['alpha_5_p'],df_big['alpha_95_p'],range(len(df_b
     plt.plot((lower,upper),(y,y),'r|-',color='seagreen')
 plt.yticks(range(len(df_big)),df_big.index)
 
+#plotting all cis alpha:
+%matplotlib qt
+for lower,upper,y in zip(df['alpha_5_p'],df['alpha_95_p'],range(len(df))):
+    plt.plot((lower,upper),(y,y),'r|-',color='seagreen')
+plt.yticks(range(len(df)),df.index)
+plt.axvline(x=0, color='black',linewidth=0.5)
+
 
 
 
@@ -53,6 +60,20 @@ plt.yticks(range(len(df_big)),df_big.index)
 for lower,upper,y in zip(df['eta_5_p'],df['eta_95_p'],range(len(df))):
     plt.plot((lower,upper),(y,y),'r|-',color='seagreen')
 plt.yticks(range(len(df)),df.index)
+plt.axvline(x=0, color='black',linewidth=0.5)
+
+
+#trying to include a line at eta=0 and zoomed:
+%matplotlib qt
+for lower,upper,y in zip(df['eta_5_p'],df['eta_95_p'],range(len(df))):
+    plt.plot((lower,upper),(y,y),'r|-',color='seagreen')
+plt.axvline(x=0, color='black',linewidth=0.5)
+#plt.xlim(-100,1000)
+plt.yticks(range(len(df)),df.index)
+
+
+
+
 
 
 #plotting all eta except high values
@@ -70,7 +91,7 @@ plt.yticks(range(len(df_c)),df_c.index)
 %%%%%%%%%%%%%%%%%%%%%%%%% Limited %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 '''
 
-path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=0.5\bootstrap_limited.csv"
+path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\bootstrap_limited_fixed1.csv"
 df=pd.read_csv(path,usecols=['ID', 'eta', 'alpha','alpha_5_p', 'alpha_95_p', 'eta_5_p', 'eta_95_p','beta_5_p', 'beta_95_p'])
 df.head()
 
@@ -80,6 +101,8 @@ df.head()
 for lower,upper,y in zip(df['eta_5_p'],df['eta_95_p'],range(len(df))):
     plt.plot((lower,upper),(y,y),'r|-',color='seagreen')
 plt.yticks(range(len(df)),df.index)
+plt.axvline(x=0, color='black',linewidth=0.5)
+
 
 
 
@@ -89,6 +112,7 @@ plt.yticks(range(len(df)),df.index)
 for lower,upper,y in zip(df['alpha_5_p'],df['alpha_95_p'],range(len(df))):
     plt.plot((lower,upper),(y,y),'r|-',color='seagreen')
 plt.yticks(range(len(df)),df.index)
+plt.axvline(x=0, color='black',linewidth=0.5)
 
 
 
@@ -114,6 +138,7 @@ plt.yticks(range(len(df_c)),df_c.index)
 for lower,upper,y in zip(df['beta_5_p'],df['beta_95_p'],range(len(df))):
     plt.plot((lower,upper),(y,y),'r|-',color='seagreen')
 plt.yticks(range(len(df)),df.index)
+plt.axvline(x=0, color='black',linewidth=0.5)
 
 
 

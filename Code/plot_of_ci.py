@@ -101,14 +101,14 @@ plt.show()
 %%%%%%%%%%%%%%%%%%%%%% Limited %%%%%%%%%%%%%%%%%%%%%%%%%%%
 '''
 
-path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\bootstrap_limited.csv"
+path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\bootstrap_limited_fixed1.csv"
 df_lim=pd.read_csv(path,usecols=['ID', 'eta', 'alpha', 'beta','eta_0', 'alpha_0','beta_0',
        'alpha_5_p', 'alpha_95_p', 'beta_5_p','beta_95_p', 'eta_5_p', 'eta_95_p', 'eta200', 'alpha200','beta200'])
 
 df_lim.columns
+#df_lim.head()
 
-
-person = 32
+person = 40
 e = df_lim['eta200'][person]
 e = e[1:-1]
 #print(e)
@@ -149,14 +149,15 @@ b_ci_mid = (b_95+b_5)/2
 
 
 #alpha and eta
+%matplotlib inline
 plt.scatter(a_float,e_float,s=10,color='mediumseagreen')
 #plt.plot(a_ci,e_ci)
 plt.plot(a_ci,[e_ci_mid,e_ci_mid],'.-',color='black')
 plt.plot([a_ci_mid,a_ci_mid],e_ci,'.-',color='black')
 #plt.yscale('log') #for log scale of eta.
 #plt.title(r"MLE of $\alpha$ and $\eta$ for the 76 participants, unlimited. $\gamma=\kappa=1$.")
-plt.xlim([-0.004,0.14])
-plt.ylim([-10,200])
+#plt.xlim([-50,1400])
+plt.ylim([-170,4300])
 plt.xlabel(r'$\hat{\alpha}$')
 plt.ylabel(r'$\hat{\eta}$')
 plt.show()
@@ -169,8 +170,8 @@ plt.plot(a_ci,[b_ci_mid,b_ci_mid],'.-',color='black')
 plt.plot([a_ci_mid,a_ci_mid],b_ci,'.-',color='black')
 #plt.yscale('log') #for log scale of eta.
 #plt.title(r"MLE of $\alpha$ and $\eta$ for the 76 participants, unlimited. $\gamma=\kappa=1$.")
-plt.xlim([-0.005,0.13])
-plt.ylim([-0.1,2.5])
+#plt.xlim([-50,1400])
+#plt.ylim([-5,76])
 plt.xlabel(r'$\hat{\alpha}$')
 plt.ylabel(r'$\hat{\beta}$')
 plt.show()
@@ -183,8 +184,8 @@ plt.plot(b_ci,[e_ci_mid,e_ci_mid],'.-',color='black')
 plt.plot([b_ci_mid,b_ci_mid],e_ci,'.-',color='black')
 #plt.yscale('log') #for log scale of eta.
 #plt.title(r"MLE of $\alpha$ and $\eta$ for the 76 participants, unlimited. $\gamma=\kappa=1$.")
-plt.xlim([-0.1,3])
-plt.ylim([-5,200])
+#plt.xlim([-1,30])
+plt.ylim([-50,4200])
 plt.xlabel(r'$\hat{\beta}$')
 plt.ylabel(r'$\hat{\eta}$')
 plt.show()
