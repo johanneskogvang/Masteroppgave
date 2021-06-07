@@ -1,7 +1,7 @@
 \newpage
 \chapter{Background Theory}
 %\section{Theory}
-In this chapter we will go through some of the statistical theory used in this report. That includes the theorem of total probability, Bayes' theorem, the beta and gamma functions, Bayesian modelling, loss functions, the softmax function, maximum likelihood estimation and bootstrapping.  
+In this chapter we will go through some of the statistical theory used in this report. That includes the theorem of total probability, Bayes' theorem, the beta and gamma functions, Bayesian modelling, loss functions, the law of total ecpectation, the softmax function, maximum likelihood estimation and bootstrapping.  
 
 \section{The Theorem of Total Probability}
 The theorem of total probability is often used when we want to find some probability, and this probability is hard to find. Then, sometimes it might be easier to find that probability if we condition on something, and use the theorem of total probability. 
@@ -137,7 +137,7 @@ As an example, consider a discrete random variable, $U$. We can find the probabi
 % where $\mathrm{B}(\gamma,\kappa)$ is the beta function, meaning that
 
 
-Later, we will use the beta and gamma functions and some properties of these. These are therefore stated here. This theory can for example be found in \citet{statinf}. The gamma function for a parameter $\kappa$ is 
+Later, we will use the beta and gamma functions and some of their properties. These are therefore stated here. This theory can for example be found in \citet{statinf}. The gamma function for a parameter $\kappa$ is 
 \begin{equation*}
     \label{gamma_func}
     \Gamma(\kappa) = \int_0^\infty t^{\kappa-1}e^{-t} \dd t.
@@ -149,9 +149,10 @@ A useful property of the gamma function is that it is recursive. Hence,
 \end{equation}
 
 Additionally, the beta function with parameters $\gamma$ and $\kappa$ is defined as
-\begin{equation*}
+\begin{equation}
+\label{beta_function}
     \mathrm{B}(\gamma,\kappa) = \int_0^1 \theta^{\gamma-1}(1-\theta)^{\kappa-1} \: \dd \theta.
-\end{equation*}
+\end{equation}
 We can express the beta function as a product of gamma functions. That yields
 \begin{equation}
 \label{beta_as_gamma}
@@ -162,7 +163,7 @@ We can express the beta function as a product of gamma functions. That yields
 
 \section{Bayesian Modelling}
 \label{theory_bayesian_modelling}
-Consider a stochastic variable, $U$, that has a probability density function $f(u|\theta)$, where $\theta$ is a parameter upon which $U$ depends. In classical statistics, $\theta$ is said to be a fixed but unknown value. On the other hand, in Bayesian statistics, we consider $\theta$ as a stochastic variable. Thus, $\theta$ has a density function, $f(\theta)$. This is called the prior distribution as it represents the prior knowledge we have about $\theta$ before observing any data. That could be our own subjective believes about the parameter, or based on other previously collected data or studies. One could also choose a prior distribution that does not say anything about the parameter at all. This is called a non-informative prior, and it is often used when we have none or little prior information about the parameter \citep{givens2012computational}. 
+Consider a stochastic variable, $U$, that has a probability density function $f(u|\theta)$, where $\theta$ is a parameter upon which $U$ depends. In classical statistics, $\theta$ is said to be a fixed but unknown value. However, in Bayesian statistics we consider $\theta$ as a stochastic variable, such that $\theta$ has a density function, $f(\theta)$. This is called the prior distribution as it represents the prior knowledge we have about $\theta$ before observing any data. That could be our own subjective believes about the parameter, or information based on other previously collected data or studies. One could also choose a prior distribution that does not say anything about the parameter at all. This is called a non-informative prior, and it is often used when we have none or little prior information about the parameter \citep{givens2012computational}. 
 If we have collected data, we can update our prior beliefs with the information we get from that data. The resulting distribution is called the posterior distribution of $\theta$. This can be found using Bayes' theorem, and it includes both the prior information we have and the new information we get from the data. 
 
 Consider a discrete stochastic variable, $U$, that has a sampling distribution $P(U=u|\theta)$, and let $P(U=u)$ be the marginal distribution of $U$. Additionally, let $f(\theta)$ be the prior distribution of $\theta$, hence our prior beliefs of the parameter. Using Bayes' rule as it is stated in \eqref{bayesrule}, we get that the posterior distribution of $\theta$ given $u$, $f(\theta|u)$, can be expressed as \citep{statinf}
@@ -193,8 +194,9 @@ As $\theta$ is a probability, its value is on the interval $[0,1]$. We know that
 The prior density of $\Theta$ is then
 \begin{equation}
     \label{betadistribution}
-    f(\theta) = \frac{1}{\mathrm{B}(\gamma,\kappa)}\theta^{\gamma-1}(1-\theta)^{\kappa-1}.
+    f(\theta) = \frac{1}{\mathrm{B}(\gamma,\kappa)}\theta^{\gamma-1}(1-\theta)^{\kappa-1},
 \end{equation}
+where $B(\gamma,\kappa)$ is the beta function as defined in \eqref{beta_function}.
 We can find the posterior distribution of $\theta$ using \eqref{posterior_proportional}, \eqref{binomial_12_ex} and \eqref{betadistribution}. Thus,
 \begin{equation*}
     \begin{aligned}
@@ -230,7 +232,7 @@ Additionally, let $z$ be the true, but unknown state of nature, where
 \begin{equation*}
     z \in \Omega_z.
 \end{equation*} 
-We can define a loss function that depends on $z$ and $\delta$, which we denote $L(z,\delta)$. This is then the loss when making a decisions, $\delta$, regarding $z$ \citep{statisticalDecisionTheoryLiese2008}.
+We can define a loss function that depends on $z$ and $\delta$, which we denote $L(z,\delta)$. This is then the loss when making a decision, $\delta$, regarding $z$ \citep{statisticalDecisionTheoryLiese2008}.
 
 A loss function could for example be the 0-1-loss function. If for example $\Omega_{\delta}= \Omega_z = \{0,1\}$, the loss function could be
 \begin{equation}
@@ -290,11 +292,12 @@ As an example, consider the box task with twelve boxes that could be either blue
         1,& \text{if box }i \text{ is red.}
     \end{cases}
 \end{equation}
-When $i$ boxes are opened, let $\textbf{X}_{1:i}$ denote the colours of the i boxes, such that
-\begin{equation*}
-    \textbf{X}_{1:i} = (X_1,X_2,...,X_{i}).
-\end{equation*}
-Additionally, let $Z$ be the colour that is in majority when all twelve boxes are opened, the true majority colour. This is also as stochastic variable as it depends on the colours of the twelve boxes, the $X_i$'s. We define $Z$ as
+When $i$ boxes are opened, let $X_{1:i}$ denote the colours of the $i$ boxes, such that
+\begin{equation}
+\label{def_of_X1:i}
+    X_{1:i} = (X_1,X_2,...,X_{i}).
+\end{equation}
+Additionally, let $Z$ be the colour that is in majority when all twelve boxes are opened, the true majority colour. This is also a stochastic variable as it depends on the colours of the twelve boxes, the $X_i$'s. We define $Z$ as
 \begin{equation}
 \label{def_of_Z}
     Z = I\left(\sum_{j=1}^{12}X_j > 6\right).
@@ -327,7 +330,7 @@ To find the expected loss, we take the expectation of the loss function. As $Z$ 
 \begin{equation*}
     E[L(Z,\delta)|X_{1:i}=x_{1:i}] = E[I(Z\neq \delta)|X_{1:i}=x_{1:i}].
 \end{equation*}
-As in \eqref{expectation_of_loss_func_general}, this expectation is the probability that $\delta \neq Z$, but here the probability is dependent on $X$. Thus,
+As in \eqref{expectation_of_loss_func_general}, this expectation is the probability that $\delta \neq Z$, but here the probability depends on $X$. Thus,
 \begin{equation}
 \label{exp_loss_theory}
     E[L(Z,\delta)|X_{1:i}=x_{1:i}] = P(Z\neq \delta|X_{1:i}=x_{1:i}).
@@ -402,7 +405,7 @@ Maximum likelihood estimation is used to find estimates for parameters in a dist
 \label{likelihood}
     L(\vp|\delta_1,\delta_2,...,\delta_n) =  \prod_{i=1}^{n} f(\delta_i|\vp).
 \end{equation} 
-The MLEs are then the estimates of $\vp$ that maximises this function, and they are often denoted $\hat{\vp}$. It is often hard to maximize the likelihood function, then it might be easier to take the logarithm of the likelihood function and maximize that instead. This is called the log likelihood function, and is normally denoted as $l$. Thus,
+The MLEs are then the estimates of $\vp$ that maximises this function, and they are usually denoted $\hat{\vp}$. It is often hard to maximize the likelihood function, then it might be easier to take the logarithm of the likelihood function and maximize that instead. This is called the log likelihood function, and is normally denoted as $l$. Thus,
 \begin{equation}
 \label{chap2:log_likelihood}
     \begin{aligned}
@@ -430,11 +433,10 @@ the likelihood function would be
         \frac{\text{exp}(- \eta \EE_{\delta_i}(\vp))}{\sum_{d=0}^{2} \text{exp}(-\eta \EE_{d}(\vp))}.
     \end{aligned}
 \end{equation*}
-
 The log likelihood would then be
 \begin{equation*}
     \begin{aligned}
-        l(\vp,\eta|\delta_1,\delta_2,...,\delta_n) =& \sum_{i=0}^N \text{log}\left( \frac{e^{-\eta \EE_{\delta_{i}}(\vp)}}
+        l(\vp,\eta|\delta_1,\delta_2,...,\delta_n) =& \sum_{i=0}^N \text{log}\left( \frac{\text{exp}({-\eta \EE_{\delta_{i}}(\vp))}}
         {\sum_{d=0}^{2} \text{exp}(-\eta \EE_{d}(\vp))}\right) \\[6pt]
         =& \sum_{i=0}^N \left(
         -\eta \EE_{\delta_{i}} 
@@ -448,7 +450,7 @@ The maximum likelihood estimators of $\vp$ and $\eta$ would then be the values t
 
 \section{Bootstrapping}
 \label{section_theory_bootstrap}
-Consider a sample, $(\delta_1,\delta_2,...,\delta_n)$, where the samples are identically and independently distributed from an unknown distribution, $F$. We can use this sample to estimate this distribution, thus, find $\hat{F}$. To get some ideas about the properties of $F$, we can find the properties of $\hat{F}$. Sometimes it is challenging to do this analytically, and we can then use simulations instead. This is where bootstrapping is useful. Bootstrapping is a way of finding those samples, either from the original sample, $(\delta_1,\delta_2,...,\delta_n)$, or from the estimated distribution, $\hat{F}$. We can then use those samples to for example find standard error, bias, variance, or perhaps the most common, confidence intervals \citep{bootstrap}.
+Consider a sample, $(\delta_1,\delta_2,...,\delta_n)$, where the samples are identically and independently distributed from an unknown distribution, $F$. We can use this sample to estimate this distribution, thus, find $\hat{F}$. To get some ideas about the properties of $F$, we can find the properties of $\hat{F}$. Sometimes it is challenging to do this analytically. Instead we can use simulations. This is where bootstrapping is useful. Bootstrapping is a way of finding those samples, either from the original sample, $(\delta_1,\delta_2,...,\delta_n)$, or from the estimated distribution, $\hat{F}$. We can then use those samples to find, for example, standard error, bias, variance, or perhaps the most common, confidence intervals \citep{bootstrap}.
 
 
 %a sample (iid) from an unknown distribution ($F$). can use that sample to estimate the distribution, hence find $\hat{F}$. To get some knowledge about the properties of $F$, we can find out things about the properties of $\hat{F}$. Often hard to do this analytically, thus, instead we use simulations. Then we can use bootstrapping. 
@@ -456,9 +458,9 @@ Consider a sample, $(\delta_1,\delta_2,...,\delta_n)$, where the samples are ide
 
 %Bootstrapping is a way of doing statistical inference using samples from a dataset. It can be used to measure the accuracy of parameters. We can for example find standard errors, bias, variance, or perhaps the most common, confidence intervals. In that way we do not need any formulas, only many samples \citep{bootstrap}. However, with many samples, we are dependent on a computer. 
 
-There are two types of bootstrapping, nonparametric and parametric. In the nonparametric bootstrap, $\hat{F}$ is the empirical distribution of the data, and we take samples from our original sample. Consider for example that you have a dataset $\boldsymbol{\delta}=(\delta_1,\delta_2,\delta_3,\delta_4,\delta_{5})$. A bootstrap sample of this might then be $(\delta_5,\delta_5,\delta_2,\delta_3,\delta_1)$ and another might be $(\delta_2,\delta_{4},\delta_{2},\delta_{2},\delta_{1})$. These are resampled versions of $\boldsymbol{\delta}$. Thus, the bootstrap samples consists of elements from the original dataset, but some of them might not appear at all in a bootstrap sample while others might appear more than once. Drawing $B$ of these samples, we can do inference about the population the original data is from. 
+There are two types of bootstrapping, nonparametric and parametric. In the nonparametric bootstrap, $\hat{F}$ is the empirical distribution of the data, and we take samples from our original sample. Consider for example that you have a dataset, $\boldsymbol{\delta}=(\delta_1,\delta_2,\delta_3,\delta_4,\delta_{5})$. A bootstrap sample of this might then be $(\delta_5,\delta_5,\delta_2,\delta_3,\delta_1)$ and another might be $(\delta_2,\delta_{4},\delta_{2},\delta_{2},\delta_{1})$. These are resampled versions of $\boldsymbol{\delta}$. Thus, the bootstrap samples consists of elements from the original dataset, but some of them might not appear at all in a bootstrap sample while others might appear more than once. Drawing $B$ of these samples, we can do inference about the population the original data is from. 
 
-In the parametric bootstrap, we make assumptions about the population, and $\hat{F}$ is the parametric distribution. Consider a sample, ($\delta_1,\delta_2,...,\delta_n$), from a distribution that has a probability mass function $f(\delta|\vp)$, where $\vp$ might be a vector of parameters \citep{statinf}. We can for example find an estimate for $\vp$, $\hat{\vp}$, using maximum likelihood estimation as in Chapter \ref{section_theory_mle}. When we have done that, we can draw new samples, denoted $\delta_i^*$ from $f(\delta|\hat{\vp})$, such that
+In the parametric bootstrap, we make assumptions about the population, and $\hat{F}$ is the parametric distribution. Consider a sample, ($\delta_1,\delta_2,...,\delta_n$), from a distribution that has a probability mass function $f(\delta|\vp)$, where $\vp$ might be a vector of parameters \citep{statinf}. We can for example find an estimate, $\hat{\vp}$, of $\vp$, using maximum likelihood estimation as in Chapter \ref{section_theory_mle}. When we have done that, we can draw new samples, denoted $\delta_i^*$ from $f(\delta|\hat{\vp})$, such that
 \begin{equation*}
     \delta_1^*,\delta_2^*,...,\delta_n^* \sim f(\delta|\hat{\vp}).
 \end{equation*}
@@ -478,7 +480,7 @@ A confidence interval (CI) for a parameter is an interval that will contain the 
 One method for finding CIs with bootstrap samples is the percentile method. The percentile method is simple to both understand and implement. However, these confidence intervals might be biased. Then, one could instead use approaches such as \textit{bias corrected and accelerated} intervals or \textit{approximate bootstrap confidence} intervals. For simplicity, we are in this report using the percentile confidence intervals. 
 
 
-Consider a situation with $B$ bootstrap samples. Let the vector $\vp$ be one parameter. If the intention is to find a CI for $\vp$, we find the MLE of each of the $B$ samples and plot those samples in a histogram. If we want to find a 90\% confidence interval using the percentile method, then we find the 5-th and 95-th percentiles. The 5-th percentile is the value of $\hat{\vp}$ in the histogram where 5\% of the samples are below. The 95-th is where 5\% of the values are above. This is visualised in Figure \ref{percentile_ci_example}. Here we have 150 bootstrap samples, and the MLE of $\vp$ is found for each sample. These values are plotted in a histogram, where the red dashed lines represent the 5 and 95 percentiles. That means that 5\% of the MLEs lie to the left of or at the left red line, and 5\% lie to the right or at the right red line. The 90\% CI for $\vp$, rounded to the closest integer, is then somewhere around (1.4,7) when we use the percentile method.
+Consider a situation with $B$ bootstrap samples. Let the vector $\vp$ be one parameter. If the intention is to find a CI for $\vp$, we find the MLE of each of the $B$ samples and plot those samples in a histogram. If we want to find a 90\% confidence interval using the percentile method, then we find the 5-th and 95-th percentiles. The 5-th percentile is the value of $\hat{\vp}$ in the histogram where 5\% of the samples are below. The 95-th is where 5\% of the values are above. This is visualised in Figure \ref{percentile_ci_example}. Here we have 150 bootstrap samples, and the MLE of $\vp$ is found for each sample. These values are plotted in a histogram, where the red dashed lines represent the 5 and 95 percentiles. That means that 5\% of the MLEs lie to the left of or at the left red line, and 5\% lie to the right of or at the right red line. The 90\% CI for $\vp$ is then somewhere around (1.4,7) when we use the percentile method.
 \begin{figure}
     \centering
     %\includegraphics{}

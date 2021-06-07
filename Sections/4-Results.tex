@@ -1,6 +1,6 @@
 \chapter{Results}
 
-As we have found the maximum likelihood estimates and their respective confidence intervals, the next step is to show some of these results. However, we first present the Ideal Observer (IO) solutions for different values of the parameters, which depends on the expected losses. We firstly look at the situations where $\gamma=\kappa=1$, thus that the prior distribution for $\Theta$ is uniform. 
+As we have found the maximum likelihood estimates and their respective confidence intervals, the next step is to show some of these results. However, we first present the Ideal Observer (IO) solutions for different values of the parameters, which depends on the expected losses. We firstly look at the situations where $\gamma=\kappa=1$, thus that the prior distribution for $\Theta$ is uniform. Secondly we have a look at how sensitive the results are to the hyperparameters $\gamma$ and $\kappa$ in the beta prior we have for $\Theta$.
 
 \section{Uniform Prior for $\Theta$}
 When we present the results, we start with the results where we have a uniform prior for $\Theta$. Recall that this means that it is equally likely that $\theta$ is anywhere between 0 and 1. We start with having a look at the probabilities that either blue or red are the majority colours. 
@@ -302,7 +302,7 @@ In the unlimited trials, she chooses what she thinks is the majority colour afte
 \begin{figure}
     \centering
     \scalebox{0.7}{\input{tikz-trees/unlim_a0.0135_g1_k1}}
-    \caption[IO solution of individual number 61 with $\ha=0.0135$ and $\gamma=\kappa=1$]{Here we see and Ideal Observer solution of the box task in the unlimited case for individual number 61 with a uniform prior, such that $\gamma=\kappa=1$. She has $\ha=0.0135$. This tree can be interpreted in the same way as the tree in Figure \ref{fig:unlim_a0.0001_gk1}.}
+    \caption[Ideal Observer solution individual 61, unlimited. $\gamma=\kappa=1$]{Here we see and Ideal Observer solution of the box task in the unlimited case for individual number 61 with a uniform prior, such that $\gamma=\kappa=1$. She has $\ha=0.0135$. This tree can be interpreted in the same way as the tree in Figure \ref{fig:unlim_a0.0001_gk1}.}
     \label{fig:IO_sol_individual61}
 \end{figure}
 
@@ -310,47 +310,47 @@ Having looked at the MLEs in the unlimited case, we now continue with the limite
 
 
 \subsubsection{Limited}
-In the limited version, we have three parameters, $\alpha$, $\beta$ and $\eta$, and we have found maximum likelihood estimates for these for all of the 76 participants. The MLEs of $\alpha$ and $\eta$ for all participants are plotted in Figure \ref{fig:mles_limited_alpha_eta}. We see that many of the participants have $\hat{\alpha}=0$. In fact, all participants except four have $\ha=0$. We also see that four of the participants have $\he$ higher than the threshold value of 1000, meaning that they make good choices each time a box is opened. What is not so easy to see is that the two participants with the highest values of $\ha$ have negative values of $\he$. This indicates that they make choices with high expected losses and that they have high costs of opening new boxes. 
+In the limited version, we have three parameters, $\alpha$, $\beta$ and $\eta$, and we have found maximum likelihood estimates for these for all of the 76 participants. The MLEs of $\alpha$ and $\eta$ for all participants are plotted in Figure \ref{fig:mles_limited_alpha_eta}, and we have zoomed in on that plot in Figure \ref{fig:mles_limited_alpha_eta_zoomed}. We see that many of the participants have $\hat{\alpha}=0$. In fact, all participants except four have $\ha=0$. We also see that four of the participants have $\he$ higher than the threshold value of 1000, meaning that they make good choices each time a box is opened. What is not so easy to see is that the two participants with the highest values of $\ha$ have negative values of $\he$. This indicates that they make choices with high expected losses and that they have high costs of opening new boxes. 
 \begin{figure}
     \centering
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[scale=0.38]{pictures/plotted_mles_limited_alpha_eta_gk1.png}
-        \caption{Mles limited, alpha and eta for all participants. Not zoomed}
+        \caption[MLEs of $\alpha$ and $\eta$, limited. $\gamma=\kappa=1$]{Maximum likelihood estimates of $\alpha$ and $\eta$ for all participants in the limited version of the box task. $\gamma=\kappa=1$.}
         \label{fig:mles_limited_alpha_eta}
     \end{minipage}\hfill
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[scale=0.38]{pictures/plotted_mles_limited_alpha_eta_gk1_zoomed.png}
-        \caption{Mles limited, alpha and eta for participants, zoomed}
+        \caption[MLEs of $\alpha$ and $\eta$ zoomed, limited. $\gamma=\kappa=1$]{MLEs of $\alpha$ and $\eta$ in the limited case. Zoomed in on the plot in Figure \ref{fig:mles_limited_alpha_eta}.}
         \label{fig:mles_limited_alpha_eta_zoomed}
     \end{minipage}
 \end{figure}
 
-In Figure \ref{fig:mles_limited_alpha_beta} we have plotted the MLEs of $\alpha$ and $\beta$ for all participants. Again we see that many participants have $\ha=0$. This might indicate that $\alpha$ is unnecessary to include in the limited version. Both $\alpha$ and $\beta$ are values tied to choosing early or not, thus, it might be enough to only include $\beta$. It is also not obvious how the MLEs are interpreting(?) $\alpha$ and $\beta$. 
+In Figure \ref{fig:mles_limited_alpha_beta} we have plotted the MLEs of $\alpha$ and $\beta$ for all participants. Again we see that many participants have $\ha=0$. This might indicate that $\alpha$ is unnecessary to include in the limited version. Both $\alpha$ and $\beta$ are values tied to whether we choose majority colour early or not. Thus, it might be enough to only include $\beta$. It is also not obvious how the MLEs are giving weight to $\alpha$ compared to $\beta$. 
 \begin{figure}
     \centering
     \includegraphics[scale=0.38]{pictures/plotted_mles_limited_alpha_beta_gk1.png}
-    \caption{Mles limited, alpha and beta for all participants.}
+    \caption[MLEs of $\alpha$ and $\beta$, limited. $\gamma=\kappa=1$]{Maximum likelihood estimates of $\alpha$ and $\beta$ for all participants in the limited version of the box task.$\gamma=\kappa=1$.}
     \label{fig:mles_limited_alpha_beta}
 \end{figure}
 
 
 
-We have also plotted the MLEs of $\beta$ and $\eta$ together in Figure \ref{fig:mles_limited_beta_eta}. Again we see that four of the participants have high values of $\he$. Three of these have $\hb$ values close to one, which might indicate that they are afraid of the test terminating, and thus choose early, but that they choose the colour that is most likely to be in majority. Zooming in on the plot as in Figure \ref{fig:mles_limited_beta_eta_zoomed}, we see that the majority of the participants have $\he$ values between 10 and 80 and $\hb$ values between zero and 0.7. We also see that some participants have $\hb$ equal to zero. 
+We have also plotted the MLEs of $\beta$ and $\eta$ together in Figure \ref{fig:mles_limited_beta_eta}. Again we see that four of the participants have high values of $\he$. Three of these have values of $\hb$ close to one, which might indicate that they are afraid of the test terminating, and thus choose early, but that they choose the colour that is most likely to be in majority. Zooming in on the plot as in Figure \ref{fig:mles_limited_beta_eta_zoomed}, we see that the majority of the participants have $\he$ values between 10 and 80 and $\hb$ values between zero and 0.7. We also see that some participants have $\hb$ equal to zero. 
 \begin{figure}
     \centering
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[scale=0.38]{pictures/plotted_mles_limited_beta_eta_gk1.png}
-        \caption{Mles limited, beta and eta for all participants}
+        \caption[MLEs of $\beta$ and $\eta$, limited. $\gamma=\kappa=1$]{Maximum likelihood estimates of $\beta$ and $\eta$ for all participants in the limited version of the box task. $\gamma=\kappa=1$.}
         \label{fig:mles_limited_beta_eta}
     \end{minipage}
     \hfill
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[scale=0.38]{pictures/plotted_mles_limited_beta_eta_zoomed_gk1.png}
-        \caption{Mles limited, beta and eta for all participants, zoomed}
+        \caption[MLEs of $\beta$ and $\eta$ zoomed, limited. $\gamma=\kappa=1$]{MLEs of $\beta$ and $\eta$ in the limited case. Zoomed in on the plot in Figure \ref{fig:mles_limited_beta_eta}.}
         \label{fig:mles_limited_beta_eta_zoomed}
     \end{minipage}
 \end{figure}
@@ -369,7 +369,7 @@ She chooses what she thinks is the majority colour after either two or three box
 \begin{figure}
     \centering
     \scalebox{0.7}{\input{tikz-trees/lim_a0.0015_b0.7929_g1_k1}}
-    \caption{IO solution individual number 70}
+    \caption[Ideal Observer solution individual 70, limited. $\gamma=\kappa=1$]{An Ideal Observer solution for individual number 70 in the limited version of the box task with $\gamma=\kappa=1$.}
     \label{fig:IO_sol_person_70}
 \end{figure}
 
@@ -378,19 +378,19 @@ She chooses what she thinks is the majority colour after either two or three box
     \begin{minipage}{0.48\textwidth}
         \centering
         \scalebox{0.7}{\input{tikz-trees/IO sol person 70, trial 5}}
-        \caption{IO sol person 70, trial 5}
+        \caption[Ideal Observer solution individual 70 in trial 5. $\gamma=\kappa=1$]{An Ideal Observer solution of Trial 5 for individual number 70 where $\gamma=\kappa=1$.}
         \label{fig:IO_sol_perosn_70_trial5}
     \end{minipage}
     \hfill
     \begin{minipage}{0.48\textwidth}
         \centering
         \scalebox{0.7}{\input{tikz-trees/IO_sol_perosn70_trial6}}
-        \caption{IO sol person 70, trial 6}
+        \caption[Ideal Observer solution individual 70 in trial 6. $\gamma=\kappa=1$]{An Ideal Observer solution of Trial 6 for individual number 70 where $\gamma=\kappa=1$.}
         \label{fig:IO_sol_person70_trial6}
     \end{minipage}
 \end{figure}
 
-We have two individuals with high values of $\ha$. They both have negative $\he$ and $\hb=0$. These can be interpreted the same way, and we therefore present only the participant with the highest $\ha$ here. This is individual number 11. Her parameter estimates are
+We have two individuals with high values of $\ha$. They both have $\hb=0$ and negative values of $\he$. These two individuals can be interpreted the same way, and we therefore present only the participant with the highest $\ha$ here. This is individual number 11. Her parameter estimates are
 \begin{equation}
 \label{mles_lim_person11}
     \begin{aligned}
@@ -400,12 +400,12 @@ We have two individuals with high values of $\ha$. They both have negative $\he$
     \end{aligned}
 \end{equation}
 She chooses after two or three boxes are opened, and she tends to choose the colour that is in minority, not majority, out of the opened boxes. This is the reason for $\he$ being negative. $\hb$ is a measure of the loss one gets when the test terminates. If the test terminates, this counts as a failed trial. It also counts as a failed trial if the participant chooses the wrong colour as the majority colour. This individual does not seem to care if she chooses the wrong colour as the majority colour, and we might believe that, in the same way, she does not care whether the test terminates or not. This might be the reason that $\hb$ is zero. However, as she chooses after two and three boxes are opened, this indicates some kind of loss of opening boxes, thus we get the high value of $\ha$. 
-Earlier, we discussed that $\alpha$ might be unnecessary in the limited trials as so many participants have $\ha=0$. However, for individual number 11 and the other participant with the high value of $\ha$, this parameter might be needed to express some kind of penalty of opening boxes as $\hb=0$.
+Earlier, we discussed that $\alpha$ might be unnecessary in the limited trials as so many participants have $\ha=0$. However, for individual number 11 and the other participant with the high value of $\ha$, this parameter might be needed to express some kind of penalty of opening boxes as we have that $\hb=0$.
 In Figure \ref{fig:IO_sol_person11_limited_gk1} we see that an Ideal Observer with the same estimates as individual number 11 would choose majority colour before any boxes are opened. The expected loss of choosing majority colour then is 0.5 as it is the probability that the opposite colour is in majority. The expected loss of opening the first box is much higher due to the high value of $\ha$. 
 \begin{figure}
     \centering
     \scalebox{0.7}{\input{tikz-trees/lim_a1.1798_b0_g1_k1}}
-    \caption{IO sol perosn 11, limited, gk1}
+    \caption[Ideal Observer solution individual 11, limited. $\gamma=\kappa=1$]{An Ideal Observer solution for individual number 13 in the limited version of the box task with $\gamma=\kappa=1$.}
     \label{fig:IO_sol_person11_limited_gk1}
 \end{figure}
 
@@ -419,7 +419,7 @@ In Figures \ref{fig:mles_limited_alpha_beta} and \ref{fig:mles_limited_beta_eta}
         \he &= 70.87.
     \end{aligned}
 \end{equation}
-This participant chooses after one box is opened in all of the six limited trials, hence, the high value of $\hb$. At the same time, individual 75 always chooses the colour of that first box as the majority colour, which is the colour with the least expected loss. The expected loss of opening the next box might be lower than the expected loss of choosing that as the majority colour. However, these expected losses are often close to each other, whereas the expected loss of choosing the other colour as the majority is often further away. Thus, she tends to choose decisions with low expected losses, but they might not be the decisions with the lowest expected loss. $\he$ is therefore quite high.
+This participant chooses after one box is opened in all of the six limited trials, hence, the high value of $\hb$. At the same time, individual 75 always chooses the colour of that first box as the majority colour, which is the colour with the least expected loss. The expected loss of opening the next box might be lower than the expected loss of choosing that as the majority colour. However, these expected losses are often close to each other, whereas the expected loss of choosing the other colour as the majority is often further away. Thus, she tends to choose decisions with low expected losses, but they might not be the decisions with the lowest expected loss. The value of $\he$ is therefore quite high.
 %, but not so high that it reaches the threshold value for $\eta$. However, that threshold value is based on expected losses that differ in value with $0.01$. Here, the expected losses differ more as the parameter estimates are quite high. Thus, the threshold value of $\eta$ might be a lot smaller in this situation. 
 
 If we look at a more typical person, we find, for example, individual number 40. She has parameter estimates
@@ -431,7 +431,7 @@ If we look at a more typical person, we find, for example, individual number 40.
         \he &= 38.00.
     \end{aligned}
 \end{equation}
-She opens between 2 and 5 boxes in all the trials except Trial 8. In all of these trials she chooses the most probable colour as the colour that she believes is the majority colour. Thus, $\he$ is reasonably high. In Trial 8 she opens nine boxes and tries to open the tenth when the test terminates. In that trial there are never two boxes of the same colour that is opened after each other, the probability that one of the colours is the majority colour is quite low. 
+She opens between 2 and 5 boxes in all the trials except Trial 8. In all of these trials she chooses the most probable colour as the colour that she believes is the majority colour. Thus, $\he$ is reasonably high. In Trial 8 she opens nine boxes and tries to open the tenth when the test terminates. In that trial there are never two boxes of the same colour that is opened after each other, and the probability that one of the colours is the majority colour is quite low. 
 
 
 
@@ -442,6 +442,7 @@ She opens between 2 and 5 boxes in all the trials except Trial 8. In all of thes
 
 
 \subsection{Confidence Intervals}
+\label{chapter:results_cis}
 We have presented an Ideal Observer solution of the box task and the maximum likelihood estimates for different participants. Now, we will discuss some of the confidence intervals we have found. Recall that these are found by finding the MLEs of 1000 bootstrap samples for each participant and the finding the 5-th and 95-th percentiles, as discussed in Chapter \ref{chapter:CIs_chap3}. 
 
 \subsubsection{Unlimited}
@@ -488,13 +489,13 @@ We see that the confidence interval for $\alpha$ includes zero. Recall that havi
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[scale=0.37]{pictures/ci_unlim_person61.png}
-        \caption[MLEs of bootstrap samples individual number 61, unlimited]{All of the MLEs of the 1000 bootstrap samples plotted for individual number 61 in the unlimited case with $\gamma=\kappa=1$. The confidence intervals for the two parameters are also included.}
+        \caption[MLEs of bootstrap samples individual 61, unlimited]{All of the MLEs of the 1000 bootstrap samples plotted for individual number 61 in the unlimited case with $\gamma=\kappa=1$. The confidence intervals for the two parameters are also included.}
         \label{fig:ci_unlim_person_61}
     \end{minipage}\hfill
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[scale=0.37]{pictures/ci_unlim_person61_zoomed.png}
-        \caption[MLEs of bootstrap samples individual number 61, unlimited, zoomed]{Here we have zoomed in on the bootstrap samples and confidence intervals that are plotted in Figure \ref{fig:ci_unlim_person_61}. This is for individual number 61 in the unlimited case with $\gamma=\kappa=1$.}
+        \caption[MLEs of bootstrap samples individual 61, unlimited, zoomed]{Here we have zoomed in on the bootstrap samples and confidence intervals that are plotted in Figure \ref{fig:ci_unlim_person_61}. This is for individual number 61 in the unlimited case with $\gamma=\kappa=1$.}
         \label{fig:ci_unlim_person_61_zoomed}
     \end{minipage}
 \end{figure}
@@ -507,19 +508,19 @@ and
 \begin{equation*}
     [\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}] = [-9.9272,18.3986].
 \end{equation*}
-We see that many of the values of $\ha$ are very high, much higher than the MLE, thus $\hat{\alpha}^{*(95)}_{1000}$ is very high. That means that the estimates for this individual are uncertain. Thus, the model might not be a good fit for this participant and the choices she makes. 
+We see that many of the values of $\ha$ are very high, much higher than the MLE, thus $\hat{\alpha}^{*(95)}_{1000}$ is very high. That means that the estimates for this individual are uncertain. Thus, the model might not be a good fit for this participant and the choices she makes. This might be because the expected loss are based on the next decisions that will be made. We have decided that these decisions are the decisions that an Ideal Observer would make, the decisions with the least expected losses. However, this participant tends to make decisions with high expected losses, meaning that the decisions we include in the model are not so relevant for this individual. Thus, we might conclude that this model is not a great fit for participants that make decisions with high expected losses. 
 \begin{figure}
     \centering
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[scale=0.37]{pictures/ci_unlim_person13.png}
-        \caption[MLEs of bootstrap samples individual number 13, unlimited]{All of the MLEs of the 1000 bootstrap samples plotted for individual number 13 in the unlimited case with $\gamma=\kappa=1$. The confidence intervals for the two parameters are also included.}
+        \caption[MLEs of bootstrap samples individual 13, unlimited]{All of the MLEs of the 1000 bootstrap samples plotted for individual number 13 in the unlimited case with $\gamma=\kappa=1$. The confidence intervals for the two parameters are also included.}
         \label{fig:ci_unlim_person_13}
     \end{minipage}\hfill
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[scale=0.37]{pictures/ci_unlim_person13_zoomed.png}
-        \caption[MLEs of bootstrap samples individual number 13, unlimited, zoomed]{Here we have zoomed in on the bootstrap samples and confidence intervals that are plotted in Figure \ref{fig:ci_unlim_person_61}. This is for individual number 13 in the unlimited case with $\gamma=\kappa=1$.}
+        \caption[MLEs of bootstrap samples individual 13, unlimited, zoomed]{Here we have zoomed in on the bootstrap samples and confidence intervals that are plotted in Figure \ref{fig:ci_unlim_person_61}. This is for individual number 13 in the unlimited case with $\gamma=\kappa=1$.}
         \label{fig:ci_unlim_person_13_zoomed}
     \end{minipage}
 \end{figure}
@@ -548,17 +549,9 @@ and
 \begin{equation*}
     [\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}] = [443422.7,443422.7].
 \end{equation*}
+Thus, we see that parametric bootstrapping might not be a satisfactory method to find confidence intervals for the participants that make the choices with the least expected loss. 
 
-\begin{comment}
-We also see in Figure \ref{fig:ci_unlim_person_58} that all the data points are collected at one spot. 
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.7]{pictures/ci_unlim_person58.png}
-    \caption[MLEs of bootstrap samples individual number 58, unlimited]{All MLEs of the 1000 bootstrap samples plotted in the unlimited case for individual number 58. We have a uniform prior here, meaning that $\gamma=\kappa=1$. We see that all the MLEs are in one spot, and thus the CI has length zero, with both ends for each parameter being the values of the MLEs.}
-    \label{fig:ci_unlim_person_58}
-\end{figure}
-The situation described here where the probabilities are either zero or one and we therefore get identical bootstrap samples is also the case for the other participants that have CIs of length zero. 
-\end{comment}
+
 
 
 
@@ -576,19 +569,19 @@ Having shown some of the confidence intervals for the unlimited trials we contin
 
 
 \subsubsection{Limited}
-We will now have a look at the confidence intervals in the limited case. In Figure \ref{fig:all_cis_alpha_lim} we see the CIs for $\alpha$ for all of the participants. Individual number 11 has a much larger upper limit of the CI that the range of the axis here, thus, the CI continues outside of the plot. We also see that participant 13 has a higher interval than the other participants. These to are also the individuals with the high values of $\ha$ in Figure \ref{fig:mles_limited_alpha_eta}. We also see that all participants except these two have upper limits smaller than 0.2, meaning that most participants has none or a small loss of opening the next box. 
+We will now have a look at the confidence intervals in the limited case. In Figure \ref{fig:all_cis_alpha_lim} we see the CIs for $\alpha$ for all of the participants. Individual number 11 has a much larger upper limit of the CI than the range of the axis here, thus, the CI continues outside of the plot. We also see that participant 13 has a higher interval than the other participants. These two are also the individuals with the high values of $\ha$ in Figure \ref{fig:mles_limited_alpha_eta}. We also see that all participants except these two have upper limits smaller than 0.2, meaning that most participants has none or a small loss of opening the next box. 
 \begin{figure}
     \centering
     \includegraphics[scale=0.37]{pictures/all_cis_lim_alpha.png} %wrong name, right plot
-    \caption{All cis of $\alpha$. Individual 11 has a much higher value of the upper limit than the range of the axis here.  unif prior, limited}
+    \caption[CIs for $\alpha$, limited. $\gamma=\kappa=1$]{Confidence intervals for $\alpha$ in the limited case of the box task with $\gamma=\kappa=1$ for each participant. Individual number 11 has a much higher value of the upper limit than the range of the axis here. }
     \label{fig:all_cis_alpha_lim}
 \end{figure}
 
-In Figure \ref{fig:all_cis_beta}, we have plotted all the confidence intervals for $\beta$ in the limited case. Again, we see that individual 11 has  large interval that spans beyond the axis here. Many of the intervals include zero, which means that one does not feel any loss if the test terminates, although this is defined as a failed trial. We also see that most of the participants have upper limits below one, meaning that failed trials are not disastrous for most participants. 
+In Figure \ref{fig:all_cis_beta}, we have plotted all the confidence intervals for $\beta$ in the limited case. Again, we see that individual 11 has a large interval that spans beyond the axis here. Many of the intervals include zero. Having $\hb=0$ means that one does not feel any loss if the test terminates, although this is defined as a failed trial. We also see that most of the participants have upper limits below one, meaning that failed trials are not disastrous for most participants. 
 \begin{figure}
     \centering
     \includegraphics[scale=0.38]{pictures/all_cis_lim_beta.png}
-    \caption{Al cis beta. Individual 11 has a much higher value of the upper limit than the range of the axis here. Unif prior, limited.}
+    \caption[CIs for $\beta$, limited. $\gamma=\kappa=1$]{Confidence intervals for $\beta$ in the limited case of the box task with $\gamma=\kappa=1$ for each participant. As in Figure \ref{fig:all_cis_alpha_lim} participant 11 has a long interval.}
     \label{fig:all_cis_beta}
 \end{figure}
 
@@ -596,12 +589,12 @@ We have also plotted the confidence interval for $\eta$ for each participant. Th
 \begin{figure}
     \centering
     \includegraphics[scale=0.37]{pictures/all_cis_lim_eta.png}
-    \caption{All cis eta, uniform prior, limited. person 70 not included as ci too high.}
+    \caption[CIs for $\eta$, limited. $\gamma=\kappa=1$]{Confidence intervals for $\eta$ in the limited case of the box task with $\gamma=\kappa=1$ for each participant. Participant 70 has a too high CI to be included here.}
     \label{fig:all_cis_eta_lim}
 \end{figure}
 
 
-We have three participants where all of the confidence intervals have length zero. These are individuals 21, 70 and 75. As for individual 75 in the unlimited case, they have very high values of $\he$, which makes the probabilities of each of the decisions as seen in \eqref{probabilities_bootstrap} be approximately zero or approximately one. Thus, all the simulated decisions are the same as the decisions they have done. All of the 1000 MLEs are therefore the same, and finding the percentiles therefore give the same value as the MLEs. It should be noted that individual 75 has $\he=70.87$ as seen in \ref{mles_lim_person75}, which is far below the threshold value of 1000 that we defined for $\eta$. She has a quite high estimate of $\beta$, which makes the expected loss of opening the next box relatively high. Therefore, the expected losses differ considerably, and it takes a much lower value of $\he$ for the probabilities in \eqref{probabilities_bootstrap} to be approximately zero or one. 
+We have three participants where all of the confidence intervals have length zero. These are individuals 21, 70 and 75. As for individual 75 in the unlimited case, they have very high values of $\he$, which makes the probabilities of each of the decisions as seen in \eqref{probabilities_bootstrap} be approximately zero or approximately one. Thus, all the simulated decisions are the same as the decisions they have done. All of the 1000 MLEs are therefore the same, and finding the percentiles therefore give the same value as the MLEs. It should be noted that individual 75 has $\he=70.87$ as seen in \ref{mles_lim_person75}, which is far below the threshold value of 1000 that we defined for $\eta$. She has a quite high estimate of $\beta$, which makes the expected loss of opening the next box relatively high. Therefore, the expected losses differ considerably, and it takes a much lower value of $\he$ for the probabilities in \eqref{probabilities_bootstrap} to be approximately zero or one. Thus, $\he=70.87$ is a high value for individual number 75.
 
 
 In Figures \ref{fig:all_cis_alpha_lim} and \ref{fig:all_cis_beta} we see that individual 11 has long confidence intervals for $\alpha$ and $\beta$. In Figure \ref{fig:ci_lim_a_b_person_11} we have plotted $\ha$ and $\hb$ of the 1000 bootstrap samples for individual 11 together with the confidence intervals for $\alpha$ and $\beta$.
@@ -617,7 +610,7 @@ and
 \begin{equation*}
     [\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}] = [-10.45,-0.0013].
 \end{equation*}
-We see also here that there are many high values of $\ha$, which again give long intervals that indicates an uncertain estimate of $\alpha$. Furthermore, there are some extreme values of $\hb$, and although the CI has upper limit below 20, this is quite high compared to the other participants. Thus, there are some uncertainty tied to the estimate of $\beta$ for individual 11. 
+We see also here that there are many high values of $\ha$, which again give long intervals that indicates an uncertain estimate of $\alpha$. Furthermore, there are some extreme values of $\hb$. The CI has upper limit at 16.74, which is quite high compared to the other participants. Thus, there are some uncertainty tied to the estimate of both $\alpha$ and $\beta$ for individual 11, indicating that this model is not a good fit. As discussed for individual 13 in the unlimited version, this might be because we assume Ideal Observer decisions when we find the expected losses of opening the next box. These decisions are not that relevant for participant 11 as she tends to make decisions with high expected losses. She actually chooses the colour that is in minority multiple times, meaning that she chooses the decisions with the highest expected loss. 
 \begin{figure}
     \centering
     \begin{minipage}{0.48\textwidth}
@@ -639,35 +632,35 @@ We see also here that there are many high values of $\ha$, which again give long
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[scale=0.37]{pictures/ci_lim_a_e_person11.png}
-        \caption{ci lim person 11}
+        \caption[MLEs for $\alpha$ and $\beta$ for bootstrap samples individual 11, limited]{All of the MLEs for $\alpha$ and $\beta$ of the 1000 bootstrap samples plotted for individual number 11 in the limited case with $\gamma=\kappa=1$. The confidence intervals for the two parameters are also included.}
         \label{fig:ci_lim_a_e_person_11}
     \end{minipage}\hfill
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[scale=0.37]{pictures/ci_lim_a_e_person11_zoomed.png}
-        \caption{ci lim person 11 zoomed}
+        \caption[MLEs for $\alpha$ and $\beta$ of bootstrap samples individual 11, unlimited, zoomed]{Here we have zoomed in on the bootstrap samples and confidence intervals that are plotted in Figure \ref{fig:ci_lim_a_e_person_11}. This is for individual number 11 in the limited case with $\gamma=\kappa=1$.}
         \label{fig:ci_lim_a_e_person_11_zoomed}
     \end{minipage}
 \end{figure}
 
-In Figure \ref{fig:ci_lim_b_e_person_11} we see $\hb$ and $\he$ for the 1000 bootstrap samples plotted, and zoomed in Figure \ref{fig:ci_lim_b_e_person_11_zoomed}. We see that the whole interval for $\eta$ s below zero. This is a strong indicator that individual 11 makes many choices with high expected losses. 
+In Figure \ref{fig:ci_lim_b_e_person_11} we see $\hb$ and $\he$ of participant number 11 for the 1000 bootstrap samples plotted, and zoomed in Figure \ref{fig:ci_lim_b_e_person_11_zoomed}. We see that the whole interval for $\eta$ is below zero. This is a strong indicator that individual 11 makes many choices with high expected losses.
 \begin{figure}
     \centering
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[scale=0.37]{pictures/ci_lim_b_e_person11.png}
-        \caption{ci lim person 11}
+        \caption[MLEs for $\beta$ and $\eta$ for bootstrap samples individual 11, limited]{All of the MLEs for $\beta$ and $\eta$ of the 1000 bootstrap samples plotted for individual number 11 in the limited case with $\gamma=\kappa=1$. The confidence intervals for the two parameters are also included.}
         \label{fig:ci_lim_b_e_person_11}
     \end{minipage}\hfill
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[scale=0.37]{pictures/ci_lim_b_e_person11_zoomed.png}
-        \caption{ci lim person 11 zoomed}
+        \caption[MLEs for $\beta$ and $\eta$ of bootstrap samples individual 11, unlimited, zoomed]{Here we have zoomed in on the bootstrap samples and confidence intervals that are plotted in Figure \ref{fig:ci_lim_b_e_person_11}. This is for individual number 11 in the limited case with $\gamma=\kappa=1$.}
         \label{fig:ci_lim_b_e_person_11_zoomed}
     \end{minipage}
 \end{figure}
 
-In Figure \ref{fig:ci_lim_a_b_person40}, we have plotted the MLEs of $\alpha$ and $\beta$ for the 1000 bootstrap samples of individual 40 that is a more typical person. We see that $\ha$ and $\hb$ tend to not be zero at the same time, but that both intervals include zero. In Figure \ref{fig:ci_lim_a_e_person_40} we have plotted all $\ha$ and $\he$ together, and zoomed in on that plot in Figure \ref{fig:ci_lim_a_e_person_40_zoomed}. Here we see that there are many high values of $\he$, and that the confidence interval is long. The values of $\hb$ and $\he$ are plotted in Figure \ref{fig:ci_lim_b_e_person_40} and we have zoomed in Figure \ref{fig:ci_lim_b_e_person_40_zoomed}. 
+In Figure \ref{fig:ci_lim_a_b_person40}, we have plotted the MLEs of $\alpha$ and $\beta$ for the 1000 bootstrap samples of individual 40 that is a more typical person. We see that $\ha$ and $\hb$ tend to not be zero at the same time, indicating that she gets some loss of opening boxes, but it differs whether the MLE is putting weight on $\alpha$ or $\beta$. In Figure \ref{fig:ci_lim_a_e_person_40} we have plotted all $\ha$ and $\he$ together, and zoomed in on that plot in Figure \ref{fig:ci_lim_a_e_person_40_zoomed}. Here we see that there are many high values of $\he$, and that the confidence interval is long. The values of $\hb$ and $\he$ are plotted in Figure \ref{fig:ci_lim_b_e_person_40} and we have zoomed in Figure \ref{fig:ci_lim_b_e_person_40_zoomed}. 
 The confidence intervals are 
 \begin{equation*}
     [\hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}] = [0,0.0665],
@@ -682,7 +675,7 @@ and
 \begin{figure}
     \centering
     \includegraphics[scale=0.5]{pictures/ci_lim_a_b_person40.png}
-    \caption{ci lim, alpha beta person 40}
+    \caption[MLEs for $\alpha$ and $\beta$ for bootstrap samples individual 40, limited]{All of the MLEs for $\alpha$ and $\beta$ of the 1000 bootstrap samples plotted for individual number 40 in the limited case with $\gamma=\kappa=1$. The confidence intervals for the two parameters are also included.}
     \label{fig:ci_lim_a_b_person40}
 \end{figure}
 \begin{figure}
@@ -690,13 +683,13 @@ and
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[scale=0.37]{pictures/ci_lim_a_e_person40.png}
-        \caption{ci lim person 40}
+        \caption[MLEs for $\alpha$ and $\eta$ for bootstrap samples individual 40, limited]{All of the MLEs for $\alpha$ and $\eta$ of the 1000 bootstrap samples plotted for individual number 40 in the limited case with $\gamma=\kappa=1$. The confidence intervals for the two parameters are also included.}
         \label{fig:ci_lim_a_e_person_40}
     \end{minipage}\hfill
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[scale=0.37]{pictures/ci_lim_a_e_person40_zoomed.png}
-        \caption{ci lim person 40 zoomed}
+        \caption[MLEs for $\alpha$ and $\eta$ of bootstrap samples individual 40, unlimited, zoomed]{Here we have zoomed in on the bootstrap samples and confidence intervals that are plotted in Figure \ref{fig:ci_lim_a_e_person_40}. This is for individual number 11 in the limited case with $\gamma=\kappa=1$.}
         \label{fig:ci_lim_a_e_person_40_zoomed}
     \end{minipage}
 \end{figure}
@@ -705,13 +698,13 @@ and
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[scale=0.37]{pictures/ci_lim_b_e_person40.png}
-        \caption{ci lim person 40}
+        \caption[MLEs for $\beta$ and $\eta$ for bootstrap samples individual 40, limited]{All of the MLEs for $\beta$ and $\eta$ of the 1000 bootstrap samples plotted for individual number 40 in the limited case with $\gamma=\kappa=1$. The confidence intervals for the two parameters are also included.}
         \label{fig:ci_lim_b_e_person_40}
     \end{minipage}\hfill
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[scale=0.37]{pictures/ci_lim_b_e_person40_zoomed.png}
-        \caption{ci lim person 40 zoomed}
+        \caption[MLEs for $\beta$ and $\eta$ of bootstrap samples individual 40, unlimited, zoomed]{Here we have zoomed in on the bootstrap samples and confidence intervals that are plotted in Figure \ref{fig:ci_lim_b_e_person_40}. This is for individual number 11 in the limited case with $\gamma=\kappa=1$.}
         \label{fig:ci_lim_b_e_person_40_zoomed}
     \end{minipage}
 \end{figure}
@@ -725,9 +718,9 @@ We have now looked at the results when we have a uniform prior, thus that $\gamm
 
 \section{Sensitivity to Hyperparameters}
 The results we have discussed so far have all been for a uniform prior of $\Theta$. 
-Recall that $\theta$ is the success probability in the Bernoulli distribution we have for the $X_i$'s, that are the colours of the boxes as described in \eqref{def_of_Xi}. Later we conditioned on there not being six blue and six red boxes. We have a beta prior for $\Theta$ with hyperparameters $\gamma$ and $\kappa$, as seen in \eqref{theta_with_beta_prior}. As we can see in Figure \ref{fig:pdf_beta_distr}, having $\gamma=\kappa=1$ is the same as having a uniform prior for $\Theta$. We will now have a look at how the results are affected by having a different prior. 
+Recall that $\Theta$ is the success probability in the Bernoulli distribution we have for the $X_i$'s, that are the colours of the boxes as described in \eqref{def_of_Xi}. Later we conditioned on there not being six blue and six red boxes. We have a beta prior for $\Theta$ with hyperparameters $\gamma$ and $\kappa$, as seen in \eqref{theta_with_beta_prior}. As we can see in Figure \ref{fig:pdf_beta_distr}, having $\gamma=\kappa=1$ is the same as having a uniform prior for $\Theta$. We will now have a look at how the results are affected by having a different prior. 
 
-As discussed in Chapter \ref{section_notation}, the participants are told that one of the colours always is in majority, such that one might think that the probability that there are more of one of the colours are higher than the probability that there are six of each of the colours. Thus, we want a prior more like the purple or orange lines in Figure \ref{fig:pdf_beta_distr}. We choose the purple line where $\gamma=\kappa=0.5$.
+As discussed in Chapter \ref{section_notation}, the participants are told that one of the colours always is in majority, such that one might think that the probability that there are more of one of the colours is higher than the probability that there are six of each of the colours. Thus, we want a prior more like the purple or orange lines in Figure \ref{fig:pdf_beta_distr}. We choose the purple line where $\gamma=\kappa=0.5$.
 
 With the new prior for $\Theta$, we have done the same as for the uniform prior. That is, we have found MLEs for all of the parameters and confidence intervals tied to each of them.
 
@@ -735,55 +728,58 @@ With the new prior for $\Theta$, we have done the same as for the uniform prior.
 When we look at the sensitivity to hyperparameters, we start with the results for the unlimited version.
 
 In Figure \ref{fig:sensitivity_mls_unlim} we have plotted all the MLEs for both priors. The green dots are the MLEs in the model with the uniform prior for $\Theta$, and the orange points are the MLEs in the model with the new prior.
-We see that the participants that had extreme values with the uniform priors, still have extreme values with the new prior, but the values differ quite a lot. The highest value of $\he$ is considerably lower, but it is still above that threshold value we defined for $\eta$. This might be because of the flat log likelihood function, making the high estimates of $\eta$ are quite uncertain, as discussed in Chapter \ref{chapter:mles}. Thus, the big change in $\he$ might not be because of the new prior, but because of the numerical optimisation. 
-If we zoom in in the plot in Figure \ref{fig:sensitivity_mls_unlim}, as we have done in Figure \ref{fig:sensitivity_mls_unlim_zoom1}, we see that the participants with high, but not extreme, values of $\he$ or $\ha$ have shifted their MLEs considerably. 
+We see that the participants that had extreme values with the uniform priors, still have extreme values with the new prior, but the values differ considerably. The highest value of $\he$ is remarkably lower, but it is still above that threshold value we defined for $\eta$. This might be because of the flat log likelihood function, making the high estimates of $\eta$ quite uncertain, as discussed in Chapter \ref{chapter:mles}. Thus, the big change in $\he$ might not be because of the new prior, but because of the numerical optimisation. 
+If we zoom in in the plot in Figure \ref{fig:sensitivity_mls_unlim}, as we have done in Figure \ref{fig:sensitivity_mls_unlim_zoom1}, we see that the participants with high, but not extreme, values of $\he$ or $\ha$ have shifted their MLEs substantially. 
 However, zooming even more, as in Figure \ref{fig:sensitivity_mls_unlim_zoom2}, we see that the MLEs of the participants that do not have extreme values are shifted a little, but not considerably, with some exceptions. All the participant that did not have $\ha=0$ from before, has shifted the values of $\ha$ closer to zero with the new prior. 
 This is because with $\gamma=\kappa=0.5$, the model put more weight on the colours of the boxes that are opened. If, for example, many of the opened boxes are blue, then the probability that blue is the majority colour is higher in the model with the new prior. That means that if a participant chooses early, these decisions are more compatible with the model with the lower values of $\gamma$  and $\kappa$. 
 Thus, it is reasonable that we have smaller values of $\ha$ for the new model. 
-Most of the participants that have $\ha=0$ in the first model have the same in the alternative model. We also see that most of these participants have the same or about the same value of $\he$, perhaps slightly shifted upwards, with the two different priors. For the other participants there are, with some exceptions, no huge differences in the values of $\he$, considering the scale we have the values on. Some participants get higher values of $\he$ and others get lower values without there being any clear pattern. 
+Most of the participants that have $\ha=0$ in the first model have the same in the alternative model. We also see that most of these participants have the same or about the same value of $\he$, perhaps slightly shifted upwards, with the new prior. For the other participants there are, with some exceptions, no huge differences in the values of $\he$, considering the scale we have the values on. Some participants get higher values of $\he$ and others get lower values without there being any clear pattern. 
 \begin{figure}
     \centering
     \includegraphics[scale=0.7]{pictures/Sensitivity/mles_unlim.png}
-    \caption{Mles unlim, sensitivity. Orange are with teh prior for theta wiht $\gamma=\kappa=0.5$. }
+    \caption[MLEs for prior with $\gamma=\kappa=1$ and $\gamma=\kappa=0.5$, unlimited]{
+    Maximum likelihood estimates in the unlimited version of the box task. The green dots represent MLEs where we have a uniform prior for $\Theta$, that is, $\gamma=\kappa=1$. The orange dots are the MLEs where $\gamma=\kappa=0.5$.}
     \label{fig:sensitivity_mls_unlim}
 \end{figure}
 \begin{figure}
     \centering
     \includegraphics[scale=0.8]{pictures/Sensitivity/mles_unlim_zoom1.png}
-    \caption{Mles unlim, sensitivity zoomed once}
+    \caption[Zoomed in on the MLEs in Figure \ref{fig:sensitivity_mls_unlim}]{MLEs for two different priors in the unlimited case of the box task. This is the same plot as in Figure \ref{fig:sensitivity_mls_unlim} zoomed in.}
     \label{fig:sensitivity_mls_unlim_zoom1}
 \end{figure}
 \begin{figure}
     \centering
     \includegraphics[scale=0.8]{pictures/Sensitivity/mles_unlim_zoom2.png}
-    \caption{Mles unlim, sensitivity zoomed twice}
+    \caption[Zoomed in on the MLEs in Figure \ref{fig:sensitivity_mls_unlim_zoom1}]{The plot of MLEs in Figure \ref{fig:sensitivity_mls_unlim_zoom1} zoomed.}
     \label{fig:sensitivity_mls_unlim_zoom2}
 \end{figure}
 
 
 
-In Figure \ref{fig:sensitivity_unlim_cis_alpha} we see the confidence intervals for $\alpha$. The green lines are the CIs we found earlier with the uniform prior, and the orange dots represent the CIs when we have the beta prior for $\Theta$ with $\gamma=\kappa=0.5$. As for the MLEs we see that the confidence intervals are close to each other. Many of the upper limits are slightly shifted to the left, with some exceptions. (jeg vet neste ikke hva jeg skal si? de er jo veldig like?) Again, we see that the interval of individual 13 is long, such that the upper limit is outside of this plot. These upper limits are also quite similar. 
+In Figure \ref{fig:sensitivity_unlim_cis_alpha} we see the confidence intervals for $\alpha$. The green lines are the CIs we found earlier with the uniform prior, and the orange lines represent the CIs when we have the beta prior for $\Theta$ with $\gamma=\kappa=0.5$. As for the MLEs we see that the confidence intervals are close to each other. Many of the upper limits are slightly shifted to the left, with some exceptions. (jeg vet neste ikke hva jeg skal si? de er jo veldig like?) Again, we see that the interval of individual 13 is long, such that the upper limit is outside of this plot. These upper limits are also quite similar. 
 \begin{figure}
     \centering
     \includegraphics[scale=0.37]{pictures/Sensitivity/ci_unlim_alpha.png}
-    \caption{CIs for alpha. Oragne is gk0.5. green is uniform}
+    \caption[CIs for $\alpha$ for all participants with two different priors, unlimited]{
+    Confidence intervals for $\alpha$ for all of the 76 participants in the unlimited version of the box task. The green intervals represent the situation where we have a uniform prior for $\Theta$, that is, $\gamma=\kappa=1$. The orange lines are the intervals for a prior where $\gamma=\kappa=0.5$.}
     \label{fig:sensitivity_unlim_cis_alpha}
 \end{figure}
 
 
-Figure \ref{fig:sensitivity_unlim_cis_eta} displays the confidence intervals for $\eta$ for each participant. We also have here that the orange dots are the CIs in the case with the new prior and the green lines are the CIs we found in the case with the uniform prior. In FIgure \ref{fig:sensitivity_unlim_cis_eta_zoomed} we have zoomed in closer to zero to get a better view of the participants we lower vlaues of $\he$. The confidence intervals for $\eta$ differ more than the intervals for $\alpha$. 
-Some of the new intervals are shorter and others are longer than the green lines, without there being any clear pattern of which ones. Some intervals are slightly shifted to the right. At least the intervals that are longer than the original intervals. There it is mostly the upper limit that is higher than the original, and the lower limit is often close to the lower limit of the green line. 
+Figure \ref{fig:sensitivity_unlim_cis_eta} displays the confidence intervals for $\eta$ for each participant. We also have here that the orange lines are the CIs in the case with the new prior and the green lines are the CIs we found in the case with the uniform prior. In Figure \ref{fig:sensitivity_unlim_cis_eta_zoomed} we have zoomed in closer to zero to get a better view of the participants we lower values of $\he$. The confidence intervals for $\eta$ differ more than the intervals for $\alpha$. 
+Some of the new intervals are shorter and others are longer than the old ones, without there being any clear pattern of which intervals that is. Some intervals are slightly shifted to the right. At least the intervals that are longer than the original intervals. There, it is mostly the upper limits that are higher than the original, and the new lower limits are often close to the old ones. 
 However, these higher upper limits might be because of the flat log likelihood function as discussed in Chapter \ref{chapter:mles}. 
 \begin{figure}
     \centering
-    \includegraphics[scale=0.37]{pictures/Sensitivity/ci_unlim_eta.png}
-    \caption{CIs for eta. Oragne is gk0.5. green is uniform}
+    \includegraphics[scale=0.36]{pictures/Sensitivity/ci_unlim_eta.png}
+    \caption[CIs for $\eta$ for all participants with two different priors, unlimited]{
+    Confidence intervals for $\eta$ for all of the 76 participants in the unlimited version of the box task. The green intervals represent the situation where we have a uniform prior for $\Theta$, that is, $\gamma=\kappa=1$. The orange lines are the intervals for a prior where $\gamma=\kappa=0.5$.}
     \label{fig:sensitivity_unlim_cis_eta}
 \end{figure}
 \begin{figure}
     \centering
-    \includegraphics[scale=0.37]{pictures/Sensitivity/ci_unlim_eta_zoomed.png}
-    \caption{CIs for eta zoomed. Oragne is gk0.5. green is uniform}
+    \includegraphics[scale=0.36]{pictures/Sensitivity/ci_unlim_eta_zoomed.png}
+    \caption[CIs for $\eta$, unlimited. Zoomed]{The plot in Figure \ref{fig:sensitivity_unlim_cis_eta} zoomed.}
     \label{fig:sensitivity_unlim_cis_eta_zoomed}
 \end{figure}
 
@@ -802,50 +798,58 @@ However, these higher upper limits might be because of the flat log likelihood f
 We continue with looking at the estimates and confidence intervals using a new prior for $\Theta$ in the limited case of the box task. 
 
 In the previous results where we have a uniform prior, we have that all the $\ha$ are zero except for two. In Figure \ref{fig:sensitivity_mles_lim_a_e} we have plotted both the new and the old estimates of $\alpha$ and $\eta$. The green dots are the estimates for the model with the uniform prior and the orange are the new estimates with the beta prior having hyperparameters $\gamma=\kappa=0.5$. 
-We see that all $\ha$ that were zero from before are still zero with the new prior. The two participants, individuals 11 and 13 that have the high values of $\ha$ get smaller values of $\ha$. Their values of $\he$ are not affected by the prior as it stays the same in both cases. 
-Almost all the other participants, that have $\ha=0$, get higher estimates of $\eta$ in the case with the non-uniform prior. Most of them are shifted upwards with about 0.02-0.35. 
-If there for example are many red boxes that are opened, we have that the probability that red is the majority colour is higher with the non-uniform prior than with the uniform. Thus, the expected loss of choosing red as the majority colour is lower now than it was with the uniform prior. Many of the participants chooses what they think is the majority colour early, meaning that they choose when few boxes are opened. With the new prior giving lower expected losses of choosing majority colour early, that means that the participants make decisions closer to the decision that has the lowest expected loss. Thus, we get higher values of $\he$ if we use the new prior with $\gamma=\kappa=0.5$.
-A few participants get smaller values of $\he$. The biggest exception is individual number 75. Recall that this is the participant that has confidence intervals of length zero because of the high value of $\he$, and that this is a high value of $\he$ for participant 75 even though it is not generally high. Her MLEs are given in \eqref{mles_lim_person75}. We discussed earlier that the log likelihood function is flat for high values of $\eta$, and that the stopping criterion in the optimisation can be met several places when $\eta$ is high. This might be the reason for the big change in the value of $\he$. 
+We see that all $\ha$ that were zero from before are still zero with the new prior. The two participants, individuals 11 and 13 that have the high values of $\ha$ get higher values of $\ha$. Their values of $\he$ are slightly higher with the new prior. 
+There are three participants that had values of $\ha$ slightly higher than zero, that with the new prior have $\ha=0$. 
+Most participants get lower value of $\he$ with the non-uniform prior. Most of the values are only shifted a little downwards with the exception of some that get a huge difference in the values. These are participants that have huge values of $\he$ from before with the uniform prior. We discussed earlier that the log likelihood function is flat for high values of $\eta$, and that the stopping criterion in the optimisation can be met several places when $\eta$ is high. This might be the reason for the big change in the value of $\he$. 
+A few participants get higher values of $\he$, but if the values are higher it is not by a lot. 
 \begin{figure}
     \centering
     \includegraphics[scale=0.8]{pictures/Sensitivity/mles_lim_a_e.png}
-    \caption{Caption}
+    \caption[MLEs of $\alpha$ and $\eta$ for prior with $\gamma=\kappa=1$ and $\gamma=\kappa=0.5$, limited]{
+    Maximum likelihood estimates of $\alpha$ and $\eta$ in the limited version of the box task. The green dots represent MLEs where we have a uniform prior for $\Theta$, that is, $\gamma=\kappa=1$. The orange dots are the MLEs where $\gamma=\kappa=0.5$.}
     \label{fig:sensitivity_mles_lim_a_e}
 \end{figure}
 
-In addition to this, we have plotted the MLEs for $\alpha$ and $\beta$ together in Figure \ref{fig:sensitivity_mles_lim_a_b}.
+In addition to this, we have plotted the MLEs for $\alpha$ and $\beta$ together in Figure \ref{fig:sensitivity_mles_lim_a_b}. We see also here participants 11 and 13 with the high values of $\ha$. Their values of $\hb$ were zero with the uniform prior, and stay zero with the new prior. We also see one participant that increases the value of $\hb$ by a lot. This is individual number 75. Recall that this is the participant that has confidence intervals of length zero because of the high value of $\he$. Her MLEs are given in \eqref{mles_lim_person75}. The log likelihood function is also quite flat for big values of $\alpha$ or $\beta$, meaning that the same argument for high differences in $\he$ holds for $\hb$ as well.  
 \begin{figure}
     \centering
     \includegraphics[scale=0.8]{pictures/Sensitivity/mles_lim_a_b.png}
-    \caption{Caption}
+    \caption[MLEs of $\alpha$ and $\beta$ for prior with $\gamma=\kappa=1$ and $\gamma=\kappa=0.5$, limited]{
+    Maximum likelihood estimates of $\alpha$ and $\beta$ in the limited version of the box task. The green dots represent MLEs where we have a uniform prior for $\Theta$, that is, $\gamma=\kappa=1$. The orange dots are the MLEs where $\gamma=\kappa=0.5$.}
     \label{fig:sensitivity_mles_lim_a_b}
 \end{figure}
 
-As so many of the values of $\ha$ are zero, zooming in on Figure \ref{fig:sensitivity_mles_lim_a_b} will give little information. We therefore go straight to the plot for $\hb$ and $\he$, that is shown in Figure \ref{fig:sensitivity_mles_lim_b_e}. Here we find an individual with a high value of $\hb$ that gets an even higher value with the new prior. In addition to this, she gets a higher value of $\he$. 
+As so many of the values of $\ha$ are zero, zooming in on Figure \ref{fig:sensitivity_mles_lim_a_b} will give little information. We therefore go straight to the plot for $\hb$ and $\he$, that is shown in Figure \ref{fig:sensitivity_mles_lim_b_e}. Here, we again see participant 75 that gets a much higher $\hb$. She gets a smaller value of $\he$, but again, that might be because of the flat log likelihood function. 
 \begin{figure}
     \centering
     \includegraphics[scale=0.8]{pictures/Sensitivity/mles_lim_b_e.png}
-    \caption{Caption}
+    \caption[MLEs of $\beta$ and $\eta$ for prior with $\gamma=\kappa=1$ and $\gamma=\kappa=0.5$, limited]{
+    Maximum likelihood estimates of $\beta$ and $\eta$ in the limited version of the box task. The green dots represent MLEs where we have a uniform prior for $\Theta$, that is, $\gamma=\kappa=1$. The orange dots are the MLEs where $\gamma=\kappa=0.5$.}
     \label{fig:sensitivity_mles_lim_b_e}
 \end{figure}
-If we zoom in as in Figure \ref{fig:sensitivity_mles_lim_b_e_zoomed}, we see that most participants, with some exceptions, get higher values of $\hb$, and as seen in Figure \ref{fig:sensitivity_mles_lim_a_e}, higher values of $\he$. (jeg skjønner faktisk ikke hvorfor de får høyere verdier av beta??)
-In the bottom left corner we have participants 11 and 13 that have negative values of $\he$ and $\hb=0$. The values of $\he$ becomes even smaller when we use the non-uniform prior for $\theta$. 
+
+If we zoom in as in Figure \ref{fig:sensitivity_mles_lim_b_e_zoomed}, we see that most participants, with some exceptions, get smaller values of both $\hb$ and $\he$. All the participants that had $\hb=0$ with the uniform prior still has that with the non-uniform prior. In fact, more participants have $\hb=0$ now than with the uniform prior. All the other participants, except participant 75, get slightly smaller values of $\hb$.
+If there for example are many red boxes that are opened, we have that the probability that red is the majority colour is higher with the non-uniform prior than with the uniform. Thus, the expected loss of choosing red as the majority colour is lower now than it was with the uniform prior. Then, if one chooses majority colour early, the expected loss is closer to the lowest expected loss. Therefore, one are not to the same degree interpreted as being afraid of the test terminating when choosing early. Thus, many of the values of $\hb$ are lower here. 
+%Many of the participants chooses what they think is the majority colour early, meaning that they choose when few boxes are opened. With the new prior giving lower expected losses of choosing majority colour early, that means that the participants make decisions closer to the decision that has the lowest expected loss. Thus, we get higher values of $\he$ if we use the new prior with $\gamma=\kappa=0.5$.
 \begin{figure}
     \centering
     \includegraphics[scale=0.8]{pictures/Sensitivity/mles_lim_b_e_zoomed.png}
-    \caption{Caption}
+    \caption[MLEs of $\beta$ and $\eta$, zoomed]{The plot in Figure \ref{fig:sensitivity_mles_lim_b_e}, zoomed.}
     \label{fig:sensitivity_mles_lim_b_e_zoomed}
 \end{figure}
 
-%\begin{figure}
-%    \centering
-%    \includegraphics[scale=0.8]{pictures/Sensitivity/mles_lim_b_e_zoomed_bottom_left.png}
-%    \caption{Caption}
-%    \label{fig:sensitivity_mles_lim_b_e_zoomed_bottom_left}
-%\end{figure}
+In general, we get smaller values of all of the three parameters, with some exceptions, with the non-uniform prior for $\Theta$.
 
-In general we get higher values of $\hb$ and more extreme values of $\he$, as the absolute values of $\he$ are higher with the new prior. We also have that the ones with $\ha\neq 0$ get smaller values of $\ha$.
 
+Intervsl for $\alpha$:
+\begin{figure}
+    \centering
+    \includegraphics{}
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
+
+OLD:
 The confidence intervals for $\alpha$ for the cases with different priors can be found in Appendix \ref{appendix_CIs}. These confidence intervals are quite similar, and do not give to much information about the sensitivity to hyperparameters. 
 
 about CIs for beta. 
@@ -854,7 +858,7 @@ we have zoomed even more on this plot in Appendix \ref{appendix_CIs}.
 \begin{figure}
     \centering
     \includegraphics[scale=0.37]{pictures/Sensitivity/ci_lim_beta_zoom1.png}
-    \caption{75 too high to be included. Almost same as for uniform prior. 11 has much longer interval for uniform than for non-uniform. }
+    \caption[CIs for $\beta$ for all participants with two different priors, limited]{Confidence intervals for $\beta$ for all of the 76 participants in the limited version of the box task. The green intervals represent the situation where we have a uniform prior for $\Theta$, that is, $\gamma=\kappa=1$. The orange lines are the intervals for a prior where $\gamma=\kappa=0.5$.}
     \label{fig:sensitivity_ci_lim_beta_zoom}
 \end{figure}
 
@@ -862,6 +866,6 @@ about cis for eta:
 \begin{figure}
     \centering
     \includegraphics[scale=0.37]{pictures/Sensitivity/ci_lim_eta.png}
-    \caption{Caption}
-    \label{fig:my_label}
+    \caption[CIs for $\eta$ for all participants with two different priors, limited]{Confidence intervals for $\eta$ for all of the 76 participants in the limited version of the box task. The green intervals represent the situation where we have a uniform prior for $\Theta$, that is, $\gamma=\kappa=1$. The orange lines are the intervals for a prior where $\gamma=\kappa=0.5$.}
+    \label{fig:sensitivity_ci_lim_eta}
 \end{figure}
