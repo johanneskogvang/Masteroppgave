@@ -330,8 +330,8 @@ In the limited version, we have three parameters, $\alpha$, $\beta$ and $\eta$, 
 In Figure \ref{fig:mles_limited_alpha_beta} we have plotted the MLEs of $\alpha$ and $\beta$ for all participants. Again we see that many participants have $\ha=0$. This might indicate that $\alpha$ is unnecessary to include in the limited version. Both $\alpha$ and $\beta$ are values tied to whether we choose majority colour early or not. Thus, it might be enough to only include $\beta$. It is also not obvious how the MLEs are giving weight to $\alpha$ compared to $\beta$. 
 \begin{figure}
     \centering
-    \includegraphics[scale=0.38]{pictures/plotted_mles_limited_alpha_beta_gk1.png}
-    \caption[MLEs of $\alpha$ and $\beta$, limited. $\gamma=\kappa=1$]{Maximum likelihood estimates of $\alpha$ and $\beta$ for all participants in the limited version of the box task.$\gamma=\kappa=1$.}
+    \includegraphics[scale=0.8]{pictures/plotted_mles_limited_alpha_beta_gk1.png}
+    \caption[MLEs of $\alpha$ and $\beta$, limited. $\gamma=\kappa=1$]{Maximum likelihood estimates of $\alpha$ and $\beta$ for all participants in the limited version of the box task. $\gamma=\kappa=1$.}
     \label{fig:mles_limited_alpha_beta}
 \end{figure}
 
@@ -446,6 +446,7 @@ She opens between 2 and 5 boxes in all the trials except Trial 8. In all of thes
 We have presented an Ideal Observer solution of the box task and the maximum likelihood estimates for different participants. Now, we will discuss some of the confidence intervals we have found. Recall that these are found by finding the MLEs of 1000 bootstrap samples for each participant and the finding the 5-th and 95-th percentiles, as discussed in Chapter \ref{chapter:CIs_chap3}. 
 
 \subsubsection{Unlimited}
+\label{chapter:cis_unlimited}
 We start with the confidence intervals in the unlimited case. In Figure \ref{fig:all_cis_alpha_unlim_v2} we see the confidence intervals for $\alpha$. The whole interval for individual number 13 is not included as it is very long. Recall that the MLE of $\alpha$ for person 13 is very large, and we also have a very large value of the upper limit of the CI for $\alpha$, $\ha_{1000}^{(95)}$. We see that many of the CIs include zero, meaning that many participants might not have that small loss of opening the next box. 
 \begin{figure}
     \centering
@@ -527,14 +528,7 @@ We see that many of the values of $\ha$ are very high, much higher than the MLE,
  
 
 
-Another participants with extreme values we looked at in Chapter \ref{chapter:mles} is individual number 58. The MLEs are 
-\begin{equation*}
-    \begin{aligned}
-        \ha &= 0.0016\\
-        \he &= 443422.7.
-    \end{aligned}
-\end{equation*}
-This value of $\he$ is above the threshold value, which makes the probabilities in \eqref{probabilities_bootstrap} be approximate either zero or one. Thus, when we draw decisions based on those probabilities, we will always end up with the same decisions, and those are the decisions that the participant have made. All the simulated decisions are therefore identical to the decisions the participant has made, and the MLEs will be identical. Thus, the length of the two CIs will be zero, and the values will be equal to the MLEs. Hence, the CIs are
+Another participants with extreme values we looked at in Chapter \ref{chapter:mles} is individual number 58. The MLEs are given in \ref{mles_unlim_person58}. Her value of $\he$ is above the threshold value, which makes the probabilities in \eqref{probabilities_bootstrap} be approximate either zero or one. Thus, when we draw decisions based on those probabilities, we will always end up with the same decisions, and those are the decisions that the participant have made. All the simulated decisions are therefore identical to the decisions the participant has made, and the MLEs will be identical. Thus, the length of the two CIs will be zero, and the values will be equal to the MLEs. Hence, the CIs are
 \begin{equation*}
     [\hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}] = [0.0016,0.0016]
 \end{equation*}
