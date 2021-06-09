@@ -1,7 +1,7 @@
 \newpage
 \chapter{Background Theory}
 %\section{Theory}
-In this chapter we will go through some of the statistical theory used in this report. That includes the theorem of total probability, Bayes' theorem, the beta and gamma functions, Bayesian modelling, loss functions, the law of total ecpectation, the softmax function, maximum likelihood estimation and bootstrapping.  
+In this chapter, we go through some of the statistical theory used in this report. This includes the theorem of total probability, Bayes' theorem, the beta and gamma functions, Bayesian modelling, loss functions, the law of total expectation, the softmax function, maximum likelihood estimation and bootstrapping.  
 
 \section{The Theorem of Total Probability}
 The theorem of total probability is often used when we want to find some probability, and this probability is hard to find. Then, sometimes it might be easier to find that probability if we condition on something, and use the theorem of total probability. 
@@ -32,7 +32,7 @@ Consider, for example, two discrete random variables $U$ and $V$ that are condit
 \begin{equation*}
     P(U+V=j) = \int_{-\infty}^\infty P(U+V=j|\Theta=\theta)f_{\Theta}(\Theta=\theta) \: d\theta.
 \end{equation*}
-Later, we can exploit the conditional independence. If $\theta$ is a probability that is defined on the interval (0,1), this will be integrated on that interval, such that 
+Later, we can exploit the conditional independence. If $\theta$ is a probability defined on the interval (0,1), this will be integrated on that interval, such that 
 \begin{equation*}
     P(U+V=j) = \int_{0}^1 P(U+V=j|\Theta=\theta)f_{\Theta}(\Theta=\theta) \: d\theta.
 \end{equation*}
@@ -42,7 +42,7 @@ Later, we can exploit the conditional independence. If $\theta$ is a probability
 
 
 \section{Bayes' Rule}
-Bayes' rule can be used to find conditional probabilities and distributions. 
+We can use Bayes' rule to find conditional probabilities and distributions. 
 \begin{theorem}[Bayes' Rule]
 Consider two events, $A$ and $B$. We can find the probability of $A$ given event $B$ by the use of the probability of event $B$ given $A$ and the probabilities of the events $A$ and $B$ separately \citep{statinf}. Hence,
 \begin{equation}
@@ -50,71 +50,6 @@ Consider two events, $A$ and $B$. We can find the probability of $A$ given event
     P(A|B)=\frac{P(B|A)P(A)}{P(B)}.
 \end{equation}
 \end{theorem}
-
-
-
-
-\begin{comment}
-From \citet{schay2016introduction}, we have a version of Bayes' theorem for continuous variables which is stated as 
-\begin{theorem}[Bayes' Theorem]
-\label{bayestheorem}
-For a continuous random variable Y and any event A with nonzero probability, if $P(A|Y=y)$ and $f_Y$ exist for all $y$, then
-\begin{equation}
-    \label{bayestheorem_eq}
-    f_{Y|A}(y) = \frac{P(A|Y=y)f_Y(y)}{\int_{-\infty}^{\infty}P(A|Y=y) f_Y(y) dy}.
-\end{equation}
-Here $f_Y$is called the prior density of $Y$, and $f_{Y|A}$ its posterior density, referring to the fact that these are the densities of $Y$ before and after the observation of $A$. 
-\end{theorem}
-
-From \eqref{lawoftotprob} we see that the denominator is the probability of event $A$, \begin{equation*}
-    \int_{-\infty}^{\infty}P(A|Y=y) f_Y(y) = P(A),
-\end{equation*}
-such that Bayes' theorem can be stated as
-\begin{equation}
-    \label{bayestheorem_eq2}
-    f_{Y|A}(y) = \frac{P(A|Y=y)f_Y(y)}{P(A)}.
-\end{equation}
-
-
-Or:
-\end{comment}
-
-\begin{comment}
-\begin{theorem}[Bayes' Theorem]
-\label{bayestheorem}
-Consider two continuous random variables, $U$ and $\Theta$, that both have a nonzero probability. If both $P(U=u|\Theta=\theta)$ and $P(\Theta=\theta)$ exist for all $\theta$, then 
-\begin{equation}
-    \label{bayesrule}
-    P(\Theta=\theta|U=u) = \frac{P(U=u|\Theta=\theta)P(\Theta=\theta)}{\int_{-\infty}^{\infty} P(U=u|\Theta=\theta)P(\Theta=\theta) \: \dd \theta}.
-\end{equation}
-$P(\Theta=\theta)$ is the prior probability/density of $\Theta$, and it represents the prior knowledge we have about that parameter. $P(\Theta=\theta|U=u)$ is called the posterior of $\Theta$, which is the probability density after we have observed that $U=u$ \citep{schay2016introduction}. 
-\end{theorem}
-
-
-From \eqref{lawoftotprob} we see that the denominator is the probability that $U=u$,
-\begin{equation*}
-    \int_{-\infty}^{\infty} P(U=u|\Theta=\theta)P(\Theta=\theta) \: \dd \theta = P(U=u).
-\end{equation*}
-Thus, Bayes' theorem can be reformulated as
-\begin{equation}
-    \label{Bayesrule2}
-     P(\Theta=\theta|U=u) = \frac{P(U=u|\Theta=\theta)P(\Theta=\theta)}{P(U=u)}.
-\end{equation}
-
-
-As an example, consider a random variable $U$ that is binomial distributed with parameters $n$ and $\theta$. Thus,
-\begin{equation*}
-    U|\theta \sim \mathrm{Binomial}(n,\theta).
-\end{equation*}
-Using Theorem \ref{bayestheorem} and \eqref{Bayesrule2}, we get that the posterior probability of $\Theta|U$ is
-\begin{equation*}
-    P(\Theta=\theta|U=u) = \frac{P(U=u|\Theta=\theta)P(\Theta=\theta)}{P(U=u)}.
-\end{equation*}
-
-\end{comment}
-
-
-
 
 
 As an example, consider a discrete random variable, $U$. We can find the probability that $U$ is greater than or equal to 7, and condition on it being different from six by using \eqref{bayesrule}. Then $U \geq 7$ is an event, and $U\neq6$ is another event. Thus,
@@ -125,18 +60,6 @@ As an example, consider a discrete random variable, $U$. We can find the probabi
 
 
 \section{The Beta and Gamma Functions}
-%The beta distribution is continuous on the interval between 0 and 1, and have two parameters \citep{statinf}. Consider a parameter $\theta$ is beta distributed with parameters $\gamma$ and $\kappa$, hence,
-%\begin{equation*}
-%    \theta \sim beta(\gamma,\kappa).
-%\end{equation*}
-%The probability density function of $\theta$ is then
-% \begin{equation}
-    % \label{betadistribution}
-    % f(\theta|\gamma,\kappa) = \frac{1}{\mathrm{B}(\gamma,\kappa)} \theta^{\gamma-1}(1-\theta)^{\kappa-1},\:\: 0<\theta<1, \gamma>0, \kappa>0,
-% \end{equation}
-% where $\mathrm{B}(\gamma,\kappa)$ is the beta function, meaning that
-
-
 Later, we will use the beta and gamma functions and some of their properties. These are therefore stated here. This theory can for example be found in \citet{statinf}. The gamma function for a parameter $\kappa$ is 
 \begin{equation*}
     \label{gamma_func}
@@ -153,7 +76,7 @@ Additionally, the beta function with parameters $\gamma$ and $\kappa$ is defined
 \label{beta_function}
     \mathrm{B}(\gamma,\kappa) = \int_0^1 \theta^{\gamma-1}(1-\theta)^{\kappa-1} \: \dd \theta.
 \end{equation}
-We can express the beta function as a product of gamma functions. That yields
+We can express the beta function as a product of gamma functions. This yields
 \begin{equation}
 \label{beta_as_gamma}
     \mathrm{B}(\gamma,\kappa) = \frac{\Gamma(\gamma)\Gamma(\kappa)}{\Gamma(\gamma+\kappa)}.
@@ -163,23 +86,25 @@ We can express the beta function as a product of gamma functions. That yields
 
 \section{Bayesian Modelling}
 \label{theory_bayesian_modelling}
-Consider a stochastic variable, $U$, that has a probability density function $f(u|\theta)$, where $\theta$ is a parameter upon which $U$ depends. In classical statistics, $\theta$ is said to be a fixed but unknown value. However, in Bayesian statistics we consider $\theta$ as a stochastic variable, such that $\theta$ has a density function, $f(\theta)$. This is called the prior distribution as it represents the prior knowledge we have about $\theta$ before observing any data. That could be our own subjective believes about the parameter, or information based on other previously collected data or studies. One could also choose a prior distribution that does not say anything about the parameter at all. This is called a non-informative prior, and it is often used when we have none or little prior information about the parameter \citep{givens2012computational}. 
-If we have collected data, we can update our prior beliefs with the information we get from that data. The resulting distribution is called the posterior distribution of $\theta$. This can be found using Bayes' theorem, and it includes both the prior information we have and the new information we get from the data. 
+Consider a stochastic variable, $U$, that has a probability density function $f(u|\theta)$, where $\theta$ is a parameter upon which $U$ depends. In classical statistics, $\theta$ is said to be a fixed but unknown value. The goal is to find this one true value. 
+However, in Bayesian statistics we consider $\theta$ as a stochastic variable, such that $\theta$ has a density function. 
+Here, the goal is to find the underlying density. To do so we propose a prior distribution for $\theta$, $f(\theta)$. The prior distribution represents the prior knowledge we have about $\theta$ before observing any data. That could be our own subjective believes about the parameter or information based on other previously collected data or studies. One could also choose a prior distribution that does not say anything about the parameter at all. This is called a non-informative prior, and it is often used when we have none or little prior information about the parameter \citep{givens2012computational}. 
+If we have collected data, denoted $u$, we can update our prior beliefs with the information we get from that data. The resulting distribution is called the posterior distribution of $\theta$, $f(\theta|u)$. We can find this using Bayes' theorem, and it includes both the prior information we have and the new information we get from the data. 
 
-Consider a discrete stochastic variable, $U$, that has a sampling distribution $P(U=u|\theta)$, and let $P(U=u)$ be the marginal distribution of $U$. Additionally, let $f(\theta)$ be the prior distribution of $\theta$, hence our prior beliefs of the parameter. Using Bayes' rule as it is stated in \eqref{bayesrule}, we get that the posterior distribution of $\theta$ given $u$, $f(\theta|u)$, can be expressed as \citep{statinf}
+Consider a discrete stochastic variable, $U$, that has a sampling distribution $P(U=u|\theta)$, and let $P(U=u)$ be the marginal distribution of $U$. Additionally, let $f(\theta)$ be the prior distribution of $\theta$. Using Bayes' rule as it is stated in \eqref{bayesrule}, we get that the posterior distribution of $\theta$ given $u$, $f(\theta|u)$, can be expressed as \citep{statinf}
 \begin{equation*}
     f(\theta|u) = \frac{P(U=u|\theta)f(\theta)}{P(U=u)}.
 \end{equation*}
-We can sometimes exploit the fact that the posterior distribution is proportional to the numerator in the above expression. This is because the denominator is a normalising constant. Then,
+We can sometimes exploit the fact that the posterior distribution is proportional to the numerator in the above expression. This is because the denominator is a normalising constant. Hence,
 \begin{equation}
     \label{posterior_proportional}
     f(\theta|u) \propto P(U=u|\theta)f(\theta).
 \end{equation}
-If \eqref{posterior_proportional} have the form of a known distribution, then that known distribution is the posterior distribution. 
+If \eqref{posterior_proportional} has the form of a known distribution, then that known distribution is the posterior distribution. 
 
 As an example, consider a random variable, $U$, that is binomially distributed with parameters 12 and some probability, $\theta$. Thus,
 \begin{equation*}
-    U|\Theta=\theta \sim \mathrm{Binomial}(12,\theta).
+    \left( U|\Theta=\theta \right) \sim \mathrm{Binomial}(12,\theta).
 \end{equation*}
 Hence, the probability that we have $u$ successes out of twelve, given $\theta$, is
 \begin{equation}
@@ -224,7 +149,7 @@ We can see that this is proportional to a beta distribution like the one in \eqr
 
 \section{Loss Functions}
 \label{theory_loss_functions}
-A loss function typically says something about the cost, or loss, of an action related to a parameter. Let $\Omega_{\delta}$ be the action space, consisting of all the actions that can be done, where $\delta$ is an action. Then,
+A loss function typically says something about the cost, or loss, of an action related to a parameter. Let $\Omega_{\delta}$ be the action space, consisting of all the actions that we can do, where $\delta$ is an action. Then,
 \begin{equation*}
     \delta \in \Omega_{\delta}.
 \end{equation*}
@@ -248,33 +173,6 @@ where $I$ is an indicator function such that
     \end{cases}
 \end{equation*}
 
-
-\begin{comment}
-
-se statistical decison theory for hva en loss func er. på s 109 står det om 0-1-loss. 
-
-If the decision you make is far away from the parameter, the cost of making that decision will be high, and then we say that the loss will be big. A decision close to the parameter will give a small loss \citep{statinf}. The loss function gives the loss of making a decision. 
-
-A commonly used loss function is the absolute error loss function. Let $\delta$ be the 
-action represented as a real number, and let $\theta$ be the parameter we make decisions regarding. The absolute error loss function is then defined as
-\begin{equation*}
-    L(\theta,\delta) = |\theta-\delta|.
-\end{equation*}
-The loss is zero if $\delta=\theta$. A special case of this loss function is the 0-1-loss. Then the loss is either 0 or 1, and only two decisions can be made. Then, 
-\begin{equation}
-\label{loss_func_indicator}
-    L(\theta,\delta) = I(\theta \neq \delta),
-\end{equation}
-where $I$ is an indicator function such that
-\begin{equation*}
-    L(\theta,\delta) =
-    \begin{cases}
-        0,&  \text{if } \theta = \delta, \\
-        1,&  \text{if } \theta \neq \delta.
-    \end{cases}
-\end{equation*}
-\end{comment}
-
 In some cases, we would like to find the expected value of the loss function. Taking the expected value of an indicator function gives the probability that the event is happening \citep{algdat}. Hence, taking the expectation of \eqref{loss_func_indicator} gives
 \begin{equation}
 \label{expectation_of_loss_func_general}
@@ -297,7 +195,7 @@ When $i$ boxes are opened, let $X_{1:i}$ denote the colours of the $i$ boxes, su
 \label{def_of_X1:i}
     X_{1:i} = (X_1,X_2,...,X_{i}).
 \end{equation}
-Additionally, let $Z$ be the colour that is in majority when all twelve boxes are opened, the true majority colour. This is also a stochastic variable as it depends on the colours of the twelve boxes, the $X_i$'s. We define $Z$ as
+Additionally, let $Z$ be the colour that is in the majority when all twelve boxes are opened, the true majority colour. This is also a stochastic variable as it depends on the colours of the twelve boxes, the $X_i$'s. We define $Z$ as
 \begin{equation}
 \label{def_of_Z}
     Z = I\left(\sum_{j=1}^{12}X_j > 6\right).
@@ -324,9 +222,9 @@ We can then define a loss function for the choice that the participant makes. Th
 \label{loss_func_example}
     L(Z,\delta) = I(Z \neq \delta),
 \end{equation}
-Then, the loss is 0 if the participant chooses the right colour as the majority colour, and 1 if the wrong colour is chosen. 
+Then, the loss is zero if the participant chooses the right colour as the majority colour and one if she chooses the wrong colour. 
 
-To find the expected loss, we take the expectation of the loss function. As $Z$ depends on the colours of the twelve boxes, we have to condition on the colour of the boxes that already are opened, $ X_{1:i}=x_{1:i}$. The expectation of the loss function is then
+To find the expected loss, we take the expectation of the loss function. As $Z$ depends on the colours of the twelve boxes, we condition on the colour of the already opened boxes, $ X_{1:i}=x_{1:i}$. The expectation of the loss function is then
 \begin{equation*}
     E[L(Z,\delta)|X_{1:i}=x_{1:i}] = E[I(Z\neq \delta)|X_{1:i}=x_{1:i}].
 \end{equation*}
@@ -356,7 +254,7 @@ This can also be used to find the expectation of functions \citep{schay2016intro
     E[g(B)] = \sum_i E[g(B)|A_i]P(A_i).
 \end{equation}
 
-Later we will use the law of total expectation when we find the expectation of a loss function that says something about the loss of opening the next box in the box task. This expected loss is dependent on the colour of the box that will be opened. Thus, to find that expected loss, we use the law of total expectation and condition on the colour of the next box. 
+Later we will use the law of total expectation when we find the expectation of a loss function that says something about the loss of opening the next box in the box task. This expected loss is dependent on the colour of the box that will be opened. Thus, to find that expected loss, we use the law of total expectation and condition on the colour of the following box. 
 
 %Again consider the box task. Let $\delta_i=2$ denote the choice of opening another box when $i$ boxes already are opened. We can in addition to the loss functions found above, \eqref{loss_func_example}, find a loss function for the choice of opening the next box. This loss function is dependent on the choice that are made after the next box is opened as well. We denote these as $\delta_{(i+1):12}$, and thus, we denote this loss function as $L(Z,\delta_i=2,\delta_{(i+1):12})$ (senere kaller jeg disse videre valgene for $IO(\textbf{x}_{i},0)$, men det blir litt mange greier å ta med her. hva skal jeg gjøre md det?). 
 
@@ -378,12 +276,6 @@ The softmax function is commonly used in classification problems with more that 
     \delta \in \{0,1,2,...,D-1\}.
 \end{equation*}
 Additionally, let $\EE_{\delta}(\vp)$ be values tied to each decision that depends on some parameters, $\vp$. The probability mass function for each decision, $\delta$, could be found using a softmax function, such that
-%\begin{equation*}
-%    \begin{aligned}
-%        f(\delta_i|\textbf{x}) = \frac{\text{exp}(- \eta \EE_{\delta_i})}{\sum_{j=0}^{K-1} \text{exp}(-\eta \EE_{\delta_j})}.
-%    \end{aligned}
-%\end{equation*}
-%Er et riktig å ha $|\textbf{x}$ her? jeg vil jo ha $|\alpha,\beta,\eta$ i min modell? burfe jeg ha $|\eta$, også senere introdusere $\alpha$ og $\beta$. slik at det heller blir som under?
 \begin{equation}
 \label{softmax_in_theory}
     \begin{aligned}
@@ -392,8 +284,8 @@ Additionally, let $\EE_{\delta}(\vp)$ be values tied to each decision that depen
 \end{equation}
 where $\eta$ is some parameter. 
 
+These decisions could, for example, be the three choices we have each time we open a box in the box task. These choices are that blue is the majority colour, or that red is, denoted $\delta=0$ and $\delta=1$, respectively. The last choice is to open another box, which we denote $\delta=2$. Then, we let $\EE_0(\vp)$ be the expected loss when choosing that blue is the majority colour, similarly to \eqref{exp_loss_theory}. Additionally, we let $\EE_1(\vp)$ and $\EE_2(\vp)$ be the expected loss of choosing red as the majority colour and of opening another box, respectively. Then, the probability mass function for $\delta$ could be as in \eqref{softmax_in_theory}. We then have a probability mass function for each of the three decisions that depend on the expected losses, parameters $\vp$ and some parameter $\eta$.
 
-These decisions could for example be the three choices you have each time a box is opened in the box task. These choices are that blue is the majority colour, or that red is, denoted $\delta=0$ and $\delta=1$, respectively. The last choice is to open another box, which is denoted $\delta=2$. Then, we let $\EE_0(\vp)$ be the expected loss when choosing that blue is the majority colour, similarly to \eqref{exp_loss_theory}. Additionally, we let $\EE_1(\vp)$ and $\EE_2(\vp)$ be the expected loss of choosing red as the majority colour and of opening another box, respectively. Then, the probability mass function for $\delta$ could be as in \eqref{softmax_in_theory}. We then have a probability mass function for each of the three decisions that depends on the expected losses, parameters $\vp$ and some parameter $\eta$.
 
 
 
@@ -450,7 +342,7 @@ The maximum likelihood estimators of $\vp$ and $\eta$ would then be the values t
 
 \section{Bootstrapping}
 \label{section_theory_bootstrap}
-Consider a sample, $(\delta_1,\delta_2,...,\delta_n)$, where the samples are identically and independently distributed from an unknown distribution, $F$. We can use this sample to estimate this distribution, thus, find $\hat{F}$. To get some ideas about the properties of $F$, we can find the properties of $\hat{F}$. Sometimes it is challenging to do this analytically. Instead we can use simulations. This is where bootstrapping is useful. Bootstrapping is a way of finding those samples, either from the original sample, $(\delta_1,\delta_2,...,\delta_n)$, or from the estimated distribution, $\hat{F}$. We can then use those samples to find, for example, standard error, bias, variance, or perhaps the most common, confidence intervals \citep{bootstrap}.
+Consider a sample, $(\delta_1,\delta_2,...,\delta_n)$, where the $\delta_i$'s are identically and independently distributed from an unknown distribution, $F$. We can use this sample to estimate this distribution, denoted by $\hat{F}$. To get some ideas about the properties of $F$, we can find the properties of $\hat{F}$. Sometimes it is challenging to do this analytically. Instead, we can use simulations, and this is where bootstrapping is useful. Bootstrapping is a way of finding new samples, either from the original sample, $(\delta_1,\delta_2,...,\delta_n)$, or from the estimated distribution, $\hat{F}$. We can then use those samples to find, for example, standard error, bias, variance, or perhaps the most common; confidence intervals \citep{bootstrap}.
 
 
 %a sample (iid) from an unknown distribution ($F$). can use that sample to estimate the distribution, hence find $\hat{F}$. To get some knowledge about the properties of $F$, we can find out things about the properties of $\hat{F}$. Often hard to do this analytically, thus, instead we use simulations. Then we can use bootstrapping. 
@@ -475,12 +367,13 @@ If we draw $B$ samples, we can, as for the nonparametric bootstrap, do inference
 \subsection{Confidence Intervals with Bootstrap Samples}
 \label{theory_ci_bootstrap}
 One way of doing inference is to find confidence intervals. When we have $B$ bootstrap samples, there are multiple methods for finding these.  
-A confidence interval (CI) for a parameter is an interval that will contain the true value of the parameter a given proportion of the times an interval is constructed. If we for example have a 90\% CI, then the true value of the parameter will be in the interval 90\% of the times an interval is constructed \citep{bootstrap}.
+A confidence interval (CI) for a parameter is an interval that will contain the true value of the parameter a given proportion of the times an interval is constructed. If we, for example, have a 90\% CI, then the true value of the parameter will be in the interval 90\% of the times we construct a new one \citep{bootstrap}.
 
-One method for finding CIs with bootstrap samples is the percentile method. The percentile method is simple to both understand and implement. However, these confidence intervals might be biased. Then, one could instead use approaches such as \textit{bias corrected and accelerated} intervals or \textit{approximate bootstrap confidence} intervals. For simplicity, we are in this report using the percentile confidence intervals. 
+One method for finding CIs with bootstrap samples is the percentile method. The percentile method is simple to both understand and implement. However, these confidence intervals might be biased. Then, one could instead use approaches such as \textit{bias corrected and accelerated} intervals or \textit{approximate bootstrap confidence} intervals. In this report, we use the percentile method to find confidence intervals. 
 
-
-Consider a situation with $B$ bootstrap samples. Let the vector $\vp$ be one parameter. If the intention is to find a CI for $\vp$, we find the MLE of each of the $B$ samples and plot those samples in a histogram. If we want to find a 90\% confidence interval using the percentile method, then we find the 5-th and 95-th percentiles. The 5-th percentile is the value of $\hat{\vp}$ in the histogram where 5\% of the samples are below. The 95-th is where 5\% of the values are above. This is visualised in Figure \ref{percentile_ci_example}. Here we have 150 bootstrap samples, and the MLE of $\vp$ is found for each sample. These values are plotted in a histogram, where the red dashed lines represent the 5 and 95 percentiles. That means that 5\% of the MLEs lie to the left of or at the left red line, and 5\% lie to the right of or at the right red line. The 90\% CI for $\vp$ is then somewhere around (1.4,7) when we use the percentile method.
+Consider a situation with $B$ bootstrap samples. Let the vector $\vp$ be a parameter, for which we want to find a confidence interval. Then, we find the MLE of $\vp$ for each of the $B$ samples.
+If we want to find a 90\% confidence interval using the percentile method, we find the 5-th and 95-th percentiles. 
+Plotting the MLEs of $\vp$ is a histogram, the 5-th percentile is the value of $\hat{\vp}$ in the histogram where 5\% of the samples are below. The 95-th is where 5\% of the values are above. This is visualised in Figure \ref{percentile_ci_example}. Here we have 150 bootstrap samples, and we have found the MLE of $\vp$ for each sample. These values are plotted in a histogram, where the red dashed lines represent the 5 and 95 percentiles. Then 5\% of the MLEs lie to the left of the left red line, and 5\% lie to the right of the right red line. The 90\% CI for $\vp$ is around (1.4,7) when using the percentile method.
 \begin{figure}
     \centering
     %\includegraphics{}
@@ -488,4 +381,3 @@ Consider a situation with $B$ bootstrap samples. Let the vector $\vp$ be one par
     \caption[Bootstrap Example]{Here we have plotted the MLEs of 150 bootstrap samples in a histogram. The red dashed lines represent the 5 and 95 percentiles.}
     \label{percentile_ci_example}
 \end{figure}
-
