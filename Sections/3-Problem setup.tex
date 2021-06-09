@@ -2,13 +2,14 @@
 %\section{Problem Setup}
 \chapter{Model formulation}
 \label{Chapter_Problem_setup}
-%Describe the box task, both versions. 
-The box task is an information sampling task that is used to assess a 'jumping to conclusions' (JTC) bias \citep{balzan2017}. In the box task used in this report the participants are shown a grid of twelve boxes, and each time a box is opened, one out of two colours, for example blue or red, is displayed. The participants are told that one of the colours is always in majority, and that their task is to find out which one. We are using two different versions of the box task. In the first one the participant can open as many of the twelve boxes as they want before deciding which of the two colours that is in majority. We call this the unlimited version. In the second one, which we call the limited version, the participants are told that the test will terminate at one point when a random box is opened. If the participant have not decided what the majority colour is when the test terminates, this counts as a failed trial. 
+The box task is an information sampling task used to assess a 'jumping to conclusions' (JTC) bias \citep{balzan2017}. In the box task used in this report, the participants are shown a grid of twelve boxes, and each time a box is opened, one out of two colours, for example, blue or red, is displayed. Participants are told that one colour is always in the majority and that their task is to find out which one. We use two different versions of the box task. In the first one, the participants can open as many of the twelve boxes as they want before deciding which of the two colours is in the majority. We call this the unlimited version. In the second one, which we call the limited version, the participants are informed that the test will terminate at one point when a random box is opened. 
+If the participant has not decided what the majority colour is when the test terminates, this counts as a failed trial. 
+The participant could, for example, try to open the fourth box when the test terminates. Then, she does not get to see what colour that fourth box has. She cannot choose what she thinks is the majority colour, and this is a failed trial.
 
-We have data from 76 participants that have done multiple trials of both versions of the box task. The experiment where the data was collected was carried out by Professor Gerit Pfuhl and Doctoral Research Fellow Kristoffer Klevjer at UiT The Arctic University of Norway in February 2020. The participants were recruited from an undergraduate psychology course. They did a practice limited trial first that terminated after three boxes where opened, such that if they tried to open a fourth box, the test terminated, and they were not able to make a decision. That trial is not analyzed here. Following the practice trial where three unlimited trials. The participants could in these trials open as many of the twelve boxes as they wanted before deciding on what they think is the dominant colour. Lastly, there where six limited trials. Three of them terminated after six boxes had been opened and the other three terminated after nine boxes had been opened. These nine trials are the ones we analyze here, meaning that we analyze Trials 2 to 10. We have data for how many boxes each participant has opened in each of the nine trials. We call this 'draws to decision'. The participants have either opened boxes until they have decided what they think is the majority colour or until the test terminates, and we have data for what they chose, or whether the test terminated before they were able to choose. To compensate for possible biases towards one colour, the two colours where changed for each new trial. They could for example be green and pink in the first trial and blue and yellow in the second trial. For simplicity, we are in this report referring to these colour as blue and red for all trials.
+We have data from 76 participants that have done multiple trials of both versions of the box task. The experiment where the data was collected was carried out by Professor Gerit Pfuhl and Doctoral Research Fellow Kristoffer Klevjer at UiT The Arctic University of Norway in February 2020. They recruited participants from an undergraduate psychology course. First, they did a practice trial that was a limited trial that terminated after opening three boxes. That means that if they tried to open the fourth, the test terminated, and they could not make a decision. That trial is not analyzed here. Following the practice trial were three unlimited trials. The participants could, in these trials, open as many of the twelve boxes as they wanted before deciding on what they think is the dominant colour—lastly, there were six limited trials. Three of them terminated after the participants had opened six boxes, and the other three terminated after they had opened nine boxes. These nine trials are the ones we analyze here, meaning that we analyze Trials 2 to 10. We have data for how many boxes each participant has opened in each of the nine trials. We call this 'draws to decision'. The participants have either opened boxes until they have decided what they think is the majority colour or until the test terminates. We have data for what they chose or whether the test terminated before they were able to choose. To compensate for possible biases towards one colour, the two colours were changed for each new trial. They could, for example, be green and pink in the first trial and blue and yellow in the second trial. For simplicity, we are in this report referring to these colour as blue and red for all trials.
 
-For each trial there is a fixed sequence of boxes. The participants are only able to choose whether to open the next box or not, they cannot choose which box that opens. Thus, we know how many of the boxes that were blue and how many that were red for each step in the different trials. In Trial 2, which is an unlimited trial, the boxes were opened in the order that is shown in Figure \ref{fig:trial2_order}. In Figure \ref{fig:histogram_trial2}, the draws to decisions for all participants are shown in a histogram. Here, the number of boxes that are opened when the participant chooses what she thinks is the majority colour is on the horizontal axis. On the vertical axis are the number of participants that has chosen on that particular box. We see that many participants have chosen majority colour after three boxes are opened. All of these three boxes are red, thus, there is a high probability that red is the dominant colour. 
-As the participants are told that one of the colours always is in majority, we can be completely sure if six of the opened boxes are red, that red is the dominant colour. This is because there cannot be six of each box if one of them is in majority. When seven boxes are opened in Trial 2, six of them are red, and we know then that red is the dominant colour. Seven participants have chosen colour after seven boxes are opened. Some participants wait longer, even though they can be completely sure after seven boxes are opened.
+For each trial, there is a fixed sequence of boxes. The participants can only choose whether to open the next box or not; they cannot choose which box they open. Thus, we know how many of the boxes that were blue and how many that were red for each step in the different trials. In Trial 2, which is an unlimited trial, the boxes were opened in the order that is shown in Figure \ref{fig:trial2_order}. In Figure \ref{fig:histogram_trial2}, the draws to decisions for all participants are shown in a histogram. Here, the number of boxes that are opened when the participant chooses what she thinks is the majority colour is on the horizontal axis. On the vertical axis are the number of participants that have decided on that particular box. We see that many participants have chosen the majority colour after they have opened three boxes. All of these three boxes are red. Thus, there is a high probability that red is the dominant colour. 
+As the participants are told that one of the colours is always in the majority, we can be completely sure if six of the opened boxes are red, that red is the dominant colour. This is because there cannot be six of each box if one of them is in the majority. When seven boxes are opened in Trial 2, six of them are red, and we know then that red is the dominant colour. Seven participants have chosen colour after seven boxes are opened. Some participants wait longer, even though they can be completely sure after seven boxes are opened.
 \begin{figure}
     \centering
     \scalebox{0.8}{\input{visualize_trials_tikz/trial2}}
@@ -26,7 +27,7 @@ As the participants are told that one of the colours always is in majority, we c
 \end{figure}
 
 
-In Trial 3, which also is an unlimited trial, it takes more boxes to be completely sure what the majority colour is. As shown in Figure \ref{fig:trial3_order}, there are six blue boxes when ten of the boxes are opened. We see in Figure \ref{fig:histogram_trial3} that the participants in general open more boxes before choosing the majority colour in this trial than in Trial 2. 
+In Trial 3, which is also an unlimited trial, it takes more boxes to be completely sure what the majority colour is. As shown in Figure \ref{fig:trial3_order}, there are six blue boxes when ten of the boxes are opened. We see in Figure \ref{fig:histogram_trial3} that the participants in general open more boxes before choosing the majority colour in this trial than in Trial 2. 
 
 \begin{figure}
     \centering
@@ -43,7 +44,7 @@ In Trial 3, which also is an unlimited trial, it takes more boxes to be complete
     \label{fig:histogram_trial3}
 \end{figure}
 
-Both Trial 5 and Trial 8 are limited trials that terminates after nine boxes are opened. The order of the boxes in Trial 5 is shown in Figure \ref{fig:trial5_order}. When seven boxes are opened, six of them are blue, and we can therefore conclude when seven boxes are opened that blue is the majority colour. We see in Figure \ref{fig:histogram_trial5} that many participants chooses majority colour after three boxes are opened, when there are only blue boxes. In Trial 8 there are never two boxes of the same colour following each other, as shown in Figure \ref{fig:trial8_order}. There are at no point in this trial six of one of the colours, meaning that we never can be completely sure which one is the majority colour. This is reflected in the draws to decision for the participants, as shown in Figure \ref{fig:histogram_trial8}. We see that the test terminates for many of the participants before they are able to choose what they think is the majority colour. 
+Both Trial 5 and Trial 8 are limited trials that terminate after nine boxes are opened. The order of the boxes in Trial 5 is shown in Figure \ref{fig:trial5_order}. When seven boxes are opened, six of them are blue, and we can therefore conclude when seven boxes are opened that blue is the majority colour. We see in Figure \ref{fig:histogram_trial5} that many participants choose the majority colour after three boxes are opened. All of these three are blue boxes. In Trial 8, there are never two boxes of the same colour following each other, as shown in Figure \ref{fig:trial8_order}. There are at no point in this trial six of one of the colours, meaning that we never can be completely sure which one is the majority colour. This is reflected in the draws to decision for the participants, as shown in Figure \ref{fig:histogram_trial8}. We see that the test terminates for many of the participants before choosing what they think is the majority colour.  
 \begin{figure}
     \centering
     \scalebox{0.8}{\input{visualize_trials_tikz/trial5}}
@@ -74,7 +75,7 @@ Both Trial 5 and Trial 8 are limited trials that terminates after nine boxes are
 
 The order of the boxes for all trials can be found in Appendix \ref{appendix_a}. Here we also have histograms of the draws to decision for all of the trials.
 
-In the following, we formulate a model for how decisions are made in the box task, and we find parameter estimates such that we can fit the model to each person. We also find a so-called Ideal Observer solution of the box task. An Ideal Observer would always make optimal decisions \citep{idealObs}. Thus, an Ideal Observer solution is close to an optimal solution of the box task. 
+In the following, we formulate a model for how the participants make decisions in the box task, and we estimate parameters such that we can fit the model to each person. We also find a so-called Ideal Observer solution of the box task. An Ideal Observer would always make optimal decisions \citep{idealObs}. Thus, an Ideal Observer solution is close to an optimal solution of the box task.  
 
 
 
@@ -82,7 +83,7 @@ In the following, we formulate a model for how decisions are made in the box tas
 \label{section_notation}
 Before we start with the formulation of the model, we will introduce some notation and present some assumptions. 
 
-We let $X_i$ be the colour of the $i$-th opened box as in \eqref{def_of_Xi}. Then, if the box is blue, $X_i$ is 0 and if the box is red, $X_i$ is one.
+We let $X_i$ be the colour of the $i$-th opened box as in \eqref{def_of_Xi}. Then, if the box is blue, $X_i$ is 0, and if the box is red, $X_i$ is one.
 We assume that each $X_i$ has a Bernoulli distribution with success probability $\theta$, where we later condition on there not being six blue and six red boxes. Then,
 \begin{equation*}
     X_i \sim \text{Bernoulli}(\theta).
@@ -131,8 +132,8 @@ and
 Just as in Chapter \ref{theory_bayesian_modelling}, we let $\Theta$ have a conjugate beta prior with parameters $\gamma$ and $\kappa$, as shown in \eqref{theta_with_beta_prior}.
 The prior distribution of $\Theta$ is then as given in \eqref{betadistribution}.
 
-Figure \ref{fig:pdf_beta_distr} shows the probability density function of the beta distribution for different values of $\gamma$ and $\kappa$. The pink line represents the situation where $\gamma=\kappa=1$. This is the same as having a uniform prior for $\Theta$. That means that the probability of $\Theta$ being anywhere on the interval between 0 and 1, is constant. As the participants are told that one of the colours will be in majority, but get no information about which one, this might be a suitable prior.
-However, one might argue that our prior beliefs resembles more the purple or orange lines as we know that one of the colours will definitively be in majority, thus it is not really reasonable to assume that $\theta$ is 0.5. For this reason we also exclude all priors that have $\gamma$ and $\kappa$ larger than 1, which is the situation for the black and grey lines. 
+Figure \ref{fig:pdf_beta_distr} shows the probability density function of the beta distribution for different values of $\gamma$ and $\kappa$. The pink line represents the situation where $\gamma=\kappa=1$. This is the same as having a uniform prior for $\Theta$. That means that the probability of $\Theta$ being anywhere on the interval between 0 and 1 is constant. As the participants are told that one of the colours will be in the majority but get no information about which one, this might be a suitable prior.
+However, one might argue that our prior beliefs resemble the purple or orange lines as we know that one of the colours will definitively be in the majority. Thus it might not be reasonable to assume that $\theta$ is 0.5. For this reason, we exclude all priors that have $\gamma$ and $\kappa$ larger than 1, which is the situation for the black and grey lines. 
 
 \begin{figure}
     \centering
@@ -148,12 +149,12 @@ Consequently, if $U_i+V_i$ is bigger than 6, it is a red majority in the box tas
 \label{def_of_Z_2}
     Z = I(U_i+V_i>6).
 \end{equation}
-This is the same as defining $Z$ as in \eqref{def_of_Z}, as $U_i+V_i = \sum_{j=1}^{12}X_j$, and the order that the boxes are opened in does not affect the majority. Then, as in \eqref{Z_true_majority}, $Z$ is 0 if the true majority colour is blue and 1 if the true majority colour is red. 
+This is the same as defining $Z$ as in \eqref{def_of_Z}, as $U_i+V_i = \sum_{j=1}^{12}X_j$, and the order that the boxes are opened in does not affect the majority. Then, as in \eqref{Z_true_majority}, $Z$ is zero if the true majority colour is blue and one if the true majority colour is red. 
 
 
 %Each time a box is opened, we have three choices. The first is to choose that blue is the majority colour, the second that red is and the third is to open another box. Let $\delta_{i+1}$ denote the different choices when $i$ boxes are opened. If $\delta_{i+1}=0$, we have chosen that blue is the majority colour, $\delta_{i+1}=1$ shows that red is chosen as the majority and $\delta_{i+1}=2$ represents the choice of opening the next box, which is box $i+1$. Moreover, let $\delta_{(i+2):12}$ be the choices made after box $i+1$ is opened. 
 
-Each time a box is opened, the participants have three choices. The first is to choose that blue is the dominant colour, the second that red is, and the third is to choose to open another box. We denote these decisions as $\delta_i$, where $i$ is the number of boxes that are opened. If $\delta_i = 0$, the participant chooses that blue is the more prominent colour, thus that there are in total, of all twelve boxes, more blue boxes than red. Moreover, $\delta_i=1$ means that the participant has chosen that red is the dominant colour, and $\delta_i=2$ represents the situation where the participant chooses to open the next box. Thus,
+Each time a box is opened, the participants have three choices. The first is to choose blue as the dominant colour, the second that red is, and the third is to choose to open another box. We denote these decisions as $\delta_i$, where $i$ is the number of opened boxes. If $\delta_i = 0$, the participant chooses that blue is the more prominent colour, thus that there are in total, of all twelve boxes, more blue boxes than red. Moreover, $\delta_i=1$ means that the participant has chosen that red is the dominant colour, and $\delta_i=2$ represents the situation where the participant chooses to open the next box. Thus,
 \begin{equation}
 \label{def_of_delta}
     \delta_i =
@@ -163,9 +164,8 @@ Each time a box is opened, the participants have three choices. The first is to 
         2,& \quad \text{if the participant chooses to open the next box.}
     \end{cases}
 \end{equation}
-%We denote the choices that are made from when $i$ boxes are opened to the last choice is made as $\delta_{i:12}$. Something about not making decisions after majority colour is chosen, such that for example $\delta_{12}$ might not exist. dette trgner jeg ikke hvis jeg isf bruker IO(\textbf{x}$_i,\delta_{i+1}$).
 
-We can define loss functions for each of these decisions. These loss functions depend on the true majority colour, $Z$, and the decision that is made, $\delta_i$. Similarly to Chapter \ref{theory_loss_functions}, we denote the loss function when $i$ boxes are opened as $L_i[Z,\delta_i;\vp]$. In our case, we have that 
+We can define loss functions for each of these decisions. These loss functions depend on the true majority colour, $Z$, and the decision, $\delta_i$. Similarly to Chapter \ref{theory_loss_functions}, we denote the loss function when $i$ boxes are opened as $L_i[Z,\delta_i;\vp]$. In our case, we have that 
 \begin{equation*}
     \Omega_Z = \{0,1\}
 \end{equation*}
@@ -182,13 +182,15 @@ If we take the expectation of this loss function, we get the expected loss for e
 \end{equation*}
 as it depends on some parameters $\vp$. This expected loss also depends on the colours of the $i$ boxes that already are opened, $x_{1:i}$.
 
-In the limited version of the box task, the participants are told that the test will terminate when a random box is opened. Thus, we need a random variable that represents how many boxes that are open when the test terminates. We call this variable $T$. If $T=3$, then the participant has opened three boxes and wants to open the fourth when the test terminates. Then, instead of seeing the colour of the fourth box, the test terminates, and this is a failed trial. The information given to the participants regarding this is that the test will terminate when a random box is opened. We assume that the first box always can be opened, but that the probabilities that the test terminates at the subsequent boxes are the same. When 12 boxes are opened, there are no more boxes to open, thus, no more chances for the test to terminate. Thus, $T$ is uniformly distributed with on $\{1,2,3,4,5,6,7,8,9,10,11\}$, 
+In the limited version of the box task, the participants are told that the test will terminate when a random box is opened. Thus, we need a random variable representing how many boxes that are open when the test terminates. We call this variable $T$. If $T=3$, the participant has opened three boxes and wants to open the fourth when the test terminates. Then, instead of seeing the colour of the fourth box, the test terminates, and this is a failed trial. The information given to the participants regarding this is that the test will terminate when a random box is opened. We assume that the first box can always be opened, but the probabilities that the test terminates at the subsequent boxes are the same. When 12 boxes are opened, there are no more boxes to open and, therefore, no more chances for the test to terminate. Thus, $T$ is uniformly distributed with on $\{1,2,3,4,5,6,7,8,9,10,11\}$, 
 \begin{equation}
 \label{T_uniform}
     T \sim \text{Uniform}(\{1,2,3,4,5,6,7,8,9,10,11\}).
 \end{equation}
 
-Now we have all the notation needed to define the model for how the participants make decisions. 
+Now we have all the notation needed to define the model for how the participants make decisions.
+
+
 
 \section{The Model for the Decisions}
 Having the notation for the expected losses and decisions, we can define the probability mass function for the decisions using a softmax function similar to the one in \eqref{softmax_in_theory}. 
@@ -201,15 +203,17 @@ For each participant we have observed decisions, $\boldsymbol{\delta}=(\delta_1,
 where $\eta$ is some parameter. $\eta$ can be interpreted as a measure of how far the choices the participant makes are away from the decision with the least expected loss. If $\eta$ is infinity, they always make the decision with the lowest expected loss, and if $\eta$ is zero, they choose arbitrarily. A negative value of $\eta$ indicates that the participant tends to choose the decisions with higher expected losses.
 
 
-When we have this model, we can find estimates of the parameters, $\vp$ and $\eta$, for each participant such that the model is adapted to each one of the participants. This is done by finding the maximum likelihood estimates (MLEs) as described in Chapter \ref{section_theory_mle}. 
-We can also find confidence intervals tied to each of the parameters for all of the participants using the bootstrap as described in Chapter \ref{section_theory_bootstrap}. This will be done in the subsequent sections, but firstly we find an Ideal Observer solution of the box task, and use this to find expressions for the loss functions and expected losses. 
+When we have this model, we can find estimates of the parameters, $\vp$ and $\eta$, for each participant such that the model is adapted to each one of the participants. This estimation is done by finding the maximum likelihood estimates (MLEs) as described in Chapter \ref{section_theory_mle}. 
+We can also find confidence intervals tied to each of the parameters for all of the participants using the bootstrap as described in Chapter \ref{section_theory_bootstrap}. This will be done in the subsequent sections, but firstly we find an Ideal Observer solution of the box task and use this to find expressions for the loss functions and expected losses. 
+
+
 
 
 \section{Loss Functions}
-Before we start with finding Ideal Observer solutions, we formulate loss functions in the unlimited and limited cases. 
+Before we start finding Ideal Observer solutions, we formulate loss functions in the unlimited and limited cases. 
 
 \subsection{Loss Functions in the Unlimited Case}
-Starting with the unlimited case, we define loss functions for each of the three choices we have when $i$ boxes are opened, and then put them together as one function. If the participant chooses blue as the majority colour, $\delta_i=0$, we say that the loss is 0 if blue actually is the true majority colour and 1 if it is not. Thus, this can be expressed as an indicator function as in \eqref{loss_func_indicator}. Recall that the true majority colour is denoted $Z$. Then, we can express the loss of choosing blue as the majority colour when $i$ boxes are opened as
+Starting with the unlimited case, we define loss functions for each of the three choices we have when $i$ boxes are opened and put them together as one function. If the participant chooses blue as the majority colour, $\delta_i=0$, we say that the loss is zero if blue is the true majority colour and one if it is not. Thus, this can be expressed as an indicator function as in \eqref{loss_func_indicator}. Recall that the true majority colour is denoted $Z$. Then, we can express the loss of choosing blue as the majority colour when $i$ boxes are opened as
 \begin{equation}
 \label{loss_func_blue}
     L_i[Z,\delta_i=0;\vp] = I(Z\neq0) = I(Z=1).
@@ -221,8 +225,8 @@ We define the loss function for when the participant chooses that red is the maj
     L_i[Z,\delta_i=1;\vp] = I(Z\neq1)=I(Z=0).
 \end{equation}
 
-We imagine that some participants have some small penalty or loss of opening another box. This might be because it is tiresome for them to sit through a whole trial and they want to finish fast, or that they get some kind of inner reward or feeling of victory when they finish early. This is represented by a parameter, $\alpha$. 
-The loss function for the choice of opening the next box depends on the successive losses. As we do not know the choices that will be done later, we do not know what these losses are either. However, we can model these choices as the choices that an Ideal Observer would make. These choices depend on the colour of the next box, $X_{i+1}$, and the colours of the boxes that already are opened, $x_{1:i}$. We denote these choices as $IO(x_{1:i},X_{i+1})$, where $X_{i+1} \in \{0,1\}$.
+We imagine that some participants have some minor penalty or loss of opening another box. That might be because it is tiresome for them to sit through a full trial and they want to finish fast, or that they get some inner reward or feeling of victory when they finish early. A parameter, $\alpha$, represent this. 
+The loss function for the choice of opening the next box depends on the successive losses. As we do not know the choices that will be made later, we do not know what these losses are. However, we can model these choices as the choices that an Ideal Observer would make. These choices depend on the colour of the next box, $X_{i+1}$, and the colours of the already opened boxes, $x_{1:i}$. We denote these choices as $IO(x_{1:i},X_{i+1})$, where $X_{i+1} \in \{0,1\}$.
 %The loss function for opening the next box depends on the parameter $\alpha$. Recall that this is a small loss, potentially zero, for opening a box. It also depends on the loss after the next box is opened. 
 We define the loss for the decision to open the next box as $\alpha$ plus the loss in the next step. Thus, 
 \begin{equation}
@@ -245,18 +249,21 @@ Putting \eqref{loss_func_blue}, \eqref{loss_func_red} and \eqref{loss_2_unlim} t
 
 Having the loss functions for the unlimited case, we proceed with formulating the loss functions for the limited trials of the box task. 
 
-\subsection{Loss Functions in the Limited Case}
-The loss functions in the limited case are highly comparable to the ones in the unlimited case. Recall that in a limited trial, the participants might be stopped when a random box is opened, and that this counts as a failed trial. 
 
-Firstly, we have a look at the loss function for choosing blue as the majority colour. We see that in the unlimited case, this is not dependent on any of the boxes that are not opened. When $i$ boxes are opened in a limited trial, and the participant chooses that blue is the majority colour, this is, as in the unlimited trial, not affected by the colours of the unopened boxes. If $i$ boxes are opened and one chooses what the majority colour is here, we know that the test will not terminate, as the participant will not open more boxes. Thus, we can put the loss function for choosing blue as the majority colour in a limited trial as the same as the loss function for choosing blue in an unlimited trial. The loss function is then as in \eqref{loss_func_blue}.
+
+
+\subsection{Loss Functions in the Limited Case}
+The loss functions in the limited case are highly comparable to the ones in the unlimited case. Recall that in a limited trial, the participants might be stopped when a random box opens and that this counts as a failed trial. 
+
+Firstly, we have a look at the loss function for choosing blue as the majority colour. We see that this is not dependent on any of the boxes that are not opened in the unlimited case. When $i$ boxes are opened in a limited trial, and the participant chooses that blue is the majority colour, this is, as in the unlimited trial, not affected by the colours of the unopened boxes. If $i$ boxes are opened, and one chooses what the majority colour is here, we know that the test will not terminate, as the participant will not open more boxes. Thus, we can put the loss function for choosing blue as the majority colour in a limited trial as the same as the loss function for choosing blue in an unlimited trial. The loss function is then as in \eqref{loss_func_blue}.
 
 The same argument holds for the loss function for choosing red as the majority colour in a limited trial. Thus, that loss function is the same as in \eqref{loss_func_red}.
 
 For the choice of opening the next box, we have to consider that the test might terminate. 
 We define a parameter, $\beta$, that only appears in the loss function for opening the next box in limited trials. 
-We let it be the loss the participant gets when the test terminates before she is able to choose what the majority colour is.
+We let it be the loss the participant gets when the test terminates before choosing what the majority colour is.
 %Recall that $\beta$ is the loss when the test terminates and that $T$ is the number of boxes that already are opened when the test terminates. 
-Recall that $T$ is the number of boxes that already are opened when the test terminates, and that it is uniformly distributed as in \eqref{T_uniform}. The loss when the test does not terminate will be the loss for when the next box is open, in the same way as for the unlimited trials. We can include the event of the test terminating as an indicator function, where an indicator function is as seen in \eqref{loss_func_indicator}. Thus, the loss function for opening the next box in an unlimited trial is the loss you get when the next box is opened plus $\alpha$, times an indicator function that is one if the test does not terminate. I addition to this we have the loss for when the test terminates, $\beta$, times an indicator for that the test terminates. Hence,
+Recall that $T$ is the number of boxes that already are opened when the test terminates and that it is uniformly distributed as in \eqref{T_uniform}. The loss when the test does not terminate will be the loss for when the next box is open, in the same way as for the unlimited trials. We can include the event of the test terminating as an indicator function, where an indicator function is as seen in \eqref{loss_func_indicator}. Thus, the loss function for opening the next box in an unlimited trial is the loss you get when the next box is opened plus $\alpha$, times an indicator function that is one if the test does not terminate. I addition to this, we have the loss for when the test terminates, $\beta$, times an indicator for that the test terminates. Hence,
 \begin{equation}
 \label{loss_func_2_limited}
     \begin{aligned}
@@ -283,18 +290,18 @@ As we have the loss functions in the unlimited and the limited cases, we now con
 
 \section{Ideal Observer Solution}
 %\sectionmark{An Ideal Observer Solution}
-Having defined loss functions for both the unlimited and the limited versions of the box task, we now want to find an Ideal Observer (IO) solution. We find one for the unlimited case and another for the limited. As stated above, an Ideal Observer acts like a participant that always makes optimal decisions. In the case of the box task, the optimal decision for each opened box is the decision that gives the least expected loss. If one makes the decision with the lowest expected loss each time a box is opened, the total solution is the Ideal Observer solution. Thus, we need to find these expected losses. They depend on the parameter $\alpha$ in the unlimited version of the box task and of both $\alpha$ and $\beta$ in the limited version. Therefore, we get many different IO solutions depending on the values of the parameters. 
-Recall that when $i$ boxes are opened, the participants have three choices as stated in \eqref{def_of_delta}. We want to find expected losses for all of these three choices, in both the unlimited and limited versions of the box task.  
+Having defined loss functions for both the unlimited and the limited versions of the box task, we now want to find an Ideal Observer (IO) solution. We find one for the unlimited case and another for the limited. As stated above, an Ideal Observer acts like a participant that always makes optimal decisions. In the box task, the optimal decision for each opened box is the decision that gives the least expected loss. If one makes the decision with the lowest expected loss each time a box is opened, the total solution is the Ideal Observer solution. Thus, we need to find these expected losses. They depend on the parameter $\alpha$ in the unlimited version of the box task and $\alpha$ and $\beta$ in the limited version. Therefore, we get many different IO solutions depending on the values of the parameters. 
+Recall that when $i$ boxes are opened, the participants have three choices as stated in \eqref{def_of_delta}. We want to find expected losses for all three decisions in both the unlimited and limited versions of the box task. 
 
 
  
 
 \subsection{Expected Losses}
 \label{section:exp_losses}
-When we find the expected losses we take the expectation of the loss functions like in \eqref{expectation_of_loss_func_general}. Recall that taking the expectation of an indicator function gives the probability of the event, and that $x_{1:i}$ is a vector containing the colours of the $i$ opened boxes.
+When we find the expected losses, we take the expectation of the loss functions like in \eqref{expectation_of_loss_func_general}. Recall that taking the expectation of an indicator function gives the probability of the event and that $x_{1:i}$ is a vector containing the colours of the $i$ opened boxes.
 
 As stated in Chapter \ref{section_notation}, the expected losses when $i$ boxes are opened, are denoted $\EE_{\delta_i}^i(\vp)$, with $\delta_i \in (0,1,2)$.
-We start with the expected loss for choosing blue as the majority colour, $\EE^i_0(\vp)$. This is the same for both the unlimited and limited trials as the loss functions, stated in \eqref{loss_func_blue}, are identical. 
+We start with the expected loss for choosing blue as the majority colour, $\EE^i_0(\vp)$. This expected loss is the same for both the unlimited and limited trials as the loss functions, stated in \eqref{loss_func_blue}, are identical. 
 We condition on the colours of the opened boxes, as the true majority colour, $Z$, depends on the colours of all the twelve boxes. Thus,
 \begin{equation}
 \label{exp_loss_blue}
@@ -304,7 +311,7 @@ We condition on the colours of the opened boxes, as the true majority colour, $Z
         = & P(Z=1|X_{1:i}=x_{1:i}).
     \end{aligned}
 \end{equation}
-We see that the expected loss of choosing blue as the majority colour is equal to the probability that red is the majority colour given the colours of the opened boxes, for both the unlimited and limited versions. The only thing that this expected loss depends on are the colours of the first $i$ boxes, $x_{1:i}$. 
+We see that the expected loss of choosing blue as the majority colour is equal to the probability that red is the majority colour given the colours of the opened boxes, for both the unlimited and limited versions. The only thing that this expected loss depends on is the colours of the first $i$ boxes, $x_{1:i}$. 
 %\begin{equation*}
 %    \theta = x_{1:i}.
 %\end{equation*}
@@ -321,7 +328,7 @@ We find the expected loss of choosing red as the majority colour when $i$ boxes 
 \end{equation}
 The expected loss for choosing red as the majority colour is then the probability that blue is the majority colour, conditioned on $X_{1:i}=x_{1:i}$, for both the unlimited and the limited case.
 
-When we find the expected losses for opening the next box, we have to distinguish between the unlimited and limited cases. Starting with the unlimited case, we continue in the same way as for choosing blue or red as the majority colour, by taking the expectation of the loss function, as it is stated in \eqref{loss_2_unlim}, and conditioning on the colours of the $i$ opened boxes. Recall that $IO(x_{1:i},X_{i+1})$ are the choices that an Ideal Observer would do in the next steps. We then get that
+When we find the expected losses for opening the next box, we have to distinguish between the unlimited and limited cases. Starting with the unlimited case, we continue in the same way as for choosing blue or red as the majority colour, by taking the expectation of the loss function, as it is stated in \eqref{loss_2_unlim}, and conditioning on the colours of the $i$ opened boxes. Recall that $IO(x_{1:i},X_{i+1})$ are the choices that an Ideal Observer would make in the next steps. We then get that
 \begin{equation*}
     \begin{aligned}
         \EE^i_{2}(\vp) 
@@ -414,7 +421,7 @@ We proceed in a similar manner when we find the expected loss of opening the nex
         &+ \beta \: I(T=i) \: | \: X_{1:i}= x_{1:i}, T\geq i\big].
     \end{aligned}
 \end{equation}
-We start with the first term in \eqref{exp_loss_limited_a}. When the test terminates is independent of the colours of the boxes, such that $T$ is independent of $x_{1:i}$. The indicator function will then be the probability of $T\neq i$, whereas for the expectation of the loss function when $i+1$ boxes are opened, we use the law of total expectation as in \eqref{law_tot_exp_func}, and condition on the colour of the next box, $X_{i+1}$. 
+We start with the first term in \eqref{exp_loss_limited_a}. When the test terminates is independent of the colours of the boxes, such that $T$ is independent of $x_{1:i}$. The indicator function will then be the probability of $T\neq i$, whereas, for the expectation of the loss function when $i+1$ boxes are opened, we use the law of total expectation as in \eqref{law_tot_exp_func}, and condition on the colour of the next box, $X_{i+1}$. 
 
 We also have that $\EE^{i+1}_{2}(\vp,X_{i+1}=j)$ is the expected loss in the next step given the colours of the $i$ opened boxes,  the colour of box $i+1$ and given that the test has not terminated yet. Thus,
 \begin{equation}
@@ -465,6 +472,8 @@ Putting \eqref{exp_loss_limited_b} and \eqref{exp_loss_limited_c} into \eqref{ex
 The expected losses in the limited cases depend on $\alpha$ and $\beta$, thus in this case we have that $\vp = (\alpha,\beta)$.
 
 Now that we have expressions for the expected losses, we have to find the probabilities in these expressions. 
+
+
 
 \subsection{Probabilities}
 As we now have expressions for the expected losses, we find the probabilities needed for finding the expected losses. That is $P(Z=1|x_{1:i})$, $P(Z=0|x_{1:i})$, $P(X_{i+1}=1|x_{1:i})$, $P(X_{i+1}=0|x_{1:i})$, $P(T\neq i|T\geq i)$ and $P(T=i|T\geq i)$.
@@ -538,7 +547,7 @@ We can find $f(\theta| U_i=u_i)$ using Bayes rule as given in \eqref{bayesrule}.
 \begin{equation*}
     f(\theta| U_i=u_i) = \frac{P(U_i=u_i|\Theta=\theta)f(\theta)}{P(U_i=u_i)},
 \end{equation*}
-which is proportional to the numerator of the right hand side as in \eqref{posterior_proportional}. Using that $U_i|\Theta$ has a binomial distribution with probability mass function as in \eqref{ui_prob_mass}, and that $\theta$ has a Beta prior, with density function as in \eqref{betadistribution}, we get that
+which is proportional to the numerator of the right-hand side as in \eqref{posterior_proportional}. Using that $U_i|\Theta$ has a binomial distribution with probability mass function as in \eqref{ui_prob_mass}, and that $\theta$ has a Beta prior, with density function as in \eqref{betadistribution}, we get that
 \begin{equation*}
     \begin{aligned}
         f(\theta|U_i=u_i) 
@@ -627,7 +636,7 @@ Putting \eqref{u12neq6} and \eqref{redmajor_given_u} into \eqref{redmajor3}, we 
         = \frac{\sum_{j=7}^{12} \binom{12-i}{j-u_i} \frac{\text{B}(j+\gamma,12-j+\kappa)}{\text{B}(u_i+\gamma,i-u_i+\kappa)}}{1-\binom{12-i}{6-u_i} \frac{\text{B}(6+\gamma,6+\kappa)}{\text{B}(u_i+\gamma,i-u_i+\kappa)}}&.
     \end{aligned}
 \end{equation}
-This is the probability that there is a red majority in total, given the colour of the first $i$ boxes that are opened, and given that one of the colours is in majority, and this is also the expected loss of choosing blue as the majority colour. 
+This is the probability that there is a red majority in total, given the colour of the first $i$ boxes that are opened, and given that one of the colours is in the majority. This is also the expected loss of choosing blue as the majority colour. 
 
 
 In the expected loss for choosing red as the majority colour, we have $P(Z=0|X_{1:i}=x_{1:i})$, as in \eqref{exp_loss_red}. The same argument holds here as in \eqref{Z_to_U_and_V}. Thus, we have that
@@ -653,13 +662,13 @@ Putting the expression in \eqref{redmajor_final} into \eqref{blue_major}, we get
 which also it the expected loss of choosing red as the majority colour. 
 
 \subsubsection{The Colour of the Next Box}
-We now have a look at the expected losses for opening the next box, both in the unlimited and the limited cases, as given in \eqref{exp_loss_next_box_unlim} and \eqref{exp_loss_limited_final}, respectively. In both of these expressions we have the probability that the next box is either red or blue, given the colours of the boxes that are opened. 
+We now have a look at the expected losses for opening the next box, both in the unlimited and the limited cases, as given in \eqref{exp_loss_next_box_unlim} and \eqref{exp_loss_limited_final}, respectively. In both expressions, we have the probability that the next box is either red or blue, given the colours of the opened boxes. 
 These probabilities are $P(X_{i+1}=1|X_{1:i}=x_{1:i})$ and $P(X_{i+1}=0|X_{1:i}=x_{1:i})$, where 
 \begin{equation}
 \label{next_blue_from_red_unlim}
     P(X_{i+1}=0|X_{1:i}=x_{1:i}) = 1 - P(X_{i+1}=1|X_{1:i}=x_{1:i}),
 \end{equation}
-as there are only two possible colours the box could have. Thus, we find the probability that that the next box is red, and can then easily find the probability of it being blue using \eqref{next_blue_from_red_unlim}. 
+as there are only two possible colours the box could have. Thus, we find the probability that that the next box is red, and can then easily find the probability of it being blue using \eqref{next_blue_from_red_unlim}.
 
 Again, we change the notation from $X_{1:i}=x_{1:i}$ to $U_i=u_i$ and $V_i=v_i$, with the same argument as for \eqref{Z_to_U_and_V}. Thus,
 \begin{equation}
@@ -687,7 +696,7 @@ We start by finding $P(X_{i+1}=1|U_i=u_i)$. Using the law of total probability t
         &\times f(\theta|U_i=u_i)\: \dd \theta.
     \end{aligned}
 \end{equation}
-The expression for $f(\theta|U_i=u_i)$ is given in \eqref{theta_given_ui}. All of the $x$'s are Bernoulli distributed with probability $\theta$, and they are conditionally independent of each other, given $\theta$. Therefore, the probability that $X_{i+1}$ is one, or red, is independent of the colour of the boxes that already are opened. The probability that a box that is opened is 1 is also equal to $\theta$. Hence,
+The expression for $f(\theta|U_i=u_i)$ is given in \eqref{theta_given_ui}. All of the $x$'s are Bernoulli distributed with probability $\theta$, and they are conditionally independent of each other, given $\theta$. Therefore, the probability that $X_{i+1}$ is one, or red, is independent of the colour of the already opened boxes. The probability that a box that is opened is one is also equal to $\theta$. Hence,
 \begin{equation}
 \label{nextisred_equal_theta}
     \begin{aligned}
@@ -822,8 +831,7 @@ As we now have the probability that the next box that is opened is red, we can f
 
 
 \subsubsection{When the Test Terminates}
-In the expected loss for opening another box in the limited case, as shown in \eqref{exp_loss_limited_final}, we also have the probability that the test terminates when $i$ boxes are opened given that the test has not terminated yet, 
-and the probability that it does not terminate when $i$ boxes are opened given that it has not terminated yet. 
+In \ref{exp_loss_limited_final} we see the expected loss for opening another box in the limited case. Here we have the probability that the test terminates when $i$ boxes are opened given that the test has not terminated yet and the probability that it does not terminate when $i$ boxes are opened given that it has not terminated yet. 
 These are $P(T=i|T\geq i)$ and $P(T\neq i|T\geq i)$, which are complementary probabilities, such that
 \begin{equation}
 \label{T_neq_i}
@@ -876,7 +884,7 @@ We now have all that we need to find the three expected losses each time a box i
 
 \section{Maximum Likelihood Estimators}
 \label{section:mles}
-As we have defined a model for the decisions that the participants make and found expressions for the expected losses for each of the three decisions, we can now fit the model to each participant. We do this by finding maximum likelihood estimates of $\alpha$ and $\eta$ in the unlimited case and $\alpha$, $\beta$ and $\eta$ in the limited case, based on the decisions the participants have made. We generalise the situation to fit both the unlimited and limited case, and use denote $\alpha$ and $\beta$ as $\vp$ here. 
+As we have defined a model for the participants' decisions and found expressions for the expected losses for each of the three decisions, we can now fit the model to each participant. We do this by finding maximum likelihood estimates of $\alpha$ and $\eta$ in the unlimited case and $\alpha$, $\beta$ and $\eta$ in the limited case, based on the decisions the participants have made. We generalise the situation to fit both the unlimited and limited case and denote $\alpha$ and $\beta$ as $\vp$. 
 
 We can find the likelihood, $L(\vp,\eta|\boldsymbol{\delta})$ as in \eqref{likelihood}. If we have $n$ decisions for each participant, denoted $\boldsymbol{\delta}$, we get that the likelihood is 
 \begin{equation}
@@ -929,32 +937,31 @@ we can write \eqref{log_likel_softmax_2} as
     \end{aligned}
 \end{equation}
 
-It does not matter if we maximize the likelihood or the log likelihood, because maximising \eqref{likelihood_softmax} and \eqref{log_likelihood_softmax} with respect to $\vp$ and $\eta$, gives the same estimates for the parameters. These are the maximum likelihood estimates, and we denote them as $\hat{\vp}$ and $\hat{\eta}$, respectively. We maximize \eqref{log_likelihood_softmax} here. Thus, we find
+It does not matter if we maximise the likelihood or the log-likelihood because maximising \eqref{likelihood_softmax} and \eqref{log_likelihood_softmax} with respect to $\vp$ and $\eta$, gives the same estimates for the parameters. These are the maximum likelihood estimates, and we denote them as $\hat{\vp}$ and $\hat{\eta}$, respectively. We maximize \eqref{log_likelihood_softmax} here. Thus, we find
 \begin{equation}
     \hat{\vp},\hat{\eta} = \underset{\vp,\eta}{\mathrm{arg}\,\mathrm{max}}\:\: l(\vp,\eta|\boldsymbol{\delta}) .
 \end{equation}
 
 Recall that in the unlimited trials we have $\vp=\alpha$, such that we find $\hat{\alpha}$ and $\hat{\eta}$ for all participants. In the limited trials we have that $\vp=\alpha,\beta$, meaning that we find $\hat{\alpha}$, $\hat{\beta}$ and $\hat{\eta}$ for all participants.
 
-
-To maximise the log likelihood we use a version of the Broyden–Fletcher– Goldfarb–Shanno (BFGS) algorithm called L-BFGS-B. This algorithm uses less memory than the original BFGS and allows bounds on the parameters \citep{optimization2}. It is an extension of the limited memory BFGS (L-BFGS) algorithm that does not allow bounds on the parameters. L-BFGS-B is mostly used for nonlinear optimisation problems with bounded variables where it might be hard to find the Hessian matrix. 
-As we want to maximise \eqref{log_likelihood_softmax} and this depends on the expected losses, it is hard to find the Hessian matrix. Especially the expected loss for opening the next box, $\EE_2^i(\vp)$, makes this challenging as it depends on the expected losses in the next steps. We also have bounds on $\alpha$ and $\beta$. Recall that they are defined as the loss one gets when a new box is opened and the loss one gets when the test terminates, respectively. If $\alpha$ or $\beta$ were negative, this indicates some kind of reward of opening the next box or of the test terminating, which we believe not to be likely. Therefore, the L-BFGS-B algorithm is a natural choice of optimization algorithm. The L-BFGS-B is used for minimising and not maximising, thus we minimise the negative of the log likelihood instead of maximising the log likelihood. We use Python for to do this, and to avoid finding local minimum points, we use several starting values and chooses the results tied to the lowest value of the negative log likelihood. 
+To maximise the log-likelihood, we use a version of the Broyden–Fletcher– Goldfarb–Shanno (BFGS) algorithm called L-BFGS-B. This algorithm uses less memory than the original BFGS and allows bounds on the parameters \citep{optimization2}. It is an extension of the limited memory BFGS (L-BFGS) algorithm that does not allow bounds on the parameters. L-BFGS-B is mostly used for nonlinear optimisation problems with bounded variables where it might be hard to find the Hessian matrix. 
+As we want to maximise \eqref{log_likelihood_softmax} and this depends on the expected losses, it is hard to find the Hessian matrix. Especially the expected loss for opening the next box, $\EE_2^i(\vp)$, makes this challenging as it depends on the expected losses in the next steps. We also have bounds on $\alpha$ and $\beta$. Recall that they are defined as the loss one gets when a new box is opened, and the loss one gets when the test terminates, respectively. If $\alpha$ or $\beta$ were negative, this indicates some reward of opening the next box or the test terminating, which we believe is not likely. Therefore, the L-BFGS-B algorithm is a natural choice of optimisation algorithm. The L-BFGS-B is used for minimising and not maximising. Thus we minimise the negative of the log-likelihood instead of maximising the log-likelihood. We use Python to do this. To avoid finding local minimum points, we use several starting values and choose the results tied to the lowest value of the negative log-likelihood. 
 
 When we have the MLEs for $\alpha$, $\beta$ and $\eta$, it remains to find confidence intervals for the parameters. 
 
 
 \section{Confidence Intervals for the Parameters}
 \label{chapter:CIs_chap3}
-To be able to say something about the uncertainty of the parameter estimates we have found, we now find confidence intervals for each of them. We then use parametric bootstrapping which is described in Chapter \ref{section_theory_bootstrap}.
+To say something about the uncertainty of the parameter estimates we have found, we now find confidence intervals for each of them. We then use parametric bootstrapping, which is described in Chapter \ref{section_theory_bootstrap}.
 
 Consider a person with parameter estimates $\hat{\alpha}$, $\hat{\beta}$ and $\hat{\eta}$. Recall that $\hat{\vp}=\hat{\alpha}$ in the unlimited case and $\hat{\vp}=\hat{\alpha},\hat{\beta}$ in the limited case. 
-We can, using the softmax model, find the probabilities for each of the three choices in all the steps in the nine trials. That is, we find the probability that the participant chooses blue as the majority colour, that she chooses red and that she chooses to open the next box. These probabilities are then
+Using the softmax model, we can find the probabilities for each of the three choices in all the steps in the nine trials. That is, we find the probability that the participant chooses blue as the majority colour, that she chooses red and that she chooses to open the next box. These probabilities are then
 \begin{equation}
 \label{probabilities_bootstrap}
     P(\delta_{j}|\hat{\vp},\hat{\eta},x_{1:i}) = \frac{\text{exp}(- \hat{\eta} \EE^i_{\delta_j}(\hat{\vp}))}{\sum_{d=0}^{2} \text{exp}(-\hat{\eta} \EE^i_{d}(\hat{\vp}))},
 \end{equation}
 where $\delta_j \in \{0,1,2 \}$.
-We can then, for each opened box, simulate the decisions the participant would make using these probabilities. Then we get whole new sequences of decisions. Consider for example Trial 2, where the order of the boxes is as shown in Figure \ref{fig:trial2_order}. Before any boxes are opened, we can imagine that the probability that the participant chooses to open the next box, that $\delta_0=2$, is quite high, and the other two probabilities quite small and of equal size. The first box that opens is a red one, $X_1=1$. The probability that she chooses red as the majority colour is then higher than the probability that she chooses blue, but whether it is higher than the probability of $\delta_1=2$ or not, depends on the parameter estimates. We find these probabilities and draw decisions until the participant in the simulated trial has chosen what the majority colour is. We do that for each of the nine trials, and then end up with a new set of simulated decisions. In the limited trials we either stop when $\delta_i=0$ or $\delta_i=1$, or when the test terminates. If the test terminates, this is a failed trial, and the loss is $\beta$. 
+For each opened box, we can simulate the decisions the participant would make using these probabilities. Then we get whole new sequences of decisions. Consider, for example, Trial 2, where the order of the boxes is as shown in Figure \ref{fig:trial2_order}. Before any boxes are opened, we can imagine that the probability that the participant chooses to open the next box, that $\delta_0=2$, is relatively high, and the other two probabilities quite small and of equal size. The first box that opens is a red one, $X_1=1$. The probability that she chooses red as the majority colour is higher than the probability that she chooses blue, but whether it is higher than the probability of $\delta_1=2$ or not depends on the parameter estimates. We find these probabilities and draw decisions until the participant in the simulated trial has chosen what the majority colour is. We do that for each of the nine trials and then end up with a new set of simulated decisions. In the limited trials, we either stop when $\delta_i=0$ or $\delta_i=1$, or when the test terminates. If the test terminates, this is a failed trial, and the loss is $\beta$. 
 
 For those simulated decisions, we find new estimates for the parameters, again using maximum likelihood estimation as in Chapter \ref{section:mles}. We simulate these decisions and find the new MLEs 1000 times. We then have 1000 bootstrap samples for all the parameters for each participant. These MLEs of the decisions in simulated trials are denoted
 \begin{equation*}
@@ -964,7 +971,7 @@ and
 \begin{equation*}
     \{\eta^{*(b)}, b=1,2,...,1000 \}.
 \end{equation*}
-For each of these parameters we use the percentile method to construct confidence intervals as described in Chapter \ref{theory_ci_bootstrap}. We find 90\% CIs for each of the parameters, and we denote them as
+For each of these parameters, we use the percentile method to construct confidence intervals as described in Chapter \ref{theory_ci_bootstrap}. We find 90\% CIs for each of the parameters, and we denote them as
 \begin{equation*}
     [\hat{\vp}^{*(5)}_{1000},\hat{\vp}^{*(95)}_{1000}]
 \end{equation*}
@@ -974,6 +981,6 @@ and
 \end{equation*}
 Thus, we are finding the 5-th and 95-th percentiles. 
 
-We do this for each of the participants, and get confidence intervals for $\alpha$ and $\eta$ in the unlimited case and for $\alpha$, $\beta$ and $\eta$ in the limited case for all 76 participants. 
+We do this for each participant and get confidence intervals for $\alpha$ and $\eta$ in the unlimited case and $\alpha$, $\beta$ and $\eta$ in the limited case for all 76 participants. 
 
-We now have an Ideal Observer solution of the box task and parameter estimates and confidence intervals for all three parameters for all of the 76 participants. Next we will show some results.
+We now have an Ideal Observer solution of the box task and parameter estimates and confidence intervals for all three parameters for all of the 76 participants. Next, we will show some results.
