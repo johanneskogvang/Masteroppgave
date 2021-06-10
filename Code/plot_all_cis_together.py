@@ -107,7 +107,7 @@ plt.axvline(x=0, color='black',linewidth=0.5)
 
 
 
-#alpha plotting all cis:
+#alpha plotting all cis alpha:
 %matplotlib qt
 for lower,upper,y in zip(df['alpha_5_p'],df['alpha_95_p'],range(len(df))):
     plt.plot((lower,upper),(y,y),'r|-',color='seagreen')

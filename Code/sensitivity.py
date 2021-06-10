@@ -35,7 +35,7 @@ alpha05 = list(df_unlim05['alpha'])
 
 
 #mles unlim, not zoomed
-%matplotlib inline
+#%matplotlib inline
 fig, ax = plt.subplots()
 x1 = df_unlim1['alpha']
 y1 = df_unlim1['eta']
@@ -46,6 +46,8 @@ CD = ax.scatter(x2, y2, c = 'orange', marker = 'o', s = 10, zorder = 2)
 ax.quiver(x1, y1, (x2-x1), (y2-y1), angles='xy', scale_units='xy', scale=1, width=0.003,headwidth=6, headlength=8)
 ax.set_xlabel(r'$\hat{\alpha}$')
 ax.set_ylabel(r'$\hat{\eta}$')
+#path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Masteroppgave\pictures\Sensitivity\mles_unlim.pdf'
+#plt.savefig(path)
 plt.show()
 
 
@@ -63,6 +65,8 @@ ax.set_xlim([-0.01, 0.19])
 ax.set_ylim([-10, 400])
 ax.set_xlabel(r'$\hat{\alpha}$')
 ax.set_ylabel(r'$\hat{\eta}$')
+path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Masteroppgave\pictures\Sensitivity\mles_unlim_zoom1.pdf'
+plt.savefig(path)
 plt.show()
 
 %matplotlib inline
@@ -79,6 +83,8 @@ ax.set_xlim([-0.005, 0.07])
 ax.set_ylim([0, 70])
 ax.set_xlabel(r'$\hat{\alpha}$')
 ax.set_ylabel(r'$\hat{\eta}$')
+path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Masteroppgave\pictures\Sensitivity\mles_unlim_zoom2.pdf'
+plt.savefig(path)
 plt.show()
 
 
@@ -193,6 +199,8 @@ CD = ax.scatter(x2, y2, c = 'orange', marker = 'o', s = 10, zorder = 2)
 ax.quiver(x1, y1, (x2-x1), (y2-y1), angles='xy', scale_units='xy', scale=1, width=0.003,headwidth=6, headlength=8)
 ax.set_xlabel(r'$\hat{\alpha}$')
 ax.set_ylabel(r'$\hat{\eta}$')
+#path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Masteroppgave\pictures\Sensitivity\mles_lim_a_e.pdf'
+#plt.savefig(path)
 plt.show()
 
 #mles lim, alpha, eta, zoomed
@@ -230,6 +238,8 @@ CD = ax.scatter(x2, y2, c = 'orange', marker = 'o', s = 10, zorder = 2)
 ax.quiver(x1, y1, (x2-x1), (y2-y1), angles='xy', scale_units='xy', scale=1, width=0.002,headwidth=8, headlength=10)
 ax.set_xlabel(r'$\hat{\alpha}$')
 ax.set_ylabel(r'$\hat{\beta}$')
+path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Masteroppgave\pictures\Sensitivity\mles_lim_a_b.pdf'
+plt.savefig(path)
 plt.show()
 
 #mles lim, alpha, beta. Zoomed
@@ -268,6 +278,8 @@ ax.quiver(x1, y1, (x2-x1), (y2-y1), angles='xy', scale_units='xy', scale=1, widt
 #ax.set_ylim([0, 70])
 ax.set_xlabel(r'$\hat{\beta}$')
 ax.set_ylabel(r'$\hat{\eta}$')
+#path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Masteroppgave\pictures\Sensitivity\mles_lim_b_e.pdf'
+#plt.savefig(path)
 plt.show()
 
 
@@ -284,7 +296,10 @@ ax.set_xlim([-0.02, 0.98])
 ax.set_ylim([-10, 140])
 ax.set_xlabel(r'$\hat{\beta}$')
 ax.set_ylabel(r'$\hat{\eta}$')
+path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Masteroppgave\pictures\Sensitivity\mles_lim_b_e_zoomed.pdf'
+plt.savefig(path)
 plt.show()
+
 
 #mles lim, beta, eta, zoomed twice
 fig, ax = plt.subplots()

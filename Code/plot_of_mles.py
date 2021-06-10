@@ -35,8 +35,11 @@ print(alpha_vec)
 plt.scatter(alpha_vec,eta_vec,s=10,color='mediumseagreen')
 #plt.yscale('log') #for log scale of eta.
 #plt.title(r"MLE of $\alpha$ and $\eta$ for the 76 participants, unlimited. $\gamma=\kappa=1$.")
-plt.xlabel(r'$\alpha$')
-plt.ylabel(r'$\eta$')
+plt.xlabel(r'$\hat{\alpha}$')
+plt.ylabel(r'$\hat{\eta}$')
+#path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Masteroppgave\pictures\plotted_mles_unlim_gk1.pdf'
+#plt.savefig(path)
+
 plt.show()
 
 
@@ -48,6 +51,8 @@ plt.xlabel(r'$\hat{\alpha}$')
 plt.ylabel(r'$\hat{\eta}$')
 plt.xlim([-0.01,0.175])
 plt.ylim([-5,300])
+path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Masteroppgave\pictures\plotted_mles_unlim_gk1_zoom1.pdf'
+plt.savefig(path)
 plt.show()
 
 #zoomed even more:
@@ -58,6 +63,8 @@ plt.xlabel(r'$\hat{\alpha}$')
 plt.ylabel(r'$\hat{\eta}$')
 plt.xlim([-0.002,0.065])
 plt.ylim([0,65])
+path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Masteroppgave\pictures\plotted_mles_unlim_gk1_zoom2.pdf'
+plt.savefig(path)
 plt.show()
 
 
@@ -89,6 +96,8 @@ plt.scatter(alpha_vec,eta_vec,s=10,color='mediumseagreen')
 #plt.title(r"MLE of $\alpha$ and $\eta$ for the 76 participants, unlimited. $\gamma=\kappa=1$.")
 plt.xlabel(r'$\hat{\alpha}$')
 plt.ylabel(r'$\hat{\eta}$')
+path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Masteroppgave\pictures\plotted_mles_limited_alpha_eta_gk1.pdf'
+plt.savefig(path)
 plt.show()
 
 
@@ -100,6 +109,8 @@ plt.xlabel(r'$\hat{\alpha}$')
 plt.ylabel(r'$\hat{\eta}$')
 plt.xlim([-0.002,0.06])
 plt.ylim([-5,132])
+path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Masteroppgave\pictures\plotted_mles_limited_alpha_eta_gk1_zoomed.pdf'
+plt.savefig(path)
 plt.show()
 
 
@@ -109,6 +120,8 @@ plt.scatter(alpha_vec,beta_vec,s=10,color='mediumseagreen')
 #plt.title(r"MLE of $\alpha$ and $\eta$ for the 76 participants, unlimited. $\gamma=\kappa=1$.")
 plt.xlabel(r'$\hat{\alpha}$')
 plt.ylabel(r'$\hat{\beta}$')
+path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Masteroppgave\pictures\plotted_mles_limited_alpha_beta_gk1.pdf'
+plt.savefig(path)
 plt.show()
 
 #zoomed in on beta axis. 
@@ -129,6 +142,8 @@ plt.scatter(beta_vec,eta_vec,s=10,color='mediumseagreen')
 #plt.title(r"MLE of $\alpha$ and $\eta$ for the 76 participants, unlimited. $\gamma=\kappa=1$.")
 plt.xlabel(r'$\hat{\beta}$')
 plt.ylabel(r'$\hat{\eta}$')
+path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Masteroppgave\pictures\plotted_mles_limited_beta_eta_gk1.pdf'
+plt.savefig(path)
 plt.show()
 
 
@@ -139,6 +154,8 @@ plt.xlabel(r'$\hat{\beta}$')
 plt.ylabel(r'$\hat{\eta}$')
 plt.xlim([-0.05,0.7])
 plt.ylim([-10,130])
+path = r'C:\Users\Johan\OneDrive\Documents\Masteroppgave\Masteroppgave\pictures\plotted_mles_limited_beta_eta_zoomed_gk1.pdf'
+plt.savefig(path)
 plt.show()
 
 

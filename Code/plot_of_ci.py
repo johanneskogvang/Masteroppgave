@@ -17,7 +17,7 @@ import pandas as pd
 '''
 
 #first loading data:
-path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=0.5\bootstrap_1000_unlim.csv"
+path = r"C:\Users\Johan\OneDrive\Documents\Masteroppgave\Data\Gamma=kappa=1\bootstrap_1000_unlim.csv"
 df_unlim=pd.read_csv(path,usecols=['ID', 'eta', 'alpha', 'fun', 'eta_0', 'alpha_0',
        'alpha_5_p', 'alpha_95_p', 'eta_5_p', 'eta_95_p', 'eta200', 'alpha200'])
 
@@ -26,7 +26,7 @@ df_unlim=pd.read_csv(path,usecols=['ID', 'eta', 'alpha', 'fun', 'eta_0', 'alpha_
 #in unlim we plot for person 58, 13, 61.
 #and maybe one that has length 0 of the CI? this si person 58
 
-person = 61
+person = 13
 e = df_unlim['eta200'][person]
 e = e[1:-1]
 #print(e)
@@ -149,7 +149,7 @@ b_ci_mid = (b_95+b_5)/2
 
 
 #alpha and eta
-%matplotlib inline
+#%matplotlib inline
 plt.scatter(a_float,e_float,s=10,color='mediumseagreen')
 #plt.plot(a_ci,e_ci)
 plt.plot(a_ci,[e_ci_mid,e_ci_mid],'.-',color='black')
@@ -157,13 +157,13 @@ plt.plot([a_ci_mid,a_ci_mid],e_ci,'.-',color='black')
 #plt.yscale('log') #for log scale of eta.
 #plt.title(r"MLE of $\alpha$ and $\eta$ for the 76 participants, unlimited. $\gamma=\kappa=1$.")
 #plt.xlim([-50,1400])
-plt.ylim([-170,4300])
+#plt.ylim([-170,4300])
 plt.xlabel(r'$\hat{\alpha}$')
 plt.ylabel(r'$\hat{\eta}$')
 plt.show()
 
 
-
+#alpha and beta
 plt.scatter(a_float,b_float,s=10,color='mediumseagreen')
 #plt.plot(a_ci,e_ci)
 plt.plot(a_ci,[b_ci_mid,b_ci_mid],'.-',color='black')
@@ -185,7 +185,7 @@ plt.plot([b_ci_mid,b_ci_mid],e_ci,'.-',color='black')
 #plt.yscale('log') #for log scale of eta.
 #plt.title(r"MLE of $\alpha$ and $\eta$ for the 76 participants, unlimited. $\gamma=\kappa=1$.")
 #plt.xlim([-1,30])
-plt.ylim([-50,4200])
+#plt.ylim([-50,4200])
 plt.xlabel(r'$\hat{\beta}$')
 plt.ylabel(r'$\hat{\eta}$')
 plt.show()
