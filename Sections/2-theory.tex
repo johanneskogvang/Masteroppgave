@@ -373,7 +373,7 @@ One method for finding CIs with bootstrap samples is the percentile method. The 
 
 Consider a situation with $B$ bootstrap samples. Let the vector $\vp$ be a parameter, for which we want to find a confidence interval. Then, we find the MLE of $\vp$ for each of the $B$ samples.
 If we want to find a 90\% confidence interval using the percentile method, we find the 5-th and 95-th percentiles. 
-Plotting the MLEs of $\vp$ is a histogram, the 5-th percentile is the value of $\hat{\vp}$ in the histogram where 5\% of the samples are below. The 95-th is where 5\% of the values are above. This is visualised in Figure \ref{percentile_ci_example}. Here we have 150 bootstrap samples, and we have found the MLE of $\vp$ for each sample. These values are plotted in a histogram, where the red dashed lines represent the 5 and 95 percentiles. Then 5\% of the MLEs lie to the left of the left red line, and 5\% lie to the right of the right red line. The 90\% CI for $\vp$ is around (1.4,7) when using the percentile method.
+Plotting the MLEs of $\vp$ is a histogram, the 5-th percentile is the value of $\hat{\vp}$ in the histogram where 5\% of the samples are below. The 95-th is where 5\% of the values are above. This is visualised in Figure \ref{percentile_ci_example}. Here we have 150 bootstrap samples, and we have found the MLE of $\vp$ for each sample. These values are plotted in a histogram, where the red dashed lines represent the 5-th and 95-th percentiles. Then 5\% of the MLEs lie to the left of the left red line, and 5\% lie to the right of the right red line. The 90\% CI for $\vp$ is around (1.4,7) when using the percentile method.
 \begin{figure}
     \centering
     %\includegraphics{}
