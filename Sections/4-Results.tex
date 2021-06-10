@@ -12,7 +12,7 @@ We present the probabilities in Figure \ref{fig:probability_gamma_kappa_1} as a 
 \begin{figure}
     \centering
     \scalebox{0.4}{\input{tikz-trees/probability_gamma_kappa_1}}
-    \caption[The probabilities of majority colour plotted. $\gamma=\kappa=1$]{A tree representing the probabilities that either red or blue are in the majority in the box task with a uniform prior. The top node is the situation where no boxes are opened, where we do not have any information. Hence, the probabilities are equal. The fraction that is blue inside the node is the same as the blue part. The circle around the nodes represents which colour that is most likely to be in the majority. Hence the circle is split between red and blue in the top node. The node down to the left is the situation when a blue box is opened, the node down to the right is when one red box is opened, and so forth.}
+    \caption[The probabilities of majority colour. $\gamma=\kappa=1$]{A tree representing the probabilities that either red or blue are in the majority in the box task with a uniform prior. The top node is the situation where no boxes are opened, where we do not have any information. Hence, the probabilities are equal. The fraction that is blue inside the node is the probability that a box is blue. The circle around the nodes represents which colour that is most likely to be in the majority. Hence the circle is split between red and blue in the top node. The node down to the left is the situation when a blue box is opened, the node down to the right is when one red box is opened, and so forth.}
     \label{fig:probability_gamma_kappa_1}
 \end{figure}
 
@@ -21,12 +21,12 @@ When we have these probabilities, the next step is to look at the Ideal Observer
 
 
 
-\subsection{An Ideal Observer Solution in the Unlimited case}
+\subsection{An Ideal Observer Solution in the Unlimited Case}
 
 As we have all the expected losses for each possible combination of opened boxes, we can present these similarly to the probabilities in Figure \ref{fig:probability_gamma_kappa_1}. 
 The expected losses in the unlimited case are given in \eqref{exp_loss_blue}, \eqref{exp_loss_red} and \eqref{exp_loss_next_box_unlim}. In the unlimited case, we get different solutions for different values of $\alpha$. We have looked at numerous solutions, but only a handful of them will be presented here. 
 
-Recall that an Ideal Observer solution is the solution we get when the decisions tied to the least expected loss are chosen each time a box is opened. In Figure \ref{fig:unlim_a0.0001_gk1}, we have visualised the expected losses and the decisions an Ideal Observer would do for a participant with $\alpha=0.0001$. As in Figure \ref{fig:probability_gamma_kappa_1}, the top node represents the situation where no boxes are opened, and the node down to the left represents the situation where one box is opened and that box is blue and so forth. The circles around the nodes represent the decision with the least expected loss, thus the decision that an Ideal Observer would make. A blue circle indicates that choosing blue as the majority colour has the least expected loss, and a red circle indicates that choosing red has. A green circle means that the decision to open the next box has the least expected loss. The colours inside the nodes represent what we could call the inverse of the expected losses. That means that if the decision of choosing red as the majority colour has a low expected loss, the amount of red inside that node is big. That means that the colour that represents the Ideal Observer solution is the most prominent in the different nodes. The inverse expected losses are found by adding together all the expected losses and then subtracting the expected loss in question. Later we are normalising these inverse expected losses as they do not sum to one. Let $\tau_i(\delta_i)$ be the inverse expected losses when $i$ boxes are opened. Then, the inverse expected loss for choosing blue as the majority colour is 
+Recall that an Ideal Observer (IO) solution is the solution we get when the decisions tied to the least expected loss are chosen each time a box is opened. In Figure \ref{fig:unlim_a0.0001_gk1}, we have visualised the expected losses and the decisions an Ideal Observer would do if $\alpha=0.0001$. As in Figure \ref{fig:probability_gamma_kappa_1}, the top node represents the situation where no boxes are opened, and the node down to the left represents the situation where one box is opened and that box is blue and so forth. The circles around the nodes represent the decision with the least expected loss, thus the decision that an Ideal Observer would make. A blue circle indicates that choosing blue as the majority colour has the least expected loss, and a red circle indicates that choosing red has. A green circle means that the decision to open the next box has the least expected loss. The colours inside the nodes represent what we could call the inverse of the expected losses. That means that if the decision of choosing red as the majority colour has a low expected loss, the amount of red inside that node is big. That means that the colour that represents the Ideal Observer solution is the most prominent in the different nodes. The inverse expected losses are found by adding together all the expected losses and then subtracting the expected loss in question. Later we are normalising these inverse expected losses as they do not sum to one. Let $\tau_i(\delta_i)$ be the inverse expected losses when $i$ boxes are opened. Then, the inverse expected loss for choosing blue as the majority colour is 
 \begin{equation*}
     \tau_i(0) = \sum_{j=0}^2 \EE_{\delta_j}^i(\alpha) - \EE_0^i(\alpha).
 \end{equation*}
@@ -71,7 +71,7 @@ As we can see in Figures \ref{fig:unlim_a0.0001_gk1}, \ref{fig:unlim_a0.01_gk1} 
 
 
 
-At some point, $\alpha$ could get so big that the ideal observer would decide what the majority colour is after only one box is opened. The expected loss for opening another box is dependent on both $\alpha$ and the expected losses for continuing to open boxes. In contrast, the expected losses for choosing the majority colour depend only on the probabilities that one of the colours is in the majority. For example, if the first box is red, the probability that red is in the majority increases. Therefore, if $\alpha$ is big enough, the expected loss for opening another box could be higher than the probabilities that one of the colours is in the majority; thus, the ideal observer would decide after one box is opened. This is the situation when $\alpha$ is 0.1 as in Figure \ref{fig:unlim_a0.1_gk1}. The expected loss before any boxes are opened is 0.5, both for choosing blue and red as the majority colour. For the choice of opening a box, the expected loss is 0.308. This is then the choice an ideal observer would make before any boxes are opened. If the box that opens is blue, the expected loss for choosing that blue is the majority colour is 0.208, 0.792 for choosing red, and 0.260 for opening another box. Hence, the ideal observer would decide that blue is the majority colour. This problem is symmetric. If the opened box is red, the expected loss for choosing that red is the majority colour is 0.208, 0.792 for choosing blue and 0.260 for opening another box. In that case, the expected loss is smallest when we choose red as the majority colour.
+At some point, $\alpha$ could get so big that the Ideal Observer would decide what the majority colour is after only one box is opened. The expected loss for opening another box is dependent on both $\alpha$ and the expected losses for continuing to open boxes. In contrast, the expected losses for choosing the majority colour depend only on the probabilities that one of the colours is in the majority. For example, if the first box is red, the probability that red is in the majority increases. Therefore, if $\alpha$ is big enough, the expected loss for opening another box could be higher than the probabilities that one of the colours is in the majority; thus, the Ideal Observer would decide after one box is opened. This is the situation when $\alpha$ is 0.1 as in Figure \ref{fig:unlim_a0.1_gk1}. The expected loss before any boxes are opened is 0.5, both for choosing blue and red as the majority colour. For the choice of opening a box, the expected loss is 0.308. This is then the choice an Ideal Observer would make before any boxes are opened. If the box that opens is blue, the expected loss for choosing that blue is the majority colour is 0.208, 0.792 for choosing red, and 0.260 for opening another box. Hence, the Ideal Observer would decide that blue is the majority colour. This problem is symmetric. If the opened box is red, the expected loss for choosing that red is the majority colour is 0.208, 0.792 for choosing blue and 0.260 for opening another box. In that case, the expected loss is smallest when we choose red as the majority colour.
 \begin{figure}
     \centering
     \scalebox{1}{\input{tikz-trees/unlim_a0.1_gk1}}
@@ -109,13 +109,13 @@ Then, the penalty for opening the next box is much higher than in Figure \ref{fi
     \begin{minipage}{0.45\textwidth}
         \centering
         \scalebox{0.5}{\input{tikz-trees/trial2_unlim_a0.01_gk1}}
-        \caption[IO Solution for Trial 2. $\alpha=0.01$,$\gamma=\kappa=1$]{This is an Ideal Observer solution for Trial 2 with $\alpha=0.01$ and $\gamma=\kappa=1$. The tree can be interpreted in the same way as Figure \ref{fig:unlim_a0.0001_gk1}.}
+        \caption[IO Solution for Trial 2. $\alpha=0.01$,$\gamma=\kappa=1$]{An Ideal Observer solution for Trial 2 with $\alpha=0.01$ and $\gamma=\kappa=1$. The tree can be interpreted in the same way as Figure \ref{fig:unlim_a0.0001_gk1}.}
         \label{fig:IO_trial2_a0.01}
     \end{minipage}\hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \scalebox{0.5}{\input{tikz-trees/trial2_unlim_a0.05_gk1}}
-        \caption[IO Solution for Trial 2. $\alpha=0.05$,$\gamma=\kappa=1$]{This is an Ideal Observer solution for Trial 2 with $\alpha=0.05$ and $\gamma=\kappa=1$. The tree can be interpreted in the same way as Figure \ref{fig:unlim_a0.0001_gk1}.}
+        \caption[IO Solution for Trial 2. $\alpha=0.05$,$\gamma=\kappa=1$]{An Ideal Observer solution for Trial 2 with $\alpha=0.05$ and $\gamma=\kappa=1$. The tree can be interpreted in the same way as Figure \ref{fig:unlim_a0.0001_gk1}.}
         \label{fig:IO_trial2_a0.05}
     \end{minipage}
 \end{figure}
@@ -125,7 +125,7 @@ As we have presented Ideal Observer solutions in the unlimited case for differen
 
 
 
-\subsection{An Ideal Observer Solution in the Limited case}
+\subsection{An Ideal Observer Solution in the Limited Case}
 Having the expected losses in the limited case as given in \eqref{exp_loss_blue}, \eqref{exp_loss_red} and \eqref{exp_loss_limited_final}, we can visualise them in the same way as Figure \ref{fig:unlim_a0.0001_gk1}. In the limited trials, we have two parameters, $\alpha$ and $\beta$. Thus, we have solutions with both of these parameters varying. 
 
 In Figures \ref{fig:lim_a0.01_b0.6_gk1} and \ref{fig:lim_a0.01_b0.4_gk1}, we see two solutions, both with $\alpha=0.01$. They have different values of $\beta$, namely $\beta=0.6$ and $0.4$, respectively. Both trees have the same width, but we see that the tree with the higher $\beta$ value is shorter. Thus, an Ideal Observer with $\beta=0.6$ would open fewer boxes than one with $\beta=0.4$, which is what we would imagine as $\beta$ is the loss of the test terminating. 
@@ -156,7 +156,7 @@ The trees in the limited case are, in general, slimmer than in the unlimited cas
     \label{fig:lim_a0.0001_b0.2_gk1}
 \end{figure}
 
-As in the unlimited case, there are trials where the Ideal Observer solution is to choose the majority colour after one box is opened. This is the case in Figures \ref{fig:lim_a0.05_b0.4_gk1} and \ref{fig:lim_a0.05_b0.6_gk1}. The only thing that has changed from Figure \ref{fig:lim_a0.01_b0.4_gk1} to Figure \ref{fig:lim_a0.05_b0.4_gk1} and from Figure \ref{fig:lim_a0.01_b0.6_gk1} to Figure \ref{fig:lim_a0.05_b0.6_gk1} is the value of $\alpha$, which has increased from 0.01 to 0.05. In the cases with the higher values of $\alpha$, the expected loss for opening the second is larger than for choosing the majority colour. That results from these expected losses being dependent on the next expected losses, which again depend on the expected losses for opening another box after that and so on. Additionally, these could potentially be large if the amount of red and blue boxes are close to each other, meaning that we, for example, first open a red box, then a blue, then a red and so forth. 
+As in the unlimited case, there are trials where the Ideal Observer solution is to choose the majority colour after one box is opened. This is the case in Figures \ref{fig:lim_a0.05_b0.4_gk1} and \ref{fig:lim_a0.05_b0.6_gk1}. The only thing that has changed from Figure \ref{fig:lim_a0.01_b0.4_gk1} to Figure \ref{fig:lim_a0.05_b0.4_gk1} and from Figure \ref{fig:lim_a0.01_b0.6_gk1} to Figure \ref{fig:lim_a0.05_b0.6_gk1} is the value of $\alpha$, which has increased from 0.01 to 0.05. In the cases with the higher values of $\alpha$, the expected loss for opening the second box is larger than for choosing the majority colour. That results from these expected losses being dependent on the next expected losses, which again depend on the expected losses for opening another box after that and so on. Additionally, these could potentially be large if the amount of red and blue boxes are close to each other, meaning that we, for example, first open a red box, then a blue, then a red and so forth. 
 
 \begin{figure}
     \centering
@@ -169,7 +169,7 @@ As in the unlimited case, there are trials where the Ideal Observer solution is 
     \begin{minipage}[t]{0.45\textwidth} 
         \centering
         \scalebox{0.8}{\input{tikz-trees/lim_a0.05_b0.4_gk1}}
-        \caption[IO solution limited. $\alpha=0.05$, $\beta=0.6$ and $\gamma=\kappa=1$.]{A decision tree for a limited trial with $\alpha = 0.05$, $\beta=0.6$ and $\gamma=\kappa=1$ that can be interpreted in the same way as the tree in Figure \ref{fig:unlim_a0.0001_gk1}).}
+        \caption[IO solution limited. $\alpha=0.05$, $\beta=0.6$ and $\gamma=\kappa=1$.]{A decision tree for a limited trial with $\alpha = 0.05$, $\beta=0.6$ and $\gamma=\kappa=1$ that can be interpreted in the same way as the tree in Figure \ref{fig:unlim_a0.0001_gk1}.}
         \label{fig:lim_a0.05_b0.6_gk1}
     \end{minipage}
 \end{figure}
@@ -180,13 +180,13 @@ In Figure \ref{fig:trial8_IO_a0.01_b0.6_gk1}, we see the IO solution for Trial 8
      \begin{minipage}[t]{0.45\textwidth}
         \centering
         \scalebox{0.7}{\input{tikz-trees/trial8_lim_a0.01_b0.6_gk1}}
-        \caption[IO solution, Trial 8. $\alpha=0.01$, $\beta=0.6$ and $\gamma=\kappa=1$.]{This is an Ideal Observer solution for Trial 8 with $\alpha=0.01$, $\beta=0.6$ and $\gamma=\kappa=1$. The tree can be interpreted in the same way as Figure \ref{fig:unlim_a0.0001_gk1}}
+        \caption[IO solution, Trial 8. $\alpha=0.01$, $\beta=0.6$ and $\gamma=\kappa=1$.]{An Ideal Observer solution for Trial 8 with $\alpha=0.01$, $\beta=0.6$ and $\gamma=\kappa=1$. The tree can be interpreted in the same way as Figure \ref{fig:unlim_a0.0001_gk1}}
         \label{fig:trial8_IO_a0.01_b0.6_gk1}
      \end{minipage}\hfill
      \begin{minipage}[t]{0.45\textwidth}
         \centering
         \scalebox{0.7}{\input{tikz-trees/trial8_lim_a0.0001_b0.2_gk1}}
-        \caption[IO solution, Trial 8. $\alpha=0.0001$, $\beta=0.2$ and $\gamma=\kappa=1$.]{This is an Ideal Observer solution for Trial 8 with $\alpha=0.01$, $\beta=0.2$ and $\gamma=\kappa=1$. The tree can be interpreted in the same way as Figure \ref{fig:unlim_a0.0001_gk1}}
+        \caption[IO solution, Trial 8. $\alpha=0.0001$, $\beta=0.2$ and $\gamma=\kappa=1$.]{An Ideal Observer solution for Trial 8 with $\alpha=0.01$, $\beta=0.2$ and $\gamma=\kappa=1$. The tree can be interpreted in the same way as Figure \ref{fig:unlim_a0.0001_gk1}}
         \label{fig:trial8_IO_a0.0001_b0.2_gk1}
      \end{minipage}
 \end{figure}
@@ -232,21 +232,21 @@ We start with the unlimited case, where we have the parameters $\alpha$ and $\et
 \begin{figure}
     \centering
     \includegraphics[scale=0.7]{pictures/plotted_mles_unlim_gk1_zoom1.pdf}
-    \caption[MLEs of $\alpha$ and $\eta$, unlimited with $\gamma=\kappa=1$, zoomed.]{The MLEs for all the participants plotted for the unlimited case of the box task with $\gamma=\kappa=1$. Here we have zoomed in closer to zero.}
+    \caption[MLEs of $\alpha$ and $\eta$, unlimited with $\gamma=\kappa=1$, zoomed.]{The MLEs for all the participants plotted for the unlimited case of the box task with $\gamma=\kappa=1$. Here we have zoomed in closer to zero on the plot in Figure \ref{fig:plot_all_mles_unlim_zoom0}.}
     \label{fig:plot_all_mles_unlim_zoom1}
 \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[scale=0.7]{pictures/plotted_mles_unlim_gk1_zoom2.pdf}
-    \caption[MLEs of $\alpha$ and $\eta$, unlimited with $\gamma=\kappa=1$, zoomed more]{The MLEs for all the participants plotted for the unlimited case of the box task with $\gamma=\kappa=1$. Here we have zoomed in closer to zero even more than in Figure \ref{fig:plot_all_mles_unlim_zoom2}.}
+    \caption[MLEs of $\alpha$ and $\eta$, unlimited with $\gamma=\kappa=1$, zoomed more]{The MLEs for all the participants plotted for the unlimited case of the box task with $\gamma=\kappa=1$. Here we have zoomed in closer to zero even more than in Figure \ref{fig:plot_all_mles_unlim_zoom1}.}
     \label{fig:plot_all_mles_unlim_zoom2}
 \end{figure}
 
  
 
-Recall that high values of $\eta$ indicate that the participant makes the decisions with the least expected losses, and $\eta$ is infinity when the participant tends to make the decisions with the least excepted loss each time a box is opened.  
-The log-likelihood function is almost flat for high values of $\eta$. That means that the stopping criterion for the optimisation algorithm will be met several places for high values of $\eta$. Thus, if the true value of $\he$ is infinity, we could find that it is, for example, 10000 because the stopping criterion is met there. Therefore, we find a threshold for $\eta$ where we can say that all values above that threshold are so high that they go to infinity. Then, we can say that if a participant has $\he$ above that threshold, she always makes the decisions with the least expected loss. This threshold depends on the difference in the two lowest expected losses, but we can, for example, find one for when the difference is $0.01$.  If we, for example, have a majority of red boxes, then the expected loss of choosing red as the majority colour is quite low, but so could the expected loss of opening the next box be. Consider, a situation where we have $\EE_0^i(\vp)=0.98$, $\EE_1^i(\vp)=0.02$ and $\EE_2^i(\vp)=0.01$. Then, the decision to open the next box has the lowest expected loss, but the decision to choose red as the majority colour is not far away. We then want the threshold value of $\eta$ to be so high that the probability that the participant chooses to open the next box is close to one. If $\eta=1000$, the probability that the participant chooses to open the next box given these expected losses, is $0.99995$. Thus, we set $\eta=1000$ as a threshold for when the participant tends to
+Recall that high values of $\eta$ indicate that the participant tends to make the decisions with the least expected losses, and $\eta$ is infinity when the participant makes the decisions with the least excepted loss each time a box is opened.  
+The log-likelihood function is almost flat for high values of $\eta$. That means that the stopping criterion for the optimisation algorithm will be met several places for high values of $\eta$. Thus, if the true value of $\eta$ is infinity, we could find that $\he$ is, for example, 10000 because the stopping criterion is met there. Therefore, we find a threshold for $\eta$ where we can say that all values above that threshold are so high that they go to infinity. Then, we can say that if a participant has $\he$ above that threshold, she tends to always make the decisions with the least expected loss. This threshold depends on the difference in the two lowest expected losses, but we can, for example, find one for when the difference is $0.01$.  If we, for example, have a majority of red boxes, then the expected loss of choosing red as the majority colour is quite low, but so could the expected loss of opening the next box be. Consider, a situation where we have $\EE_0^i(\vp)=0.98$, $\EE_1^i(\vp)=0.02$ and $\EE_2^i(\vp)=0.01$. Then, the decision to open the next box has the lowest expected loss, but the decision to choose red as the majority colour is not far away. We then want the threshold value of $\eta$ to be so high that the probability that the participant chooses to open the next box is close to one. If $\eta=1000$, the probability that the participant chooses to open the next box given these expected losses, is $0.99995$. Thus, we set $\eta=1000$ as a threshold for when the participant tends to
 always makes the choices that have the least expected loss.
 
  
@@ -262,7 +262,7 @@ In each of the three unlimited trials, this individual chooses the majority colo
 
 
 
-Looking at the other extreme value in Figure \ref{fig:plot_all_mles_unlim_zoom0}, which is individual number 13, we see that she has a high value of $\ha$ and a small value of $\he$. In fact, the value of $\eta$ is negative. The values are
+Looking at the other extreme value in Figure \ref{fig:plot_all_mles_unlim_zoom0}, which is individual number 13, we see that she has a high value of $\ha$ and a small value of $\he$. The values are
 \begin{equation}
 \label{mles_unlim_person13}
     \begin{aligned}
@@ -292,7 +292,7 @@ If we look at a more typical person, we find, for example, individual number 61.
         \he &= 19.9432.
     \end{aligned}
 \end{equation}
-In the unlimited trials, she chooses what she thinks is the majority colour after five, six and four boxes are opened. She chooses the majority colour before she can be entirely sure and therefore has $\ha$ larger than zero. However, when she chooses majority colour, she chooses the colour with the least expected loss and thus has a positive $\he$. An IO with the estimates of individual 61 would choose after 3, 10 and 9 boxes were opened. Thus her decisions do not coincide with the IO decisions, but they are not far away.  
+In the three unlimited trials, she chooses what she thinks is the majority colour after five, six and four boxes are opened. She chooses the majority colour before she can be entirely sure and therefore has $\ha$ larger than zero. However, when she chooses majority colour, she chooses the colour with the least expected loss and thus has a positive $\he$. An IO with the estimates of individual 61 would choose after 3, 10 and 9 boxes were opened. Thus her decisions do not coincide with the IO decisions, but they are not far away.  
 \begin{figure}
     \centering
     \scalebox{0.7}{\input{tikz-trees/unlim_a0.0135_g1_k1}}
@@ -332,7 +332,7 @@ In Figure \ref{fig:mles_limited_alpha_beta} we have plotted the MLEs of $\alpha$
 
 
 
-We have plotted the MLEs of $\beta$ and $\eta$ together in Figure \ref{fig:mles_limited_beta_eta}. Again we see that four of the participants have high values of $\he$. Three of these have values of $\hb$ close to one, which might indicate that they are afraid of the test terminating and thus choose early, but that they choose the colour that is most likely to be in the majority. Zooming in on the plot as in Figure \ref{fig:mles_limited_beta_eta_zoomed}, we see that the majority of the participants have $\he$ values between 10 and 80 and $\hb$ values between zero and 0.7. We also see that some participants have $\hb$ equal to zero. 
+We have plotted the MLEs of $\beta$ and $\eta$ together in Figure \ref{fig:mles_limited_beta_eta}. Again we see that four of the participants have high values of $\he$. Three of these have values of $\hb$ close to one, which might indicate that they are afraid of the test terminating and thus choose early, but that they choose the colour that is most likely to be in the majority. Zooming in on the plot as in Figure \ref{fig:mles_limited_beta_eta_zoomed}, we see that the majority of the participants have values of $\he$ between 10 and 80 and values of $\hb$ between zero and 0.7. We also see that some participants have $\hb$ equal to zero. 
 \begin{figure}
     \centering
     \begin{minipage}{0.48\textwidth}
@@ -452,7 +452,7 @@ We start with the confidence intervals in the unlimited case. In Figure \ref{fig
 
 
 
-In Figure \ref{fig:all_cis_eta_unlim_v2} we see all the CIs in the unlimited case for $\eta$. We see that some of the participants have the whole CI above 1000, the threshold value we defined for $\he$. We can for these participants conclude that they always make decisions with small expected losses. We also see that many of the CIs include the threshold value. In Figure \ref{fig:all_cis_eta_unlim_zoomed} we have zoomed in on the CIs and added a line at zero. Only one CI include zero, the CI for individual number 13. Recall that she has a negative value of $\he$ and a very high $\ha$.
+In Figure \ref{fig:all_cis_eta_unlim_v2} we see all the CIs in the unlimited case for $\eta$. We see that some of the participants have the whole CI above 1000, the threshold value we defined for $\he$. We can for these participants conclude that they always make decisions with small expected losses. We also see that many of the CIs include the threshold value. In Figure \ref{fig:all_cis_eta_unlim_zoomed} we have zoomed in on the CIs and added a line at zero. Only one CI include zero, the CI for individual number 13. Recall that she has a negative value of $\he$ and a very high $\ha$, as seen in \eqref{mles_unlim_person13}.
 \begin{figure}
     \centering
     \includegraphics[scale=0.38]{pictures/test_cis_eta_unlim.png}
@@ -471,13 +471,19 @@ In Figure \ref{fig:all_cis_eta_unlim_v2} we see all the CIs in the unlimited cas
 In Chapter \ref{chapter:mles} we discussed individual 61 that is a more typical person. Her MLEs are given in \eqref{mles_unilim_person61}.
 We have 1000 bootstrap samples and thus 1000 values of both $\hat{\alpha}$ and $\he$ for this participant. These are plotted in Figure \ref{fig:ci_unlim_person_61}. There, we have also plotted the confidence interval as black lines. We see that most of the bootstrap samples are accumulated in the bottom left corner. Thus, we zoom in there in Figure \ref{fig:ci_unlim_person_61_zoomed}, where we also have plotted the CI. We have that
 \begin{equation*}
-    [\hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}] = [0,0.0362]
+    \begin{aligned}
+         \left[ \hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}\right] &= [0,0.0362],\\
+         \left[\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}\right] &= [10.0449,110.3661].
+    \end{aligned}
 \end{equation*}
-and
-\begin{equation*}
-    [\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}] = [10.0449,110.3661].
-\end{equation*}
-We see that the confidence interval for $\alpha$ includes zero. Recall that having $\ha=0$ means that one does not have any loss of opening boxes. Additionally, we see that the whole interval for $\eta$ is above zero, which means that individual number 61 makes decisions with low expected losses. However, they might not always be the decisions with the lowest expected loss. 
+%\begin{equation*}
+%    [\hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}] = [0,0.0362]
+%\end{equation*}
+%and
+%\begin{equation*}
+%    [\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}] = [10.0449,110.3661].
+%\end{equation*}
+We see that the confidence interval for $\alpha$ includes zero. Recall that having $\alpha=0$ means that one does not have any loss of opening boxes. Additionally, we see that the whole interval for $\eta$ is above zero, which means that individual number 61 makes decisions with low expected losses. However, they might not always be the decisions with the lowest expected loss. 
 
 
 \begin{figure}
@@ -498,13 +504,19 @@ We see that the confidence interval for $\alpha$ includes zero. Recall that havi
 
 In Chapter \ref{chapter:mles} we also discussed individual number 13 that has a high value of $\ha$, as seen in \eqref{mles_unlim_person13}, compared to the other participants. The 1000 bootstrap samples for participant number 13 are plotted in Figure \ref{fig:ci_unlim_person_13}, and zoomed on the $\he$ axis in Figure \ref{fig:ci_unlim_person_13_zoomed}. The CIs are
 \begin{equation*}
-    [\hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}] = [0,1246.3510]
+    \begin{aligned}
+         \left[ \hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}\right] &= [0,1246.3510],\\
+         \left[\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}\right] &= [-9.9272,18.3986].
+    \end{aligned}
 \end{equation*}
-and
-\begin{equation*}
-    [\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}] = [-9.9272,18.3986].
-\end{equation*}
-We see that many of the values of $\ha$ are very high, much higher than the MLE; thus, $\hat{\alpha}^{*(95)}_{1000}$ is very high. That means that the estimates for this individual are uncertain. Thus, the model might not be a good fit for this participant and the choices she makes. That might be because the expected loss is based on the next decisions that will be made. We have decided that these decisions are the decisions that an Ideal Observer would make, the decisions with the least expected losses. However, this participant tends to make decisions with high expected losses, meaning that the decisions we include in the model are not so relevant for this individual. Thus, we might conclude that this model is not a great fit for participants that make decisions with high expected losses. 
+%\begin{equation*}
+%    [\hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}] = [0,1246.3510]
+%\end{equation*}
+%and
+%\begin{equation*}
+%    [\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}] = [-9.9272,18.3986].
+%\end{equation*}
+We see that many of the values of $\ha$ are very high, much higher than the MLE; thus, $\hat{\alpha}^{*(95)}_{1000}$ is very high. That means that the estimate for this individual is uncertain. Thus, the model might not be a good fit for this participant and the choices she makes. That might be because the expected loss is based on the next decisions that will be made. We have decided that these decisions are the decisions that an Ideal Observer would make, the decisions with the least expected losses. However, this participant tends to make decisions with high expected losses, meaning that the decisions we include in the model are not so relevant for this individual. Thus, we might conclude that this model is not a great fit for participants that make decisions with high expected losses. 
 \begin{figure}
     \centering
     \begin{minipage}{0.48\textwidth}
@@ -523,14 +535,20 @@ We see that many of the values of $\ha$ are very high, much higher than the MLE;
  
 
 
-Another participant with extreme values we looked at in Chapter \ref{chapter:mles} is individual number 58. The MLEs are given in \ref{mles_unlim_person58}. Her value of $\he$ is above the threshold value, which makes the probabilities in \eqref{probabilities_bootstrap} be approximate either zero or one. Thus, when we draw decisions based on those probabilities, we will always end up with the same decisions, and those are the decisions that the participant have made. All the simulated decisions are identical to the decisions the participant has made, and the MLEs will be identical. Thus, the length of the two CIs will be zero, and the values will be equal to the MLEs. Hence, the CIs are
+Another participant with extreme values we looked at in Chapter \ref{chapter:mles} is individual number 58. The MLEs are given in \eqref{mles_unlim_person58}. Her value of $\he$ is above the threshold value, which makes the probabilities in \eqref{probabilities_bootstrap} be approximate either zero or one. Thus, when we draw decisions based on those probabilities, we will always end up with the same decisions, and those are the decisions that the participant have made. All the simulated decisions are identical to the decisions the participant has made, and the MLEs will be identical. Thus, the length of the two CIs will be zero, and the values will be equal to the MLEs. Hence, the CIs are
 \begin{equation*}
-    [\hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}] = [0.0016,0.0016]
+    \begin{aligned}
+         \left[ \hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}\right] &= [0.0016,0.0016],\\
+         \left[\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}\right] &= [443422.7,443422.7].
+    \end{aligned}
 \end{equation*}
-and
-\begin{equation*}
-    [\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}] = [443422.7,443422.7].
-\end{equation*}
+%\begin{equation*}
+%    [\hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}] = [0.0016,0.0016]
+%\end{equation*}
+%and
+%\begin{equation*}
+%    [\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}] = [443422.7,443422.7].
+%\end{equation*}
 Thus, parametric bootstrapping might not be a satisfactory method to find confidence intervals for the participants that tend to make the  decisions with the least expected loss. 
 
 Having shown some of the confidence intervals for the unlimited trials, we continue with the limited trials.
@@ -579,15 +597,22 @@ In Figures \ref{fig:all_cis_alpha_lim} and \ref{fig:all_cis_beta} we see that in
 We have zoomed in on that plot in Figure \ref{fig:ci_lim_a_b_person_11_zoomed}. Additionally, we have plotted the MLEs and the confidence intervals of $\alpha$ and $\eta$ in Figure \ref{fig:ci_lim_a_e_person_11} and zoomed in on that plot in Figure \ref{fig:ci_lim_a_e_person_11_zoomed}.
 The confidence intervals are 
 \begin{equation*}
-    [\hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}] = [0.2935,649.1],
+    \begin{aligned}
+         \left[ \hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}\right] &= [0.2935,649.1],\\
+         \left[\hat{\beta}^{*(5)}_{1000},\hat{\beta}^{*(95)}_{1000}\right] &= [0,16.74],\\
+         \left[\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}\right] &= [-10.45,-0.0013].
+    \end{aligned}
 \end{equation*}
-\begin{equation*}
-    [\hb^{*(5)}_{1000},\hb^{*(95)}_{1000}] = [0,16.74]
-\end{equation*}
-and
-\begin{equation*}
-    [\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}] = [-10.45,-0.0013].
-\end{equation*}
+%\begin{equation*}
+%    [\hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}] = [0.2935,649.1],
+%\end{equation*}
+%\begin{equation*}
+%    [\hb^{*(5)}_{1000},\hb^{*(95)}_{1000}] = [0,16.74]
+%\end{equation*}
+%and
+%\begin{equation*}
+%    [\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}] = [-10.45,-0.0013].
+%\end{equation*}
 We see also here that there are many high values of $\ha$, which again give long intervals that indicate an uncertain estimate of $\alpha$. Furthermore, there are some extreme values of $\hb$. The CI has an upper limit at 16.74, which is relatively high compared to the other participants. Thus, there is some uncertainty tied to the estimate of both $\alpha$ and $\beta$ for individual 11, indicating that this model is not a good fit. As discussed for individual 13 in the unlimited version, this might be because we assume Ideal Observer decisions when we find the expected losses of opening the next box. These decisions are not that relevant for participant 11 in the limited case as she tends to make decisions with high expected losses. She chooses the colour in the minority multiple times, meaning that she chooses the decisions with the highest expected loss. 
 \begin{figure}
     \centering
@@ -600,7 +625,7 @@ We see also here that there are many high values of $\ha$, which again give long
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[scale=0.37]{pictures/ci_lim_a_b_person11_zoomed.png}
-        \caption[MLEs for $\alpha$ and $\beta$ of bootstrap samples individual 11, unlimited, zoomed]{Here we have zoomed in on the bootstrap samples and confidence intervals that are plotted in Figure \ref{fig:ci_lim_a_b_person_11}. This is for individual number 11 in the limited case with $\gamma=\kappa=1$.}
+        \caption[MLEs for $\alpha$ and $\beta$ of bootstrap samples individual 11, limited, zoomed]{Here we have zoomed in on the bootstrap samples and confidence intervals that are plotted in Figure \ref{fig:ci_lim_a_b_person_11}. This is for individual number 11 in the limited case with $\gamma=\kappa=1$.}
         \label{fig:ci_lim_a_b_person_11_zoomed}
     \end{minipage}
 \end{figure}
@@ -633,7 +658,7 @@ In Figure \ref{fig:ci_lim_b_e_person_11} we see $\hb$ and $\he$ of participant n
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[scale=0.37]{pictures/ci_lim_b_e_person11_zoomed.png}
-        \caption[MLEs for $\beta$ and $\eta$ of bootstrap samples individual 11, unlimited, zoomed]{Here we have zoomed in on the bootstrap samples and confidence intervals that are plotted in Figure \ref{fig:ci_lim_b_e_person_11}. This is for individual number 11 in the limited case with $\gamma=\kappa=1$.}
+        \caption[MLEs for $\beta$ and $\eta$ of bootstrap samples individual 11, limited, zoomed]{Here we have zoomed in on the bootstrap samples and confidence intervals that are plotted in Figure \ref{fig:ci_lim_b_e_person_11}. This is for individual number 11 in the limited case with $\gamma=\kappa=1$.}
         \label{fig:ci_lim_b_e_person_11_zoomed}
     \end{minipage}
 \end{figure}
@@ -641,15 +666,22 @@ In Figure \ref{fig:ci_lim_b_e_person_11} we see $\hb$ and $\he$ of participant n
 In Figure \ref{fig:ci_lim_a_b_person40}, we have plotted the MLEs of $\alpha$ and $\beta$ for the 1000 bootstrap samples of individual 40 that is a more typical person. We see that $\ha$ and $\hb$ tend to not be zero at the same time, indicating that she gets some loss of opening boxes, but it differs whether the MLE is putting weight on $\alpha$ or $\beta$. In Figure \ref{fig:ci_lim_a_e_person_40} we have plotted all $\ha$ and $\he$ together, and zoomed in on that plot in Figure \ref{fig:ci_lim_a_e_person_40_zoomed}. Here we see that there are many high values of $\he$, and that the confidence interval is long. The values of $\hb$ and $\he$ are plotted in Figure \ref{fig:ci_lim_b_e_person_40} and we have zoomed in Figure \ref{fig:ci_lim_b_e_person_40_zoomed}. 
 The confidence intervals are 
 \begin{equation*}
-    [\hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}] = [0,0.0665],
+    \begin{aligned}
+         \left[ \hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}\right] &= [0,0.0796],\\
+         \left[\hat{\beta}^{*(5)}_{1000},\hat{\beta}^{*(95)}_{1000}\right] &= [0,0.5857],\\
+         \left[\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}\right] &= [21.29,2716.5].
+    \end{aligned}
 \end{equation*}
-\begin{equation*}
-    [\hb^{*(5)}_{1000},\hb^{*(95)}_{1000}] = [0,0.6763]
-\end{equation*}
-and
-\begin{equation*}
-    [\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}] = [4.2926,31.287].
-\end{equation*}
+%\begin{equation*}
+%    [\hat{\alpha}^{*(5)}_{1000},\hat{\alpha}^{*(95)}_{1000}] = [0,0.0796],
+%\end{equation*}
+%\begin{equation*}
+%    [\hb^{*(5)}_{1000},\hb^{*(95)}_{1000}] = [0,0.5857]
+%\end{equation*}
+%and
+%\begin{equation*}
+%    [\hat{\eta}^{*(5)}_{1000},\hat{\eta}^{*(95)}_{1000}] = [21.29,2716.5].
+%\end{equation*}
 \begin{figure}
     \centering
     \includegraphics[scale=0.5]{pictures/ci_lim_a_b_person40.png}
@@ -667,7 +699,7 @@ and
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[scale=0.37]{pictures/ci_lim_a_e_person40_zoomed.png}
-        \caption[MLEs for $\alpha$ and $\eta$ of bootstrap samples individual 40, unlimited, zoomed]{Here we have zoomed in on the bootstrap samples and confidence intervals that are plotted in Figure \ref{fig:ci_lim_a_e_person_40}. This is for individual number 11 in the limited case with $\gamma=\kappa=1$.}
+        \caption[MLEs for $\alpha$ and $\eta$ of bootstrap samples individual 40, limited, zoomed]{Here we have zoomed in on the bootstrap samples and confidence intervals that are plotted in Figure \ref{fig:ci_lim_a_e_person_40}. This is for individual number 11 in the limited case with $\gamma=\kappa=1$.}
         \label{fig:ci_lim_a_e_person_40_zoomed}
     \end{minipage}
 \end{figure}
@@ -682,7 +714,7 @@ and
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[scale=0.37]{pictures/ci_lim_b_e_person40_zoomed.png}
-        \caption[MLEs for $\beta$ and $\eta$ of bootstrap samples individual 40, unlimited, zoomed]{Here we have zoomed in on the bootstrap samples and confidence intervals that are plotted in Figure \ref{fig:ci_lim_b_e_person_40}. This is for individual number 11 in the limited case with $\gamma=\kappa=1$.}
+        \caption[MLEs for $\beta$ and $\eta$ of bootstrap samples individual 40, limited, zoomed]{Here we have zoomed in on the bootstrap samples and confidence intervals that are plotted in Figure \ref{fig:ci_lim_b_e_person_40}. This is for individual number 11 in the limited case with $\gamma=\kappa=1$.}
         \label{fig:ci_lim_b_e_person_40_zoomed}
     \end{minipage}
 \end{figure}
@@ -700,7 +732,7 @@ Recall that $\Theta$ is the success probability in the Bernoulli distribution we
 As discussed in Chapter \ref{section_notation}, the participants are told that one of the colours always is in the majority. Therefore, one might think that the probability that there are more of one of the colours is higher than the probability that there are six of each of the colours. Thus, we want a prior more like the purple or orange lines in Figure \ref{fig:pdf_beta_distr}. We choose the purple line where $\gamma=\kappa=0.5$.
 
 
-Having a uniform prior for $\Theta$, we have found MLEs for all the parameters and confidence intervals tied to each of them for each of the participants. We will now do the same with a prior having $\gamma=\kappa=0.5$, and compare the results.
+Having a uniform prior for $\Theta$, we have found MLEs for all the parameters and confidence intervals tied to each of them for each of the participants. We do the same with a prior having $\gamma=\kappa=0.5$, and compare the results.
 With these values of the hyperparameters, the model put more weight on the colours of the boxes that are opened. 
 For example, suppose many of the opened boxes are blue. In that case, the probability that blue is the majority colour is higher in the model with the new prior, resulting in a lower expected loss of choosing blue as the majority colour. 
 %If there, for example, are many red boxes that are opened, we have that the probability that red is the majority colour is higher with the non-uniform prior than with the uniform. Thus, the expected loss of red as the majority colour is lower now than with the uniform prior. Then, if one chooses the majority colour early, the expected loss is closer to the lowest expected loss.
@@ -724,7 +756,7 @@ Most of the participants with $\ha=0$ in the first model have the same in the al
 \begin{figure}
     \centering
     \includegraphics[scale=0.7]{pictures/Sensitivity/mles_unlim_zoom1.pdf}
-    \caption[Zoomed in on the MLEs in Figure \ref{fig:sensitivity_mls_unlim}]{MLEs for two different priors in the unlimited case of the box task. This is the same plot as in Figure \ref{fig:sensitivity_mls_unlim} zoomed in.}
+    \caption[Zoomed in on the MLEs in Figure \ref{fig:sensitivity_mls_unlim}]{MLEs using two different priors in the unlimited case of the box task. This is the same plot as in Figure \ref{fig:sensitivity_mls_unlim} zoomed in.}
     \label{fig:sensitivity_mls_unlim_zoom1}
 \end{figure}
 \begin{figure}
@@ -763,7 +795,7 @@ However, these higher upper limits might be because of the flat log-likelihood f
     \label{fig:sensitivity_unlim_cis_eta_zoomed}
 \end{figure}
 
-Thus, we see that the unlimited version is not very sensitive when changing the hyperparameters from 1 to 0.5. The MLEs of $\eta$ do not seem to change much, whereas the MLEs of $\alpha$ tend to be a bit smaller. However, there are no large changes in the confidence intervals. 
+Thus, we see that the unlimited version is not very sensitive when changing the hyperparameters from 1 to 0.5. The MLEs of $\eta$ do not seem to change much, whereas the MLEs of $\alpha$ tend to be a bit smaller. There are no substantial changes in the confidence intervals. 
 
 
 %the model will now predict that they choose earlier, thus, they are more consisten with the best choices as in general people tend to choose early, at least earlier than an IO (or earlier than they would need to do if they would choose the alternative with the least exp loss). 
@@ -807,15 +839,14 @@ The plot for $\hb$ and $\he$ together is shown in Figure \ref{fig:sensitivity_ml
 \end{figure}
 
 If we zoom in on the plot in Figure \ref{fig:sensitivity_mles_lim_b_e}, as in Figure \ref{fig:sensitivity_mles_lim_b_e_zoomed}, we see that most participants, with some exceptions, get smaller values of both $\hb$ and $\he$. 
-All the participants that had $\hb=0$ with the uniform prior still have that with the non-uniform prior. 
-%More participants have $\hb=0$ now than with the uniform prior. 
+All the participants that had $\hb=0$ with the uniform prior still have that with the non-uniform prior. %More participants have $\hb=0$ now than with the uniform prior. 
 All the other participants, except participant 75, get slightly smaller values of $\hb$, resulting in more participants getting $\hb=0$ with the new prior.
 %If there, for example, are many red boxes that are opened, we have that the probability that red is the majority colour is higher with the non-uniform prior than with the uniform. Thus, the expected loss of red as the majority colour is lower now than with the uniform prior. Then, if one chooses the majority colour early, the expected loss is closer to the lowest expected loss. Therefore, one is not to the same degree interpreted as being afraid of the test terminating when choosing early. Thus, many of the values of $\hb$ are lower here. 
 %Many of the participants chooses what they think is the majority colour early, meaning that they choose when few boxes are opened. With the new prior giving lower expected losses of choosing majority colour early, that means that the participants make decisions closer to the decision that has the lowest expected loss. Thus, we get higher values of $\he$ if we use the new prior with $\gamma=\kappa=0.5$.
 \begin{figure}
     \centering
     \includegraphics[scale=0.7]{pictures/Sensitivity/mles_lim_b_e_zoomed.pdf}
-    \caption[MLEs of $\beta$ and $\eta$, zoomed]{The plot in Figure \ref{fig:sensitivity_mles_lim_b_e}, zoomed.}
+    \caption[MLEs of $\beta$ and $\eta$ for prior with $\gamma=\kappa=1$ and $\gamma=\kappa=0.5$, limited, zoomed]{The plot in Figure \ref{fig:sensitivity_mles_lim_b_e}, zoomed.}
     \label{fig:sensitivity_mles_lim_b_e_zoomed}
 \end{figure}
 

@@ -83,10 +83,10 @@ In the following, we formulate a model for how the participants make decisions i
 \label{section_notation}
 Before we start with the formulation of the model, we will introduce some notation and present some assumptions. 
 
-We let $X_i$ be the colour of the $i$-th opened box as in \eqref{def_of_Xi}. Then, if the box is blue, $X_i$ is 0, and if the box is red, $X_i$ is one.
-We assume that each $X_i$ has a Bernoulli distribution with success probability $\theta$, where we later condition on there not being six blue and six red boxes. Then,
+We let $X_i$ be the colour of the $i$-th opened box as in \eqref{def_of_Xi}. Then, if the box is blue, $X_i$ is zero, and if the box is red, $X_i$ is one.
+We assume that each $X_i$ has a Bernoulli distribution with success probability $\Theta$, where we later condition on there not being six blue and six red boxes. Then,
 \begin{equation*}
-    X_i \sim \text{Bernoulli}(\theta).
+    X_i \sim \text{Bernoulli}(\Theta).
 \end{equation*}
 We also define a vector, $X_{1:i}$, that contains the colours of the first $i$ boxes that are or will be opened, just as in \eqref{def_of_X1:i}. In the same way, we let $x_{1:i} = (x_1,x_2,...,x_{i})$.
 
@@ -95,17 +95,17 @@ Additionally, let $U_i$ be the number of the first $i$ opened boxes that are red
 \label{def_of_U}
     U_i = \sum_{j=1}^{i} X_j. 
 \end{equation}
-The sum of Bernoulli distributed variables is binomially distributed \citep{statinf}. Thus, $U_i$ is binomially distributed with parameters $i$ and $\theta$. We define another stochastic variable, $V_i$, that is the number of red boxes that are not opened when $i$ boxes are opened. Thus, $V_i$ is the number of red boxes out of the $12-i$ boxes that are not opened, which yields,
+The sum of Bernoulli distributed variables is binomially distributed \citep{statinf}. Thus, $U_i$ is binomially distributed with parameters $i$ and $\Theta$. We define another stochastic variable, $V_i$, that is the number of red boxes that are not opened when $i$ boxes are opened. Thus, $V_i$ is the number of red boxes out of the $12-i$ boxes that are not opened, which yields,
 \begin{equation}
 \label{def_of_V}
     V_i = \sum_{j=i+1}^{12} X_j.
 \end{equation}
-This variable is also binomially distributed, but with parameters $12-i$ and $\theta$. Thus,
+This variable is also binomially distributed, but with parameters $12-i$ and $\Theta$. Thus,
 \begin{equation}
 \label{U_V_binomal_distri}
     \begin{aligned}
-        U_i &\sim \text{Binomial}(i,\theta)\\
-        V_i &\sim \text{Binomial}(12-i,\theta).
+        U_i &\sim \text{Binomial}(i,\Theta)\\
+        V_i &\sim \text{Binomial}(12-i,\Theta).
     \end{aligned}
 \end{equation}
 %\begin{subequations}
@@ -132,8 +132,8 @@ and
 Just as in Chapter \ref{theory_bayesian_modelling}, we let $\Theta$ have a conjugate beta prior with parameters $\gamma$ and $\kappa$, as shown in \eqref{theta_with_beta_prior}.
 The prior distribution of $\Theta$ is then as given in \eqref{betadistribution}.
 
-Figure \ref{fig:pdf_beta_distr} shows the probability density function of the beta distribution for different values of $\gamma$ and $\kappa$. The pink line represents the situation where $\gamma=\kappa=1$. This is the same as having a uniform prior for $\Theta$. That means that the probability of $\Theta$ being anywhere on the interval between 0 and 1 is constant. As the participants are told that one of the colours will be in the majority but get no information about which one, this might be a suitable prior.
-However, one might argue that our prior beliefs resemble the purple or orange lines as we know that one of the colours will definitively be in the majority. Thus it might not be reasonable to assume that $\theta$ is 0.5. For this reason, we exclude all priors that have $\gamma$ and $\kappa$ larger than 1, which is the situation for the black and grey lines. 
+Figure \ref{fig:pdf_beta_distr} shows the probability density function of the beta distribution for different values of $\gamma$ and $\kappa$. The pink line represents the situation where $\gamma=\kappa=1$. This is the same as having a uniform prior for $\Theta$. That means that the probability of $\Theta$ being anywhere on the interval between zero and one is constant. As the participants are told that one of the colours will be in the majority but get no information about which one, this might be a suitable prior.
+However, one might argue that our prior beliefs resemble the purple or orange lines as we know that one of the colours will definitively be in the majority. Thus it might not be reasonable to assume that $\Theta$ is 0.5. For this reason, we exclude all priors that have $\gamma$ and $\kappa$ larger than 1, which is the situation for the black and grey lines. 
 
 \begin{figure}
     \centering
@@ -219,7 +219,7 @@ Starting with the unlimited case, we define loss functions for each of the three
     L_i[Z,\delta_i=0;\vp] = I(Z\neq0) = I(Z=1).
 \end{equation}
 
-We define the loss function for when the participant chooses that red is the majority colour, $\delta_i=1$, similarly to \eqref{loss_func_blue}. This time the loss is 0 if the true majority colour is red and 1 if the blue is the true majority colour. Thus,
+We define the loss function for when the participant chooses that red is the majority colour, $\delta_i=1$, similarly to \eqref{loss_func_blue}. This time the loss is zero if the true majority colour is red and one if the blue is the true majority colour. Thus,
 \begin{equation}
 \label{loss_func_red}
     L_i[Z,\delta_i=1;\vp] = I(Z\neq1)=I(Z=0).
@@ -290,7 +290,7 @@ As we have the loss functions in the unlimited and the limited cases, we now con
 
 \section{Ideal Observer Solution}
 %\sectionmark{An Ideal Observer Solution}
-Having defined loss functions for both the unlimited and the limited versions of the box task, we now want to find an Ideal Observer (IO) solution. We find one for the unlimited case and another for the limited. As stated above, an Ideal Observer acts like a participant that always makes optimal decisions. In the box task, the optimal decision for each opened box is the decision that gives the least expected loss. If one makes the decision with the lowest expected loss each time a box is opened, the total solution is the Ideal Observer solution. Thus, we need to find these expected losses. They depend on the parameter $\alpha$ in the unlimited version of the box task and $\alpha$ and $\beta$ in the limited version. Therefore, we get many different IO solutions depending on the values of the parameters. 
+Having defined loss functions for both the unlimited and the limited versions of the box task, we now want to find an Ideal Observer (IO) solution. We find one for the unlimited case and another for the limited. As stated above, an Ideal Observer acts like a participant that always makes optimal decisions. In the box task, the optimal decision for each opened box is the decision that gives the least expected loss. If one makes the decision with the lowest expected loss each time a box is opened, the total solution is the Ideal Observer solution. Thus, we need to find these expected losses. They depend on the parameter $\alpha$ in the unlimited version of the box task and both $\alpha$ and $\beta$ in the limited version. Therefore, we get many different IO solutions depending on the values of the parameters. 
 Recall that when $i$ boxes are opened, the participants have three choices as stated in \eqref{def_of_delta}. We want to find expected losses for all three decisions in both the unlimited and limited versions of the box task. 
 
 
@@ -476,19 +476,19 @@ Now that we have expressions for the expected losses, we have to find the probab
 
 
 \subsection{Probabilities}
-As we now have expressions for the expected losses, we find the probabilities needed for finding the expected losses. That is $P(Z=1|x_{1:i})$, $P(Z=0|x_{1:i})$, $P(X_{i+1}=1|x_{1:i})$, $P(X_{i+1}=0|x_{1:i})$, $P(T\neq i|T\geq i)$ and $P(T=i|T\geq i)$.
+As we now have expressions for the expected losses, we find the probabilities needed for finding the expected losses. That is $P(Z=1|X_{1:i}=x_{1:i})$, $P(Z=0|X_{1:i}=x_{1:i})$, $P(X_{i+1}=1|X_{1:i}=x_{1:i})$, $P(X_{i+1}=0|X_{1:i}=x_{1:i})$, $P(T\neq i|T\geq i)$ and $P(T=i|T\geq i)$.
 
 \subsubsection{The Majority Colour}
 When we find the probabilities used in the expressions for the expected losses, we start with the expected loss for choosing blue as the majority colour, as given in \eqref{exp_loss_blue}. Then we need the probability
 \begin{equation}
 \label{prob_red_major_Z}
-    P(Z=1|x_{1:i}).
+    P(Z=1|X_{1:i}=x_{1:i}).
 \end{equation}
 %$P(Z=1|x_{1:i})$. 
-This is the probability that red is the majority colour, given the colours of the boxes that already are observed. Using the definition of $Z$ as it is in \eqref{def_of_Z_2}, we can express \eqref{prob_red_major_Z} using $U_i$ and $V_i$. Recall that they are defined as in \eqref{def_of_U} and \eqref{def_of_V}, respectively. \eqref{prob_red_major_Z} can then be expressed as the probability that $U_i+V_i>6$, or that $U_i+V_i \geq 7$, given the colours of the $i$ first boxes. However, we also need to condition on $U_i+V_i \neq 6$, as we know that one of the colours always is in majority, such that there will never be six blue and six red boxes all together. Thus, we find $P(U_i+V_i \geq 7 | x_{1:i},U_i+V_i \neq 6)$. As the order the boxes have been opened in is irrelevant here, and $U_i = \sum_{j=1}^i X_j$, we use $U_i=u_i$ instead of $x_{1:i}$, to be consistent with the other notation. Thus, we have that
+This is the probability that red is the majority colour, given the colours of the boxes that already are observed. Using the definition of $Z$ as it is in \eqref{def_of_Z_2}, we can express \eqref{prob_red_major_Z} using $U_i$ and $V_i$. Recall that they are defined as in \eqref{def_of_U} and \eqref{def_of_V}, respectively. \eqref{prob_red_major_Z} can then be expressed as the probability that $U_i+V_i>6$, or that $U_i+V_i \geq 7$, given the colours of the $i$ first boxes. However, we also need to condition on $U_i+V_i \neq 6$, as we know that one of the colours always is in majority, such that there will never be six blue and six red boxes all together. Thus, we find $P(U_i+V_i \geq 7 | X_{1:i}=x_{1:i},U_i+V_i \neq 6)$. As the order the boxes have been opened in is irrelevant here, and $U_i = \sum_{j=1}^i X_j$, we use $U_i=u_i$ instead of $X_{1:i}=x_{1:i}$, to be consistent with the other notation. Thus, we have that
 \begin{equation}
 \label{Z_to_U_and_V}
-    P(Z=1|x_{1:i}) = P(U_i+V_i \geq 7 | U_i=u_i,U_i+V_i \neq 6).
+    P(Z=1|X_{1:i}=x_{1:i}) = P(U_i+V_i \geq 7 | U_i=u_i,U_i+V_i \neq 6).
 \end{equation}
 
 Using Bayes rule as described in \eqref{bayesrule}, we get that
@@ -547,7 +547,7 @@ We can find $f(\theta| U_i=u_i)$ using Bayes rule as given in \eqref{bayesrule}.
 \begin{equation*}
     f(\theta| U_i=u_i) = \frac{P(U_i=u_i|\Theta=\theta)f(\theta)}{P(U_i=u_i)},
 \end{equation*}
-which is proportional to the numerator of the right-hand side as in \eqref{posterior_proportional}. Using that $U_i|\Theta$ has a binomial distribution with probability mass function as in \eqref{ui_prob_mass}, and that $\theta$ has a Beta prior, with density function as in \eqref{betadistribution}, we get that
+which is proportional to the numerator of the right-hand side as in \eqref{posterior_proportional}. Using that $U_i|\Theta$ has a binomial distribution with probability mass function as in \eqref{ui_prob_mass}, and that $\Theta$ has a beta prior, with density function as in \eqref{betadistribution}, we get that
 \begin{equation*}
     \begin{aligned}
         f(\theta|U_i=u_i) 
@@ -786,15 +786,16 @@ Firstly,
         &= P(U_{i+1}+V_{i+1}\neq6|U_{i+1}=u_i+1).
     \end{aligned}
 \end{equation}
-From \eqref{u12neq6} we have that
-\begin{equation}
-\label{u12neq6_b}
-    \begin{aligned}
-        P(U_i+V_i\neq6|U_i=u_i) 
-        &= 1-\binom{12-i}{6-u_i} \frac{\text{B}(6+\gamma,6+\kappa)}{\text{B}(u_i+\gamma,i-u_i+\kappa)},
-    \end{aligned}
-\end{equation}
-thus, we get that
+%From \eqref{u12neq6} we have that
+%\begin{equation}
+%\label{u12neq6_b}
+%    \begin{aligned}
+%        P(U_i+V_i\neq6|U_i=u_i) 
+%        &= 1-\binom{12-i}{6-u_i} \frac{\text{B}(6+\gamma,6+\kappa)}{\text{B}(u_i+\gamma,i-u_i+\kappa)},
+%    \end{aligned}
+%\end{equation}
+%thus, 
+Using \eqref{u12neq6}, we get that
 \begin{equation}
 \label{u12neq6_c}
     \begin{aligned}
@@ -803,7 +804,7 @@ thus, we get that
         &= 1-\binom{11-i}{5-u_i} \frac{\text{B}(6+\gamma,6+\kappa)}{\text{B}(u_i+1+\gamma,i-u_i-1+\kappa)}.
     \end{aligned}
 \end{equation}
-Using \eqref{u_iplus1_equal_ui+1} and \eqref{u12neq6_c}, we get that 
+Then, using \eqref{u_iplus1_equal_ui+1} and \eqref{u12neq6_c}, we get that 
 \begin{equation}
 \label{u12neq6_givennextisred}
     \begin{aligned}
@@ -831,7 +832,7 @@ As we now have the probability that the next box that is opened is red, we can f
 
 
 \subsubsection{When the Test Terminates}
-In \ref{exp_loss_limited_final} we see the expected loss for opening another box in the limited case. Here we have the probability that the test terminates when $i$ boxes are opened given that the test has not terminated yet and the probability that it does not terminate when $i$ boxes are opened given that it has not terminated yet. 
+In \eqref{exp_loss_limited_final} we see the expected loss for opening another box in the limited case. Here we have the probability that the test terminates when $i$ boxes are opened given that the test has not terminated yet and the probability that it does not terminate when $i$ boxes are opened given that it has not terminated yet. 
 These are $P(T=i|T\geq i)$ and $P(T\neq i|T\geq i)$, which are complementary probabilities, such that
 \begin{equation}
 \label{T_neq_i}
